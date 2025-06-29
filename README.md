@@ -45,11 +45,11 @@ npm run build
 
 ### About Information
 
-Edit the file `src/info/about.md` to update your personal information and bio.
+Edit the file `docs/info/about.md` to update your personal information and bio.
 
 ### Blog Posts
 
-Add new blog posts as markdown files in the `src/posts/` directory. Each post can include frontmatter:
+Add new blog posts as markdown files in the `docs/posts/` directory. Each post can include frontmatter:
 
 ```markdown
 ---
@@ -74,7 +74,7 @@ The site is automatically deployed to GitHub Pages when you push to the main bra
 
 ```
 vibe/
-├── src/
+├── docs/
 │   ├── posts/           # Blog posts (markdown files)
 │   ├── info/            # About information (markdown files)
 │   ├── index.html       # Main HTML template
