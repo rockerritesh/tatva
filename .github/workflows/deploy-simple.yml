@@ -1,0 +1,62 @@
+name: Deploy Blog to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Copy markdown files to docs
+      run: |
+        # Copy posts to docs/posts if they exist
+        if [ -d "posts" ] && [ "$(ls -A posts 2>/dev/null)" ]; then
+          mkdir -p docs/posts
+          cp posts/*.md docs/posts/ 2>/dev/null || true
+        fi
+        
+        # Copy info files to docs/info if they exist  
+        if [ -d "info" ] && [ "$(ls -A info 2>/dev/null)" ]; then
+          mkdir -p docs/info
+          cp info/*.md docs/info/ 2>/dev/null || true
+        fi
+      
+    - name: Generate static HTML files
+      run: npm run build:static
+      
+    - name: Build with Vite
+      run: npm run build
+      
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './dist'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4 
