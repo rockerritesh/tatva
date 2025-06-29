@@ -1,11 +1,13 @@
 {
   "name": "tatva-blog",
   "version": "1.0.0",
+  "type": "module",
   "description": "A simple and elegant personal blog website",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "npm run build:static && vite",
+    "build": "npm run build:static && vite build",
+    "build:static": "node scripts/build-static-html.js",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -14,7 +16,11 @@
   "dependencies": {
     "marked": "^9.1.6"
   },
-  "keywords": ["blog", "markdown", "static-site"],
+  "keywords": [
+    "blog",
+    "markdown",
+    "static-site"
+  ],
   "author": "Your Name",
   "license": "MIT"
 }

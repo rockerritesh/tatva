@@ -1,0 +1,8 @@
+# This directory is for your info pages
+# 
+# Add your about.md file here, and it will be automatically
+# converted to HTML and deployed via GitHub Actions
+#
+# Example:
+# info/
+#   └── about.md 

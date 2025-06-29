@@ -1,0 +1,10 @@
+# This directory is for your blog posts
+# 
+# Add your markdown files here, and they will be automatically
+# converted to HTML and deployed via GitHub Actions
+#
+# Example structure:
+# posts/
+#   ├── my-first-post.md
+#   ├── tutorial.md
+#   └── thoughts.md 

@@ -95,48 +95,52 @@ class BlogApp {
 
   async loadBlogPosts() {
     try {
-      // In a real static site, you'd have a build process that generates a posts index
-      // For now, we'll try to load some common post files
-      const postFiles = [
-        'hello-world.md',
-        'getting-started.md',
-        'markdown-guide.md'
-      ];
-
-      const posts = [];
-      
-      for (const file of postFiles) {
-        try {
-          const response = await fetch(`./posts/${file}`);
-          if (response.ok) {
-            const markdown = await response.text();
-            const post = this.parsePost(markdown, file);
-            posts.push(post);
-          }
-        } catch (error) {
-          console.log(`Post ${file} not found, skipping...`);
+      // Load the auto-generated posts index (now with HTML files)
+      const response = await fetch('./posts-index.json');
+      if (response.ok) {
+        const postsIndex = await response.json();
+        
+        if (postsIndex.length > 0) {
+          this.posts = postsIndex;
+          this.renderBlogList();
+        } else {
+          this.renderEmptyState();
         }
-      }
-
-      if (posts.length > 0) {
-        this.posts = posts;
-        this.renderBlogList();
       } else {
-        document.getElementById('blog-list').innerHTML = `
-          <div class="blog-card">
-            <h3>No posts yet</h3>
-            <p class="date">Getting started</p>
-            <p class="excerpt">
-              Add your blog posts as markdown files in the <code>posts/</code> folder. 
-              Each post will be automatically displayed here. Start by creating a file like 
-              <code>hello-world.md</code> in the posts directory.
-            </p>
-          </div>
-        `;
+        this.renderEmptyState();
       }
     } catch (error) {
       console.error('Error loading blog posts:', error);
+      this.renderEmptyState();
     }
+  }
+
+  extractContent(markdown) {
+    const lines = markdown.split('\n');
+    
+    // Remove frontmatter if present
+    if (lines[0] === '---') {
+      const frontmatterEnd = lines.findIndex((line, index) => index > 0 && line === '---');
+      if (frontmatterEnd > 0) {
+        return lines.slice(frontmatterEnd + 1).join('\n');
+      }
+    }
+    
+    return markdown;
+  }
+
+  renderEmptyState() {
+    document.getElementById('blog-list').innerHTML = `
+      <div class="blog-card">
+        <h3>No posts yet</h3>
+        <p class="date">Getting started</p>
+        <p class="excerpt">
+          Add your blog posts as markdown files in the <code>posts/</code> folder. 
+          Each post will be automatically displayed here. Start by creating a file like 
+          <code>hello-world.md</code> in the posts directory.
+        </p>
+      </div>
+    `;
   }
 
   parsePost(markdown, filename) {
@@ -200,19 +204,9 @@ class BlogApp {
   }
 
   openPost(filename) {
-    const post = this.posts.find(p => p.filename === filename);
-    if (post) {
-      const modal = document.getElementById('blog-modal');
-      const content = document.getElementById('blog-content');
-      
-      content.innerHTML = `
-        <h1>${post.title}</h1>
-        <p style="color: #6b7280; margin-bottom: 2rem;">${post.date}</p>
-        ${marked(post.content)}
-      `;
-      
-      modal.style.display = 'block';
-    }
+    // For static HTML files, navigate directly to the post
+    const htmlFilename = filename.replace('.md', '.html');
+    window.location.href = `./posts/${htmlFilename}`;
   }
 }
 

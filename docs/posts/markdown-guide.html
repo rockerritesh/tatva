@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Guide For Blog Posts - Tatva Blog</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .post-container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .post-header { margin-bottom: 2rem; }
+        .post-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .post-date { color: var(--text-secondary); font-size: 0.9rem; }
+        .post-content { line-height: 1.8; }
+        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        .post-content h1, .post-content h2, .post-content h3 { margin-top: 2rem; margin-bottom: 1rem; }
+        .post-content p { margin-bottom: 1rem; }
+        .post-content code { background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; }
+        .post-content pre { background: var(--code-bg); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">Tatva</a></h1>
+            </div>
+            <div class="nav-links">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="post-container">
+        <a href="../index.html" class="back-link">← Back to Blog</a>
+        
+        <article class="post-header">
+            <h1 class="post-title">Markdown Guide For Blog Posts</h1>
+            <p class="post-date">1/20/2024</p>
+        </article>
+        
+        <div class="post-content">
+            <h1>Markdown Guide for Blog Posts</h1>
+<p>This post demonstrates how to use markdown formatting in your blog posts. All posts are written in markdown and automatically converted to HTML.</p>
+<h2>Headers</h2>
+<p>Use <code>#</code> for headers:</p>
+<pre><code class="language-markdown"># H1 Header
+## H2 Header
+### H3 Header
+</code></pre>
+<h2>Text Formatting</h2>
+<ul>
+<li><strong>Bold text</strong> with <code>**bold**</code></li>
+<li><em>Italic text</em> with <code>*italic*</code></li>
+<li><code>Inline code</code> with backticks</li>
+<li><del>Strikethrough</del> with <code>~~text~~</code></li>
+</ul>
+<h2>Lists</h2>
+<h3>Unordered Lists</h3>
+<ul>
+<li>Item 1</li>
+<li>Item 2<ul>
+<li>Nested item</li>
+<li>Another nested item</li>
+</ul>
+</li>
+</ul>
+<h3>Ordered Lists</h3>
+<ol>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ol>
+<h2>Code Blocks</h2>
+<pre><code class="language-javascript">function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet(&#39;World&#39;));
+</code></pre>
+<h2>Links and Images</h2>
+<ul>
+<li><a href="https://google.com">Link to Google</a></li>
+<li><img src="https://via.placeholder.com/300x200" alt="Alt text for image"></li>
+</ul>
+<h2>Blockquotes</h2>
+<blockquote>
+<p>This is a blockquote. Use it for highlighting important information or quotes from other sources.</p>
+</blockquote>
+<h2>Tables</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Supported</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Headers</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Lists</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h2>Frontmatter</h2>
+<p>Each post can include frontmatter at the top:</p>
+<pre><code class="language-yaml">---
+title: Your Post Title
+date: 2024-01-20
+---
+</code></pre>
+<p>The frontmatter is used to set the post title and date. If not provided, the filename will be used as the title.</p>
+<p>Happy writing! ✍️</p>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Tatva. Built with ❤️</p>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
