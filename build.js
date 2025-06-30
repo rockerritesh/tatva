@@ -539,6 +539,23 @@ class JekyllLikeBuilder {
     }
   }
 
+  // Copy CNAME file from root to docs
+  copyCNAME() {
+    const sourcePath = 'CNAME';
+    const destPath = 'docs/CNAME';
+    
+    if (fs.existsSync(sourcePath)) {
+      try {
+        fs.copyFileSync(sourcePath, destPath);
+        console.log('✅ Copied CNAME to docs directory');
+      } catch (error) {
+        console.error('❌ Error copying CNAME:', error.message);
+      }
+    } else {
+      console.log('⚠️  CNAME file not found in root directory');
+    }
+  }
+
   // Build the site
   async build() {
     console.log('🔨 Building Jekyll-like site...');
@@ -562,6 +579,9 @@ class JekyllLikeBuilder {
     
     // Compile SCSS
     this.compileScss();
+    
+    // Copy CNAME file
+    this.copyCNAME();
     
     // Generate individual post pages
     for (const post of this.posts) {
