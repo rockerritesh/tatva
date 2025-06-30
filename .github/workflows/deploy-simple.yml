@@ -1,28 +1,27 @@
-name: Deploy Blog to GitHub Pages
+name: Build and Deploy to Docs Folder
 
 on:
   push:
     branches: [ main ]
+    paths: 
+      - 'posts/**/*.md'
+      - 'info/**/*.md'
+      - 'src/**'
+      - 'scripts/**'
+      - '.github/workflows/**'
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -32,37 +31,33 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Copy markdown files to docs
+    - name: Copy markdown files to src
       run: |
-        # Copy posts to docs/posts if they exist
+        # Copy posts to src/posts if they exist
         if [ -d "posts" ] && [ "$(ls -A posts 2>/dev/null)" ]; then
-          mkdir -p docs/posts
-          cp posts/*.md docs/posts/ 2>/dev/null || true
+          mkdir -p src/posts
+          cp posts/*.md src/posts/ 2>/dev/null || true
         fi
         
-        # Copy info files to docs/info if they exist  
+        # Copy info files to src/info if they exist  
         if [ -d "info" ] && [ "$(ls -A info 2>/dev/null)" ]; then
-          mkdir -p docs/info
-          cp info/*.md docs/info/ 2>/dev/null || true
+          mkdir -p src/info
+          cp info/*.md src/info/ 2>/dev/null || true
         fi
       
     - name: Generate static HTML files
       run: npm run build:static
       
-    - name: Build with Vite
+    - name: Build with Vite to docs folder  
       run: npm run build
       
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-      
-    - name: Upload to GitHub Pages
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: './dist'
-        name: github-pages-${{ github.run_id }}
-        
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
-      with:
-        artifact_name: github-pages-${{ github.run_id }} 
+    - name: Commit and push built files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto-build: Update static files [skip ci]"
+          git push 

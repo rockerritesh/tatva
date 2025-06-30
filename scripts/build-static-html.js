@@ -7,15 +7,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Paths
-const postsDir = path.join(__dirname, '../docs/posts');
-const infoDir = path.join(__dirname, '../docs/info');
-const templatesDir = path.join(__dirname, '../templates');
+const postsDir = path.join(__dirname, '../src/posts');
+const infoDir = path.join(__dirname, '../src/info');
 const outputDir = path.join(__dirname, '../docs');
-
-// Ensure templates directory exists
-if (!fs.existsSync(templatesDir)) {
-  fs.mkdirSync(templatesDir, { recursive: true });
-}
 
 // HTML template for blog posts
 const POST_TEMPLATE = `<!DOCTYPE html>
@@ -143,6 +137,11 @@ function buildStaticSite() {
   console.log('🔨 Building static HTML files...');
   
   try {
+    // Ensure output directory exists
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+
     // Process blog posts
     if (fs.existsSync(postsDir)) {
       const postFiles = fs.readdirSync(postsDir).filter(file => file.endsWith('.md'));
@@ -192,7 +191,12 @@ function buildStaticSite() {
         
         // For info files, we'll just save the HTML content that can be loaded by the main page
         const htmlFilename = filename.replace('.md', '.html');
-        const htmlPath = path.join(infoDir, htmlFilename);
+        const htmlPath = path.join(outputDir, 'info', htmlFilename);
+        
+        // Ensure info directory exists
+        if (!fs.existsSync(path.dirname(htmlPath))) {
+          fs.mkdirSync(path.dirname(htmlPath), { recursive: true });
+        }
         
         fs.writeFileSync(htmlPath, htmlContent);
         console.log(`  ℹ️  Generated ${htmlFilename}`);
