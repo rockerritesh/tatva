@@ -4,4 +4,4 @@
                 <p class="post-date">${e.date}</p>
                 <p class="post-excerpt">${e.excerpt}</p>
             </article>
-        `).join("");n.innerHTML=s}catch(t){console.error("Error loading posts:",t),n.innerHTML='<p class="error">Failed to load posts.</p>'}}async function l(){const n=document.getElementById("about-content");try{const t=await fetch("./info/about.html");if(!t.ok)throw new Error("About content not found");const r=await t.text();n.innerHTML=r}catch(t){console.error("Error loading about content:",t),n.innerHTML="<p>About content will be available soon.</p>"}}document.addEventListener("DOMContentLoaded",()=>{i(),a(),l()});
+        `).join("");n.innerHTML=s}catch(t){console.error("Error loading posts:",t),n.innerHTML='<p class="error">Failed to load posts.</p>'}}document.addEventListener("DOMContentLoaded",()=>{i(),a()});

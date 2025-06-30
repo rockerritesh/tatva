@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tatva - Personal Blog</title>
+    <title>About - Tatva</title>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
                 <h1><a href="index.html">Tatva</a></h1>
             </div>
             <div class="nav-links">
-                <a href="about.html" class="nav-link">About</a>
+                <a href="about.html" class="nav-link active">About</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                     <span class="sun-icon">☀️</span>
                     <span class="moon-icon">🌙</span>
@@ -23,23 +23,15 @@
     </header>
 
     <main class="container">
-        <section class="hero">
-            <h2>Welcome to Tatva</h2>
-            <p>A simple and elegant personal blog</p>
-        </section>
-
-        <section class="posts-section">
-            <h3>Latest Posts</h3>
-            <div id="posts-container" class="posts-list">
-                <div class="loading">Loading posts...</div>
-            </div>
-        </section>
+        <div id="about-content" class="about-section">
+            <div class="loading">Loading...</div>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 Tatva. Built with ❤️</p>
     </footer>
 
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="./about.js"></script>
 </body>
 </html>

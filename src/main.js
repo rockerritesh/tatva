@@ -46,28 +46,9 @@ async function loadPosts() {
     }
 }
 
-// Load about content
-async function loadAboutContent() {
-    const aboutContainer = document.getElementById('about-content');
-    
-    try {
-        const response = await fetch('./info/about.html');
-        if (!response.ok) {
-            throw new Error('About content not found');
-        }
-        
-        const content = await response.text();
-        aboutContainer.innerHTML = content;
-        
-    } catch (error) {
-        console.error('Error loading about content:', error);
-        aboutContainer.innerHTML = '<p>About content will be available soon.</p>';
-    }
-}
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     loadPosts();
-    loadAboutContent();
 });
