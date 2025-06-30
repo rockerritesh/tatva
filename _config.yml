@@ -1,7 +1,7 @@
 title: Tatva
 description: A Jekyll-inspired blog
-url: "https://yourusername.github.io"
-baseurl: "/"
+url: "https://tatva.sumityadav.com.np"
+baseurl: "https://tatva.sumityadav.com.np"
 
 # Build settings
 markdown: CommonMark
