@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tatva - Personal Blog</title>
-  <script type="module" crossorigin src="/assets/main-gCl7dMTG.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-CYGvxSgH.css">
+  <script type="module" crossorigin src="/assets/main-CE26urwB.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CqzwHu2x.css">
 </head>
 <body>
     <header>
@@ -14,8 +14,6 @@
                 <h1>Tatva</h1>
             </div>
             <div class="nav-links">
-                <button class="nav-btn active" data-section="about">About</button>
-                <button class="nav-btn" data-section="blogs">Blogs</button>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                     <span class="sun-icon">☀️</span>
                     <span class="moon-icon">🌙</span>
@@ -25,32 +23,23 @@
     </header>
 
     <main class="container">
-        <section id="about-section" class="section active">
-            <div class="about-content">
-                <div class="profile-header">
-                    <h2>About Me</h2>
-                </div>
-                <div id="about-info" class="content-area">
-                    <p>Loading...</p>
-                </div>
+        <section class="hero">
+            <h2>Welcome to Tatva</h2>
+            <p>A simple and elegant personal blog</p>
+        </section>
+
+        <section class="posts-section">
+            <h3>Latest Posts</h3>
+            <div id="posts-container" class="posts-grid">
+                <div class="loading">Loading posts...</div>
             </div>
         </section>
 
-        <section id="blogs-section" class="section">
-            <div class="blogs-header">
-                <h2>My Blogs</h2>
-            </div>
-            <div id="blog-list" class="blog-grid">
-                <p>Loading blogs...</p>
+        <section class="info-section">
+            <div id="about-content" class="info-content">
+                <div class="loading">Loading about...</div>
             </div>
         </section>
-
-        <div id="blog-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="blog-content"></div>
-            </div>
-        </div>
     </main>
 
     <footer>
