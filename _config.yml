@@ -1,0 +1,32 @@
+title: Tatva
+description: A Jekyll-inspired blog
+url: "https://yourusername.github.io"
+baseurl: "/vibe"
+
+# Build settings
+markdown: CommonMark
+highlighter: none
+permalink: /posts/:year/:month/:day/:title/
+
+# Site settings
+author:
+  name: Sumit Yadav
+  email: rockerritesh4@gmail.com
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /posts/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default" 

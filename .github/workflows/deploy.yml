@@ -4,7 +4,13 @@ on:
   push:
     branches: [ main ]
     paths: 
-      - 'posts/**/*.md'
+      - '_posts/**/*.md'
+      - '*.md'
+      - '_layouts/**'
+      - '_includes/**'
+      - '_sass/**'
+      - '_config.yml'
+      - 'build.js'
 
 permissions:
   contents: write
@@ -25,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Build blog
+    - name: Build Jekyll-like blog
       run: npm run build
       
     - name: Commit and push built files
@@ -36,6 +42,6 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "Auto-build: Update blog [skip ci]"
+          git commit -m "Auto-build: Update Jekyll-like blog [skip ci]"
           git push
         fi 

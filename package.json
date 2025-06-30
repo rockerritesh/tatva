@@ -2,12 +2,15 @@
   "name": "tatva",
   "version": "1.0.0",
   "type": "module",
-  "description": "Tatva - A minimal blog",
+  "description": "Tatva - A Jekyll-inspired blog",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "dev": "node build.js && cd docs && python3 -m http.server 8000"
   },
   "dependencies": {
-    "marked": "^9.1.6"
+    "marked": "^9.1.6",
+    "js-yaml": "^4.1.0",
+    "sass": "^1.69.5"
   },
   "author": "Sumit Yadav",
   "license": "MIT"
