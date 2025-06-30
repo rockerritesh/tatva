@@ -486,6 +486,40 @@ class JekyllLikeBuilder {
     }
   }
 
+  // Copy post assets (images, etc.)
+  copyPostAssets() {
+    if (!fs.existsSync('_posts')) return;
+    
+    // Get all non-markdown files from _posts directory
+    const assetFiles = fs.readdirSync('_posts').filter(file => !file.endsWith('.md'));
+    
+    for (const assetFile of assetFiles) {
+      const sourcePath = path.join('_posts', assetFile);
+      
+      // For each post that might reference this asset, copy it to the post directory
+      for (const post of this.posts) {
+        // Read the original markdown file to check for asset references
+        const markdownContent = fs.readFileSync(post.file, 'utf-8');
+        
+        // Check if the post markdown content references this asset
+        if (markdownContent.includes(assetFile)) {
+          const postDir = path.join('docs', post.url.replace(/\/$/, ''));
+          const destPath = path.join(postDir, assetFile);
+          
+          try {
+            // Ensure directory exists
+            fs.mkdirSync(postDir, { recursive: true });
+            // Copy the asset file
+            fs.copyFileSync(sourcePath, destPath);
+            console.log(`  ✅ Copied ${assetFile} to ${post.url}`);
+          } catch (error) {
+            console.error(`❌ Error copying ${assetFile} to ${post.url}:`, error.message);
+          }
+        }
+      }
+    }
+  }
+
   // Compile SCSS
   compileScss() {
     const scssPath = '_sass/main.scss';
@@ -522,6 +556,9 @@ class JekyllLikeBuilder {
     // Process content
     await this.loadPosts();
     this.processPages();
+    
+    // Copy post assets
+    this.copyPostAssets();
     
     // Compile SCSS
     this.compileScss();
