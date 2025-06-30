@@ -3,47 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life - Tatva Blog</title>
-    <link rel="stylesheet" href="/assets/styles-BPDaK3YV.css">
-    <style>
-        .post-container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-        .post-header { margin-bottom: 2rem; }
-        .post-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .post-date { color: var(--text-secondary); font-size: 0.9rem; }
-        .post-content { line-height: 1.8; }
-        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; }
-        .back-link:hover { text-decoration: underline; }
-        .post-content h1, .post-content h2, .post-content h3 { margin-top: 2rem; margin-bottom: 1rem; }
-        .post-content p { margin-bottom: 1rem; }
-        .post-content code { background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; }
-        .post-content pre { background: var(--code-bg); padding: 1rem; border-radius: 8px; overflow-x: auto; }
-    </style>
+    <title>Life - Tatva</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">Tatva</a></h1>
-            </div>
-            <div class="nav-links">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                    <span class="sun-icon">☀️</span>
-                    <span class="moon-icon">🌙</span>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <main class="post-container">
-        <a href="../index.html" class="back-link">← Back to Blog</a>
-        
-        <article class="post-header">
-            <h1 class="post-title">Life</h1>
-            <p class="post-date">1/21/2024</p>
-        </article>
-        
-        <div class="post-content">
-            <h1>Life</h1>
+    <h1>Tatva</h1>
+    <p><a href="index.html">← Back to Blog</a></p>
+    
+    <h2>Life</h2>
+    <p><em>Published: 2024-01-21</em></p>
+    
+    <h1>Life</h1>
 <p>Life is a beautiful, complex journey that we all navigate in our own unique way. It&#39;s filled with moments of joy, challenges, growth, and discovery.</p>
 <h2>The Essence of Life</h2>
 <p>Life isn&#39;t just about existing—it&#39;s about living. It&#39;s about finding meaning in the everyday moments, learning from our experiences, and growing into the best versions of ourselves.</p>
@@ -93,24 +62,8 @@
 <p>Life is a gift, and every day is a chance to make it meaningful. Whether through small acts of kindness, pursuing our dreams, or simply being present in the moment, we all have the power to create a life that matters.</p>
 <p><em>&quot;The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.&quot;</em> — Ralph Waldo Emerson</p>
 
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Tatva. Built with ❤️</p>
-    </footer>
-
-    <script>
-        // Theme toggle functionality
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    </script>
+    
+    <hr>
+    <p><a href="index.html">← Back to Blog</a></p>
 </body>
 </html>

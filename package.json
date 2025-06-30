@@ -1,26 +1,14 @@
 {
-  "name": "tatva-blog",
+  "name": "tatva",
   "version": "1.0.0",
   "type": "module",
-  "description": "A simple and elegant personal blog website",
-  "main": "index.js",
+  "description": "Tatva - A minimal blog",
   "scripts": {
-    "dev": "npm run build:static && vite",
-    "build": "npm run build:static && vite build",
-    "build:static": "node scripts/build-static-html.js",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "vite": "^5.0.0"
+    "build": "node build.js"
   },
   "dependencies": {
     "marked": "^9.1.6"
   },
-  "keywords": [
-    "blog",
-    "markdown",
-    "static-site"
-  ],
-  "author": "Your Name",
+  "author": "Sumit Yadav",
   "license": "MIT"
 }
