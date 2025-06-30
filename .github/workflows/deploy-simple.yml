@@ -60,4 +60,5 @@ jobs:
           echo "No changes to commit"
         else
           git commit -m "Auto-build: Update static files [skip ci]"
-          git push 
+          git push
+        fi 
