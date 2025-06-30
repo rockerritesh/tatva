@@ -11,6 +11,21 @@ const postsDir = path.join(__dirname, '../src/posts');
 const infoDir = path.join(__dirname, '../src/info');
 const outputDir = path.join(__dirname, '../docs');
 
+// Function to find the CSS file dynamically
+function findCSSFile() {
+  try {
+    const assetsDir = path.join(outputDir, 'assets');
+    if (fs.existsSync(assetsDir)) {
+      const files = fs.readdirSync(assetsDir);
+      const cssFile = files.find(file => file.endsWith('.css'));
+      return cssFile ? `/assets/${cssFile}` : '/assets/main.css';
+    }
+  } catch (error) {
+    console.log('Could not find CSS file, using default');
+  }
+  return '/assets/main.css';
+}
+
 // HTML template for blog posts
 const POST_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
@@ -18,7 +33,7 @@ const POST_TEMPLATE = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{TITLE}} - Tatva Blog</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="{{CSS_PATH}}">
     <style>
         .post-container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
         .post-header { margin-bottom: 2rem; }
@@ -130,7 +145,8 @@ function generatePostHTML(post) {
   return POST_TEMPLATE
     .replace(/\{\{TITLE\}\}/g, post.title)
     .replace(/\{\{DATE\}\}/g, post.date)
-    .replace(/\{\{CONTENT\}\}/g, htmlContent);
+    .replace(/\{\{CONTENT\}\}/g, htmlContent)
+    .replace(/\{\{CSS_PATH\}\}/g, findCSSFile());
 }
 
 function buildStaticSite() {
