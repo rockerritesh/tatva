@@ -556,6 +556,23 @@ class JekyllLikeBuilder {
     }
   }
 
+  // Copy sitemap.xml file from root to docs
+  copySitemap() {
+    const sourcePath = 'sitemap.xml';
+    const destPath = 'docs/sitemap.xml';
+    
+    if (fs.existsSync(sourcePath)) {
+      try {
+        fs.copyFileSync(sourcePath, destPath);
+        console.log('✅ Copied sitemap.xml to docs directory');
+      } catch (error) {
+        console.error('❌ Error copying sitemap.xml:', error.message);
+      }
+    } else {
+      console.log('⚠️  sitemap.xml file not found in root directory');
+    }
+  }
+
   // Build the site
   async build() {
     console.log('🔨 Building Jekyll-like site...');
@@ -582,6 +599,9 @@ class JekyllLikeBuilder {
     
     // Copy CNAME file
     this.copyCNAME();
+    
+    // Copy sitemap.xml file
+    this.copySitemap();
     
     // Generate individual post pages
     for (const post of this.posts) {
