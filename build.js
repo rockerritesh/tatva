@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { marked } from 'marked';
 import yaml from 'js-yaml';
-import sass from 'sass';
+import * as sass from 'sass';
 
 class JekyllLikeBuilder {
   constructor() {
