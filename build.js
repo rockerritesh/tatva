@@ -573,6 +573,23 @@ class JekyllLikeBuilder {
     }
   }
 
+  // Copy favicon.ico file from root to docs
+  copyFavicon() {
+    const sourcePath = 'favicon.ico';
+    const destPath = 'docs/favicon.ico';
+    
+    if (fs.existsSync(sourcePath)) {
+      try {
+        fs.copyFileSync(sourcePath, destPath);
+        console.log('✅ Copied favicon.ico to docs directory');
+      } catch (error) {
+        console.error('❌ Error copying favicon.ico:', error.message);
+      }
+    } else {
+      console.log('⚠️  favicon.ico file not found in root directory');
+    }
+  }
+
   // Build the site
   async build() {
     console.log('🔨 Building Jekyll-like site...');
@@ -602,6 +619,9 @@ class JekyllLikeBuilder {
     
     // Copy sitemap.xml file
     this.copySitemap();
+    
+    // Copy favicon.ico file
+    this.copyFavicon();
     
     // Generate individual post pages
     for (const post of this.posts) {
