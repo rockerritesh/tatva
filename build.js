@@ -590,6 +590,23 @@ class JekyllLikeBuilder {
     }
   }
 
+  // Copy googleb55b08cea6f7992e.html file from root to docs
+  copyGoogleHtml() {
+    const sourcePath = 'googleb55b08cea6f7992e.html';
+    const destPath = 'docs/googleb55b08cea6f7992e.html';
+    
+    if (fs.existsSync(sourcePath)) {
+      try {
+        fs.copyFileSync(sourcePath, destPath);
+        console.log('✅ Copied googleb55b08cea6f7992e.html to docs directory');
+      } catch (error) {
+        console.error('❌ Error copying googleb55b08cea6f7992e.html:', error.message);
+      }
+    } else { 
+      console.log('⚠️  googleb55b08cea6f7992e.html file not found in root directory');
+    }
+  }
+
   // Build the site
   async build() {
     console.log('🔨 Building Jekyll-like site...');
@@ -622,6 +639,9 @@ class JekyllLikeBuilder {
     
     // Copy favicon.ico file
     this.copyFavicon();
+
+    // Copy googleb55b08cea6f7992e.html file
+    this.copyGoogleHtml();
     
     // Generate individual post pages
     for (const post of this.posts) {
