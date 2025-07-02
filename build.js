@@ -556,20 +556,78 @@ class JekyllLikeBuilder {
     }
   }
 
-  // Copy sitemap.xml file from root to docs
-  copySitemap() {
-    const sourcePath = 'sitemap.xml';
+  // Generate sitemap.xml file dynamically
+  generateSitemap() {
     const destPath = 'docs/sitemap.xml';
     
-    if (fs.existsSync(sourcePath)) {
-      try {
-        fs.copyFileSync(sourcePath, destPath);
-        console.log('✅ Copied sitemap.xml to docs directory');
-      } catch (error) {
-        console.error('❌ Error copying sitemap.xml:', error.message);
-      }
-    } else {
-      console.log('⚠️  sitemap.xml file not found in root directory');
+    // Get the site URL from config
+    let siteUrl = this.config.url || 'https://your-domain.com';
+    let baseUrl = this.config.baseurl || '';
+    
+    // If baseurl is a full URL, ignore it and just use the main url
+    if (baseUrl.startsWith('http')) {
+      baseUrl = '';
+    }
+    
+    // Ensure siteUrl doesn't end with slash
+    siteUrl = siteUrl.replace(/\/$/, '');
+    if (baseUrl && !baseUrl.startsWith('/')) {
+      baseUrl = '/' + baseUrl;
+    }
+    
+    const fullBaseUrl = `${siteUrl}${baseUrl}`;
+    
+    let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+    
+    // Add homepage
+    sitemapContent += `
+  <url>
+    <loc>${fullBaseUrl}/</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>`;
+    
+    // Add pages (excluding homepage which is already added)
+    for (const page of this.pages) {
+      if (page.url === '/') continue; // Skip homepage as it's already added
+      
+      const pageUrl = page.url.replace(/\/$/, '');
+      const lastmod = page.frontmatter.date || new Date().toISOString().split('T')[0];
+      
+      sitemapContent += `
+  <url>
+    <loc>${fullBaseUrl}${pageUrl}/</loc>
+    <lastmod>${lastmod}T00:00:00Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+    }
+    
+    // Add posts
+    for (const post of this.posts) {
+      const postDate = new Date(post.date);
+      const lastmod = postDate.toISOString();
+      
+      sitemapContent += `
+  <url>
+    <loc>${fullBaseUrl}${post.url}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
+    }
+    
+    sitemapContent += `
+</urlset>
+`;
+    
+    try {
+      fs.writeFileSync(destPath, sitemapContent);
+      console.log(`✅ Generated sitemap.xml with ${this.posts.length} posts and ${this.pages.length} pages`);
+    } catch (error) {
+      console.error('❌ Error generating sitemap.xml:', error.message);
     }
   }
 
@@ -607,6 +665,85 @@ class JekyllLikeBuilder {
     }
   }
 
+  // Generate robots.txt file
+  generateRobotsTxt() {
+    const destPath = 'docs/robots.txt';
+    
+    // Get the site URL from config, handling cases where baseurl might be redundant
+    let siteUrl = this.config.url || 'https://your-domain.com';
+    let baseUrl = this.config.baseurl || '';
+    
+    // If baseurl is a full URL, ignore it and just use the main url
+    if (baseUrl.startsWith('http')) {
+      baseUrl = '';
+    }
+    
+    // Ensure siteUrl doesn't end with slash and baseUrl doesn't start with slash (unless empty)
+    siteUrl = siteUrl.replace(/\/$/, '');
+    if (baseUrl && !baseUrl.startsWith('/')) {
+      baseUrl = '/' + baseUrl;
+    }
+    
+    const fullSitemapUrl = `${siteUrl}${baseUrl}/sitemap.xml`;
+    
+    const robotsContent = `User-agent: *
+Allow: /
+
+Sitemap: ${fullSitemapUrl}
+`;
+    
+    try {
+      fs.writeFileSync(destPath, robotsContent);
+      console.log('✅ Generated robots.txt');
+    } catch (error) {
+      console.error('❌ Error generating robots.txt:', error.message);
+    }
+  }
+
+  // Generate llms.txt file
+  generateLlmsTxt() {
+    const destPath = 'docs/llms.txt';
+    
+    // Get site info from config
+    const siteName = this.config.title || 'Personal Website';
+    const description = this.config.description || 'A personal blog and website';
+    const authorName = this.config.author?.name || 'Site Owner';
+    const authorEmail = this.config.author?.email || '';
+    
+    const llmsContent = `# ${siteName}
+
+This site is open to AI crawling and indexing.
+
+## About
+${description}
+
+## Author
+${authorName}
+
+## Content Policy
+This is a personal blog containing thoughts, ideas, and experiences. 
+Content is available for AI training and reference with attribution.
+
+## Contact
+${authorEmail ? `Email: ${authorEmail}` : 'Contact information available on the about page.'}
+
+## Technical
+- Built with a custom Jekyll-like static site generator
+- Posts available in structured format
+- Sitemap available at /sitemap.xml
+
+User-agent: *
+Allow: /
+`;
+    
+    try {
+      fs.writeFileSync(destPath, llmsContent);
+      console.log('✅ Generated llms.txt');
+    } catch (error) {
+      console.error('❌ Error generating llms.txt:', error.message);
+    }
+  }
+
   // Build the site
   async build() {
     console.log('🔨 Building Jekyll-like site...');
@@ -634,14 +771,18 @@ class JekyllLikeBuilder {
     // Copy CNAME file
     this.copyCNAME();
     
-    // Copy sitemap.xml file
-    this.copySitemap();
+    // Generate sitemap.xml file
+    this.generateSitemap();
     
     // Copy favicon.ico file
     this.copyFavicon();
 
     // Copy googleb55b08cea6f7992e.html file
     this.copyGoogleHtml();
+    
+    // Generate robots.txt and llms.txt files
+    this.generateRobotsTxt();
+    this.generateLlmsTxt();
     
     // Generate individual post pages
     for (const post of this.posts) {
