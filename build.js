@@ -392,7 +392,11 @@ class JekyllLikeBuilder {
     
     const layout = this.layouts[layoutName];
     const data = {
-      site: this.config,
+      site: {
+        ...this.config,
+        posts: this.posts,
+        pages: this.pages
+      },
       page: pageData,
       content: content
     };
@@ -794,17 +798,7 @@ Allow: /
         continue;
       }
 
-      const data = {
-        site: {
-          ...this.config,
-          posts: this.posts,
-          pages: this.pages
-        },
-        page: post,
-        content: post.content
-      };
-
-      const html = this.processTemplate(layout.content, data);
+      const html = this.applyLayout(post.content, layoutName, post);
       
       // Create directory structure for the post
       const postDir = path.join('docs', post.url.replace(/\/$/, ''));
@@ -831,17 +825,14 @@ Allow: /
         continue;
       }
 
-      const data = {
-        site: {
-          ...this.config,
-          posts: this.posts,
-          pages: this.pages
-        },
-        page: { ...page, layout: layoutName },
-        content: page.content
+      const layoutPageData = {
+        ...page.frontmatter,
+        title: page.title,
+        url: page.url,
+        layout: layoutName
       };
       
-      const html = this.processTemplate(layout.content, data);
+      const html = this.applyLayout(page.content, layoutName, layoutPageData);
       
       let outputPath;
       if (page.url === '/') {
