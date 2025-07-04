@@ -202,6 +202,57 @@ body {
     transition: border-color 0.3s ease;
 }
 
+// Mermaid diagrams
+.mermaid {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    overflow-x: auto;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    
+    // Ensure diagrams are responsive
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    // Style for diagram containers
+    .node rect,
+    .node circle,
+    .node ellipse,
+    .node polygon {
+        fill: var(--bg-color);
+        stroke: var(--border-color);
+        stroke-width: 2px;
+        transition: fill 0.3s ease, stroke 0.3s ease;
+    }
+    
+    // Text in diagrams
+    .node .label,
+    .edgeLabel {
+        color: var(--text-color);
+        font-family: inherit;
+        transition: color 0.3s ease;
+    }
+    
+    // Arrows and connectors
+    .edgePath path {
+        stroke: var(--text-muted);
+        stroke-width: 2px;
+        fill: none;
+        transition: stroke 0.3s ease;
+    }
+    
+    // Arrow markers
+    .arrowheadPath {
+        fill: var(--text-muted);
+        transition: fill 0.3s ease;
+    }
+}
+
 // Footer
 .site-footer {
     border-top: 1px solid var(--border-color);

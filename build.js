@@ -384,6 +384,39 @@ class JekyllLikeBuilder {
     return processed;
   }
 
+  // Process Mermaid code blocks with placeholder system
+  processMermaidBlocks(content) {
+    const mermaidBlocks = [];
+    let index = 0;
+    
+    // First pass: extract mermaid blocks and replace with placeholders
+    const contentWithPlaceholders = content.replace(/```mermaid\n([\s\S]*?)\n```/g, (match, mermaidCode) => {
+      const cleanCode = mermaidCode.trim();
+      mermaidBlocks[index] = cleanCode;
+      const placeholder = `MERMAID_PLACEHOLDER_${index}`;
+      index++;
+      return placeholder;
+    });
+    
+    // Store the blocks for later restoration
+    this.mermaidBlocks = mermaidBlocks;
+    return contentWithPlaceholders;
+  }
+  
+  // Restore Mermaid blocks after markdown processing
+  restoreMermaidBlocks(htmlContent) {
+    if (!this.mermaidBlocks) return htmlContent;
+    
+    let restoredContent = htmlContent;
+    this.mermaidBlocks.forEach((block, index) => {
+      const placeholder = `MERMAID_PLACEHOLDER_${index}`;
+      const mermaidDiv = `<div class="mermaid">${block}</div>`;
+      restoredContent = restoredContent.replace(new RegExp(placeholder, 'g'), mermaidDiv);
+    });
+    
+    return restoredContent;
+  }
+
   // Apply layout to content
   applyLayout(content, layoutName, pageData) {
     if (!layoutName || !this.layouts[layoutName]) {
@@ -444,9 +477,15 @@ class JekyllLikeBuilder {
       const [, year, month, day, slug] = dateMatch;
       const url = `/posts/${year}/${month}/${day}/${slug}/`;
 
+      // Process Mermaid blocks before converting markdown to HTML
+      const processedBody = this.processMermaidBlocks(body);
+      const htmlContent = marked(processedBody);
+      // Restore Mermaid blocks after markdown processing
+      const finalContent = this.restoreMermaidBlocks(htmlContent);
+
       const post = {
         ...frontmatter,
-        content: marked(body),
+        content: finalContent,
         excerpt: body.substring(0, 300) + '...',
         url,
         date: frontmatter.date || `${year}-${month}-${day}`,
@@ -475,12 +514,16 @@ class JekyllLikeBuilder {
       const { frontmatter, content } = this.parseFrontmatter(rawContent);
       
       const title = frontmatter.title || file.replace('.md', '');
-      const htmlContent = marked(content);
+      // Process Mermaid blocks before converting markdown to HTML
+      const processedContent = this.processMermaidBlocks(content);
+      const htmlContent = marked(processedContent);
+      // Restore Mermaid blocks after markdown processing
+      const finalContent = this.restoreMermaidBlocks(htmlContent);
       const url = frontmatter.permalink || `/${file.replace('.md', '')}/`;
       
       const page = {
         title,
-        content: htmlContent,
+        content: finalContent,
         url,
         filename: file,
         frontmatter

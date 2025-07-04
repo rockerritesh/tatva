@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgentsAI - A Jekyll-inspired blog">
+    <title>AgentsAI - Tatva</title>
+    <meta name="description" content="">
     <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
     <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ff6b6b',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#ff6b6b',
+                lineColor: '#666',
+                sectionBkgColor: '#f8f9fa',
+                altSectionBkgColor: '#e9ecef',
+                gridColor: '#ddd',
+                tertiaryColor: '#f1f3f4'
+            }
+        });
+    </script>
 </head>
 <body>
     <header class="site-header">
@@ -15,7 +35,7 @@
         <nav class="site-nav">
             <div class="trigger">
                 <a class="page-link" href="/">Home</a>
-                <a class="page-link" href="/about">About</a>
+                <!-- <a class="page-link" href="/about">About</a> -->
             </div>
         </nav>
     </div>
@@ -53,73 +73,71 @@
 <h2>🏗️ System Architecture: The Technical Foundation</h2>
 <h3>Core Workflow Visualization</h3>
 <p>The system follows an elegant flow that mimics human problem-solving approaches:</p>
-<pre><code class="language-mermaid">flowchart TD
-    A[&quot;🧑‍💻 User Query&quot;] --&gt; B[&quot;📊 Query Embedding&lt;br/&gt;OpenAI text-embedding-3-large&quot;]
-    B --&gt; C[&quot;🎯 Agent Selection&lt;br/&gt;Cosine Similarity &gt; 0.5&quot;]
-    C --&gt; D{&quot;🤔 Agent Found?&quot;}
-    D --&gt;|No| E[&quot;💬 General Chat Response&quot;]
-    D --&gt;|Yes| F[&quot;🛠️ Tool Sequence Planning&quot;]
-    F --&gt; G[&quot;⚙️ Tool Execution Loop&quot;]
-    G --&gt; H[&quot;📝 Context Gathering&quot;]
-    H --&gt; I[&quot;🔄 Tool Function Call&quot;]
-    I --&gt; J[&quot;💾 Store Results&quot;]
-    J --&gt; K{&quot;🔄 More Tools?&quot;}
-    K --&gt;|Yes| H
-    K --&gt;|No| L[&quot;📋 Results Summary&quot;]
-    L --&gt; M[&quot;✅ Response to User&quot;]
+<p><div class="mermaid">flowchart TD
+    A["🧑‍💻 User Query"] --> B["📊 Query Embedding<br/>OpenAI text-embedding-3-large"]
+    B --> C["🎯 Agent Selection<br/>Cosine Similarity > 0.5"]
+    C --> D{"🤔 Agent Found?"}
+    D -->|No| E["💬 General Chat Response"]
+    D -->|Yes| F["🛠️ Tool Sequence Planning"]
+    F --> G["⚙️ Tool Execution Loop"]
+    G --> H["📝 Context Gathering"]
+    H --> I["🔄 Tool Function Call"]
+    I --> J["💾 Store Results"]
+    J --> K{"🔄 More Tools?"}
+    K -->|Yes| H
+    K -->|No| L["📋 Results Summary"]
+    L --> M["✅ Response to User"]
     
     style A fill:#e1f5fe
     style C fill:#f3e5f5
     style F fill:#e8f5e8
     style I fill:#fff3e0
-    style M fill:#e8f5e8
-</code></pre>
+    style M fill:#e8f5e8</div></p>
 <h3>Agent Ecosystem Overview</h3>
-<pre><code class="language-mermaid">graph TB
-    subgraph &quot;🤖 Agent Ecosystem&quot;
-        A1[&quot;📊 CSVDataAgent&lt;br/&gt;DataframeLoader&lt;br/&gt;AdvanceCSVQuery&quot;]
-        A2[&quot;😀 EmojiWriter&lt;br/&gt;EmojiTranslator&lt;br/&gt;EmojiMixer&quot;]
-        A3[&quot;📝 TextSummarizer&lt;br/&gt;KeypointExtractor&lt;br/&gt;ContentExpander&quot;]
-        A4[&quot;📄 PDFContentWriter&lt;br/&gt;TextExtractor&lt;br/&gt;ContentReformatter&quot;]
-        A5[&quot;🌐 TranslatorAgent&lt;br/&gt;MultilingualTranslator&lt;br/&gt;StylePreserver&quot;]
+<p><div class="mermaid">graph TB
+    subgraph "🤖 Agent Ecosystem"
+        A1["📊 CSVDataAgent<br/>DataframeLoader<br/>AdvanceCSVQuery"]
+        A2["😀 EmojiWriter<br/>EmojiTranslator<br/>EmojiMixer"]
+        A3["📝 TextSummarizer<br/>KeypointExtractor<br/>ContentExpander"]
+        A4["📄 PDFContentWriter<br/>TextExtractor<br/>ContentReformatter"]
+        A5["🌐 TranslatorAgent<br/>MultilingualTranslator<br/>StylePreserver"]
     end
     
-    subgraph &quot;🔧 Core System&quot;
-        B1[&quot;🎯 Agent Selection Engine&quot;]
-        B2[&quot;🛠️ Tool Orchestrator&quot;]
-        B3[&quot;💬 Conversation Manager&quot;]
-        B4[&quot;📊 Embedding Generator&quot;]
+    subgraph "🔧 Core System"
+        B1["🎯 Agent Selection Engine"]
+        B2["🛠️ Tool Orchestrator"]
+        B3["💬 Conversation Manager"]
+        B4["📊 Embedding Generator"]
     end
     
-    subgraph &quot;🔌 Integration Layer&quot;
-        C1[&quot;🧠 OpenAI GPT-4o&quot;]
-        C2[&quot;🔤 OpenAI Embeddings&quot;]
-        C3[&quot;📂 File System&quot;]
-        C4[&quot;💾 Conversation History&quot;]
+    subgraph "🔌 Integration Layer"
+        C1["🧠 OpenAI GPT-4o"]
+        C2["🔤 OpenAI Embeddings"]
+        C3["📂 File System"]
+        C4["💾 Conversation History"]
     end
     
-    B1 --&gt; A1
-    B1 --&gt; A2
-    B1 --&gt; A3
-    B1 --&gt; A4
-    B1 --&gt; A5
+    B1 --> A1
+    B1 --> A2
+    B1 --> A3
+    B1 --> A4
+    B1 --> A5
     
-    B2 --&gt; B1
-    B3 --&gt; B2
-    B4 --&gt; B1
+    B2 --> B1
+    B3 --> B2
+    B4 --> B1
     
-    B4 --&gt; C2
-    B2 --&gt; C1
-    B3 --&gt; C4
-    A1 --&gt; C3
-    A4 --&gt; C3
+    B4 --> C2
+    B2 --> C1
+    B3 --> C4
+    A1 --> C3
+    A4 --> C3
     
     style A1 fill:#e3f2fd
     style A2 fill:#fff3e0
     style A3 fill:#e8f5e8
     style A4 fill:#fce4ec
-    style A5 fill:#f3e5f5
-</code></pre>
+    style A5 fill:#f3e5f5</div></p>
 <h2>🔬 Technical Deep Dive: How It All Works</h2>
 <h3>1. 🎯 Semantic Agent Selection</h3>
 <p>The heart of the system lies in its intelligent agent selection mechanism. Here&#39;s how it works:</p>
@@ -166,7 +184,7 @@
     return tools_order.tools_name_in_seq
 </code></pre>
 <h3>3. 🔄 Execution Flow Sequence</h3>
-<pre><code class="language-mermaid">sequenceDiagram
+<p><div class="mermaid">sequenceDiagram
     participant U as 🧑‍💻 User
     participant S as 🎯 System
     participant E as 🔤 Embedding API
@@ -175,29 +193,28 @@
     participant L as 🧠 LLM API
     participant H as 💾 History
     
-    U-&gt;&gt;S: Submit Query
-    S-&gt;&gt;E: Generate Query Embedding
-    E--&gt;&gt;S: Return Embedding Vector
-    S-&gt;&gt;S: Calculate Cosine Similarity
-    S-&gt;&gt;A: Select Best Agent (&gt;0.5 threshold)
-    A-&gt;&gt;L: Determine Tool Sequence
-    L--&gt;&gt;A: Return Tool Order
+    U->>S: Submit Query
+    S->>E: Generate Query Embedding
+    E-->>S: Return Embedding Vector
+    S->>S: Calculate Cosine Similarity
+    S->>A: Select Best Agent (>0.5 threshold)
+    A->>L: Determine Tool Sequence
+    L-->>A: Return Tool Order
     
     loop For Each Tool
-        A-&gt;&gt;T: Gather Tool Inputs
-        A-&gt;&gt;L: Get Missing Information
-        L--&gt;&gt;A: Provide Inputs
-        A-&gt;&gt;T: Execute Tool Function
-        T--&gt;&gt;A: Return Results
-        A-&gt;&gt;H: Store Context
+        A->>T: Gather Tool Inputs
+        A->>L: Get Missing Information
+        L-->>A: Provide Inputs
+        A->>T: Execute Tool Function
+        T-->>A: Return Results
+        A->>H: Store Context
     end
     
-    A-&gt;&gt;L: Generate Final Summary
-    L--&gt;&gt;A: Formatted Response
-    A--&gt;&gt;U: Deliver Results
+    A->>L: Generate Final Summary
+    L-->>A: Formatted Response
+    A-->>U: Deliver Results
     
-    Note over S,H: Maintains conversation&lt;br/&gt;context throughout
-</code></pre>
+    Note over S,H: Maintains conversation<br/>context throughout</div></p>
 <h2>🤖 Meet the Agent Squad: Specialized AI Workers</h2>
 <h3>1. 📊 <strong>CSVDataAgent</strong> - The Data Scientist</h3>
 <p><strong>Specialty</strong>: CSV data processing and analysis</p>
@@ -411,7 +428,7 @@ uv run final_version.py
     <footer class="site-footer">
     <div class="wrapper">
         <div class="footer-content">
-            <p>&copy; {{ 'now' | date: '%Y' }} Tatva. Built with ❤️</p>
+            <p>&copy; 2025 Made with ❤️ | All rights reserved to <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
             
                 <p>Contact: <a href="mailto:rockerritesh4@gmail.com">rockerritesh4@gmail.com</a></p>
             

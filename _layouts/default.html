@@ -7,6 +7,25 @@
     <meta name="description" content="{{ page.description }}">
     <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ff6b6b',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#ff6b6b',
+                lineColor: '#666',
+                sectionBkgColor: '#f8f9fa',
+                altSectionBkgColor: '#e9ecef',
+                gridColor: '#ddd',
+                tertiaryColor: '#f1f3f4'
+            }
+        });
+    </script>
 </head>
 <body>
     {% include header.html %}

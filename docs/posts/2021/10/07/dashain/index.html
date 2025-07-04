@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashain - A Jekyll-inspired blog">
+    <title>Dashain - Tatva</title>
+    <meta name="description" content="">
     <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
     <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ff6b6b',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#ff6b6b',
+                lineColor: '#666',
+                sectionBkgColor: '#f8f9fa',
+                altSectionBkgColor: '#e9ecef',
+                gridColor: '#ddd',
+                tertiaryColor: '#f1f3f4'
+            }
+        });
+    </script>
 </head>
 <body>
     <header class="site-header">
@@ -15,7 +35,7 @@
         <nav class="site-nav">
             <div class="trigger">
                 <a class="page-link" href="/">Home</a>
-                <a class="page-link" href="/about">About</a>
+                <!-- <a class="page-link" href="/about">About</a> -->
             </div>
         </nav>
     </div>
@@ -604,7 +624,7 @@
     <footer class="site-footer">
     <div class="wrapper">
         <div class="footer-content">
-            <p>&copy; {{ 'now' | date: '%Y' }} Tatva. Built with ❤️</p>
+            <p>&copy; 2025 Made with ❤️ | All rights reserved to <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
             
                 <p>Contact: <a href="mailto:rockerritesh4@gmail.com">rockerritesh4@gmail.com</a></p>
             
