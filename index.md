@@ -1,6 +1,7 @@
 ---
 layout: home
-title: Welcome to Tatva - Sumit Yadav[aka. rockerritesh]
+title: Welcome to Tatva - Sumit Yadav (aka. rockerritesh)
+description: Explore the deeper layers of existence, technology, learning, and self-growth through personal reflections and insights.
 permalink: /
 ---
 

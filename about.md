@@ -6,34 +6,42 @@ permalink: /about/
 
 # About Me
 
-## Contact Information
-- **Name:** Sumit Yadav
-- **Email:** rockerritesh4@gmail.com
-- **Portfolio:** [sumityadav.com.np](https://sumityadav.com.np)
-- **Mobile:** +977-9819856148
-- **GitHub:** [github.com/rockerritesh](https://github.com/rockerritesh)
-- **LinkedIn:** [linkedin.com/in/rockerritesh](https://linkedin.com/in/rockerritesh)
+
+<img src="https://sumityadav.com.np/rockerritesh.png" alt="Sumit_Yadav"> <style>
+        img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 80%;
+        text-align:center;
+        width:50%
+        }
+</style>
+
+# Sumit Yadav (Rocker Ritesh)
+
+**Email:** [rockerritesh4@gmail.com](mailto:rockerritesh4@gmail.com) | **Mobile:** +977-9819856148  
+**Portfolio:** [sumityadav.com.np](https://sumityadav.com.np) | **GitHub:** [github.com/rockerritesh](https://github.com/rockerritesh) | **LinkedIn:** [linkedin.com/in/rockerritesh](https://www.linkedin.com/in/rockerritesh/)
 
 ## Summary
 
-AI Engineer specializing in natural language processing (NLP) and AI optimization, with 5+ years of experience developing production-grade AI systems. Currently architecting:
+**AI Engineer** specializing in **natural language processing (NLP)** and **AI optimization**, with 5+ years of experience developing production-grade [AI systems](https://huggingface.co/rockerritesh). Currently architecting:
 
-- Multi-agent RAG systems with guardrails for secure information retrieval
-- Context-aware chatbots with post-conversation analysis capabilities
-- LLM evaluation frameworks for accuracy and reliability testing
-- MCP Server for easy and fast way to integrate Agents
+- **Multi-agent RAG systems** with guardrails for secure information retrieval
+- **Context-aware chatbots** with post-conversation analysis capabilities
+- **LLM evaluation frameworks** for accuracy and reliability testing
+- **[MCP Server](https://github.com/rockerritesh/scraper-mcp-smithery)** for easy and fast way to integrate Agents
 
-Proven track record in AI/Machine Learning engineering across many NLP projects including Maithili text classification (low-resources) (0.87 accuracy) and multilingual document analysis systems. Authored 3 peer-reviewed publications and one open review paper on machine learning optimization/security and low-resource language processing.
+Proven track record in **AI/Machine Learning engineering** across many NLP projects including Maithili text classification (low-resources) (0.87 accuracy) and multilingual document analysis systems. Authored 3 peer-reviewed publications and one open review paper on **machine learning optimization/security** and **low-resource language processing**.
 
-## Core Competencies
-
+**Core Competencies:**
 - **AI Prompt Design** • **LLM Fine-tuning** • **Security Document Analysis**
 - **Technical Documentation** • **Cross-functional Collaboration** • **GRC Data Annotation**
 
 ## Education
 
-**Pulchowk Engineering College** - Kathmandu, Nepal  
-*Bachelor of Computer Engineering*
+**Pulchowk Engineering College** | Kathmandu, Nepal  
+Bachelor of Computer Engineering
 
 **Courses:** SDNs, FinTech, Operating Systems, Data Structures, Big Data, Artificial Intelligence, Networking, Databases
 
@@ -41,6 +49,114 @@ Proven track record in AI/Machine Learning engineering across many NLP projects 
 
 - **Languages:** Python, C, C++, Bash
 - **Online Courses:** Deep Learning and GAN Specialization, Generative AI LLM, Image Understanding TensorFlow GCP
-- **Tools/Modules:** CI/CD, GIT, PyTorch, LangChain, LlamaIndex, Django, Streamlit, MySQL, GraphQL
+- **Tools/Modules:** CI/CD, GIT, Pytorch, LangChain, LlamaIndex, Django, Streamlit, MySQL, GraphQL
 - **Soft Skills:** Leadership, Event Management, Writing, Public Speaking, Time Management
-- **Hobbies:** Walking, Meditation, Deep Think, Meta-Thinking 
+- **Hobbies:** Walking, Meditation, Deep Think, Meta-Thinking
+
+## Experience
+
+### AI Engineer (Remote) | Astha.ai, USA
+*May 2025 - Present*
+
+- **Zero Trust Agentic System:** Working on projects related to RAG, Agent identity and dataflow
+
+### AI Engineer (Full-time) | Amnil Technology Pvt. Ltd, Lalitpur
+*May 2024 - May 2025*
+
+- **Generative AI and Machine Learning Engineering:** Working on projects related to RAG, Agent-based systems, recursive query, Chatbot, SQL Agent, and scheduling optimization. Built systems including Guardrails, LLM evaluation, and Report generation
+- **LLM hosting, inference optimization, and API integration:** Hosted different **embedding models** and **completion models** (e.g., LLaMA 3.3 3B model) on server using vLLM inference engine, ensuring efficient performance and easy API integration
+
+### Chief Data Officer (Full-time) | Ed-Acadia, Lalitpur
+*May 2022 - 2023*
+
+- **AI/ML Projects:** Supervised projects and research related to Data Science. Worked on different DocumentsAI systems for low-resource languages
+
+### Software Coordinator (Full-time) | PDSC (Plan Design Solve Create), Lalitpur
+*May 2022 - 2023*
+
+- **Project Management:** Supervised projects and research related to Data Science
+
+### GAN Mentor (Part-time) | DeepLearning.AI, Virtual
+*Aug 2021 - Present*
+
+- **Course - GAN Specialization:** Helping students understand key concepts behind Unsupervised learning (GAN)
+
+### AI and Robotics Member (Part-time) | Robotics Association of Nepal, Lalitpur
+*2021 - Present*
+
+- **Making Robotics based systems:** Conducted research and projects related to Computer Vision based on Raspberry Pi microcontroller
+
+## Publications
+
+1. **[SUPPORT VECTORS ARE A BETTER WAY OF TEXT CLASSIFICATION FOR IMBALANCED DATA](https://www.researchgate.net/publication/371514138_SUPPORT_VECTORS_ARE_A_BETTER_WAY_OF_TEXT_CLASSIFICATION_FOR_IMBALANCED_DATA)** - Presented a robust SVC method for text classification (100+ classes) using term-frequency vectorization, achieving superior test data results over neural networks
+
+2. **[Machine Learning Analysis of Tirhuta Lipi](https://www.researchgate.net/publication/373370042_Machine_Learning_Analysis_of_Tirhuta_Lipi)** - Achieved 0.97 accuracy in Tirhuta Lipi character recognition using MobileNet embedding and logistic regression, with applications in translation and OCR for low-resource languages
+
+3. **[Revolutionizing Currency Security: A Yolov8-Based Approach for Automated Detection of Counterfeit Nepali Banknotes](https://doi.org/10.61440/JBES.2024.v1.47)** - Implemented YOLOv8 to achieve a true positive recall of 0.82 (front face) and 0.9863 (back face) in detecting counterfeit Nepali banknotes, demonstrating significant advancements in counterfeit currency detection
+
+## Projects
+
+### [Vibe-Coder](https://github.com/rockerritesh/vibe_coder)
+Made an Agent that will do Streamlit and FastAPI. **Tech:** Agent, MCP, Claude API keys, Python, Streamlit
+
+### Retrieval Augmentation Generation System (RAG) and Intelligent Document Processing (IDP)
+Developed a retrieval-augmented reality system for enhanced information access and interaction. **Tech:** OpenAI, Gemini, Claude API keys, Python
+
+### Nepali Chat with Doc
+Implemented a [chatbot](https://huggingface.co/spaces/rockerritesh/open_ai_chat_bot) for Nepali language using Devanagari and Preeti fonts. Features include Guardrails system, post-conversation analysis, and agent-based systems like SQL Agent, Excel Agent, and Reflexive Agents. [Preeti to Unicode Conversion](https://huggingface.co/spaces/rockerritesh/preeti-unicode). **Tech:** OpenAI, Gemini, Claude API keys
+
+### Bachelor's Major Project: Evaluating Auto-Encoder Transformer Language Model for Maithili Text Classification
+Established a benchmark in this language. First to create a corpus in Devanagari Maithili language, trained LLM for Maithili, and performed downstream task classification. **Tech:** LLM, [Transformer (BERT)](https://huggingface.co/rockerritesh/maiBERT_TF), PyTorch, [Streamlit](https://maithili.streamlit.app/) & Big Data (April 2024)
+
+### [IRB](https://github.com/jarp0l/IRB-Robo-Arm) (Image Recognition Based) Robotics Arm
+Research-oriented, open-source project under UN's SDG3 - Good Health & Well-Being. **Tech:** Python, Arduino Programming, Arduino Toolkit, TensorFlow (May 2020)
+
+### Nepali Language Projects
+Developed multiple applications, including a Devanagari letter classifier using VGG16 (accuracy 0.94), a Nepali sentiment analysis model, and a simple OCR for Nepali text. **Tech:** Keras, Transformer, PyTorch, TF-IDF, NLTK (Past 2 Years)
+
+### Unsupervised Model
+Explored the behavior of latent spaces using VAE, GAN, C-GAN, AC-GAN, and DC-GAN. **Tech:** Python, NumPy, TensorFlow (Sep 2021)
+
+### NEPSE Simple
+Presented Nepal stock market data in a minimal environment constraint. **Tech:** GitHub Workflow, Automation in Scraping, WebSockets, JavaScript, RSS, XML (Since 2020)
+
+### Advanced Document and AI Systems
+Designed and implemented a variety of tools, including:
+- Chat systems for Nepali and multilingual documents with Preeti-to-Unicode conversion and guardrails for improved user interaction
+- AI-powered memo creation and advanced Excel file manipulation tools
+- Contract document analysis using recursive and advanced reasoning GPT systems
+- Translation systems for Nepali documents using OCR and text conversion
+- Chat and interaction systems for image and audio data with TTS and Whisper integration
+
+### Verification and Financial Prediction Systems
+Developed:
+- A face and signature verification app using VGG-based advanced face detection and liveness detection algorithms
+- A loan eligibility prediction system utilizing knowledge-based reasoning techniques
+
+## Honors and Awards
+
+- **Winner of [GritFeat AI Hackathon](https://www.linkedin.com/posts/gritfeat-solutions_aihackathon-gritfeat-healthcare-activity-7025771930481803264-Hbdc?utm_source=share&utm_medium=member_desktop) 2023, Locus** - Feb 2023 (SWIFT is a wearable device with hardware and AI models that detect falls in elderly people with 0.7986 accuracy, resulting in immediate emergency alerts to contacts)
+
+- **First Runner-Up of Dataverse, Locus** - Jan 2023, [Dataverse Solution](https://github.com/rockerritesh/Datarush-2023-DataVerse-) (NLP-based problem to classify abstracts)
+
+- **Winner of Best AI Project of Deltathon, DELTA 3.0** - Jan 2022, [Nepali Harvest](https://github.com/adhikariraju38/Nepali_Harvest) (Designed a portal to help farmers by predicting diseases, identifying optimal harvest times, and aiding with crop health assessment)
+
+- **Winner of [Image Challenge](https://www.kaggle.com/competitions/automatic-vote-counting-image/overview), IT-Meet UP KU** - Sep 2022 (Training AI model to classify images of ballot papers)
+
+- **Winner of Capture The Flag, LogPoint** - Feb 2021 (Task of finding information and exploiting a binary file)
+
+- **Runner's Up at DATARUSH by DOCSUMO** - Feb 2021 (NLP-based model for classifying abstracts into classes)
+
+## Social Experience
+
+### Team of [NPL Coders](https://nplcoder.org) | Global
+*Sep 2023 - Present*  
+Conducted National level Data Science Coding Competition on Kaggle and HackerRank
+
+### Joint Secretary at NTBNS Student Clubs, IOE, Pulchowk Campus | Lalitpur, Nepal
+*Jan 2020 - Present*  
+Conducted technical training & Organized Nepal's largest Saraswati Puja Program
+
+### Tutor of Children In Technology - WorldLink | Nepal
+*Nov 2023*  
+Educated students about risks and safety of the Internet

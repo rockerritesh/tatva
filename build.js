@@ -105,7 +105,7 @@ class JekyllLikeBuilder {
     });
     
     // Process special 'now' date: {{ 'now' | date: '%Y' }}
-    processed = processed.replace(/\{\{\s*'now'\s*\|\s*date:\s*"([^"]+)"\s*\}\}/g, (match, format) => {
+    processed = processed.replace(/\{\{\s*'now'\s*\|\s*date:\s*['"]([^'"]+)['"]\s*\}\}/g, (match, format) => {
       const now = new Date();
       if (format === '%Y') {
         return now.getFullYear().toString();
@@ -228,7 +228,7 @@ class JekyllLikeBuilder {
     
     // Now process variables with complex filters
     // Process complex variables with filters: {{ page.description | default: site.description }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*default:\s*([^}]+)\s*\}\}/g, (match, variable, defaultVar) => {
+    processed = processed.replace(/\{\{\s*([^|]+)\|\s*default:\s*([^}]+?)\s*\}\}/g, (match, variable, defaultVar) => {
       const parts = variable.trim().split('.');
       let value = data;
       
