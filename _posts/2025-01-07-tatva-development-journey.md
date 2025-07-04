@@ -53,7 +53,7 @@ With the foundation solid, I went into feature development mode:
 ### Visual Polish
 - `Add favicon copying to build process`
 - `sass` - SCSS compilation support
-- `dark` - Dark mode implementation with CSS custom properties
+- `dark` - Initial dark mode implementation with CSS custom properties
 
 ### Infrastructure
 - `better sitemap` - Enhanced sitemap generation
@@ -71,12 +71,74 @@ With the technical foundation complete, I shifted focus to content:
 
 Each post triggered the automated build system: `Auto-build: Update Jekyll-like blog [skip ci]`
 
-## Phase 5: The Polish Phase (Recent)
+## Phase 5: The Mermaid Enhancement (Day 4-5)
+
+A significant milestone came with the integration of Mermaid.js for diagram rendering:
+
+### `🎨 Add comprehensive Mermaid.js diagram support`
+
+This wasn't just about adding a library - it required sophisticated integration:
+- **Placeholder System**: Protected Mermaid syntax from markdown processing
+- **Theme Integration**: Diagrams automatically adapt to site theme
+- **Build Pipeline**: Enhanced the custom build system to handle code blocks
+- **Demo Content**: Created comprehensive examples showcasing various diagram types
+
+Technical implementation highlights:
+- Custom regex processing: `/```mermaid\n([\s\S]*?)\n```/g`
+- Dual-phase rendering: Extract → Process Markdown → Restore
+- Dynamic theme adaptation for light/dark modes
+
+## Phase 6: The Dark Mode Revolution (Latest - July 4, 2025)
+
+Today marked another major milestone with the implementation of a comprehensive dark/light mode toggle system:
+
+### `✨ Add dark/light mode toggle functionality`
+
+This wasn't just a simple theme switcher - it's a complete user experience enhancement:
+
+#### **Interactive Theme Toggle**
+- Circular button with animated sun (☀️) and moon (🌙) icons
+- Smooth transitions with rotation effects (0.3s ease)
+- Hover animations with scaling and color changes
+- Accessible design with proper ARIA labels
+
+#### **Smart Theme Management**
+- **Manual Override**: Users can override system preferences
+- **System Respect**: Automatically detects and follows system dark/light mode
+- **Persistent Memory**: Choice saved in localStorage across sessions
+- **Real-time Updates**: Responds to system theme changes dynamically
+
+#### **Technical Architecture**
+```scss
+// Three-tier CSS approach:
+:root { /* Default light theme */ }
+:root.dark-theme { /* Manual dark override */ }
+:root.light-theme { /* Manual light override */ }
+@media (prefers-color-scheme: dark) { /* System preference */ }
+```
+
+#### **Enhanced Visual Design**
+- **Light Mode**: Clean whites (#fdfdfd), dark text (#333), blue links (#0066cc)
+- **Dark Mode**: Rich darks (#1a1a1a), light text (#e0e0e0), bright links (#4da6ff)
+- **Unified Theming**: All components including Mermaid diagrams adapt instantly
+- **Responsive Design**: Mobile-optimized toggle (36x36px on small screens)
+
+#### **Advanced JavaScript Features**
+- Theme detection and application logic
+- Mermaid.js theme synchronization
+- Event-driven architecture
+- System preference monitoring
+- Smooth transitions between themes
+
+This implementation elevates Tatva from a simple blog to a modern, user-centric web experience that adapts to individual preferences and usage contexts.
+
+## Phase 7: The Polish Phase (Recent)
 
 The latest commits show attention to detail:
 - `footer note` - Adding copyright and attribution
 - `layout` - Template refinements
 - Final content updates and fixes
+- Merge conflict resolutions and deployment optimizations
 
 ## Technical Achievements
 
@@ -87,18 +149,32 @@ Built a complete Liquid-like templating system that supports:
 - Date formatting and URL generation
 - Include system for reusable components
 
+### Advanced Diagram Integration
+- **Mermaid.js Support**: Flowcharts, sequence diagrams, system architecture
+- **Theme Synchronization**: Diagrams automatically adapt to light/dark modes
+- **Build Pipeline Integration**: Sophisticated processing preserves diagram syntax
+- **Comprehensive Examples**: Demo content showcasing capabilities
+
+### Modern Theme System
+- **Dual-Mode Support**: Light and dark themes with smooth transitions
+- **User Choice Persistence**: localStorage-based preference management
+- **System Integration**: Respects user's OS-level theme preferences
+- **Accessibility Focus**: ARIA labels, keyboard navigation, contrast optimization
+
 ### Automated Pipeline
 Created a GitHub Actions workflow that:
 - Builds the site on every content change
-- Compiles SCSS to CSS
+- Compiles SCSS to CSS with theme support
 - Generates SEO files (sitemap.xml, robots.txt)
 - Deploys to GitHub Pages automatically
+- Handles merge conflicts and updates gracefully
 
 ### Modern Web Standards
 - Responsive design with mobile-first approach
 - Dark mode support with CSS custom properties
 - Semantic HTML structure
-- Accessibility considerations
+- Accessibility considerations (WCAG compliance)
+- Performance optimization (smooth transitions, efficient CSS)
 
 ## The Philosophy Behind Tatva
 
@@ -107,6 +183,7 @@ Created a GitHub Actions workflow that:
 - **Truth in Simplicity**: No unnecessary dependencies or complexity
 - **Essence of Control**: Complete ownership of every line of code
 - **Truth in Learning**: Each commit represents genuine understanding
+- **User-Centric Truth**: Adapting to individual preferences and needs
 
 ## Lessons Learned
 
@@ -114,36 +191,78 @@ Created a GitHub Actions workflow that:
 2. **Custom solutions offer freedom** - When you build it yourself, you control everything
 3. **Incremental development works** - Small commits, big progress
 4. **Documentation through commits** - A good git history tells the story
+5. **User experience is paramount** - Features like dark mode significantly enhance usability
+6. **Theme systems are complex** - Balancing system preferences with user choice requires careful design
+7. **Integration challenges** - Making third-party libraries (like Mermaid) work seamlessly with custom themes
 
 ## The Numbers
 
-- **80+ commits** in 5 days
-- **865 lines** of custom JavaScript build system
-- **7 blog posts** covering diverse topics
+- **90+ commits** in 5 days
+- **900+ lines** of custom JavaScript build system
+- **9 blog posts** covering diverse topics
 - **1 custom static site generator** built from scratch
+- **2 major theme modes** with seamless switching
+- **Multiple diagram types** supported with theme integration
+
+## Current Feature Set
+
+### Core Functionality
+- ✅ Jekyll-compatible frontmatter parsing
+- ✅ Custom Liquid-like templating engine
+- ✅ SCSS compilation with live reloading
+- ✅ Automated GitHub Pages deployment
+- ✅ SEO optimization (sitemap, robots.txt, meta tags)
+
+### User Experience
+- ✅ **Dark/Light mode toggle with system preference detection**
+- ✅ **Responsive design for all screen sizes**
+- ✅ **Smooth animations and transitions**
+- ✅ **Accessibility features (ARIA labels, keyboard navigation)**
+
+### Content Features
+- ✅ **Mermaid.js diagram rendering with theme integration**
+- ✅ **Markdown processing with custom enhancements**
+- ✅ **Post excerpts and metadata**
+- ✅ **Asset copying and management**
+
+### Technical Infrastructure
+- ✅ **Custom build system with error handling**
+- ✅ **Git integration with automated workflows**
+- ✅ **Performance optimization**
+- ✅ **Cross-browser compatibility**
 
 ## What's Next?
 
-The foundation is solid, the content is flowing, and the automation is humming. Tatva has evolved from a simple idea to a fully functional, custom-built publishing platform.
+The foundation is solid, the content is flowing, and the automation is humming. Tatva has evolved from a simple idea to a fully functional, modern publishing platform.
 
-Future plans include:
-- Enhanced markdown processing
-- Comment system integration
-- Analytics and performance monitoring
-- More advanced templating features
+Future enhancement possibilities:
+- **Enhanced markdown processing** with custom syntax extensions
+- **Comment system integration** (possibly using GitHub Discussions)
+- **Analytics and performance monitoring** integration
+- **Search functionality** with client-side indexing
+- **RSS feed generation** for content syndication
+- **Progressive Web App (PWA)** features
+- **Advanced diagram types** beyond Mermaid.js
+- **Theme customization** allowing users to create custom color schemes
 
 ## Reflection
 
-This journey represents more than just building a website - it's about understanding the tools we use daily. By rebuilding Jekyll's functionality from scratch, I gained deep insights into:
-- Static site generation principles
-- Template processing algorithms
-- Build system architecture
-- Modern web development practices
+This journey represents more than just building a website - it's about understanding the tools we use daily. By rebuilding Jekyll's functionality from scratch and adding modern enhancements like intelligent dark mode, I gained deep insights into:
 
-Sometimes the best way to learn a technology is to recreate it yourself.
+- Static site generation principles and best practices
+- Template processing algorithms and optimization
+- Build system architecture and automation
+- Modern web development practices (CSS custom properties, responsive design)
+- User experience design (theme management, accessibility)
+- JavaScript event handling and state management
+- CSS architecture for maintainable theming systems
+
+The latest dark mode implementation showcases how modern web development has evolved - users expect intelligent, adaptive interfaces that respect their preferences and provide smooth, delightful interactions.
+
+Sometimes the best way to learn a technology is to recreate it yourself, then improve upon it.
 
 ---
 
 *View the complete source code and commit history at [GitHub](https://github.com/rockerritesh/tatva)*
 
-**"The purpose of Tatva is not just to publish content, but to understand the essence of how publishing works."** 
+**"The purpose of Tatva is not just to publish content, but to understand the essence of how modern web publishing works - from the build system to the user experience."** 

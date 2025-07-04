@@ -102,7 +102,7 @@
 <ul>
 <li><code>Add favicon copying to build process</code></li>
 <li><code>sass</code> - SCSS compilation support</li>
-<li><code>dark</code> - Dark mode implementation with CSS custom properties</li>
+<li><code>dark</code> - Initial dark mode implementation with CSS custom properties</li>
 </ul>
 <h3>Infrastructure</h3>
 <ul>
@@ -119,12 +119,70 @@
 <li><strong>Life</strong> - Philosophical reflections on existence</li>
 </ul>
 <p>Each post triggered the automated build system: <code>Auto-build: Update Jekyll-like blog [skip ci]</code></p>
-<h2>Phase 5: The Polish Phase (Recent)</h2>
+<h2>Phase 5: The Mermaid Enhancement (Day 4-5)</h2>
+<p>A significant milestone came with the integration of Mermaid.js for diagram rendering:</p>
+<h3><code>🎨 Add comprehensive Mermaid.js diagram support</code></h3>
+<p>This wasn&#39;t just about adding a library - it required sophisticated integration:</p>
+<ul>
+<li><strong>Placeholder System</strong>: Protected Mermaid syntax from markdown processing</li>
+<li><strong>Theme Integration</strong>: Diagrams automatically adapt to site theme</li>
+<li><strong>Build Pipeline</strong>: Enhanced the custom build system to handle code blocks</li>
+<li><strong>Demo Content</strong>: Created comprehensive examples showcasing various diagram types</li>
+</ul>
+<p>Technical implementation highlights:</p>
+<ul>
+<li>Custom regex processing: <code>/```mermaid\n([\s\S]*?)\n```/g</code></li>
+<li>Dual-phase rendering: Extract → Process Markdown → Restore</li>
+<li>Dynamic theme adaptation for light/dark modes</li>
+</ul>
+<h2>Phase 6: The Dark Mode Revolution (Latest - July 4, 2025)</h2>
+<p>Today marked another major milestone with the implementation of a comprehensive dark/light mode toggle system:</p>
+<h3><code>✨ Add dark/light mode toggle functionality</code></h3>
+<p>This wasn&#39;t just a simple theme switcher - it&#39;s a complete user experience enhancement:</p>
+<h4><strong>Interactive Theme Toggle</strong></h4>
+<ul>
+<li>Circular button with animated sun (☀️) and moon (🌙) icons</li>
+<li>Smooth transitions with rotation effects (0.3s ease)</li>
+<li>Hover animations with scaling and color changes</li>
+<li>Accessible design with proper ARIA labels</li>
+</ul>
+<h4><strong>Smart Theme Management</strong></h4>
+<ul>
+<li><strong>Manual Override</strong>: Users can override system preferences</li>
+<li><strong>System Respect</strong>: Automatically detects and follows system dark/light mode</li>
+<li><strong>Persistent Memory</strong>: Choice saved in localStorage across sessions</li>
+<li><strong>Real-time Updates</strong>: Responds to system theme changes dynamically</li>
+</ul>
+<h4><strong>Technical Architecture</strong></h4>
+<pre><code class="language-scss">// Three-tier CSS approach:
+:root { /* Default light theme */ }
+:root.dark-theme { /* Manual dark override */ }
+:root.light-theme { /* Manual light override */ }
+@media (prefers-color-scheme: dark) { /* System preference */ }
+</code></pre>
+<h4><strong>Enhanced Visual Design</strong></h4>
+<ul>
+<li><strong>Light Mode</strong>: Clean whites (#fdfdfd), dark text (#333), blue links (#0066cc)</li>
+<li><strong>Dark Mode</strong>: Rich darks (#1a1a1a), light text (#e0e0e0), bright links (#4da6ff)</li>
+<li><strong>Unified Theming</strong>: All components including Mermaid diagrams adapt instantly</li>
+<li><strong>Responsive Design</strong>: Mobile-optimized toggle (36x36px on small screens)</li>
+</ul>
+<h4><strong>Advanced JavaScript Features</strong></h4>
+<ul>
+<li>Theme detection and application logic</li>
+<li>Mermaid.js theme synchronization</li>
+<li>Event-driven architecture</li>
+<li>System preference monitoring</li>
+<li>Smooth transitions between themes</li>
+</ul>
+<p>This implementation elevates Tatva from a simple blog to a modern, user-centric web experience that adapts to individual preferences and usage contexts.</p>
+<h2>Phase 7: The Polish Phase (Recent)</h2>
 <p>The latest commits show attention to detail:</p>
 <ul>
 <li><code>footer note</code> - Adding copyright and attribution</li>
 <li><code>layout</code> - Template refinements</li>
 <li>Final content updates and fixes</li>
+<li>Merge conflict resolutions and deployment optimizations</li>
 </ul>
 <h2>Technical Achievements</h2>
 <h3>Custom Template Engine</h3>
@@ -135,20 +193,36 @@
 <li>Date formatting and URL generation</li>
 <li>Include system for reusable components</li>
 </ul>
+<h3>Advanced Diagram Integration</h3>
+<ul>
+<li><strong>Mermaid.js Support</strong>: Flowcharts, sequence diagrams, system architecture</li>
+<li><strong>Theme Synchronization</strong>: Diagrams automatically adapt to light/dark modes</li>
+<li><strong>Build Pipeline Integration</strong>: Sophisticated processing preserves diagram syntax</li>
+<li><strong>Comprehensive Examples</strong>: Demo content showcasing capabilities</li>
+</ul>
+<h3>Modern Theme System</h3>
+<ul>
+<li><strong>Dual-Mode Support</strong>: Light and dark themes with smooth transitions</li>
+<li><strong>User Choice Persistence</strong>: localStorage-based preference management</li>
+<li><strong>System Integration</strong>: Respects user&#39;s OS-level theme preferences</li>
+<li><strong>Accessibility Focus</strong>: ARIA labels, keyboard navigation, contrast optimization</li>
+</ul>
 <h3>Automated Pipeline</h3>
 <p>Created a GitHub Actions workflow that:</p>
 <ul>
 <li>Builds the site on every content change</li>
-<li>Compiles SCSS to CSS</li>
+<li>Compiles SCSS to CSS with theme support</li>
 <li>Generates SEO files (sitemap.xml, robots.txt)</li>
 <li>Deploys to GitHub Pages automatically</li>
+<li>Handles merge conflicts and updates gracefully</li>
 </ul>
 <h3>Modern Web Standards</h3>
 <ul>
 <li>Responsive design with mobile-first approach</li>
 <li>Dark mode support with CSS custom properties</li>
 <li>Semantic HTML structure</li>
-<li>Accessibility considerations</li>
+<li>Accessibility considerations (WCAG compliance)</li>
+<li>Performance optimization (smooth transitions, efficient CSS)</li>
 </ul>
 <h2>The Philosophy Behind Tatva</h2>
 <p><strong>Tatva</strong> (तत्त्व) means &quot;truth&quot; or &quot;essence&quot; in Sanskrit. This project embodies that philosophy:</p>
@@ -156,6 +230,7 @@
 <li><strong>Truth in Simplicity</strong>: No unnecessary dependencies or complexity</li>
 <li><strong>Essence of Control</strong>: Complete ownership of every line of code</li>
 <li><strong>Truth in Learning</strong>: Each commit represents genuine understanding</li>
+<li><strong>User-Centric Truth</strong>: Adapting to individual preferences and needs</li>
 </ul>
 <h2>Lessons Learned</h2>
 <ol>
@@ -163,35 +238,78 @@
 <li><strong>Custom solutions offer freedom</strong> - When you build it yourself, you control everything</li>
 <li><strong>Incremental development works</strong> - Small commits, big progress</li>
 <li><strong>Documentation through commits</strong> - A good git history tells the story</li>
+<li><strong>User experience is paramount</strong> - Features like dark mode significantly enhance usability</li>
+<li><strong>Theme systems are complex</strong> - Balancing system preferences with user choice requires careful design</li>
+<li><strong>Integration challenges</strong> - Making third-party libraries (like Mermaid) work seamlessly with custom themes</li>
 </ol>
 <h2>The Numbers</h2>
 <ul>
-<li><strong>80+ commits</strong> in 5 days</li>
-<li><strong>865 lines</strong> of custom JavaScript build system</li>
-<li><strong>7 blog posts</strong> covering diverse topics</li>
+<li><strong>90+ commits</strong> in 5 days</li>
+<li><strong>900+ lines</strong> of custom JavaScript build system</li>
+<li><strong>9 blog posts</strong> covering diverse topics</li>
 <li><strong>1 custom static site generator</strong> built from scratch</li>
+<li><strong>2 major theme modes</strong> with seamless switching</li>
+<li><strong>Multiple diagram types</strong> supported with theme integration</li>
+</ul>
+<h2>Current Feature Set</h2>
+<h3>Core Functionality</h3>
+<ul>
+<li>✅ Jekyll-compatible frontmatter parsing</li>
+<li>✅ Custom Liquid-like templating engine</li>
+<li>✅ SCSS compilation with live reloading</li>
+<li>✅ Automated GitHub Pages deployment</li>
+<li>✅ SEO optimization (sitemap, robots.txt, meta tags)</li>
+</ul>
+<h3>User Experience</h3>
+<ul>
+<li>✅ <strong>Dark/Light mode toggle with system preference detection</strong></li>
+<li>✅ <strong>Responsive design for all screen sizes</strong></li>
+<li>✅ <strong>Smooth animations and transitions</strong></li>
+<li>✅ <strong>Accessibility features (ARIA labels, keyboard navigation)</strong></li>
+</ul>
+<h3>Content Features</h3>
+<ul>
+<li>✅ <strong>Mermaid.js diagram rendering with theme integration</strong></li>
+<li>✅ <strong>Markdown processing with custom enhancements</strong></li>
+<li>✅ <strong>Post excerpts and metadata</strong></li>
+<li>✅ <strong>Asset copying and management</strong></li>
+</ul>
+<h3>Technical Infrastructure</h3>
+<ul>
+<li>✅ <strong>Custom build system with error handling</strong></li>
+<li>✅ <strong>Git integration with automated workflows</strong></li>
+<li>✅ <strong>Performance optimization</strong></li>
+<li>✅ <strong>Cross-browser compatibility</strong></li>
 </ul>
 <h2>What&#39;s Next?</h2>
-<p>The foundation is solid, the content is flowing, and the automation is humming. Tatva has evolved from a simple idea to a fully functional, custom-built publishing platform.</p>
-<p>Future plans include:</p>
+<p>The foundation is solid, the content is flowing, and the automation is humming. Tatva has evolved from a simple idea to a fully functional, modern publishing platform.</p>
+<p>Future enhancement possibilities:</p>
 <ul>
-<li>Enhanced markdown processing</li>
-<li>Comment system integration</li>
-<li>Analytics and performance monitoring</li>
-<li>More advanced templating features</li>
+<li><strong>Enhanced markdown processing</strong> with custom syntax extensions</li>
+<li><strong>Comment system integration</strong> (possibly using GitHub Discussions)</li>
+<li><strong>Analytics and performance monitoring</strong> integration</li>
+<li><strong>Search functionality</strong> with client-side indexing</li>
+<li><strong>RSS feed generation</strong> for content syndication</li>
+<li><strong>Progressive Web App (PWA)</strong> features</li>
+<li><strong>Advanced diagram types</strong> beyond Mermaid.js</li>
+<li><strong>Theme customization</strong> allowing users to create custom color schemes</li>
 </ul>
 <h2>Reflection</h2>
-<p>This journey represents more than just building a website - it&#39;s about understanding the tools we use daily. By rebuilding Jekyll&#39;s functionality from scratch, I gained deep insights into:</p>
+<p>This journey represents more than just building a website - it&#39;s about understanding the tools we use daily. By rebuilding Jekyll&#39;s functionality from scratch and adding modern enhancements like intelligent dark mode, I gained deep insights into:</p>
 <ul>
-<li>Static site generation principles</li>
-<li>Template processing algorithms</li>
-<li>Build system architecture</li>
-<li>Modern web development practices</li>
+<li>Static site generation principles and best practices</li>
+<li>Template processing algorithms and optimization</li>
+<li>Build system architecture and automation</li>
+<li>Modern web development practices (CSS custom properties, responsive design)</li>
+<li>User experience design (theme management, accessibility)</li>
+<li>JavaScript event handling and state management</li>
+<li>CSS architecture for maintainable theming systems</li>
 </ul>
-<p>Sometimes the best way to learn a technology is to recreate it yourself.</p>
+<p>The latest dark mode implementation showcases how modern web development has evolved - users expect intelligent, adaptive interfaces that respect their preferences and provide smooth, delightful interactions.</p>
+<p>Sometimes the best way to learn a technology is to recreate it yourself, then improve upon it.</p>
 <hr>
 <p><em>View the complete source code and commit history at <a href="https://github.com/rockerritesh/tatva">GitHub</a></em></p>
-<p><strong>&quot;The purpose of Tatva is not just to publish content, but to understand the essence of how publishing works.&quot;</strong> </p>
+<p><strong>&quot;The purpose of Tatva is not just to publish content, but to understand the essence of how modern web publishing works - from the build system to the user experience.&quot;</strong> </p>
 
     </div>
 
