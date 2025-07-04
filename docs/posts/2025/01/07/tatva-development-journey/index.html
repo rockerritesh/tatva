@@ -1,0 +1,153 @@
+
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">The Tatva Journey: Building a Custom Jekyll-like Static Site Generator</h1>
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                July 4, 2025
+            </time>
+             • <span>Sumit Yadav</span>
+        </p>
+    </header>
+
+    <div class="post-content">
+        <h1>The Tatva Journey: Building a Custom Jekyll-like Static Site Generator</h1>
+<p><em>A technical memoir of creating a personal blog from scratch</em></p>
+<h2>The Beginning - June 2025</h2>
+<p>Five days ago, with a simple commit message &quot;initial&quot;, I embarked on what would become an intense journey of building Tatva - not just another blog, but a completely custom static site generator that mimics Jekyll&#39;s elegance while being built entirely in JavaScript.</p>
+<h2>Phase 1: The GitHub Actions Odyssey (Day 1-2)</h2>
+<p>The early commits tell a story of persistence and learning:</p>
+<ul>
+<li><code>Fix GitHub Actions deployment permissions and workflow</code></li>
+<li><code>Transform to GitHub Actions auto-deployment workflow</code></li>
+<li><code>Fix multiple GitHub Pages artifacts issue</code></li>
+<li><code>Add simpler GitHub Pages deployment workflow</code></li>
+</ul>
+<p>Like many developers, I started by wrestling with CI/CD. The GitHub Actions configuration went through multiple iterations as I learned the intricacies of automated deployment. Each commit represents a small victory over YAML indentation errors and permission issues.</p>
+<h2>Phase 2: The Great Transformation (Day 3-4)</h2>
+<p>Then came the pivotal moment - two commits that changed everything:</p>
+<h3><code>Complete rewrite: Create minimal Tatva blog</code></h3>
+<h3><code>Transform into Jekyll-like static site generator</code></h3>
+<p>This is where Tatva truly began. Instead of using Jekyll or another existing static site generator, I made the bold decision to build my own. The 865-line <code>build.js</code> file became the heart of the system, implementing:</p>
+<ul>
+<li><strong>Jekyll-compatible frontmatter parsing</strong> using <code>js-yaml</code></li>
+<li><strong>Custom Liquid-like templating engine</strong> with support for:<ul>
+<li>Variables: <code>{{ site.title }}</code></li>
+<li>Conditionals: <code>{% if page.title %}</code></li>
+<li>Loops: <code>{% for post in site.posts %}</code></li>
+<li>Includes: <code>{% include header.html %}</code></li>
+<li>Filters: <code>{{ post.date | date: &quot;%B %d, %Y&quot; }}</code></li>
+</ul>
+</li>
+</ul>
+<p>Why reinvent the wheel? Because sometimes you need a wheel that fits your exact cart.</p>
+<h2>Phase 3: The Feature Factory (Day 3-4)</h2>
+<p>With the foundation solid, I went into feature development mode:</p>
+<h3>SEO &amp; Optimization</h3>
+<ul>
+<li><code>Add sitemap.xml for SEO</code></li>
+<li><code>Add sitemap.xml generation and build process integration</code></li>
+<li><code>Add llms.txt for LLM-friendly site overview</code></li>
+</ul>
+<h3>Visual Polish</h3>
+<ul>
+<li><code>Add favicon copying to build process</code></li>
+<li><code>sass</code> - SCSS compilation support</li>
+<li><code>dark</code> - Dark mode implementation with CSS custom properties</li>
+</ul>
+<h3>Infrastructure</h3>
+<ul>
+<li><code>better sitemap</code> - Enhanced sitemap generation</li>
+<li><code>copy google</code> - Google Search Console verification</li>
+<li>Multiple <code>baseurl</code> fixes for proper deployment</li>
+</ul>
+<h2>Phase 4: Content Creation Era (Day 2-4)</h2>
+<p>With the technical foundation complete, I shifted focus to content:</p>
+<ul>
+<li><strong>Family Tree</strong> - Personal genealogy in Nepali</li>
+<li><strong>Bio</strong> - Professional introduction as &quot;Rocker Ritesh&quot;</li>
+<li><strong>AI Agents</strong> - Technical posts about multi-agent systems</li>
+<li><strong>Life</strong> - Philosophical reflections on existence</li>
+</ul>
+<p>Each post triggered the automated build system: <code>Auto-build: Update Jekyll-like blog [skip ci]</code></p>
+<h2>Phase 5: The Polish Phase (Recent)</h2>
+<p>The latest commits show attention to detail:</p>
+<ul>
+<li><code>footer note</code> - Adding copyright and attribution</li>
+<li><code>layout</code> - Template refinements</li>
+<li>Final content updates and fixes</li>
+</ul>
+<h2>Technical Achievements</h2>
+<h3>Custom Template Engine</h3>
+<p>Built a complete Liquid-like templating system that supports:</p>
+<ul>
+<li>Nested layouts (<code>home.html</code> extends <code>default.html</code>)</li>
+<li>Complex filters and conditionals</li>
+<li>Date formatting and URL generation</li>
+<li>Include system for reusable components</li>
+</ul>
+<h3>Automated Pipeline</h3>
+<p>Created a GitHub Actions workflow that:</p>
+<ul>
+<li>Builds the site on every content change</li>
+<li>Compiles SCSS to CSS</li>
+<li>Generates SEO files (sitemap.xml, robots.txt)</li>
+<li>Deploys to GitHub Pages automatically</li>
+</ul>
+<h3>Modern Web Standards</h3>
+<ul>
+<li>Responsive design with mobile-first approach</li>
+<li>Dark mode support with CSS custom properties</li>
+<li>Semantic HTML structure</li>
+<li>Accessibility considerations</li>
+</ul>
+<h2>The Philosophy Behind Tatva</h2>
+<p><strong>Tatva</strong> (तत्त्व) means &quot;truth&quot; or &quot;essence&quot; in Sanskrit. This project embodies that philosophy:</p>
+<ul>
+<li><strong>Truth in Simplicity</strong>: No unnecessary dependencies or complexity</li>
+<li><strong>Essence of Control</strong>: Complete ownership of every line of code</li>
+<li><strong>Truth in Learning</strong>: Each commit represents genuine understanding</li>
+</ul>
+<h2>Lessons Learned</h2>
+<ol>
+<li><strong>GitHub Actions can be tricky</strong> - YAML indentation matters more than you think</li>
+<li><strong>Custom solutions offer freedom</strong> - When you build it yourself, you control everything</li>
+<li><strong>Incremental development works</strong> - Small commits, big progress</li>
+<li><strong>Documentation through commits</strong> - A good git history tells the story</li>
+</ol>
+<h2>The Numbers</h2>
+<ul>
+<li><strong>80+ commits</strong> in 5 days</li>
+<li><strong>865 lines</strong> of custom JavaScript build system</li>
+<li><strong>7 blog posts</strong> covering diverse topics</li>
+<li><strong>1 custom static site generator</strong> built from scratch</li>
+</ul>
+<h2>What&#39;s Next?</h2>
+<p>The foundation is solid, the content is flowing, and the automation is humming. Tatva has evolved from a simple idea to a fully functional, custom-built publishing platform.</p>
+<p>Future plans include:</p>
+<ul>
+<li>Enhanced markdown processing</li>
+<li>Comment system integration</li>
+<li>Analytics and performance monitoring</li>
+<li>More advanced templating features</li>
+</ul>
+<h2>Reflection</h2>
+<p>This journey represents more than just building a website - it&#39;s about understanding the tools we use daily. By rebuilding Jekyll&#39;s functionality from scratch, I gained deep insights into:</p>
+<ul>
+<li>Static site generation principles</li>
+<li>Template processing algorithms</li>
+<li>Build system architecture</li>
+<li>Modern web development practices</li>
+</ul>
+<p>Sometimes the best way to learn a technology is to recreate it yourself.</p>
+<hr>
+<p><em>View the complete source code and commit history at <a href="https://github.com/rockerritesh/tatva">GitHub</a></em></p>
+<p><strong>&quot;The purpose of Tatva is not just to publish content, but to understand the essence of how publishing works.&quot;</strong> </p>
+
+    </div>
+
+    <footer class="post-footer">
+        <p><a href="/">&larr; Back to all posts</a></p>
+        <p>Built with ❤️ by <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
+    </footer>
+</article> 
