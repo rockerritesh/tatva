@@ -36,6 +36,10 @@
             <div class="trigger">
                 <a class="page-link" href="/">Home</a>
                 <!-- <a class="page-link" href="/about">About</a> -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon theme-icon-light">🌙</span>
+                    <span class="theme-icon theme-icon-dark">☀️</span>
+                </button>
             </div>
         </nav>
     </div>
@@ -615,7 +619,6 @@
 
     <footer class="post-footer">
         <p><a href="/">&larr; Back to all posts</a></p>
-        <p>Built with ❤️ by <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
     </footer>
 </article> 
         </div>
@@ -631,5 +634,95 @@
         </div>
     </div>
 </footer> 
+    
+    <!-- Theme toggle functionality -->
+    <script>
+        (function() {
+            // Get theme preference from localStorage or default to system preference
+            const getThemePreference = () => {
+                const stored = localStorage.getItem('theme-preference');
+                if (stored) return stored;
+                
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            // Apply theme to document
+            const applyTheme = (theme) => {
+                const root = document.documentElement;
+                root.classList.remove('light-theme', 'dark-theme');
+                
+                if (theme !== 'auto') {
+                    root.classList.add(`${theme}-theme`);
+                }
+                
+                // Update Mermaid theme if it exists
+                if (window.mermaid) {
+                    const mermaidTheme = theme === 'dark' || 
+                        (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) 
+                        ? 'dark' : 'default';
+                    
+                    mermaid.initialize({ 
+                        startOnLoad: true,
+                        theme: mermaidTheme,
+                        themeVariables: {
+                            primaryColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            primaryTextColor: theme === 'dark' ? '#e0e0e0' : '#333',
+                            primaryBorderColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            lineColor: theme === 'dark' ? '#a0a0a0' : '#666',
+                            sectionBkgColor: theme === 'dark' ? '#2a2a2a' : '#f8f9fa',
+                            altSectionBkgColor: theme === 'dark' ? '#333' : '#e9ecef',
+                            gridColor: theme === 'dark' ? '#333' : '#ddd',
+                            tertiaryColor: theme === 'dark' ? '#2a2a2a' : '#f1f3f4'
+                        }
+                    });
+                    
+                    // Re-render existing diagrams
+                    document.querySelectorAll('.mermaid').forEach(el => {
+                        if (el.getAttribute('data-processed')) {
+                            el.removeAttribute('data-processed');
+                            el.innerHTML = el.getAttribute('data-original') || el.innerHTML;
+                        }
+                    });
+                    mermaid.init(undefined, '.mermaid');
+                }
+            };
+            
+            // Toggle theme function
+            const toggleTheme = () => {
+                const currentTheme = getThemePreference();
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                localStorage.setItem('theme-preference', newTheme);
+                applyTheme(newTheme);
+            };
+            
+            // Apply theme on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                const theme = getThemePreference();
+                applyTheme(theme);
+                
+                // Add click event to theme toggle button
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+                
+                // Store original mermaid content for re-rendering
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    if (!el.getAttribute('data-original')) {
+                        el.setAttribute('data-original', el.innerHTML);
+                    }
+                });
+            });
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only respond to system changes if user hasn't set a manual preference
+                if (!localStorage.getItem('theme-preference')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
 </body>
 </html> 
