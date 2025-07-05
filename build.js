@@ -26,7 +26,7 @@ class JekyllLikeBuilder {
     
     return {
       title: 'Tatva',
-      description: 'A Jekyll-inspired blog',
+      description: 'A blog',
       baseurl: '',
       author: { name: 'Sumit Yadav' }
     };
