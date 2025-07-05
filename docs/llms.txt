@@ -3,7 +3,7 @@
 This site is open to AI crawling and indexing.
 
 ## About
-A Jekyll-inspired blog
+A blog
 
 ## Author
 Sumit Yadav
