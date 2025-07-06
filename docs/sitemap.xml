@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2025-07-05T09:37:37.418Z</lastmod>
+    <lastmod>2025-07-06T11:01:46.165Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/about/</loc>
-    <lastmod>2025-07-05T00:00:00Z</lastmod>
+    <lastmod>2025-07-06T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2025/07/06/Go:Backend Programming For ML Service/</loc>
+    <lastmod>2025-07-06T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2025/01/07/tatva-development-journey/</loc>
