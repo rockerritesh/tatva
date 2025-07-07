@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love - Tatva</title>
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ff6b6b',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#ff6b6b',
+                lineColor: '#666',
+                sectionBkgColor: '#f8f9fa',
+                altSectionBkgColor: '#e9ecef',
+                gridColor: '#ddd',
+                tertiaryColor: '#f1f3f4'
+            }
+        });
+    </script>
+</head>
+<body>
+    <header class="site-header">
+    <div class="wrapper">
+        <a class="site-title" href="/">Tatva</a>
+        
+        <nav class="site-nav">
+            <div class="trigger">
+                <a class="page-link" href="/">Home</a>
+                <!-- <a class="page-link" href="/about">About</a> -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon theme-icon-light">🌙</span>
+                    <span class="theme-icon theme-icon-dark">☀️</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header> 
+    
+    <main class="page-content">
+        <div class="wrapper">
+            
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">Love</h1>
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                July 7, 2025
+            </time>
+            
+        </p>
+    </header>
+
+    <div class="post-content">
+        <h1>Love</h1>
+<p>Love remains one of humanity&#39;s most enduring enigmas, a force that has inspired countless songs, poems, and philosophical treatises while continuing to baffle scientists and philosophers alike. It operates by its own mysterious logic, often striking when least expected and defying rational explanation.</p>
+<p>The mystery begins with love&#39;s unpredictability. Two people can meet hundreds of times with no spark, then suddenly find themselves inexplicably drawn to each other. There&#39;s no formula for compatibility, no algorithm that can predict when hearts will align. Love seems to bypass our conscious decision-making entirely, emerging from some deeper wellspring of human experience.</p>
+<p>Even more puzzling is love&#39;s transformative power. It can turn introverts into poets, skeptics into believers, and cautious people into risk-takers. Under love&#39;s influence, we find ourselves capable of profound selflessness, willing to sacrifice our comfort, time, and even our lives for another person. This transformation often happens so gradually we hardly notice it, yet it can reshape our entire identity.</p>
+<p>The neurochemical explanation only deepens the mystery. While scientists can identify the cocktail of hormones and neurotransmitters involved—oxytocin, dopamine, serotonin—knowing the mechanics doesn&#39;t explain why these chemicals create such transcendent experiences. Why does a mere biological process generate feelings that seem to connect us to something infinite?</p>
+<p>Love&#39;s timeline defies logic too. Some couples fall in love at first sight and stay together for decades, while others build love slowly over years of friendship. Love can endure through separation, survive betrayal, and sometimes mysteriously fade despite perfect circumstances. It exists outside our normal understanding of cause and effect.</p>
+<p>Perhaps most mysteriously, love multiplies rather than divides. Unlike material resources, the more love we give, the more we seem to have. Parents don&#39;t love their second child half as much as their first—somehow love expands to encompass each new person who enters our hearts.</p>
+<p>The ancient Greeks recognized love&#39;s complexity by identifying multiple types: eros, philia, storge, and agape. Yet even this taxonomy fails to capture love&#39;s full mystery. How can one emotion encompass the passionate romance of new lovers, the quiet devotion of long-married couples, the fierce protectiveness of parents, and the compassionate care for strangers?</p>
+<p>Love&#39;s greatest mystery might be its paradoxical nature. It makes us simultaneously vulnerable and invincible, rational and irrational, individual and connected. It&#39;s both the most universal human experience and the most uniquely personal. Everyone knows love, yet no one can fully explain it.</p>
+<p>This mystery isn&#39;t a problem to be solved but a truth to be lived. Love&#39;s elusiveness is perhaps its greatest gift—it keeps us humble, wondering, and open to the possibility that life contains forces beyond our understanding. In a world increasingly explained by science and technology, love remains beautifully, stubbornly inexplicable.</p>
+<pre><code>Love drowns in its own depths.
+Silence speaks what words cannot.
+We are beautiful, broken things.
+Stars remember what we forget.
+Your absence fills every room.
+Time heals by teaching forgetting.
+</code></pre>
+
+    </div>
+
+    <footer class="post-footer">
+        <p><a href="/">&larr; Back to all posts</a></p>
+    </footer>
+</article> 
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+    <div class="wrapper">
+        <div class="footer-content">
+            <p>&copy; 2025 Made with ❤️ | All rights reserved to <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
+            
+                <p>Contact: <a href="mailto:rockerritesh4@gmail.com">rockerritesh4@gmail.com</a></p>
+            
+        </div>
+    </div>
+</footer> 
+    
+    <!-- Theme toggle functionality -->
+    <script>
+        (function() {
+            // Get theme preference from localStorage or default to system preference
+            const getThemePreference = () => {
+                const stored = localStorage.getItem('theme-preference');
+                if (stored) return stored;
+                
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            // Apply theme to document
+            const applyTheme = (theme) => {
+                const root = document.documentElement;
+                root.classList.remove('light-theme', 'dark-theme');
+                
+                if (theme !== 'auto') {
+                    root.classList.add(`${theme}-theme`);
+                }
+                
+                // Update Mermaid theme if it exists
+                if (window.mermaid) {
+                    const mermaidTheme = theme === 'dark' || 
+                        (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) 
+                        ? 'dark' : 'default';
+                    
+                    mermaid.initialize({ 
+                        startOnLoad: true,
+                        theme: mermaidTheme,
+                        themeVariables: {
+                            primaryColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            primaryTextColor: theme === 'dark' ? '#e0e0e0' : '#333',
+                            primaryBorderColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            lineColor: theme === 'dark' ? '#a0a0a0' : '#666',
+                            sectionBkgColor: theme === 'dark' ? '#2a2a2a' : '#f8f9fa',
+                            altSectionBkgColor: theme === 'dark' ? '#333' : '#e9ecef',
+                            gridColor: theme === 'dark' ? '#333' : '#ddd',
+                            tertiaryColor: theme === 'dark' ? '#2a2a2a' : '#f1f3f4'
+                        }
+                    });
+                    
+                    // Re-render existing diagrams
+                    document.querySelectorAll('.mermaid').forEach(el => {
+                        if (el.getAttribute('data-processed')) {
+                            el.removeAttribute('data-processed');
+                            el.innerHTML = el.getAttribute('data-original') || el.innerHTML;
+                        }
+                    });
+                    mermaid.init(undefined, '.mermaid');
+                }
+            };
+            
+            // Toggle theme function
+            const toggleTheme = () => {
+                const currentTheme = getThemePreference();
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                localStorage.setItem('theme-preference', newTheme);
+                applyTheme(newTheme);
+            };
+            
+            // Apply theme on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                const theme = getThemePreference();
+                applyTheme(theme);
+                
+                // Add click event to theme toggle button
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+                
+                // Store original mermaid content for re-rendering
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    if (!el.getAttribute('data-original')) {
+                        el.setAttribute('data-original', el.innerHTML);
+                    }
+                });
+            });
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only respond to system changes if user hasn't set a manual preference
+                if (!localStorage.getItem('theme-preference')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
+</body>
+</html> 
