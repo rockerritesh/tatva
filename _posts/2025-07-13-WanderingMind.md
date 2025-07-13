@@ -4,7 +4,7 @@ data: 2025-07-13
 ---
 
 # The Cost of a Wandering Mind: Why Being Present Matters for Happiness
-<img src="https://tatva.sumityadav.com.np/posts/2025/07/07/love/duality.png" alt="Love" style="display: block; margin: 20px auto; border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+<img src="https://tatva.sumityadav.com.np/posts/2025/07/13/wanderingmind/duality.png" alt="Love" style="display: block; margin: 20px auto; border-radius: 50%; width: 300px; height: 300px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
 
 ## Introduction
 
