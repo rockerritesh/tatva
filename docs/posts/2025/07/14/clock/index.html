@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock - Tatva</title>
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ff6b6b',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#ff6b6b',
+                lineColor: '#666',
+                sectionBkgColor: '#f8f9fa',
+                altSectionBkgColor: '#e9ecef',
+                gridColor: '#ddd',
+                tertiaryColor: '#f1f3f4'
+            }
+        });
+    </script>
+</head>
+<body>
+    <header class="site-header">
+    <div class="wrapper">
+        <a class="site-title" href="/">Tatva</a>
+        
+        <nav class="site-nav">
+            <div class="trigger">
+                <a class="page-link" href="/">Home</a>
+                <!-- <a class="page-link" href="/about">About</a> -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon theme-icon-light">🌙</span>
+                    <span class="theme-icon theme-icon-dark">☀️</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header> 
+    
+    <main class="page-content">
+        <div class="wrapper">
+            
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">Clock</h1>
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                July 14, 2025
+            </time>
+            
+        </p>
+    </header>
+
+    <div class="post-content">
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Elapsed Counter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+        
+<pre><code>    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: &#39;Inter&#39;, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        overflow-x: hidden;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        padding: 50px 40px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+                    0 0 0 1px rgba(255, 255, 255, 0.1);
+        max-width: 900px;
+        width: 95%;
+        margin: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    h1 {
+        font-family: &#39;Orbitron&#39;, monospace;
+        font-size: 3.5em;
+        font-weight: 900;
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, #ffd700, #ffeb3b, #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+        from { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7)); }
+        to { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9)); }
+    }
+
+    .input-section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .input-section h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        color: #ffd700;
+        font-weight: 600;
+    }
+
+    .input-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .input-field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .input-field label {
+        font-size: 0.9em;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .input-field input, .input-field select {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 12px 15px;
+        color: white;
+        font-size: 1em;
+        outline: none;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .input-field input:focus, .input-field select:focus {
+        border-color: #ffd700;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .input-field input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .set-button {
+        background: linear-gradient(45deg, #ffd700, #ffeb3b);
+        color: #333;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    .set-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+    }
+
+    .set-button:active {
+        transform: translateY(-1px);
+    }
+
+    .date-info {
+        font-size: 1.4em;
+        margin-bottom: 40px;
+        opacity: 0.9;
+        font-weight: 500;
+        color: #ffd700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .time-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .time-unit {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 30px 20px;
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .time-unit::before {
+        content: &#39;&#39;;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .time-unit:hover::before {
+        left: 100%;
+    }
+
+    .time-unit:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 215, 0, 0.5);
+    }
+
+    .time-value {
+        font-family: &#39;Orbitron&#39;, monospace;
+        font-size: 2.8em;
+        font-weight: 700;
+        background: linear-gradient(45deg, #ffd700, #ffeb3b, #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 10px;
+        animation: numberPulse 2s ease-in-out infinite;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+
+    @keyframes numberPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .time-label {
+        font-size: 1.2em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        opacity: 0.9;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer {
+        margin-top: 30px;
+        opacity: 0.9;
+        font-size: 1.1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .live-indicator {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background: linear-gradient(45deg, #ff4444, #ff6666);
+        border-radius: 50%;
+        animation: pulse 1.5s infinite;
+        box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.7; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 30px 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+        }
+        
+        .time-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .time-value {
+            font-size: 2.2em;
+        }
+        
+        .input-group {
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .input-field input, .input-field select {
+            width: 200px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .time-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .time-value {
+            font-size: 2em;
+        }
+    }
+&lt;/style&gt;
+</code></pre>
+</head>
+<body>
+    <div class="stars"></div>
+    
+<pre><code>&lt;div class=&quot;container&quot;&gt;
+    &lt;h1&gt;Time Elapsed Counter&lt;/h1&gt;
+    
+    &lt;div class=&quot;input-section&quot;&gt;
+        &lt;h2&gt;Set Custom Date &amp; Time&lt;/h2&gt;
+        &lt;div class=&quot;input-group&quot;&gt;
+            &lt;div class=&quot;input-field&quot;&gt;
+                &lt;label&gt;Day&lt;/label&gt;
+                &lt;input type=&quot;number&quot; id=&quot;day&quot; min=&quot;1&quot; max=&quot;31&quot; value=&quot;11&quot; placeholder=&quot;Day&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;input-field&quot;&gt;
+                &lt;label&gt;Month&lt;/label&gt;
+                &lt;select id=&quot;month&quot;&gt;
+                    &lt;option value=&quot;1&quot;&gt;January&lt;/option&gt;
+                    &lt;option value=&quot;2&quot;&gt;February&lt;/option&gt;
+                    &lt;option value=&quot;3&quot;&gt;March&lt;/option&gt;
+                    &lt;option value=&quot;4&quot;&gt;April&lt;/option&gt;
+                    &lt;option value=&quot;5&quot; selected&gt;May&lt;/option&gt;
+                    &lt;option value=&quot;6&quot;&gt;June&lt;/option&gt;
+                    &lt;option value=&quot;7&quot;&gt;July&lt;/option&gt;
+                    &lt;option value=&quot;8&quot;&gt;August&lt;/option&gt;
+                    &lt;option value=&quot;9&quot;&gt;September&lt;/option&gt;
+                    &lt;option value=&quot;10&quot;&gt;October&lt;/option&gt;
+                    &lt;option value=&quot;11&quot;&gt;November&lt;/option&gt;
+                    &lt;option value=&quot;12&quot;&gt;December&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;input-field&quot;&gt;
+                &lt;label&gt;Year&lt;/label&gt;
+                &lt;input type=&quot;number&quot; id=&quot;year&quot; min=&quot;1900&quot; max=&quot;2030&quot; value=&quot;2001&quot; placeholder=&quot;Year&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;input-field&quot;&gt;
+                &lt;label&gt;Hour&lt;/label&gt;
+                &lt;input type=&quot;number&quot; id=&quot;hour&quot; min=&quot;0&quot; max=&quot;23&quot; value=&quot;21&quot; placeholder=&quot;Hour (24h)&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;input-field&quot;&gt;
+                &lt;label&gt;Minute&lt;/label&gt;
+                &lt;input type=&quot;number&quot; id=&quot;minute&quot; min=&quot;0&quot; max=&quot;59&quot; value=&quot;0&quot; placeholder=&quot;Minute&quot;&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;set-button&quot; onclick=&quot;setCustomDate()&quot;&gt;Set Date &amp; Time&lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;date-info&quot; id=&quot;dateInfo&quot;&gt;
+        Since May 11, 2001 at 9:00 PM (Nepal Time)
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;time-grid&quot;&gt;
+        &lt;div class=&quot;time-unit&quot;&gt;
+            &lt;div class=&quot;time-value&quot; id=&quot;years&quot;&gt;0&lt;/div&gt;
+            &lt;div class=&quot;time-label&quot;&gt;Years&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;time-unit&quot;&gt;
+            &lt;div class=&quot;time-value&quot; id=&quot;weeks&quot;&gt;0&lt;/div&gt;
+            &lt;div class=&quot;time-label&quot;&gt;Weeks&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;time-unit&quot;&gt;
+            &lt;div class=&quot;time-value&quot; id=&quot;hours&quot;&gt;0&lt;/div&gt;
+            &lt;div class=&quot;time-label&quot;&gt;Hours&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;time-unit&quot;&gt;
+            &lt;div class=&quot;time-value&quot; id=&quot;minutes&quot;&gt;0&lt;/div&gt;
+            &lt;div class=&quot;time-label&quot;&gt;Minutes&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;time-unit&quot;&gt;
+            &lt;div class=&quot;time-value&quot; id=&quot;seconds&quot;&gt;0&lt;/div&gt;
+            &lt;div class=&quot;time-label&quot;&gt;Seconds&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;footer&quot;&gt;
+        &lt;span class=&quot;live-indicator&quot;&gt;&lt;/span&gt;
+        Live counter updating every second
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // Default date - May 11, 2001 at 9:00 PM Nepal Time
+    let targetDate = new Date(&#39;2001-05-11T21:00:00+05:45&#39;);
+    
+    // Create animated stars
+    function createStars() {
+        const starsContainer = document.querySelector(&#39;.stars&#39;);
+        const numStars = 100;
+        
+        for (let i = 0; i &lt; numStars; i++) {
+            const star = document.createElement(&#39;div&#39;);
+            star.className = &#39;star&#39;;
+            star.style.left = Math.random() * 100 + &#39;%&#39;;
+            star.style.top = Math.random() * 100 + &#39;%&#39;;
+            star.style.animationDelay = Math.random() * 3 + &#39;s&#39;;
+            star.style.animationDuration = (Math.random() * 3 + 2) + &#39;s&#39;;
+            starsContainer.appendChild(star);
+        }
+    }
+    
+    function updateCounter() {
+        const now = new Date();
+        const diff = now - targetDate;
+        
+        if (diff &lt; 0) {
+            // If target date is in the future, show 0 for all values
+            document.getElementById(&#39;seconds&#39;).textContent = &#39;0&#39;;
+            document.getElementById(&#39;minutes&#39;).textContent = &#39;0&#39;;
+            document.getElementById(&#39;hours&#39;).textContent = &#39;0&#39;;
+            document.getElementById(&#39;weeks&#39;).textContent = &#39;0&#39;;
+            document.getElementById(&#39;years&#39;).textContent = &#39;0&#39;;
+            return;
+        }
+        
+        // Calculate time units
+        const seconds = Math.floor(diff / 1000);
+        const minutes = Math.floor(diff / (1000 * 60));
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
+        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+        
+        // Update display with formatting
+        document.getElementById(&#39;seconds&#39;).textContent = seconds.toLocaleString();
+        document.getElementById(&#39;minutes&#39;).textContent = minutes.toLocaleString();
+        document.getElementById(&#39;hours&#39;).textContent = hours.toLocaleString();
+        document.getElementById(&#39;weeks&#39;).textContent = weeks.toLocaleString();
+        document.getElementById(&#39;years&#39;).textContent = years.toLocaleString();
+    }
+    
+    function setCustomDate() {
+        const day = document.getElementById(&#39;day&#39;).value;
+        const month = document.getElementById(&#39;month&#39;).value;
+        const year = document.getElementById(&#39;year&#39;).value;
+        const hour = document.getElementById(&#39;hour&#39;).value;
+        const minute = document.getElementById(&#39;minute&#39;).value;
+        
+        // Validate inputs
+        if (!day || !month || !year || hour === &#39;&#39; || minute === &#39;&#39;) {
+            alert(&#39;Please fill in all fields&#39;);
+            return;
+        }
+        
+        // Create date string (Nepal timezone is UTC+5:45)
+        const dateString = `${year}-${month.padStart(2, &#39;0&#39;)}-${day.padStart(2, &#39;0&#39;)}T${hour.padStart(2, &#39;0&#39;)}:${minute.padStart(2, &#39;0&#39;)}:00+05:45`;
+        targetDate = new Date(dateString);
+        
+        // Update display
+        const months = [&#39;January&#39;, &#39;February&#39;, &#39;March&#39;, &#39;April&#39;, &#39;May&#39;, &#39;June&#39;,
+                      &#39;July&#39;, &#39;August&#39;, &#39;September&#39;, &#39;October&#39;, &#39;November&#39;, &#39;December&#39;];
+        const monthName = months[parseInt(month) - 1];
+        const timeStr = `${hour.padStart(2, &#39;0&#39;)}:${minute.padStart(2, &#39;0&#39;)}`;
+        const time12 = new Date(`2000-01-01T${timeStr}`).toLocaleTimeString(&#39;en-US&#39;, {
+            hour: &#39;numeric&#39;,
+            minute: &#39;2-digit&#39;,
+            hour12: true
+        });
+        
+        document.getElementById(&#39;dateInfo&#39;).textContent = 
+            `Since ${monthName} ${day}, ${year} at ${time12} (Nepal Time)`;
+        
+        // Update counter immediately
+        updateCounter();
+    }
+    
+    // Initialize
+    createStars();
+    updateCounter();
+    setInterval(updateCounter, 1000);
+&lt;/script&gt;
+</code></pre>
+</body>
+</html>
+
+    </div>
+
+    <footer class="post-footer">
+        <p><a href="/">&larr; Back to all posts</a></p>
+    </footer>
+</article> 
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+    <div class="wrapper">
+        <div class="footer-content">
+            <p>&copy; 2025 Made with ❤️ | All rights reserved to <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
+            
+                <p>Contact: <a href="mailto:rockerritesh4@gmail.com">rockerritesh4@gmail.com</a></p>
+            
+        </div>
+    </div>
+</footer> 
+    
+    <!-- Theme toggle functionality -->
+    <script>
+        (function() {
+            // Get theme preference from localStorage or default to system preference
+            const getThemePreference = () => {
+                const stored = localStorage.getItem('theme-preference');
+                if (stored) return stored;
+                
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            // Apply theme to document
+            const applyTheme = (theme) => {
+                const root = document.documentElement;
+                root.classList.remove('light-theme', 'dark-theme');
+                
+                if (theme !== 'auto') {
+                    root.classList.add(`${theme}-theme`);
+                }
+                
+                // Update Mermaid theme if it exists
+                if (window.mermaid) {
+                    const mermaidTheme = theme === 'dark' || 
+                        (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) 
+                        ? 'dark' : 'default';
+                    
+                    mermaid.initialize({ 
+                        startOnLoad: true,
+                        theme: mermaidTheme,
+                        themeVariables: {
+                            primaryColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            primaryTextColor: theme === 'dark' ? '#e0e0e0' : '#333',
+                            primaryBorderColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            lineColor: theme === 'dark' ? '#a0a0a0' : '#666',
+                            sectionBkgColor: theme === 'dark' ? '#2a2a2a' : '#f8f9fa',
+                            altSectionBkgColor: theme === 'dark' ? '#333' : '#e9ecef',
+                            gridColor: theme === 'dark' ? '#333' : '#ddd',
+                            tertiaryColor: theme === 'dark' ? '#2a2a2a' : '#f1f3f4'
+                        }
+                    });
+                    
+                    // Re-render existing diagrams
+                    document.querySelectorAll('.mermaid').forEach(el => {
+                        if (el.getAttribute('data-processed')) {
+                            el.removeAttribute('data-processed');
+                            el.innerHTML = el.getAttribute('data-original') || el.innerHTML;
+                        }
+                    });
+                    mermaid.init(undefined, '.mermaid');
+                }
+            };
+            
+            // Toggle theme function
+            const toggleTheme = () => {
+                const currentTheme = getThemePreference();
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                localStorage.setItem('theme-preference', newTheme);
+                applyTheme(newTheme);
+            };
+            
+            // Apply theme on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                const theme = getThemePreference();
+                applyTheme(theme);
+                
+                // Add click event to theme toggle button
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+                
+                // Store original mermaid content for re-rendering
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    if (!el.getAttribute('data-original')) {
+                        el.setAttribute('data-original', el.innerHTML);
+                    }
+                });
+            });
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only respond to system changes if user hasn't set a manual preference
+                if (!localStorage.getItem('theme-preference')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
+</body>
+</html> 
