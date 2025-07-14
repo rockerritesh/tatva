@@ -60,8 +60,8 @@
     </header>
 
     <div class="post-content">
-        <pre><code class="language-html">&lt;style&gt;
-    @import url(&#39;https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap&#39;);
+        <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
     
     * {
         margin: 0;
@@ -70,7 +70,7 @@
     }
 
     body {
-        font-family: &#39;Inter&#39;, sans-serif;
+        font-family: 'Inter', sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
         background-size: 400% 400%;
         animation: gradientShift 15s ease infinite;
@@ -130,7 +130,7 @@
     }
 
     h1 {
-        font-family: &#39;Orbitron&#39;, monospace;
+        font-family: 'Orbitron', monospace;
         font-size: 3.5em;
         font-weight: 900;
         margin-bottom: 15px;
@@ -260,7 +260,7 @@
     }
 
     .time-unit::before {
-        content: &#39;&#39;;
+        content: '';
         position: absolute;
         top: 0;
         left: -100%;
@@ -281,7 +281,7 @@
     }
 
     .time-value {
-        font-family: &#39;Orbitron&#39;, monospace;
+        font-family: 'Orbitron', monospace;
         font-size: 2.8em;
         font-weight: 700;
         background: linear-gradient(45deg, #ffd700, #ffeb3b, #fff);
@@ -370,102 +370,103 @@
             font-size: 2em;
         }
     }
-&lt;/style&gt;
+</style>
 
-&lt;div class=&quot;stars&quot;&gt;&lt;/div&gt;
+<div class="stars"></div>
 
-&lt;div class=&quot;container&quot;&gt;
-    &lt;h1&gt;Time Elapsed Counter&lt;/h1&gt;
+<div class="container">
+    <h1>Time Elapsed Counter</h1>
     
-    &lt;div class=&quot;input-section&quot;&gt;
-        &lt;h2&gt;Set Custom Date &amp; Time&lt;/h2&gt;
-        &lt;div class=&quot;input-group&quot;&gt;
-            &lt;div class=&quot;input-field&quot;&gt;
-                &lt;label&gt;Day&lt;/label&gt;
-                &lt;input type=&quot;number&quot; id=&quot;day&quot; min=&quot;1&quot; max=&quot;31&quot; value=&quot;11&quot; placeholder=&quot;Day&quot;&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;input-field&quot;&gt;
-                &lt;label&gt;Month&lt;/label&gt;
-                &lt;select id=&quot;month&quot;&gt;
-                    &lt;option value=&quot;1&quot;&gt;January&lt;/option&gt;
-                    &lt;option value=&quot;2&quot;&gt;February&lt;/option&gt;
-                    &lt;option value=&quot;3&quot;&gt;March&lt;/option&gt;
-                    &lt;option value=&quot;4&quot;&gt;April&lt;/option&gt;
-                    &lt;option value=&quot;5&quot; selected&gt;May&lt;/option&gt;
-                    &lt;option value=&quot;6&quot;&gt;June&lt;/option&gt;
-                    &lt;option value=&quot;7&quot;&gt;July&lt;/option&gt;
-                    &lt;option value=&quot;8&quot;&gt;August&lt;/option&gt;
-                    &lt;option value=&quot;9&quot;&gt;September&lt;/option&gt;
-                    &lt;option value=&quot;10&quot;&gt;October&lt;/option&gt;
-                    &lt;option value=&quot;11&quot;&gt;November&lt;/option&gt;
-                    &lt;option value=&quot;12&quot;&gt;December&lt;/option&gt;
-                &lt;/select&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;input-field&quot;&gt;
-                &lt;label&gt;Year&lt;/label&gt;
-                &lt;input type=&quot;number&quot; id=&quot;year&quot; min=&quot;1900&quot; max=&quot;2030&quot; value=&quot;2001&quot; placeholder=&quot;Year&quot;&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;input-field&quot;&gt;
-                &lt;label&gt;Hour&lt;/label&gt;
-                &lt;input type=&quot;number&quot; id=&quot;hour&quot; min=&quot;0&quot; max=&quot;23&quot; value=&quot;21&quot; placeholder=&quot;Hour (24h)&quot;&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;input-field&quot;&gt;
-                &lt;label&gt;Minute&lt;/label&gt;
-                &lt;input type=&quot;number&quot; id=&quot;minute&quot; min=&quot;0&quot; max=&quot;59&quot; value=&quot;0&quot; placeholder=&quot;Minute&quot;&gt;
-            &lt;/div&gt;
+<pre><code>&lt;div class=&quot;input-section&quot;&gt;
+    &lt;h2&gt;Set Custom Date &amp; Time&lt;/h2&gt;
+    &lt;div class=&quot;input-group&quot;&gt;
+        &lt;div class=&quot;input-field&quot;&gt;
+            &lt;label&gt;Day&lt;/label&gt;
+            &lt;input type=&quot;number&quot; id=&quot;day&quot; min=&quot;1&quot; max=&quot;31&quot; value=&quot;11&quot; placeholder=&quot;Day&quot;&gt;
         &lt;/div&gt;
-        &lt;button class=&quot;set-button&quot; onclick=&quot;setCustomDate()&quot;&gt;Set Date &amp; Time&lt;/button&gt;
-    &lt;/div&gt;
-    
-    &lt;div class=&quot;date-info&quot; id=&quot;dateInfo&quot;&gt;
-        Since May 11, 2001 at 9:00 PM (Nepal Time)
-    &lt;/div&gt;
-    
-    &lt;div class=&quot;time-grid&quot;&gt;
-        &lt;div class=&quot;time-unit&quot;&gt;
-            &lt;div class=&quot;time-value&quot; id=&quot;years&quot;&gt;0&lt;/div&gt;
-            &lt;div class=&quot;time-label&quot;&gt;Years&lt;/div&gt;
+        &lt;div class=&quot;input-field&quot;&gt;
+            &lt;label&gt;Month&lt;/label&gt;
+            &lt;select id=&quot;month&quot;&gt;
+                &lt;option value=&quot;1&quot;&gt;January&lt;/option&gt;
+                &lt;option value=&quot;2&quot;&gt;February&lt;/option&gt;
+                &lt;option value=&quot;3&quot;&gt;March&lt;/option&gt;
+                &lt;option value=&quot;4&quot;&gt;April&lt;/option&gt;
+                &lt;option value=&quot;5&quot; selected&gt;May&lt;/option&gt;
+                &lt;option value=&quot;6&quot;&gt;June&lt;/option&gt;
+                &lt;option value=&quot;7&quot;&gt;July&lt;/option&gt;
+                &lt;option value=&quot;8&quot;&gt;August&lt;/option&gt;
+                &lt;option value=&quot;9&quot;&gt;September&lt;/option&gt;
+                &lt;option value=&quot;10&quot;&gt;October&lt;/option&gt;
+                &lt;option value=&quot;11&quot;&gt;November&lt;/option&gt;
+                &lt;option value=&quot;12&quot;&gt;December&lt;/option&gt;
+            &lt;/select&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;time-unit&quot;&gt;
-            &lt;div class=&quot;time-value&quot; id=&quot;weeks&quot;&gt;0&lt;/div&gt;
-            &lt;div class=&quot;time-label&quot;&gt;Weeks&lt;/div&gt;
+        &lt;div class=&quot;input-field&quot;&gt;
+            &lt;label&gt;Year&lt;/label&gt;
+            &lt;input type=&quot;number&quot; id=&quot;year&quot; min=&quot;1900&quot; max=&quot;2030&quot; value=&quot;2001&quot; placeholder=&quot;Year&quot;&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;time-unit&quot;&gt;
-            &lt;div class=&quot;time-value&quot; id=&quot;hours&quot;&gt;0&lt;/div&gt;
-            &lt;div class=&quot;time-label&quot;&gt;Hours&lt;/div&gt;
+        &lt;div class=&quot;input-field&quot;&gt;
+            &lt;label&gt;Hour&lt;/label&gt;
+            &lt;input type=&quot;number&quot; id=&quot;hour&quot; min=&quot;0&quot; max=&quot;23&quot; value=&quot;21&quot; placeholder=&quot;Hour (24h)&quot;&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;time-unit&quot;&gt;
-            &lt;div class=&quot;time-value&quot; id=&quot;minutes&quot;&gt;0&lt;/div&gt;
-            &lt;div class=&quot;time-label&quot;&gt;Minutes&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;time-unit&quot;&gt;
-            &lt;div class=&quot;time-value&quot; id=&quot;seconds&quot;&gt;0&lt;/div&gt;
-            &lt;div class=&quot;time-label&quot;&gt;Seconds&lt;/div&gt;
+        &lt;div class=&quot;input-field&quot;&gt;
+            &lt;label&gt;Minute&lt;/label&gt;
+            &lt;input type=&quot;number&quot; id=&quot;minute&quot; min=&quot;0&quot; max=&quot;59&quot; value=&quot;0&quot; placeholder=&quot;Minute&quot;&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-    
-    &lt;div class=&quot;footer&quot;&gt;
-        &lt;span class=&quot;live-indicator&quot;&gt;&lt;/span&gt;
-        Live counter updating every second
+    &lt;button class=&quot;set-button&quot; onclick=&quot;setCustomDate()&quot;&gt;Set Date &amp; Time&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;date-info&quot; id=&quot;dateInfo&quot;&gt;
+    Since May 11, 2001 at 9:00 PM (Nepal Time)
+&lt;/div&gt;
+
+&lt;div class=&quot;time-grid&quot;&gt;
+    &lt;div class=&quot;time-unit&quot;&gt;
+        &lt;div class=&quot;time-value&quot; id=&quot;years&quot;&gt;0&lt;/div&gt;
+        &lt;div class=&quot;time-label&quot;&gt;Years&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;time-unit&quot;&gt;
+        &lt;div class=&quot;time-value&quot; id=&quot;weeks&quot;&gt;0&lt;/div&gt;
+        &lt;div class=&quot;time-label&quot;&gt;Weeks&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;time-unit&quot;&gt;
+        &lt;div class=&quot;time-value&quot; id=&quot;hours&quot;&gt;0&lt;/div&gt;
+        &lt;div class=&quot;time-label&quot;&gt;Hours&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;time-unit&quot;&gt;
+        &lt;div class=&quot;time-value&quot; id=&quot;minutes&quot;&gt;0&lt;/div&gt;
+        &lt;div class=&quot;time-label&quot;&gt;Minutes&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;time-unit&quot;&gt;
+        &lt;div class=&quot;time-value&quot; id=&quot;seconds&quot;&gt;0&lt;/div&gt;
+        &lt;div class=&quot;time-label&quot;&gt;Seconds&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;script&gt;
+&lt;div class=&quot;footer&quot;&gt;
+    &lt;span class=&quot;live-indicator&quot;&gt;&lt;/span&gt;
+    Live counter updating every second
+&lt;/div&gt;
+</code></pre>
+</div>
+
+<script>
     // Default date - May 11, 2001 at 9:00 PM Nepal Time
-    let targetDate = new Date(&#39;2001-05-11T21:00:00+05:45&#39;);
+    let targetDate = new Date('2001-05-11T21:00:00+05:45');
     
     // Create animated stars
     function createStars() {
-        const starsContainer = document.querySelector(&#39;.stars&#39;);
+        const starsContainer = document.querySelector('.stars');
         const numStars = 100;
         
-        for (let i = 0; i &lt; numStars; i++) {
-            const star = document.createElement(&#39;div&#39;);
-            star.className = &#39;star&#39;;
-            star.style.left = Math.random() * 100 + &#39;%&#39;;
-            star.style.top = Math.random() * 100 + &#39;%&#39;;
-            star.style.animationDelay = Math.random() * 3 + &#39;s&#39;;
-            star.style.animationDuration = (Math.random() * 3 + 2) + &#39;s&#39;;
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
             starsContainer.appendChild(star);
         }
     }
@@ -474,13 +475,13 @@
         const now = new Date();
         const diff = now - targetDate;
         
-        if (diff &lt; 0) {
+        if (diff < 0) {
             // If target date is in the future, show 0 for all values
-            document.getElementById(&#39;seconds&#39;).textContent = &#39;0&#39;;
-            document.getElementById(&#39;minutes&#39;).textContent = &#39;0&#39;;
-            document.getElementById(&#39;hours&#39;).textContent = &#39;0&#39;;
-            document.getElementById(&#39;weeks&#39;).textContent = &#39;0&#39;;
-            document.getElementById(&#39;years&#39;).textContent = &#39;0&#39;;
+            document.getElementById('seconds').textContent = '0';
+            document.getElementById('minutes').textContent = '0';
+            document.getElementById('hours').textContent = '0';
+            document.getElementById('weeks').textContent = '0';
+            document.getElementById('years').textContent = '0';
             return;
         }
         
@@ -492,42 +493,42 @@
         const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
         
         // Update display with formatting
-        document.getElementById(&#39;seconds&#39;).textContent = seconds.toLocaleString();
-        document.getElementById(&#39;minutes&#39;).textContent = minutes.toLocaleString();
-        document.getElementById(&#39;hours&#39;).textContent = hours.toLocaleString();
-        document.getElementById(&#39;weeks&#39;).textContent = weeks.toLocaleString();
-        document.getElementById(&#39;years&#39;).textContent = years.toLocaleString();
+        document.getElementById('seconds').textContent = seconds.toLocaleString();
+        document.getElementById('minutes').textContent = minutes.toLocaleString();
+        document.getElementById('hours').textContent = hours.toLocaleString();
+        document.getElementById('weeks').textContent = weeks.toLocaleString();
+        document.getElementById('years').textContent = years.toLocaleString();
     }
     
     function setCustomDate() {
-        const day = document.getElementById(&#39;day&#39;).value;
-        const month = document.getElementById(&#39;month&#39;).value;
-        const year = document.getElementById(&#39;year&#39;).value;
-        const hour = document.getElementById(&#39;hour&#39;).value;
-        const minute = document.getElementById(&#39;minute&#39;).value;
+        const day = document.getElementById('day').value;
+        const month = document.getElementById('month').value;
+        const year = document.getElementById('year').value;
+        const hour = document.getElementById('hour').value;
+        const minute = document.getElementById('minute').value;
         
         // Validate inputs
-        if (!day || !month || !year || hour === &#39;&#39; || minute === &#39;&#39;) {
-            alert(&#39;Please fill in all fields&#39;);
+        if (!day || !month || !year || hour === '' || minute === '') {
+            alert('Please fill in all fields');
             return;
         }
         
         // Create date string (Nepal timezone is UTC+5:45)
-        const dateString = `${year}-${month.padStart(2, &#39;0&#39;)}-${day.padStart(2, &#39;0&#39;)}T${hour.padStart(2, &#39;0&#39;)}:${minute.padStart(2, &#39;0&#39;)}:00+05:45`;
+        const dateString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:00+05:45`;
         targetDate = new Date(dateString);
         
         // Update display
-        const months = [&#39;January&#39;, &#39;February&#39;, &#39;March&#39;, &#39;April&#39;, &#39;May&#39;, &#39;June&#39;,
-                      &#39;July&#39;, &#39;August&#39;, &#39;September&#39;, &#39;October&#39;, &#39;November&#39;, &#39;December&#39;];
+        const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December'];
         const monthName = months[parseInt(month) - 1];
-        const timeStr = `${hour.padStart(2, &#39;0&#39;)}:${minute.padStart(2, &#39;0&#39;)}`;
-        const time12 = new Date(`2000-01-01T${timeStr}`).toLocaleTimeString(&#39;en-US&#39;, {
-            hour: &#39;numeric&#39;,
-            minute: &#39;2-digit&#39;,
+        const timeStr = `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
+        const time12 = new Date(`2000-01-01T${timeStr}`).toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
             hour12: true
         });
         
-        document.getElementById(&#39;dateInfo&#39;).textContent = 
+        document.getElementById('dateInfo').textContent = 
             `Since ${monthName} ${day}, ${year} at ${time12} (Nepal Time)`;
         
         // Update counter immediately
@@ -538,8 +539,7 @@
     createStars();
     updateCounter();
     setInterval(updateCounter, 1000);
-&lt;/script&gt;
-</code></pre>
+</script>
 
     </div>
 
