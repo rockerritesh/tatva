@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2025-07-14T15:40:54.619Z</lastmod>
+    <lastmod>2025-07-17T04:39:28.104Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/about/</loc>
-    <lastmod>2025-07-14T00:00:00Z</lastmod>
+    <lastmod>2025-07-17T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2025/07/17/The Brain's Thinking Cycle: From Thought to Reply/</loc>
+    <lastmod>2025-07-17T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2025/07/14/clock/</loc>
