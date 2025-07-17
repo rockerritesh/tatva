@@ -52,10 +52,10 @@ When you think and respond, your brain runs an intricate production line with sp
 ```mermaid
 pie
     title Action Selection Probability
-    “Verbal Reply” : 45
-    “Physical Action” : 25
-    “Memory Search” : 20
-    “Emotional Reaction” : 10
+    "Verbal Reply" : 45
+    "Physical Action" : 25
+    "Memory Search" : 20
+    "Emotional Reaction" : 10
 ```
 
 ### 5. **Quality Control Checkpoint**  
