@@ -7,7 +7,8 @@ tags: churia-forests terai rainfall deforestation monsoon flooding ecosystem
 author: Sumit Yadav, Grok
 description: Explore how Nepal’s Churia forests regulate rainfall in the Terai and how their deforestation disrupts precipitation patterns, increases flooding in the Himalayas and hilly regions, and unbalances Nepal’s ecosystem.
 ---
-![Churai Range](churai.png)
+<img src="https://tatva.sumityadav.com.np/posts/2025/07/23/The%20Churia%20Forests/churai.png alt="Churai Range" width="50%">
+
 # The Churia Forests and Rainfall in Nepal’s Terai: Impacts of Deforestation on Precipitation and Ecosystem Balance
 
 Nepal’s Terai region, the nation’s agricultural heartland, depends on monsoon rains to sustain its productivity. The Churia (or Chure) forests, located in the Siwalik Hills at the foothills of the Himalayas, play a pivotal role in regulating rainfall and maintaining ecological balance across Nepal. However, massive deforestation in the Churia region has disrupted these processes, leading to reduced and delayed rains in the Terai, increased humidity and precipitation near the Himalayas, and severe flooding in the Himalayan and hilly regions. These changes have unbalanced Nepal’s ecosystem, threatening agriculture, livelihoods, and environmental stability. This blog explores the role of the Churia forests in precipitation, the impacts of their deforestation, and potential solutions to restore ecological harmony.
