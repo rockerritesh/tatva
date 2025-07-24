@@ -7,7 +7,7 @@ tags: churia-forests terai rainfall deforestation monsoon flooding ecosystem
 author: Sumit Yadav, Grok
 description: Explore how Nepal’s Churia forests regulate rainfall in the Terai and how their deforestation disrupts precipitation patterns, increases flooding in the Himalayas and hilly regions, and unbalances Nepal’s ecosystem.
 ---
-<img src="https://tatva.sumityadav.com.np/posts/2025/07/23/The%20Churia%20Forests/churai.png alt="Churai Range" width="50%">
+<img src="https://tatva.sumityadav.com.np/posts/2025/07/23/The%20Churia%20Forests/churai.png" alt="Churai Range" width="80%">
 
 # The Churia Forests and Rainfall in Nepal’s Terai: Impacts of Deforestation on Precipitation and Ecosystem Balance
 
