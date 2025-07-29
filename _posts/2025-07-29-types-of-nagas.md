@@ -1,8 +1,7 @@
-
 ---
 title: "Types of Nāgas in Hindu Mythology" 
 date: 2025-07-29 
-author: "Rocker Ritesh" 
+author: Rocker Ritesh, Sumit Yadav
 ---
 
 🐍 Major Nāgas (Individual Names)
