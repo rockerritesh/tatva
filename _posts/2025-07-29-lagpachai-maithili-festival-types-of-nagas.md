@@ -4,7 +4,7 @@ date: 2025-07-29
 author: Rocker Ritesh, Sumit Yadav
 ---
 
-<img src="https://tatva.sumityadav.com.np/posts/2025/07/28/agpachai-maithili-festival-types-of-nagas/kaliya_nag.jpg" alt="Krishna on Kaliya Nag" width="100%">
+<img src="https://tatva.sumityadav.com.np/posts/2025/07/28/lagpachai-maithili-festival-types-of-nagas/kaliya_nag.jpg" alt="Krishna on Kaliya Nag" width="100%">
 
 Nag Panchami, also known as Lagpachai in Nepali, is a Hindu festival celebrated in honor of the serpent deities, Nagas. It falls on the fifth day (Panchami) of the bright half (Shukla Paksha) of the Hindu month of Shravan, which usually occurs in July or August. In 2025, Nag Panchami will be celebrated on July 29th. 
 
