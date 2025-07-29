@@ -1,8 +1,14 @@
 ---
-title: "Types of Nāgas in Hindu Mythology" 
+title: "Lagpachai Festival of Nāgas in Hindu Mythology, Mithila" 
 date: 2025-07-29 
 author: Rocker Ritesh, Sumit Yadav
 ---
+
+<img src="https://tatva.sumityadav.com.np/posts/2025/07/28/agpachai-maithili-festival-types-of-nagas/kaliya_nag.jpg" alt="Churai Range" width="100%">
+
+Nag Panchami, also known as Lagpachai in Nepali, is a Hindu festival celebrated in honor of the serpent deities, Nagas. It falls on the fifth day (Panchami) of the bright half (Shukla Paksha) of the Hindu month of Shravan, which usually occurs in July or August. In 2025, Nag Panchami will be celebrated on July 29th. 
+
+During Nag Panchami, devotees worship the Nagas, seeking blessings for protection from snakebites, fire, and other misfortunes. Many people paste pictures of snakes on their doorways and offer milk and other items to the serpent deities. It's a day when women also pray for the well-being of their brothers. The festival is widely celebrated throughout Nepal and India
 
 🐍 Major Nāgas (Individual Names)
 
