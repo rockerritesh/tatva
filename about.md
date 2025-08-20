@@ -32,7 +32,7 @@ permalink: /about/
 - **LLM evaluation frameworks** for accuracy and reliability testing
 - **[MCP Server](https://github.com/rockerritesh/scraper-mcp-smithery)** for easy and fast way to integrate Agents
 
-Proven track record in **AI/Machine Learning engineering** across many NLP projects including Maithili text classification (low-resources) (0.87 accuracy) and multilingual document analysis systems. Authored 3 peer-reviewed publications and one open review paper on **machine learning optimization/security** and **low-resource language processing**.
+Proven track record in **AI/Machine Learning engineering** across many NLP projects including Maithili text classification (low-resources) (0.87 accuracy) and multilingual document analysis systems. Authored 4 peer-reviewed publications including recent research on **AI safety, optimization, and low-resource language processing**.
 
 **Core Competencies:**
 - **AI Prompt Design** • **LLM Fine-tuning** • **Security Document Analysis**
@@ -93,6 +93,8 @@ Bachelor of Computer Engineering
 2. **[Machine Learning Analysis of Tirhuta Lipi](https://www.researchgate.net/publication/373370042_Machine_Learning_Analysis_of_Tirhuta_Lipi)** - Achieved 0.97 accuracy in Tirhuta Lipi character recognition using MobileNet embedding and logistic regression, with applications in translation and OCR for low-resource languages
 
 3. **[Revolutionizing Currency Security: A Yolov8-Based Approach for Automated Detection of Counterfeit Nepali Banknotes](https://doi.org/10.61440/JBES.2024.v1.47)** - Implemented YOLOv8 to achieve a true positive recall of 0.82 (front face) and 0.9863 (back face) in detecting counterfeit Nepali banknotes, demonstrating significant advancements in counterfeit currency detection
+
+4. **[Latest Research Paper](https://arxiv.org/html/2508.11290v1)** - Recent research contribution focusing on advanced AI methodologies and optimization techniques in natural language processing and machine learning systems (August 2025)
 
 ## Projects
 
