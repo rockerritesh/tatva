@@ -1,6 +1,10 @@
 # Tatva
 
 A Jekyll-inspired static site generator built with Node.js.
+<img width="2922" height="2006" alt="image" src="https://github.com/user-attachments/assets/06e2239f-392f-4a94-aee4-dfa3be624610" />
+<img width="2874" height="2000" alt="image" src="https://github.com/user-attachments/assets/ada79729-9291-4f4f-923e-fdeb90d84cbd" />
+
+
 
 ## Features
 
