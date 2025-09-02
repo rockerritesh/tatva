@@ -154,6 +154,7 @@ class JekyllLikeBuilder {
       
       return array.map(item => {
         const itemData = { ...data, [itemVar]: item };
+
         return this.processTemplate(loopContent, itemData);
       }).join('');
     });
@@ -290,6 +291,23 @@ class JekyllLikeBuilder {
       
       return value ? value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') : '';
     });
+
+    // Process escape and slice filter: {{ post.title | escape | slice: 0 }}
+    processed = processed.replace(/\{\{\s*([^|]+)\|\s*escape\s*\|\s*slice:\s*(\d+)\s*\}\}/g, (match, variable, index) => {
+      const parts = variable.trim().split('.');
+      let value = data;
+      
+      for (const part of parts) {
+        if (value && value[part] !== undefined) {
+          value = value[part];
+        } else {
+          return '';
+        }
+      }
+      
+      const escapedValue = value ? value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') : '';
+      return escapedValue.charAt(parseInt(index)) || '';
+    });
     
     // Process strip_html and truncatewords: {{ post.excerpt | strip_html | truncatewords: 30 }}
     processed = processed.replace(/\{\{\s*([^|]+)\|\s*strip_html\s*\|\s*truncatewords:\s*(\d+)\s*\}\}/g, (match, variable, wordCount) => {
@@ -366,6 +384,8 @@ class JekyllLikeBuilder {
       if (variable.includes('|') || variable.includes('%')) {
         return match;
       }
+      
+
       
       const parts = variable.trim().split('.');
       let value = data;
@@ -444,6 +464,84 @@ class JekyllLikeBuilder {
     return processed;
   }
 
+  // Extract first image from markdown content
+  extractFirstImage(content) {
+    // First, look for HTML img tags: <img src="..." alt="...">
+    const htmlImageRegex = /<img[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/i;
+    const htmlMatch = content.match(htmlImageRegex);
+    
+    if (htmlMatch && htmlMatch[1]) {
+      const imagePath = htmlMatch[1].trim();
+      return imagePath;
+    }
+    
+    // If no HTML img found, look for markdown image syntax: ![alt](image.jpg)
+    const markdownImageRegex = /!\[.*?\]\(([^)]+)\)/;
+    const markdownMatch = content.match(markdownImageRegex);
+    
+    if (markdownMatch && markdownMatch[1]) {
+      const imagePath = markdownMatch[1].trim();
+      return imagePath;
+    }
+    
+    return null;
+  }
+
+  // Process post thumbnails for home page
+  processPostThumbnails(html) {
+    let postIndex = 0;
+    
+    // Find each post-image div and populate with correct data
+    return html.replace(/<div class="post-image">\s*<div class="post-image-overlay">\s*\w\s*<\/div>\s*<\/div>/g, (match) => {
+      const post = this.posts[postIndex];
+      postIndex++;
+      
+      if (!post) {
+        return match; // Return original if no post found
+      }
+      
+      // Generate the thumbnail HTML
+      if (post.featuredImage) {
+        // Handle relative image paths
+        let imageUrl = post.featuredImage;
+        if (!imageUrl.startsWith('http')) {
+          imageUrl = post.url + imageUrl;
+        }
+        
+        return `<div class="post-image" style="background-image: url('${imageUrl}');">
+                    <div class="post-image-overlay">
+                      ${post.title.charAt(0)}
+                    </div>
+                </div>`;
+      } else {
+        return `<div class="post-image default-bg" style="background: ${post.defaultImageBg};">
+                    ${post.defaultImageIcon}
+                </div>`;
+      }
+    });
+  }
+
+  // Generate default image identifier based on post title
+  generateDefaultImage(title) {
+    const colors = [
+      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+      'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+      'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+      'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+      'linear-gradient(135deg, #ff8a80 0%, #ea4c89 100%)'
+    ];
+    
+    // Use title length to pick a consistent color for each post
+    const colorIndex = title.length % colors.length;
+    return {
+      background: colors[colorIndex],
+      icon: title.charAt(0).toUpperCase()
+    };
+  }
+
   // Process posts
   async loadPosts() {
     if (!fs.existsSync('_posts')) {
@@ -483,6 +581,10 @@ class JekyllLikeBuilder {
       // Restore Mermaid blocks after markdown processing
       const finalContent = this.restoreMermaidBlocks(htmlContent);
 
+      // Extract first image from post content
+      const firstImage = this.extractFirstImage(body);
+      const defaultImage = this.generateDefaultImage(frontmatter.title || slug);
+      
       const post = {
         ...frontmatter,
         content: finalContent,
@@ -490,7 +592,10 @@ class JekyllLikeBuilder {
         url,
         date: frontmatter.date || `${year}-${month}-${day}`,
         slug,
-        file: filePath
+        file: filePath,
+        featuredImage: firstImage,
+        defaultImageBg: defaultImage.background,
+        defaultImageIcon: defaultImage.icon
       };
 
       this.posts.push(post);
@@ -875,7 +980,12 @@ Allow: /
         layout: layoutName
       };
       
-      const html = this.applyLayout(page.content, layoutName, layoutPageData);
+      let html = this.applyLayout(page.content, layoutName, layoutPageData);
+      
+      // Special handling for home page to process post thumbnails
+      if (page.url === '/' && layoutName === 'home') {
+        html = this.processPostThumbnails(html);
+      }
       
       let outputPath;
       if (page.url === '/') {
