@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Your Moment - Tatva</title>
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ff6b6b',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#ff6b6b',
+                lineColor: '#666',
+                sectionBkgColor: '#f8f9fa',
+                altSectionBkgColor: '#e9ecef',
+                gridColor: '#ddd',
+                tertiaryColor: '#f1f3f4'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+    
+    <header class="site-header">
+    <div class="wrapper">
+        <a class="site-title" href="/">Tatva</a>
+        
+        <nav class="site-nav">
+            <div class="trigger">
+                <a class="page-link" href="/">Home</a>
+                <!-- <a class="page-link" href="/about">About</a> -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon theme-icon-light">🌙</span>
+                    <span class="theme-icon theme-icon-dark">☀️</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header> 
+    
+    <main class="page-content">
+        <div class="wrapper">
+            
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">Capture Your Moment</h1>
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                January 17, 2020
+            </time>
+            
+        </p>
+    </header>
+
+    <div class="post-content">
+        <h1>📸 Capture Your Moment</h1>
+<p>A digital space where memories are made, one selfie at a time. In this age of fleeting moments, sometimes we need to pause and capture the essence of now.</p>
+<div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 40px; border-radius: 20px; margin: 40px 0; text-align: center;">
+
+<h1>💫 Your Digital Mirror</h1>
+<div style="text-align: center; margin: 30px 0;">
+  <div style="display: inline-flex; background: rgba(255,255,255,0.2); border-radius: 50px; padding: 5px; backdrop-filter: blur(10px);">
+    <button id="startCameraBtn" onclick="startCamera()" style="padding: 12px 24px; border: none; border-radius: 50px; background: rgba(255,255,255,0.9); color: #333; font-weight: bold; cursor: pointer; margin-right: 5px; transition: all 0.3s ease;">📹 Start Camera</button>
+    <button id="captureBtn" onclick="capturePhoto()" style="padding: 12px 24px; border: none; border-radius: 50px; background: transparent; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s ease;" disabled>📸 Capture</button>
+  </div>
+</div>
+
+<div id="cameraContainer" style="margin: 30px 0;">
+  <video id="webcam" style="display: none; width: 480px; height: 480px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin: 20px auto;" autoplay></video>
+  
+<p>  <canvas id="canvas" style="display: none;" width="480" height="480"></canvas></p>
+  <div id="photoResult" style="display: none; margin: 20px auto;">
+    <img id="capturedPhoto" style="width: 480px; height: 480px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Your Captured Moment">
+    <div style="margin: 20px 0;">
+      <button onclick="downloadPhoto()" style="padding: 12px 24px; border: none; border-radius: 50px; background: rgba(255,255,255,0.9); color: #333; font-weight: bold; cursor: pointer; margin: 0 10px; transition: all 0.3s ease;">💾 Download</button>
+      <button onclick="retakePhoto()" style="padding: 12px 24px; border: none; border-radius: 50px; background: transparent; color: white; font-weight: bold; cursor: pointer; border: 2px solid white; transition: all 0.3s ease;">🔄 Retake</button>
+    </div>
+  </div>
+</div>
+
+<p style="font-style: italic; margin-top: 20px; opacity: 0.8; font-size: 18px; line-height: 1.6;">
+  Every moment is unique, every smile tells a story.<br>
+  Capture yours and keep it forever ✨
+</p>
+
+</div>
+
+<hr>
+<div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 30px; border-radius: 15px; margin: 30px 0; text-align: center;">
+
+<h2>🌟 About This Moment</h2>
+<p style="font-size: 16px; line-height: 1.8; margin: 20px 0;">
+In a world that moves at lightning speed, taking a moment to capture yourself is an act of self-love. This digital mirror reflects not just your image, but your presence in this exact moment of time.
+</p>
+
+<ul style="list-style: none; padding: 0; font-size: 16px;">
+  <li style="padding: 8px 0; opacity: 0.9;">📱 Uses your device's camera</li>
+  <li style="padding: 8px 0; opacity: 0.9;">🎯 Perfect 480x480 square format</li>
+  <li style="padding: 8px 0; opacity: 0.9;">💾 Download your selfie instantly</li>
+  <li style="padding: 8px 0; opacity: 0.9;">🔒 All processing happens locally - your privacy is protected</li>
+</ul>
+
+</div>
+
+<hr>
+<div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 30px; border-radius: 15px; margin: 30px 0; text-align: center;">
+
+<h2>💭 Reflection</h2>
+<p style="font-size: 18px; line-height: 1.8; font-style: italic;">
+"A photograph is a secret about a secret. The more it tells you, the less you know." - Diane Arbus
+</p>
+
+<p style="font-size: 16px; line-height: 1.6; margin-top: 20px;">
+Sometimes we need to see ourselves to remember who we are. In the reflection of a camera lens, we find not just our image, but our essence - the spark that makes us uniquely human.
+</p>
+
+</div>
+
+<script>
+let webcamStream = null;
+let webcamElement = document.getElementById('webcam');
+let canvasElement = document.getElementById('canvas');
+let capturedPhotoElement = document.getElementById('capturedPhoto');
+let photoResultDiv = document.getElementById('photoResult');
+let startCameraBtn = document.getElementById('startCameraBtn');
+let captureBtn = document.getElementById('captureBtn');
+
+async function startCamera() {
+  try {
+    // Request camera access with specific constraints
+    webcamStream = await navigator.mediaDevices.getUserMedia({ 
+      video: { 
+        width: { ideal: 480 },
+        height: { ideal: 480 },
+        facingMode: 'user' // Front camera for selfies
+      } 
+    });
+    
+    webcamElement.srcObject = webcamStream;
+    webcamElement.style.display = 'block';
+    
+    // Update button states
+    startCameraBtn.textContent = '📹 Camera Active';
+    startCameraBtn.style.background = 'rgba(46, 204, 113, 0.9)';
+    captureBtn.disabled = false;
+    captureBtn.style.background = 'rgba(255,255,255,0.9)';
+    captureBtn.style.color = '#333';
+    
+    // Hide photo result if showing
+    photoResultDiv.style.display = 'none';
+    
+  } catch (error) {
+    alert('Error accessing camera: ' + error.message);
+    console.error('Camera access error:', error);
+  }
+}
+
+function capturePhoto() {
+  if (!webcamStream) {
+    alert('Please start the camera first!');
+    return;
+  }
+  
+  // Set canvas size to 480x480
+  canvasElement.width = 480;
+  canvasElement.height = 480;
+  
+  const context = canvasElement.getContext('2d');
+  
+  // Draw the video frame to canvas (480x480)
+  context.drawImage(webcamElement, 0, 0, 480, 480);
+  
+  // Convert canvas to image
+  const imageDataUrl = canvasElement.toDataURL('image/png');
+  capturedPhotoElement.src = imageDataUrl;
+  
+  // Show the captured photo
+  photoResultDiv.style.display = 'block';
+  webcamElement.style.display = 'none';
+  
+  // Update button states
+  startCameraBtn.textContent = '📹 Start Camera';
+  startCameraBtn.style.background = 'rgba(255,255,255,0.9)';
+  captureBtn.disabled = true;
+  captureBtn.style.background = 'transparent';
+  captureBtn.style.color = 'white';
+  
+  // Stop the camera stream
+  stopCamera();
+}
+
+function downloadPhoto() {
+  const link = document.createElement('a');
+  link.download = `selfie-${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.png`;
+  link.href = capturedPhotoElement.src;
+  link.click();
+}
+
+function retakePhoto() {
+  photoResultDiv.style.display = 'none';
+  startCamera();
+}
+
+function stopCamera() {
+  if (webcamStream) {
+    webcamStream.getTracks().forEach(track => track.stop());
+    webcamStream = null;
+  }
+}
+
+// Cleanup when page is unloaded
+window.addEventListener('beforeunload', stopCamera);
+</script>
+    </div>
+
+    <footer class="post-footer">
+        <p><a href="/">&larr; Back to all posts</a></p>
+    </footer>
+</article> 
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+    <div class="wrapper">
+        <div class="footer-content">
+            <p>&copy; 2025 Made with ❤️ | All rights reserved to <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
+            
+                <p>Contact: <a href="mailto:rockerritesh4@gmail.com">rockerritesh4@gmail.com</a></p>
+            
+        </div>
+    </div>
+</footer> 
+    
+    <!-- Theme toggle functionality -->
+    <script>
+        (function() {
+            // Get theme preference from localStorage or default to system preference
+            const getThemePreference = () => {
+                const stored = localStorage.getItem('theme-preference');
+                if (stored) return stored;
+                
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            // Apply theme to document
+            const applyTheme = (theme) => {
+                const root = document.documentElement;
+                root.classList.remove('light-theme', 'dark-theme');
+                
+                if (theme !== 'auto') {
+                    root.classList.add(`${theme}-theme`);
+                }
+                
+                // Update Mermaid theme if it exists
+                if (window.mermaid) {
+                    const mermaidTheme = theme === 'dark' || 
+                        (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) 
+                        ? 'dark' : 'default';
+                    
+                    mermaid.initialize({ 
+                        startOnLoad: true,
+                        theme: mermaidTheme,
+                        themeVariables: {
+                            primaryColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            primaryTextColor: theme === 'dark' ? '#e0e0e0' : '#333',
+                            primaryBorderColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            lineColor: theme === 'dark' ? '#a0a0a0' : '#666',
+                            sectionBkgColor: theme === 'dark' ? '#2a2a2a' : '#f8f9fa',
+                            altSectionBkgColor: theme === 'dark' ? '#333' : '#e9ecef',
+                            gridColor: theme === 'dark' ? '#333' : '#ddd',
+                            tertiaryColor: theme === 'dark' ? '#2a2a2a' : '#f1f3f4'
+                        }
+                    });
+                    
+                    // Re-render existing diagrams
+                    document.querySelectorAll('.mermaid').forEach(el => {
+                        if (el.getAttribute('data-processed')) {
+                            el.removeAttribute('data-processed');
+                            el.innerHTML = el.getAttribute('data-original') || el.innerHTML;
+                        }
+                    });
+                    mermaid.init(undefined, '.mermaid');
+                }
+            };
+            
+            // Toggle theme function
+            const toggleTheme = () => {
+                const currentTheme = getThemePreference();
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                localStorage.setItem('theme-preference', newTheme);
+                applyTheme(newTheme);
+            };
+            
+            // Apply theme on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                const theme = getThemePreference();
+                applyTheme(theme);
+                
+                // Add click event to theme toggle button
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+                
+                // Store original mermaid content for re-rendering
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    if (!el.getAttribute('data-original')) {
+                        el.setAttribute('data-original', el.innerHTML);
+                    }
+                });
+            });
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only respond to system changes if user hasn't set a manual preference
+                if (!localStorage.getItem('theme-preference')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+        
+        // Scroll Progress Bar functionality
+        (function() {
+            const scrollProgressBar = document.getElementById('scroll-progress-bar');
+            
+            if (!scrollProgressBar) return;
+            
+            function updateScrollProgress() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                scrollProgressBar.style.height = Math.min(Math.max(scrollPercent, 0), 100) + '%';
+            }
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            
+            // Update on resize (in case content changes)
+            window.addEventListener('resize', updateScrollProgress, { passive: true });
+            
+            // Initial update
+            updateScrollProgress();
+        })();
+    </script>
+</body>
+</html> 
