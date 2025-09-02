@@ -1,6 +1,6 @@
 ---
 title: Ten Mahavidyas
-date: 2021-10-07
+date: 2025-09-02
 ---
 ![MahaVidyas](mahavidyas.png)
 # Exploring the Ten Mahavidyas: The Profound Wisdom Goddesses of Tantra
