@@ -76,7 +76,7 @@ body {
 }
 
 .wrapper {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -90,7 +90,8 @@ body {
 }
 
 .site-title {
-    font-size: 1.5rem;
+    font-family: "Dancing Script", "Brush Script MT", cursive;
+    font-size: 1.8rem;
     font-weight: 600;
     text-decoration: none;
     color: var(--text-color);
@@ -189,8 +190,10 @@ body {
 
 // Home page
 .page-heading {
-    font-size: 2rem;
+    font-family: "Dancing Script", "Brush Script MT", cursive;
+    font-size: 2.4rem;
     margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 .post-list-heading {
@@ -245,9 +248,11 @@ body {
 }
 
 .post-title {
-    font-size: 2.5rem;
+    font-family: "Dancing Script", "Brush Script MT", cursive;
+    font-size: 2.8rem;
     margin-bottom: 0.5rem;
     line-height: 1.2;
+    font-weight: 700;
 }
 
 .post-content {
@@ -255,8 +260,10 @@ body {
 }
 
 .post-content h1, .post-content h2, .post-content h3 {
+    font-family: "Dancing Script", "Brush Script MT", cursive;
     margin-top: 2rem;
     margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 .post-content p {
