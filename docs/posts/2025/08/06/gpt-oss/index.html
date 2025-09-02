@@ -32,6 +32,11 @@
     </script>
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+    
     <header class="site-header">
     <div class="wrapper">
         <a class="site-title" href="/">Tatva</a>
@@ -507,6 +512,30 @@ def forward(self, x, position_ids):
                     applyTheme(e.matches ? 'dark' : 'light');
                 }
             });
+        })();
+        
+        // Scroll Progress Bar functionality
+        (function() {
+            const scrollProgressBar = document.getElementById('scroll-progress-bar');
+            
+            if (!scrollProgressBar) return;
+            
+            function updateScrollProgress() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                scrollProgressBar.style.height = Math.min(Math.max(scrollPercent, 0), 100) + '%';
+            }
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            
+            // Update on resize (in case content changes)
+            window.addEventListener('resize', updateScrollProgress, { passive: true });
+            
+            // Initial update
+            updateScrollProgress();
         })();
     </script>
 </body>
