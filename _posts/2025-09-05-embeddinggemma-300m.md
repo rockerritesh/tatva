@@ -430,6 +430,48 @@ fetch("./all_embedding_pca_results.json")
 
 ---
 
+## 🌐 PCA Visualization of Embeddings (3D)
+
+Sometimes 2D isn’t enough — let’s explore **3D projections** of embeddings.  
+Rotate the plot below to see how clusters form in higher dimensions.
+
+<div id="pca-plot-3d"></div>
+
+<script>
+fetch("./all_embedding_pca_results.json")
+  .then(res => res.json())
+  .then(data => {
+    const traces = [];
+    Object.values(data).forEach(dataset => {
+      const x = dataset.items.map(d => d.pca_coordinates.x);
+      const y = dataset.items.map(d => d.pca_coordinates.y);
+      const z = dataset.items.map(d => d.pca_coordinates.z);
+      const text = dataset.items.map(d => d.text);
+
+      traces.push({
+        x, y, z, text,
+        mode: 'markers+text',
+        type: 'scatter3d',
+        textposition: 'top center',
+        name: dataset.dataset_name,
+        marker: { size: 5 }
+      });
+    });
+
+    Plotly.newPlot('pca-plot-3d', traces, {
+      title: "PCA Projection of Embeddings (3D)",
+      scene: {
+        xaxis: { title: "PC1" },
+        yaxis: { title: "PC2" },
+        zaxis: { title: "PC3" }
+      },
+      height: 700
+    });
+  });
+</script>
+
+---
+
 ## 📐 Explained Variance
 
 Dimensionality reduction should preserve variance.  
