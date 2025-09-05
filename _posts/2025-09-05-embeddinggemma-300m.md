@@ -212,7 +212,6 @@ function createPlot(containerId, data, title) {
   };
 
   Plotly.newPlot(containerId, traces, layout, config);
-};
 </script>
 
 ---
