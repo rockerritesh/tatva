@@ -274,23 +274,6 @@ function createPlot(containerId, data, title) {
 
   Plotly.newPlot(containerId, traces, layout, config);
 }
-
-// Create all plots when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  // Only create the first two plots since we have the data
-  createPlot('animals-plot', embeddingData.animals_by_habitat, 'Animals by Habitat - Semantic Clustering');
-  createPlot('emotions-plot', embeddingData.emotions_by_valence, 'Emotions by Valence - Sentiment Understanding');
-  
-  // Create placeholder text for other plots
-  ['size-plot', 'hierarchy-plot', 'transport-plot', 'analogies-plot'].forEach(id => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.innerHTML = `<div style="text-align: center; padding: 100px; color: #666; font-size: 18px;">
-        Interactive visualization would appear here with full dataset
-      </div>`;
-    }
-  });
-});
 </script>
 
 <hr>
