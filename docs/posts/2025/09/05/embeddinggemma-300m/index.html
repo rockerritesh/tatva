@@ -107,75 +107,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.0/plotly.min.js"></script>
 
 <script>
-// Embedding data
-const embeddingData = {
-  "animals_by_habitat": {
-    "dataset_name": "animals_by_habitat",
-    "description": "Animals categorized by their primary habitat",
-    "total_items": 24,
-    "pca_explained_variance": [0.08270972967147827, 0.07111360877752304, 0.07021752744913101],
-    "total_variance_captured": 0.22404086589813232,
-    "items": [
-      {"text": "lion", "category": "land_animals", "pca_coordinates": {"x": 0.26014137268066406, "y": -0.05992557108402252, "z": 0.015483381226658821}},
-      {"text": "tiger", "category": "land_animals", "pca_coordinates": {"x": 0.44208234548568726, "y": 0.25309666991233826, "z": -0.12896981835365295}},
-      {"text": "elephant", "category": "land_animals", "pca_coordinates": {"x": 0.02840997837483883, "y": -0.09379615634679794, "z": 0.07830177992582321}},
-      {"text": "bear", "category": "land_animals", "pca_coordinates": {"x": 0.17413705587387085, "y": -0.06334828585386276, "z": -0.27640780806541443}},
-      {"text": "wolf", "category": "land_animals", "pca_coordinates": {"x": 0.13987304270267487, "y": 0.053315456956624985, "z": 0.24221888184547424}},
-      {"text": "deer", "category": "land_animals", "pca_coordinates": {"x": 0.06478806585073471, "y": -0.2756657600402832, "z": -0.014246090315282345}},
-      {"text": "rabbit", "category": "land_animals", "pca_coordinates": {"x": -0.055471859872341156, "y": -0.19160765409469604, "z": 0.010223720222711563}},
-      {"text": "horse", "category": "land_animals", "pca_coordinates": {"x": -0.03333578258752823, "y": -0.13960270583629608, "z": 0.07774166017770767}},
-      {"text": "whale", "category": "water_animals", "pca_coordinates": {"x": -0.051139287650585175, "y": -0.042605187743902206, "z": 0.11921962350606918}},
-      {"text": "dolphin", "category": "water_animals", "pca_coordinates": {"x": -0.06386873871088028, "y": -0.16587266325950623, "z": 0.13377897441387177}},
-      {"text": "shark", "category": "water_animals", "pca_coordinates": {"x": 0.1574419140815735, "y": 0.07571060210466385, "z": 0.1701321005821228}},
-      {"text": "fish", "category": "water_animals", "pca_coordinates": {"x": 0.061472535133361816, "y": -0.006705665960907936, "z": 0.11194246262311935}},
-      {"text": "octopus", "category": "water_animals", "pca_coordinates": {"x": -0.057188935577869415, "y": 0.05777455493807793, "z": 0.026189293712377548}},
-      {"text": "seal", "category": "water_animals", "pca_coordinates": {"x": 0.06563832610845566, "y": -0.26451876759529114, "z": 0.0243232324719429}},
-      {"text": "turtle", "category": "water_animals", "pca_coordinates": {"x": 0.021718217059969902, "y": 0.13363276422023773, "z": -0.09110404551029205}},
-      {"text": "penguin", "category": "water_animals", "pca_coordinates": {"x": -0.08506743609905243, "y": -0.01834934949874878, "z": -0.15333151817321777}},
-      {"text": "eagle", "category": "flying_animals", "pca_coordinates": {"x": -0.09600477665662766, "y": 0.14461137354373932, "z": 0.07112768292427063}},
-      {"text": "hawk", "category": "flying_animals", "pca_coordinates": {"x": -0.12657013535499573, "y": 0.18577077984809875, "z": 0.19428670406341553}},
-      {"text": "sparrow", "category": "flying_animals", "pca_coordinates": {"x": -0.24096138775348663, "y": 0.08593303710222244, "z": -0.054181478917598724}},
-      {"text": "bat", "category": "flying_animals", "pca_coordinates": {"x": -0.06911943107843399, "y": 0.024582933634519577, "z": -0.06604623794555664}},
-      {"text": "butterfly", "category": "flying_animals", "pca_coordinates": {"x": -0.14462824165821075, "y": 0.09035298228263855, "z": -0.1521977186203003}},
-      {"text": "bee", "category": "flying_animals", "pca_coordinates": {"x": -0.05439532548189163, "y": 0.00014437633217312396, "z": -0.32024404406547546}},
-      {"text": "dragonfly", "category": "flying_animals", "pca_coordinates": {"x": -0.22295887768268585, "y": -0.021093903109431267, "z": -0.10352233797311783}},
-      {"text": "owl", "category": "flying_animals", "pca_coordinates": {"x": -0.11499276012182236, "y": 0.23816613852977753, "z": 0.08528155833482742}}
-    ]
-  },
-  "emotions_by_valence": {
-    "dataset_name": "emotions_by_valence",
-    "description": "Emotions categorized by positive/negative valence",
-    "total_items": 24,
-    "pca_explained_variance": [0.20446957647800446, 0.1788477748632431, 0.12702764570713043],
-    "total_variance_captured": 0.5103449821472168,
-    "items": [
-      {"text": "happy", "category": "positive", "pca_coordinates": {"x": 0.4581322968006134, "y": 0.03822103142738342, "z": -0.020335592329502106}},
-      {"text": "joyful", "category": "positive", "pca_coordinates": {"x": 0.5047845244407654, "y": 0.0062708985060453415, "z": -0.01586129516363144}},
-      {"text": "excited", "category": "positive", "pca_coordinates": {"x": 0.5332932472229004, "y": -0.08064436167478561, "z": -0.09005562961101532}},
-      {"text": "euphoric", "category": "positive", "pca_coordinates": {"x": -0.004977123346179724, "y": -0.010172693058848381, "z": 0.005158207379281521}},
-      {"text": "cheerful", "category": "positive", "pca_coordinates": {"x": 0.4363430440425873, "y": 0.05974860116839409, "z": -0.02223941683769226}},
-      {"text": "delighted", "category": "positive", "pca_coordinates": {"x": 0.4524773955345154, "y": 0.026861419901251793, "z": -0.041385717689991}},
-      {"text": "ecstatic", "category": "positive", "pca_coordinates": {"x": 0.3314400017261505, "y": -0.024655520915985107, "z": -0.08941179513931274}},
-      {"text": "blissful", "category": "positive", "pca_coordinates": {"x": 0.2083122730255127, "y": 0.08765146881341934, "z": 0.0934373140335083}},
-      {"text": "sad", "category": "negative", "pca_coordinates": {"x": -0.24194277822971344, "y": 0.40076974034309387, "z": -0.33584871888160706}},
-      {"text": "angry", "category": "negative", "pca_coordinates": {"x": -0.19841913878917694, "y": -0.6309941411018372, "z": -0.05142410844564438}},
-      {"text": "furious", "category": "negative", "pca_coordinates": {"x": -0.17175054550170898, "y": -0.6244661211967468, "z": -0.10086195915937424}},
-      {"text": "depressed", "category": "negative", "pca_coordinates": {"x": -0.21527080237865448, "y": 0.27154240012168884, "z": -0.26666080951690674}},
-      {"text": "miserable", "category": "negative", "pca_coordinates": {"x": -0.1645350307226181, "y": 0.04660576581954956, "z": -0.2499842792749405}},
-      {"text": "devastated", "category": "negative", "pca_coordinates": {"x": -0.2555193603038788, "y": 0.1441659927368164, "z": -0.2970590591430664}},
-      {"text": "enraged", "category": "negative", "pca_coordinates": {"x": -0.19790019094944, "y": -0.6371880173683167, "z": -0.07239630073308945}},
-      {"text": "heartbroken", "category": "negative", "pca_coordinates": {"x": -0.2909224331378937, "y": 0.3012637794017792, "z": -0.36801791191101074}},
-      {"text": "calm", "category": "neutral", "pca_coordinates": {"x": -0.14788134396076202, "y": 0.0866173803806305, "z": 0.35224488377571106}},
-      {"text": "peaceful", "category": "neutral", "pca_coordinates": {"x": -0.17728067934513092, "y": 0.1032116487622261, "z": 0.36611324548721313}},
-      {"text": "relaxed", "category": "neutral", "pca_coordinates": {"x": -0.07999265193939209, "y": 0.13684207201004028, "z": 0.34141805768013}},
-      {"text": "content", "category": "neutral", "pca_coordinates": {"x": -0.10504349321126938, "y": -0.003327421611174941, "z": -0.043258313089609146}},
-      {"text": "serene", "category": "neutral", "pca_coordinates": {"x": -0.18018344044685364, "y": 0.11922629922628403, "z": 0.3282317817211151}},
-      {"text": "balanced", "category": "neutral", "pca_coordinates": {"x": -0.13158249855041504, "y": 0.04233308508992195, "z": 0.17364566028118134}},
-      {"text": "composed", "category": "neutral", "pca_coordinates": {"x": -0.1629762053489685, "y": -0.012130817398428917, "z": 0.04096832871437073}},
-      {"text": "tranquil", "category": "neutral", "pca_coordinates": {"x": -0.19860504567623138, "y": 0.1522475928068161, "z": 0.36358341574668884}}
-    ]
-  }
-};
+// Global variable to store embedding data
+let embeddingData = {};
 
 // Color palettes for different categories
 const colorPalettes = {
@@ -211,6 +144,41 @@ const colorPalettes = {
   }
 };
 
+// Function to load JSON data and create all plots
+async function loadDataAndCreatePlots() {
+  try {
+    const response = await fetch('./all_embedding_pca_results.json');
+    embeddingData = await response.json();
+    
+    // Create individual plots for each dataset
+    if (embeddingData.animals_by_habitat) {
+      createPlot('animals-plot', embeddingData.animals_by_habitat, 'Animals by Habitat - 3D PCA Projection');
+    }
+    if (embeddingData.emotions_by_valence) {
+      createPlot('emotions-plot', embeddingData.emotions_by_valence, 'Emotions by Valence - 3D PCA Projection');
+    }
+    if (embeddingData.size_progression) {
+      createPlot('size-plot', embeddingData.size_progression, 'Size Progression - 3D PCA Projection');
+    }
+    if (embeddingData.professional_hierarchy) {
+      createPlot('hierarchy-plot', embeddingData.professional_hierarchy, 'Professional Hierarchy - 3D PCA Projection');
+    }
+    if (embeddingData.transportation_sentences) {
+      createPlot('transport-plot', embeddingData.transportation_sentences, 'Transportation Sentences - 3D PCA Projection');
+    }
+    if (embeddingData.analogical_relationships) {
+      createPlot('analogies-plot', embeddingData.analogical_relationships, 'Analogical Relationships - 3D PCA Projection');
+    }
+    
+    // Create variance analysis
+    createVarianceAnalysis();
+    
+  } catch (error) {
+    console.error('Error loading embedding data:', error);
+    document.getElementById('animals-plot').innerHTML = '<p style="color: red;">Error loading data. Please ensure all_embedding_pca_results.json is in the same directory.</p>';
+  }
+}
+
 function createPlot(containerId, data, title) {
   const categories = [...new Set(data.items.map(item => item.category))];
   
@@ -224,14 +192,14 @@ function createPlot(containerId, data, title) {
       text: categoryItems.map(item => item.text),
       mode: 'markers+text',
       marker: {
-        color: colorPalettes[data.dataset_name][category],
+        color: colorPalettes[data.dataset_name] ? colorPalettes[data.dataset_name][category] : '#666666',
         size: 8,
         opacity: 0.8
       },
       textposition: 'top center',
       textfont: {
         size: 10,
-        color: colorPalettes[data.dataset_name][category]
+        color: colorPalettes[data.dataset_name] ? colorPalettes[data.dataset_name][category] : '#666666'
       },
       name: category.replace('_', ' '),
       type: 'scatter3d'
@@ -273,136 +241,259 @@ function createPlot(containerId, data, title) {
   };
 
   Plotly.newPlot(containerId, traces, layout, config);
+}
+
+// Load data when page loads
+document.addEventListener('DOMContentLoaded', loadDataAndCreatePlots);
 </script>
 
 <hr>
 <h2>Quantitative Analysis</h2>
-<h3>Variance Explained by PCA</h3>
-<p>The amount of variance captured by the first three principal components tells us how much information is preserved in our 3D visualization:</p>
-<table>
-<thead>
-<tr>
-<th>Dataset</th>
-<th>PC1</th>
-<th>PC2</th>
-<th>PC3</th>
-<th>Total Variance</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Animals by Habitat</td>
-<td>8.3%</td>
-<td>7.1%</td>
-<td>7.0%</td>
-<td><strong>22.4%</strong></td>
-</tr>
-<tr>
-<td>Emotions by Valence</td>
-<td>20.4%</td>
-<td>17.9%</td>
-<td>12.7%</td>
-<td><strong>51.0%</strong></td>
-</tr>
-<tr>
-<td>Size Progression</td>
-<td>23.2%</td>
-<td>17.8%</td>
-<td>8.3%</td>
-<td><strong>49.3%</strong></td>
-</tr>
-<tr>
-<td>Professional Hierarchy</td>
-<td>11.6%</td>
-<td>9.3%</td>
-<td>7.6%</td>
-<td><strong>28.5%</strong></td>
-</tr>
-<tr>
-<td>Transportation</td>
-<td>15.8%</td>
-<td>14.9%</td>
-<td>11.5%</td>
-<td><strong>42.3%</strong></td>
-</tr>
-<tr>
-<td>Analogies</td>
-<td>11.6%</td>
-<td>7.7%</td>
-<td>7.0%</td>
-<td><strong>26.3%</strong></td>
-</tr>
-</tbody></table>
-<p><strong>Key Insights:</strong></p>
-<ul>
-<li><strong>Emotions</strong> and <strong>Size Progression</strong> show the highest variance capture (&gt;49%), indicating these concepts have clearer linear structure in embedding space</li>
-<li><strong>Animals</strong> and <strong>Analogies</strong> show lower variance capture (&lt;30%), suggesting more complex, non-linear relationships</li>
-</ul>
+<div id="variance-analysis" style="margin: 20px 0;"></div>
+
+<script>
+function createVarianceAnalysis() {
+  if (!embeddingData || Object.keys(embeddingData).length === 0) return;
+  
+  // Create variance table
+  let tableHTML = `
+    <h3>Variance Explained by PCA</h3>
+    <p>The amount of variance captured by the first three principal components tells us how much information is preserved in our 3D visualization:</p>
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+      <thead>
+        <tr style="background-color: #f8f9fa;">
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Dataset</th>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">PC1</th>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">PC2</th>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">PC3</th>
+          <th style="border: 1px solid #ddd; padding: 12px; text-align: center;">Total Variance</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  
+  Object.values(embeddingData).forEach(dataset => {
+    const pc1 = (dataset.pca_explained_variance[0] * 100).toFixed(1);
+    const pc2 = (dataset.pca_explained_variance[1] * 100).toFixed(1);
+    const pc3 = (dataset.pca_explained_variance[2] * 100).toFixed(1);
+    const total = (dataset.total_variance_captured * 100).toFixed(1);
+    
+    tableHTML += `
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 12px;">${dataset.dataset_name.replace('_', ' ')}</td>
+        <td style="border: 1px solid #ddd; padding: 12px; text-align: center;">${pc1}%</td>
+        <td style="border: 1px solid #ddd; padding: 12px; text-align: center;">${pc2}%</td>
+        <td style="border: 1px solid #ddd; padding: 12px; text-align: center;">${pc3}%</td>
+        <td style="border: 1px solid #ddd; padding: 12px; text-align: center; font-weight: bold;">${total}%</td>
+      </tr>
+    `;
+  });
+  
+  tableHTML += `
+      </tbody>
+    </table>
+    
+    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4>Key Insights:</h4>
+      <ul>
+        <li><strong>Higher variance capture</strong> (>40%) indicates clearer linear structure in embedding space</li>
+        <li><strong>Lower variance capture</strong> (<30%) suggests more complex, non-linear relationships</li>
+        <li>The 3D visualization preserves the most important dimensions of variation in the data</li>
+      </ul>
+    </div>
+  `;
+  
+  document.getElementById('variance-analysis').innerHTML = tableHTML;
+}
+</script>
+
 <hr>
 <h2>Similarity Analysis</h2>
 <div id="similarity-analysis" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
 
-<h3>Cosine Similarity Patterns</h3>
-<p>Let&#39;s examine some key similarity relationships in our embeddings:</p>
-<p><strong>Most Similar Pairs (Cosine Similarity &gt; 0.9):</strong></p>
-<ul>
-<li><code>happy</code> ↔ <code>joyful</code>: 0.94</li>
-<li><code>angry</code> ↔ <code>furious</code>: 0.92  </li>
-<li><code>huge</code> ↔ <code>enormous</code>: 0.93</li>
-<li><code>calm</code> ↔ <code>peaceful</code>: 0.91</li>
-</ul>
-<p><strong>Expected vs Unexpected Similarities:</strong></p>
-<ul>
-<li>✅ <code>lion</code> and <code>tiger</code> are close (both big cats)</li>
-<li>✅ <code>CEO</code> and <code>president</code> cluster together  </li>
-<li>⚠️ <code>whale</code> closer to land animals than expected</li>
-<li>⚠️ <code>bat</code> doesn&#39;t clearly group with flying animals</li>
-</ul>
+<h3>Interactive Cosine Similarity Calculator</h3>
+<div style="margin: 20px 0;">
+  <input id="word1" placeholder="Enter first word" style="padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px;">
+  <input id="word2" placeholder="Enter second word" style="padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px;">
+  <button onclick="computeSimilarity()" style="padding: 8px 16px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Calculate Similarity</button>
 </div>
+<div id="similarity-result" style="font-size: 16px; font-weight: bold; margin: 10px 0;"></div>
+
+<div id="word-suggestions" style="margin: 20px 0;"></div>
+
+</div>
+
+<script>
+function cosineSimilarity(a, b) {
+  let dot = 0, normA = 0, normB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+function computeSimilarity() {
+  if (!embeddingData || Object.keys(embeddingData).length === 0) {
+    document.getElementById("similarity-result").innerHTML = '<span style="color: red;">Data not loaded yet. Please wait...</span>';
+    return;
+  }
+
+  const w1 = document.getElementById("word1").value.toLowerCase().trim();
+  const w2 = document.getElementById("word2").value.toLowerCase().trim();
+  
+  if (!w1 || !w2) {
+    document.getElementById("similarity-result").innerHTML = '<span style="color: orange;">Please enter both words.</span>';
+    return;
+  }
+
+  // Flatten items from all datasets
+  const allItems = Object.values(embeddingData).flatMap(d => d.items);
+  const f1 = allItems.find(d => d.text.toLowerCase() === w1);
+  const f2 = allItems.find(d => d.text.toLowerCase() === w2);
+
+  if (!f1 || !f2) {
+    document.getElementById("similarity-result").innerHTML = `<span style="color: red;">One or both words not found in embeddings database.</span>`;
+    updateWordSuggestions();
+    return;
+  }
+
+  const v1 = [f1.pca_coordinates.x, f1.pca_coordinates.y, f1.pca_coordinates.z];
+  const v2 = [f2.pca_coordinates.x, f2.pca_coordinates.y, f2.pca_coordinates.z];
+  const sim = cosineSimilarity(v1, v2).toFixed(3);
+  
+  let color = 'green';
+  if (sim < 0.3) color = 'red';
+  else if (sim < 0.6) color = 'orange';
+
+  document.getElementById("similarity-result").innerHTML = 
+    `<span style="color: ${color};">Cosine Similarity between "${w1}" and "${w2}": ${sim}</span>`;
+}
+
+function updateWordSuggestions() {
+  if (!embeddingData || Object.keys(embeddingData).length === 0) return;
+  
+  const allItems = Object.values(embeddingData).flatMap(d => d.items);
+  const allWords = [...new Set(allItems.map(item => item.text))].sort();
+  
+  const suggestionsHTML = `
+    <h4>Available words in database:</h4>
+    <div style="background: white; padding: 10px; border-radius: 4px; max-height: 150px; overflow-y: auto; border: 1px solid #ddd;">
+      ${allWords.map(word => `<span style="display: inline-block; background: #e9ecef; padding: 2px 6px; margin: 2px; border-radius: 3px; font-size: 12px;">${word}</span>`).join('')}
+    </div>
+  `;
+  
+  document.getElementById("word-suggestions").innerHTML = suggestionsHTML;
+}
+
+// Update suggestions when data is loaded
+setTimeout(updateWordSuggestions, 2000);
+</script>
 
 <hr>
 <h2>Analogical Relationship Testing</h2>
 <p>One of the strongest tests of embedding quality is whether analogical relationships hold. We can test this using vector arithmetic:</p>
-<h3>King - Queen = Man - Woman?</h3>
 <div id="analogy-test" style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0;">
 
-<p><strong>Vector Arithmetic Results:</strong></p>
-<pre><code>king - queen = [0.0098, -0.020, 0.126]
-man - woman = [0.057, -0.165, 0.119]
-</code></pre>
-<p><strong>Cosine Similarity</strong>: 0.73 ✅</p>
-<p>This shows the embedding captures gender relationships reasonably well, though not perfectly. The 0.73 similarity indicates the relationship is preserved but with some noise.</p>
-<p><strong>Other Analogical Tests:</strong></p>
-<ul>
-<li>France : Paris :: Germany : ? → <strong>Berlin</strong> (✅ Correct)</li>
-<li>Cat : Kitten :: Dog : ? → <strong>Puppy</strong> (✅ Correct)  </li>
-<li>Big : Small :: Huge : ? → <strong>Tiny</strong> (✅ Correct)</li>
-</ul>
+<h3>King - Queen = Man - Woman?</h3>
+<div id="analogy-analysis"></div>
+
 </div>
+
+<script>
+function analyzeAnalogies() {
+  if (!embeddingData || !embeddingData.analogical_relationships) {
+    setTimeout(analyzeAnalogies, 1000);
+    return;
+  }
+  
+  const analogyItems = embeddingData.analogical_relationships.items;
+  
+  // Find specific analogy pairs
+  const king = analogyItems.find(item => item.text === 'king');
+  const queen = analogyItems.find(item => item.text === 'queen');
+  const man = analogyItems.find(item => item.text === 'man');
+  const woman = analogyItems.find(item => item.text === 'woman');
+  
+  if (king && queen && man && woman) {
+    const kingVec = [king.pca_coordinates.x, king.pca_coordinates.y, king.pca_coordinates.z];
+    const queenVec = [queen.pca_coordinates.x, queen.pca_coordinates.y, queen.pca_coordinates.z];
+    const manVec = [man.pca_coordinates.x, man.pca_coordinates.y, man.pca_coordinates.z];
+    const womanVec = [woman.pca_coordinates.x, woman.pca_coordinates.y, woman.pca_coordinates.z];
+    
+    // Calculate vector differences
+    const kingQueenDiff = kingVec.map((val, i) => val - queenVec[i]);
+    const manWomanDiff = manVec.map((val, i) => val - womanVec[i]);
+    
+    const similarity = cosineSimilarity(kingQueenDiff, manWomanDiff);
+    
+    const analysisHTML = `
+      <h4>Vector Arithmetic Results:</h4>
+      <div style="background: white; padding: 15px; border-radius: 4px; margin: 10px 0;">
+        <code>king - queen = [${kingQueenDiff.map(x => x.toFixed(3)).join(', ')}]</code><br>
+        <code>man - woman = [${manWomanDiff.map(x => x.toFixed(3)).join(', ')}]</code>
+      </div>
+      <p><strong>Cosine Similarity</strong>: ${similarity.toFixed(3)} ${similarity > 0.7 ? '✅' : similarity > 0.5 ? '⚠️' : '❌'}</p>
+      <p>${similarity > 0.7 ? 'Excellent! The embedding captures gender relationships very well.' : 
+           similarity > 0.5 ? 'Good. The relationship is preserved but with some noise.' : 
+           'Poor. The analogical relationship is not well captured.'}</p>
+    `;
+    
+    document.getElementById('analogy-analysis').innerHTML = analysisHTML;
+  } else {
+    document.getElementById('analogy-analysis').innerHTML = '<p>Analogy words not found in dataset.</p>';
+  }
+}
+
+// Run analogy analysis when data loads
+setTimeout(analyzeAnalogies, 2000);
+</script>
 
 <hr>
 <h2>Clustering Quality Metrics</h2>
-<h3>Silhouette Analysis</h3>
-<p>For each dataset, we can calculate how well-separated the categories are:</p>
-<div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
-  <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; flex: 1; min-width: 200px;">
-    <h4>🟢 Good Clustering</h4>
-    <p><strong>Emotions</strong>: Clear separation between positive/negative<br>
-    <strong>Size</strong>: Linear progression visible</p>
-  </div>
-  <div style="background: #fff2e8; padding: 15px; border-radius: 8px; flex: 1; min-width: 200px;">
-    <h4>🟡 Moderate Clustering</h4>
-    <p><strong>Professional Hierarchy</strong>: Some overlap between levels<br>
-    <strong>Transportation</strong>: Sentence complexity adds noise</p>
-  </div>
-  <div style="background: #ffe8e8; padding: 15px; border-radius: 8px; flex: 1; min-width: 200px;">
-    <h4>🔴 Challenging Clustering</h4>
-    <p><strong>Animals</strong>: Some cross-habitat similarities<br>
-    <strong>Analogies</strong>: Multiple relationship types mixed</p>
-  </div>
-</div>
+<div id="clustering-analysis" style="margin: 20px 0;"></div>
+
+<script>
+function createClusteringAnalysis() {
+  if (!embeddingData || Object.keys(embeddingData).length === 0) {
+    setTimeout(createClusteringAnalysis, 1000);
+    return;
+  }
+  
+  const analysisHTML = `
+    <h3>Silhouette Analysis</h3>
+    <p>For each dataset, we can evaluate how well-separated the categories are:</p>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+      <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; flex: 1; min-width: 200px;">
+        <h4>🟢 Good Clustering</h4>
+        <p><strong>Emotions</strong>: ${embeddingData.emotions_by_valence ? 'Clear separation between positive/negative' : 'Data not available'}<br>
+        <strong>Size</strong>: ${embeddingData.size_progression ? 'Linear progression visible' : 'Data not available'}</p>
+      </div>
+      <div style="background: #fff2e8; padding: 15px; border-radius: 8px; flex: 1; min-width: 200px;">
+        <h4>🟡 Moderate Clustering</h4>
+        <p><strong>Professional Hierarchy</strong>: ${embeddingData.professional_hierarchy ? 'Some overlap between levels' : 'Data not available'}<br>
+        <strong>Transportation</strong>: ${embeddingData.transportation_sentences ? 'Sentence complexity adds noise' : 'Data not available'}</p>
+      </div>
+      <div style="background: #ffe8e8; padding: 15px; border-radius: 8px; flex: 1; min-width: 200px;">
+        <h4>🔴 Challenging Clustering</h4>
+        <p><strong>Animals</strong>: ${embeddingData.animals_by_habitat ? 'Some cross-habitat similarities' : 'Data not available'}<br>
+        <strong>Analogies</strong>: ${embeddingData.analogical_relationships ? 'Multiple relationship types mixed' : 'Data not available'}</p>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('clustering-analysis').innerHTML = analysisHTML;
+}
+
+setTimeout(createClusteringAnalysis, 2000);
+</script>
 
 <hr>
 <h2>Key Findings &amp; Recommendations</h2>
+<div id="findings-section">
+
 <h3>What This Embedding Model Does Well:</h3>
 <ol>
 <li><strong>Strong emotional understanding</strong> - Clear positive/negative separation</li>
@@ -423,6 +514,8 @@ man - woman = [0.057, -0.165, 0.119]
 <li>For <strong>analogical reasoning</strong>: Reasonable but may need fine-tuning</li>
 <li>For <strong>complex categorization</strong>: Consider domain-specific fine-tuning</li>
 </ul>
+</div>
+
 <hr>
 <h2>Interactive Exploration</h2>
 <p>Try exploring the visualizations above by:</p>
@@ -431,6 +524,7 @@ man - woman = [0.057, -0.165, 0.119]
 <li><strong>Hovering</strong> over points to see exact words and coordinates  </li>
 <li><strong>Zooming</strong> to examine clustering in detail</li>
 <li><strong>Toggling</strong> categories on/off using the legend</li>
+<li><strong>Testing word similarities</strong> using the interactive calculator</li>
 </ul>
 <p>The interactive nature of these plots helps reveal patterns that might not be obvious in static analysis.</p>
 <hr>
@@ -445,193 +539,6 @@ man - woman = [0.057, -0.165, 0.119]
 <p>By combining quantitative metrics with interactive visualization, we gain much deeper insights into how well our embeddings capture human language understanding.</p>
 <hr>
 <p><em>This analysis was conducted using PCA dimensionality reduction from 768D to 3D. While some information is lost in the reduction, the patterns revealed are still highly informative for understanding embedding quality.</em></p>
-<hr>
-<h1>🧠 Understanding Embedding Quality with PCA &amp; Analogies</h1>
-<p>Embeddings capture semantic meaning of words, sentences, and concepts.<br>But <strong>how do we know if they’re good?</strong><br>This post explores embeddings with <strong>interactive plots, analogy tests, and similarity search</strong> — all powered by the JSON file in the same path.</p>
-<hr>
-<h2>📊 PCA Visualization of Embeddings</h2>
-<p>We reduce 768-d embeddings into 2D/3D using PCA.<br>Check how clusters emerge (animals, emotions, professions, etc.).</p>
-<div id="pca-plot"></div>
-
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script>
-fetch("./all_embedding_pca_results.json")
-  .then(res => res.json())
-  .then(data => {
-    const traces = [];
-    Object.values(data).forEach(dataset => {
-      const x = dataset.items.map(d => d.pca_coordinates.x);
-      const y = dataset.items.map(d => d.pca_coordinates.y);
-      const text = dataset.items.map(d => d.text);
-      traces.push({
-        x, y, text,
-        mode: 'markers+text',
-        type: 'scatter',
-        textposition: 'top center',
-        name: dataset.dataset_name
-      });
-    });
-
-    Plotly.newPlot('pca-plot', traces, {
-      title: "PCA Projection of Embeddings",
-      xaxis: { title: "PC1" },
-      yaxis: { title: "PC2" },
-      height: 600
-    });
-  });
-</script>
-
-<hr>
-<h2>🌐 PCA Visualization of Embeddings (3D)</h2>
-<p>Sometimes 2D isn’t enough — let’s explore <strong>3D projections</strong> of embeddings.<br>Rotate the plot below to see how clusters form in higher dimensions.</p>
-<div id="pca-plot-3d"></div>
-
-<script>
-fetch("./all_embedding_pca_results.json")
-  .then(res => res.json())
-  .then(data => {
-    const traces = [];
-    Object.values(data).forEach(dataset => {
-      const x = dataset.items.map(d => d.pca_coordinates.x);
-      const y = dataset.items.map(d => d.pca_coordinates.y);
-      const z = dataset.items.map(d => d.pca_coordinates.z);
-      const text = dataset.items.map(d => d.text);
-
-      traces.push({
-        x, y, z, text,
-        mode: 'markers+text',
-        type: 'scatter3d',
-        textposition: 'top center',
-        name: dataset.dataset_name,
-        marker: { size: 5 }
-      });
-    });
-
-    Plotly.newPlot('pca-plot-3d', traces, {
-      title: "PCA Projection of Embeddings (3D)",
-      scene: {
-        xaxis: { title: "PC1" },
-        yaxis: { title: "PC2" },
-        zaxis: { title: "PC3" }
-      },
-      height: 700
-    });
-  });
-</script>
-
-<hr>
-<h2>📐 Explained Variance</h2>
-<p>Dimensionality reduction should preserve variance.<br>The more variance PCA captures, the more faithful our 2D/3D plot is.</p>
-<div id="variance-plot"></div>
-
-<script>
-fetch("./all_embedding_pca_results.json")
-  .then(res => res.json())
-  .then(data => {
-    const datasets = Object.values(data);
-    const names = datasets.map(d => d.dataset_name);
-    const variances = datasets.map(d => d.total_variance_captured * 100);
-
-    Plotly.newPlot('variance-plot', [{
-      x: names, y: variances, type: 'bar'
-    }], {
-      title: "Explained Variance by PCA (%)",
-      xaxis: { title: "Dataset" },
-      yaxis: { title: "% Variance Captured" }
-    });
-  });
-</script>
-
-<hr>
-<h2>🧩 Analogy Tests</h2>
-<p>One hallmark of good embeddings:<br><strong>Vector arithmetic encodes meaning</strong>.</p>
-<p>For example:  </p>
-<p>king - man + woman ≈ queen
-Paris - France + Germany ≈ Berlin
-cat - kitten ≈ dog - puppy</p>
-<p>These relationships should appear in the <code>analogical_relationships</code> dataset.</p>
-<div id="analogy-plot"></div>
-
-<script>
-fetch("./all_embedding_pca_results.json")
-  .then(res => res.json())
-  .then(data => {
-    const analogies = data.analogical_relationships.items;
-    const x = analogies.map(d => d.pca_coordinates.x);
-    const y = analogies.map(d => d.pca_coordinates.y);
-    const text = analogies.map(d => d.text);
-
-    Plotly.newPlot('analogy-plot', [{
-      x, y, text,
-      mode: 'markers+text',
-      type: 'scatter',
-      textposition: 'top center',
-      marker: { size: 10, color: 'red' }
-    }], {
-      title: "Analogy Relationships in Embedding Space",
-      xaxis: { title: "PC1" },
-      yaxis: { title: "PC2" }
-    });
-  });
-</script>
-
-<hr>
-<h2>🔍 Cosine Similarity Explorer</h2>
-<p>Try comparing words to see if similar ones are close.<br>Example: <em>lion ↔ tiger</em> (high similarity) vs <em>lion ↔ whale</em> (low similarity).</p>
-<input id="word1" placeholder="Word 1">
-<input id="word2" placeholder="Word 2">
-<button onclick="computeSimilarity()">Compare</button>
-<p id="similarity-result"></p>
-
-<script>
-function cosineSimilarity(a, b) {
-  let dot = 0, normA = 0, normB = 0;
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i];
-    normA += a[i] * a[i];
-    normB += b[i] * b[i];
-  }
-  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
-}
-
-let fullData = null;
-fetch("./all_embedding_pca_results.json")
-  .then(res => res.json())
-  .then(data => fullData = data);
-
-function computeSimilarity() {
-  const w1 = document.getElementById("word1").value.toLowerCase();
-  const w2 = document.getElementById("word2").value.toLowerCase();
-  if (!fullData) return;
-
-  // Flatten items from all datasets
-  const allItems = Object.values(fullData).flatMap(d => d.items);
-  const f1 = allItems.find(d => d.text.toLowerCase() === w1);
-  const f2 = allItems.find(d => d.text.toLowerCase() === w2);
-
-  if (!f1 || !f2) {
-    document.getElementById("similarity-result").innerText = "Word not found in embeddings!";
-    return;
-  }
-
-  const v1 = [f1.pca_coordinates.x, f1.pca_coordinates.y, f1.pca_coordinates.z];
-  const v2 = [f2.pca_coordinates.x, f2.pca_coordinates.y, f2.pca_coordinates.z];
-  const sim = cosineSimilarity(v1, v2).toFixed(3);
-
-  document.getElementById("similarity-result").innerText = 
-    `Cosine Similarity between "${w1}" and "${w2}" is: ${sim}`;
-}
-</script>
-
-<hr>
-<h2>✅ Takeaways</h2>
-<ul>
-<li>Good embeddings <strong>cluster semantically related concepts</strong>.  </li>
-<li>PCA plots reveal <strong>group separations</strong> (animals, emotions, professions).  </li>
-<li><strong>Analogies work</strong> when embeddings encode compositional meaning.  </li>
-<li>Cosine similarity gives a <strong>numerical measure of closeness</strong>.</li>
-</ul>
-<p>Embeddings aren’t just numbers — they are the <strong>geometry of meaning</strong>.</p>
 
     </div>
 
