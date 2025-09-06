@@ -2,6 +2,7 @@
 title: embeddinggemma-300m
 date: 2025-09-05
 ---
+<img src="https://tatva.sumityadav.com.np/posts/2025/09/05/embeddinggemma-300m/embed.png" alt="embeddinggemma-300m" width="100%">
 # Understanding Text Embeddings: A Comprehensive Quality Analysis
 
 Text embeddings are one of the most fundamental components of modern NLP systems. But how do we know if our embeddings are actually good? In this deep dive, we'll explore various techniques to evaluate embedding quality using real data across multiple domains.
