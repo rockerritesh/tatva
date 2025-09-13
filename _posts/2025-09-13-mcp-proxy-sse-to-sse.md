@@ -1,9 +1,9 @@
 ---
-title: Implement your own SSE-to-SSE proxy
+title: Implement your own MCP SSE-to-SSE proxy
 date: 2025-09-13
 ---
 
-# Building a Production-Ready SSE-to-SSE Proxy with Advanced Policy Engine
+# Building a Production-Ready MCP SSE-to-SSE Proxy with Advanced Policy Engine
 
 *A deep dive into implementing secure, scalable Server-Sent Events proxying with intelligent tool access control*
 
@@ -11,11 +11,11 @@ date: 2025-09-13
 
 ## 🚀 Introduction: The Challenge of Modern API Proxying
 
-In today's distributed systems landscape, API proxying has evolved far beyond simple request forwarding. Modern applications demand intelligent, secure, and policy-aware proxies that can adapt to complex security requirements while maintaining high performance. This blog post explores the implementation of a sophisticated **SSE-to-SSE proxy** with an advanced **policy enforcement engine** - a solution that bridges the gap between security and functionality in real-time communication systems.
+In today's distributed systems landscape, API proxying has evolved far beyond simple request forwarding. Modern applications demand intelligent, secure, and policy-aware proxies that can adapt to complex security requirements while maintaining high performance. This blog post explores the implementation of a sophisticated MCP **SSE-to-SSE proxy** with an advanced **policy enforcement engine** - a solution that bridges the gap between security and functionality in real-time communication systems.
 
 ### What We Built
 
-We've implemented a production-ready SSE-to-SSE proxy that transforms:
+We've implemented a production-ready MCP SSE-to-SSE proxy that transforms:
 - **Input**: `https://domain.com/sse` 
 - **Output**: `https://sumit.domain.com/sse`
 
