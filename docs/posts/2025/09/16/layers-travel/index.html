@@ -69,471 +69,321 @@
     </header>
 
     <div class="post-content">
-        <hr>
-<h2>layout: post
-title: &quot;3D Layerwise Embedding Evolution: A Journey Through Transformer Representations&quot;
-date: 2025-09-16
-categories: [machine-learning, visualization, transformers]
-tags: [embeddings, neural-networks, pca, 3d-visualization, transformers]
-description: &quot;Interactive 3D visualization showing how transformer embeddings evolve through neural network layers&quot;</h2>
-<h1>3D Layerwise Embedding Evolution</h1>
-<p>This interactive 3D visualization reveals how transformer embeddings evolve through the 25 layers of a neural network. Watch as semantic representations transform from scattered, unstructured patterns in early layers to clearly defined clusters in deeper layers.</p>
-<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.26.0/plotly.min.js"></script>
-
-<div class="visualization-wrapper">
-    <div class="controls-panel">
-        <div class="control-group">
-            <label for="dataset-select">Dataset:</label>
-            <select id="dataset-select">
-                <option value="sentiment_analysis">Sentiment Analysis</option>
-                <option value="academic_subjects">Academic Subjects</option>
-                <option value="scientific_domains">Scientific Domains</option>
-            </select>
-        </div>
-        
-<pre><code>    &lt;div class=&quot;control-group&quot;&gt;
-        &lt;label&gt;
-            &lt;input type=&quot;checkbox&quot; id=&quot;show-trajectories&quot; checked&gt;
-            Show Trajectories
-        &lt;/label&gt;
-    &lt;/div&gt;
-    
-    &lt;div class=&quot;control-group&quot;&gt;
-        &lt;label&gt;
-            &lt;input type=&quot;checkbox&quot; id=&quot;layer-spacing&quot; checked&gt;
-            Enhanced Layer Spacing
-        &lt;/label&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div id=&quot;loading-state&quot; class=&quot;status-message&quot;&gt;
-    Loading 3D visualization...
-&lt;/div&gt;
-
-&lt;div id=&quot;error-state&quot; class=&quot;status-message error&quot; style=&quot;display: none;&quot;&gt;
-    Unable to load visualization data. Please check your connection.
-&lt;/div&gt;
-
-&lt;div id=&quot;plot-3d&quot; style=&quot;width:100%; height:600px; display:none;&quot;&gt;&lt;/div&gt;
-
-&lt;div id=&quot;dataset-info&quot; class=&quot;info-section&quot; style=&quot;display:none;&quot;&gt;
-    &lt;h3&gt;Dataset Statistics&lt;/h3&gt;
-    &lt;div class=&quot;stats-container&quot;&gt;
-        &lt;div class=&quot;stat-item&quot;&gt;
-            &lt;span class=&quot;stat-label&quot;&gt;Total Items:&lt;/span&gt;
-            &lt;span class=&quot;stat-value&quot; id=&quot;total-items&quot;&gt;-&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;stat-item&quot;&gt;
-            &lt;span class=&quot;stat-label&quot;&gt;Categories:&lt;/span&gt;
-            &lt;span class=&quot;stat-value&quot; id=&quot;categories-list&quot;&gt;-&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;stat-item&quot;&gt;
-            &lt;span class=&quot;stat-label&quot;&gt;Layers:&lt;/span&gt;
-            &lt;span class=&quot;stat-value&quot;&gt;25 (L0-L24)&lt;/span&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-</div>
-
-<h2>Understanding the Visualization</h2>
-<h3>3D Structure</h3>
-<ul>
-<li><strong>X-axis (PC1)</strong>: First principal component of embeddings</li>
-<li><strong>Y-axis (PC2)</strong>: Second principal component of embeddings  </li>
-<li><strong>Z-axis</strong>: Layer depth (0-24) through the transformer network</li>
-</ul>
-<h3>Visual Elements</h3>
-<ul>
-<li><strong>Colored Points</strong>: Each category has a distinct color (science/math/literature, positive/negative/neutral, etc.)</li>
-<li><strong>Trajectory Lines</strong>: Faint lines connecting how individual text samples move through embedding space</li>
-<li><strong>Layer Separation</strong>: Vertical spacing shows the progression through network layers</li>
-</ul>
-<h3>Key Observations</h3>
-<h4>Early Layers (0-5)</h4>
-<ul>
-<li>Embeddings appear relatively mixed and unstructured</li>
-<li>Limited semantic separation between categories</li>
-<li>Lower explained variance in PCA components</li>
-</ul>
-<h4>Middle Layers (6-15)</h4>
-<ul>
-<li>Gradual emergence of category-specific clustering</li>
-<li>Increasing separation between semantic groups</li>
-<li>Peak explained variance often occurs in this range</li>
-</ul>
-<h4>Late Layers (16-24)</h4>
-<ul>
-<li>Clear, distinct clusters for each category</li>
-<li>Strong semantic organization</li>
-<li>Stable representational structure</li>
-</ul>
-<h2>Dataset Comparisons</h2>
-<h3>Academic Subjects</h3>
-<p>Categories: Science, Mathematics, Literature</p>
-<ul>
-<li>Mathematics concepts cluster tightly in later layers</li>
-<li>Science topics show broad but consistent grouping  </li>
-<li>Literature maintains distinct semantic space</li>
-</ul>
-<h3>Sentiment Analysis</h3>
-<p>Categories: Positive, Negative, Neutral</p>
-<ul>
-<li>Clear emotional polarity emerges by layer 10-12</li>
-<li>Neutral sentiments occupy intermediate space</li>
-<li>Strong linear separability in final layers</li>
-</ul>
-<h3>Scientific Domains</h3>
-<p>Categories: Astronomy, Biology, Physics</p>
-<ul>
-<li>Domain-specific terminologies create clear boundaries</li>
-<li>Physics and astronomy show some overlap (mathematical concepts)</li>
-<li>Biology maintains distinct biological/life science cluster</li>
-</ul>
-<h2>Technical Implementation</h2>
-<p>The visualization processes 1,800 data points (24 items × 25 layers × 3 datasets) in real-time, applying PCA dimensionality reduction while preserving the temporal evolution through network layers.</p>
-<style>
-.visualization-wrapper {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.controls-panel {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    padding: 15px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-
-.control-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.control-group label {
-    font-weight: 600;
-    color: #495057;
-    font-size: 14px;
-}
-
-.control-group select {
-    padding: 6px 12px;
-    border: 2px solid #dee2e6;
-    border-radius: 6px;
-    background: white;
-    font-size: 14px;
-    min-width: 160px;
-}
-
-.control-group select:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.control-group input[type="checkbox"] {
-    transform: scale(1.2);
-    margin-right: 5px;
-}
-
-.status-message {
-    text-align: center;
-    padding: 40px;
-    font-size: 1.1rem;
-    color: #6c757d;
-    background: rgba(255,255,255,0.8);
-    border-radius: 8px;
-}
-
-.status-message.error {
-    color: #dc3545;
-    background: rgba(248, 215, 218, 0.8);
-}
-
-.info-section {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-
-.info-section h3 {
-    margin-top: 0;
-    color: #495057;
-    font-size: 1.2rem;
-}
-
-.stats-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.stat-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background: white;
-    border-radius: 6px;
-    border-left: 4px solid #667eea;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.stat-label {
-    font-weight: 600;
-    color: #495057;
-    font-size: 0.9rem;
-}
-
-.stat-value {
-    font-weight: 700;
-    color: #667eea;
-    font-size: 1rem;
-}
-
-#plot-3d {
-    background: rgba(255,255,255,0.95);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-</style>
-
-<script>
-let embeddingsData = null;
-let currentDataset = 'academic_subjects';
-
-// Color schemes for each dataset
-const colorSchemes = {
-    sentiment_analysis: {
-        'positive': '#27ae60',
-        'negative': '#e74c3c', 
-        'neutral': '#3498db'
-    },
-    academic_subjects: {
-        'science': '#e74c3c',
-        'mathematics': '#1abc9c',
-        'literature': '#3498db'
-    },
-    scientific_domains: {
-        'astronomy': '#9b59b6',
-        'biology': '#f39c12',
-        'physics': '#e91e63'
-    }
-};
-
-async function loadVisualizationData() {
-    try {
-        const response = await fetch('https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        <h1>Interactive 3D visualization of how neural network embeddings evolve across layers</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Layer-wise Embedding Evolution</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
         }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        select, input[type="file"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #plot {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .info {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e8f4f8;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>3D Layer-wise Embedding Evolution Visualizer</h1>
         
-        embeddingsData = await response.json();
-        
-        document.getElementById('loading-state').style.display = 'none';
-        document.getElementById('plot-3d').style.display = 'block';
-        document.getElementById('dataset-info').style.display = 'block';
-        
-        setupEventListeners();
-        renderVisualization();
-        updateDatasetInfo();
-        
-    } catch (error) {
-        console.error('Failed to load visualization data:', error);
-        document.getElementById('loading-state').style.display = 'none';
-        document.getElementById('error-state').style.display = 'block';
-    }
-}
+<pre><code>    &lt;div class=&quot;controls&quot;&gt;
+        &lt;select id=&quot;datasetSelect&quot; style=&quot;display: none;&quot;&gt;
+            &lt;option value=&quot;&quot;&gt;Select Dataset&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;label&gt;
+            Z-separation: 
+            &lt;input type=&quot;range&quot; id=&quot;zSeparation&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;5&quot; /&gt;
+            &lt;span id=&quot;zValue&quot;&gt;5&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;button id=&quot;loadData&quot;&gt;Load Data&lt;/button&gt;
+        &lt;span id=&quot;loadStatus&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    
+    &lt;div id=&quot;info&quot; class=&quot;info&quot; style=&quot;display: none;&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;plot&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
 
-function setupEventListeners() {
-    document.getElementById('dataset-select').addEventListener('change', function(e) {
-        currentDataset = e.target.value;
-        renderVisualization();
-        updateDatasetInfo();
+&lt;script&gt;
+    let currentData = null;
+    const JSON_FILE_PATH = &#39;https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json&#39;;
+    
+    // Color palette for categories
+    const colors = [
+        &#39;#e41a1c&#39;, &#39;#377eb8&#39;, &#39;#4daf4a&#39;, &#39;#984ea3&#39;, 
+        &#39;#ff7f00&#39;, &#39;#ffff33&#39;, &#39;#a65628&#39;, &#39;#f781bf&#39;
+    ];
+
+    document.getElementById(&#39;loadData&#39;).addEventListener(&#39;click&#39;, loadDataFromFile);
+    document.getElementById(&#39;datasetSelect&#39;).addEventListener(&#39;change&#39;, updateVisualization);
+    document.getElementById(&#39;zSeparation&#39;).addEventListener(&#39;input&#39;, function() {
+        document.getElementById(&#39;zValue&#39;).textContent = this.value;
+        updateVisualization();
     });
-    
-    document.getElementById('show-trajectories').addEventListener('change', renderVisualization);
-    document.getElementById('layer-spacing').addEventListener('change', renderVisualization);
-}
 
-function updateDatasetInfo() {
-    if (!embeddingsData || !embeddingsData[currentDataset]) return;
-    
-    const dataset = embeddingsData[currentDataset];
-    document.getElementById('total-items').textContent = dataset.total_items;
-    document.getElementById('categories-list').textContent = dataset.categories.join(', ');
-}
+    // Load data automatically on page load
+    window.addEventListener(&#39;load&#39;, loadDataFromFile);
 
-function renderVisualization() {
-    if (!embeddingsData || !embeddingsData[currentDataset]) return;
-    
-    const dataset = embeddingsData[currentDataset];
-    const showTrajectories = document.getElementById('show-trajectories').checked;
-    const enhancedSpacing = document.getElementById('layer-spacing').checked;
-    const colors = colorSchemes[currentDataset];
-    
-    // Build trajectory data for each text item
-    const trajectoryMap = {};
-    
-    Object.keys(dataset.layers).forEach(layerKey => {
-        const layerIndex = parseInt(layerKey);
-        const layerData = dataset.layers[layerKey];
+    function loadDataFromFile() {
+        const statusEl = document.getElementById(&#39;loadStatus&#39;);
+        statusEl.textContent = &#39;Loading...&#39;;
+        statusEl.style.color = &#39;orange&#39;;
         
-        layerData.items.forEach((item, itemIndex) => {
-            const uniqueKey = `${item.category}_${itemIndex}`;
-            
-            if (!trajectoryMap[uniqueKey]) {
-                trajectoryMap[uniqueKey] = {
-                    category: item.category,
-                    text: item.text,
-                    coordinates: []
-                };
+        fetch(JSON_FILE_PATH)
+            .then(response =&gt; {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data =&gt; {
+                currentData = data;
+                populateDatasetSelect();
+                updateVisualization();
+                statusEl.textContent = &#39;Data loaded successfully!&#39;;
+                statusEl.style.color = &#39;green&#39;;
+            })
+            .catch(error =&gt; {
+                console.error(&#39;Error loading JSON:&#39;, error);
+                statusEl.textContent = `Error loading data: ${error.message}`;
+                statusEl.style.color = &#39;red&#39;;
+                
+                // Show fallback message
+                document.getElementById(&#39;plot&#39;).innerHTML = `
+                    &lt;div style=&quot;display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;&quot;&gt;
+                        &lt;div style=&quot;text-align: center;&quot;&gt;
+                            &lt;p&gt;❌ Could not load JSON file from: ${JSON_FILE_PATH}&lt;/p&gt;
+                            &lt;p style=&quot;font-size: 14px; color: #999;&quot;&gt;
+                                Make sure the file exists at the specified path and the browser has permission to access it.
+                            &lt;/p&gt;
+                            &lt;p style=&quot;font-size: 12px; color: #ccc;&quot;&gt;
+                                Note: For security reasons, browsers may block local file access. 
+                                Consider running a local web server or hosting the file.
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                `;
+            });
+    }
+
+    function populateDatasetSelect() {
+        const select = document.getElementById(&#39;datasetSelect&#39;);
+        select.innerHTML = &#39;&lt;option value=&quot;&quot;&gt;Select Dataset&lt;/option&gt;&#39;;
+        
+        if (currentData) {
+            // Check if data has multiple datasets
+            const datasetNames = Object.keys(currentData);
+            if (datasetNames.length &gt; 1) {
+                datasetNames.forEach(name =&gt; {
+                    const option = document.createElement(&#39;option&#39;);
+                    option.value = name;
+                    option.textContent = name;
+                    select.appendChild(option);
+                });
+                select.style.display = &#39;block&#39;;
+                select.value = datasetNames[0]; // Select first dataset
+            } else {
+                select.style.display = &#39;none&#39;;
             }
-            
-            trajectoryMap[uniqueKey].coordinates.push({
-                x: item.pca_coordinates.x,
-                y: item.pca_coordinates.y,
-                z: enhancedSpacing ? layerIndex * 120 : layerIndex * 50,
-                layer: layerIndex
-            });
-        });
-    });
-    
-    let plotTraces = [];
-    
-    // Create scatter traces for each category
-    const categoryGroups = {};
-    Object.values(trajectoryMap).forEach(trajectory => {
-        const category = trajectory.category;
-        
-        if (!categoryGroups[category]) {
-            categoryGroups[category] = {
-                x: [], y: [], z: [],
-                text: [], customdata: [],
-                mode: 'markers',
-                type: 'scatter3d',
-                name: category.charAt(0).toUpperCase() + category.slice(1),
-                marker: {
-                    color: colors[category] || '#95a5a6',
-                    size: 5,
-                    opacity: 0.8,
-                    line: { color: 'rgba(0,0,0,0.1)', width: 0.5 }
-                },
-                hovertemplate: '<b>%{text}</b><br>' +
-                             'PC1: %{x:.1f}<br>' +
-                             'PC2: %{y:.1f}<br>' +
-                             'Layer: %{customdata}<br>' +
-                             '<extra></extra>'
-            };
         }
+    }
+
+    function getCurrentDataset() {
+        if (!currentData) return null;
         
-        trajectory.coordinates.forEach(coord => {
-            categoryGroups[category].x.push(coord.x);
-            categoryGroups[category].y.push(coord.y);
-            categoryGroups[category].z.push(coord.z);
-            categoryGroups[category].text.push(trajectory.text);
-            categoryGroups[category].customdata.push(coord.layer);
+        const selectedDataset = document.getElementById(&#39;datasetSelect&#39;).value;
+        
+        if (selectedDataset &amp;&amp; currentData[selectedDataset]) {
+            return currentData[selectedDataset];
+        } else if (currentData.layers) {
+            // Single dataset format
+            return currentData;
+        } else {
+            // Multiple datasets, return first one
+            const firstKey = Object.keys(currentData)[0];
+            return currentData[firstKey];
+        }
+    }
+
+    function updateVisualization() {
+        const dataset = getCurrentDataset();
+        if (!dataset) return;
+
+        const zSeparation = parseInt(document.getElementById(&#39;zSeparation&#39;).value);
+        
+        // Update info
+        const info = document.getElementById(&#39;info&#39;);
+        info.style.display = &#39;block&#39;;
+        info.innerHTML = `
+            &lt;strong&gt;Dataset:&lt;/strong&gt; ${dataset.dataset_name || &#39;Unknown&#39;} | 
+            &lt;strong&gt;Description:&lt;/strong&gt; ${dataset.description || &#39;N/A&#39;} | 
+            &lt;strong&gt;Total Items:&lt;/strong&gt; ${dataset.total_items || &#39;N/A&#39;} | 
+            &lt;strong&gt;Layers:&lt;/strong&gt; ${dataset.num_layers || Object.keys(dataset.layers).length}
+        `;
+
+        // Prepare data for plotting
+        const traces = [];
+        const categories = dataset.categories || [];
+        const categoryColors = {};
+        categories.forEach((cat, i) =&gt; {
+            categoryColors[cat] = colors[i % colors.length];
         });
-    });
-    
-    plotTraces = Object.values(categoryGroups);
-    
-    // Add trajectory lines if enabled
-    if (showTrajectories) {
-        Object.values(trajectoryMap).forEach((trajectory, index) => {
-            const coords = trajectory.coordinates;
-            plotTraces.push({
-                x: coords.map(c => c.x),
-                y: coords.map(c => c.y),
-                z: coords.map(c => c.z),
-                mode: 'lines',
-                type: 'scatter3d',
-                line: {
-                    color: colors[trajectory.category] || '#95a5a6',
-                    width: 2,
-                    opacity: 0.4
-                },
-                showlegend: false,
-                hoverinfo: 'none'
+
+        // Create traces for each category
+        categories.forEach(category =&gt; {
+            const x = [], y = [], z = [], text = [], layer_info = [];
+            
+            Object.entries(dataset.layers).forEach(([layerStr, layerData]) =&gt; {
+                const layerIdx = parseInt(layerStr);
+                const zLevel = layerIdx * zSeparation;
+                
+                layerData.items.forEach(item =&gt; {
+                    if (item.category === category) {
+                        x.push(item.pca_coordinates.x);
+                        y.push(item.pca_coordinates.y);
+                        z.push(zLevel);
+                        text.push(`${item.text}&lt;br&gt;Category: ${item.category}&lt;br&gt;Layer: ${layerIdx}`);
+                        layer_info.push(layerIdx);
+                    }
+                });
             });
+
+            if (x.length &gt; 0) {
+                traces.push({
+                    x: x,
+                    y: y,
+                    z: z,
+                    text: text,
+                    type: &#39;scatter3d&#39;,
+                    mode: &#39;markers&#39;,
+                    name: category,
+                    marker: {
+                        size: 6,
+                        color: categoryColors[category],
+                        opacity: 0.8,
+                        line: {
+                            color: &#39;black&#39;,
+                            width: 0.5
+                        }
+                    },
+                    hovertemplate: &#39;%{text}&lt;extra&gt;&lt;/extra&gt;&#39;
+                });
+            }
+        });
+
+        // Add trajectory lines for same text across layers
+        const textTrajectories = {};
+        Object.entries(dataset.layers).forEach(([layerStr, layerData]) =&gt; {
+            const layerIdx = parseInt(layerStr);
+            const zLevel = layerIdx * zSeparation;
+            
+            layerData.items.forEach(item =&gt; {
+                if (!textTrajectories[item.text]) {
+                    textTrajectories[item.text] = {
+                        x: [], y: [], z: [], 
+                        category: item.category
+                    };
+                }
+                textTrajectories[item.text].x.push(item.pca_coordinates.x);
+                textTrajectories[item.text].y.push(item.pca_coordinates.y);
+                textTrajectories[item.text].z.push(zLevel);
+            });
+        });
+
+        // Add trajectory lines
+        Object.values(textTrajectories).forEach((traj, i) =&gt; {
+            if (traj.x.length &gt; 1) {
+                traces.push({
+                    x: traj.x,
+                    y: traj.y,
+                    z: traj.z,
+                    type: &#39;scatter3d&#39;,
+                    mode: &#39;lines&#39;,
+                    name: &#39;&#39;,
+                    showlegend: false,
+                    line: {
+                        color: categoryColors[traj.category],
+                        width: 2,
+                        opacity: 0.3
+                    },
+                    hoverinfo: &#39;skip&#39;
+                });
+            }
+        });
+
+        const layout = {
+            title: `3D Layer-wise Embedding Evolution: ${dataset.dataset_name || &#39;Dataset&#39;}`,
+            scene: {
+                xaxis: { title: &#39;PC1&#39; },
+                yaxis: { title: &#39;PC2&#39; },
+                zaxis: { title: &#39;Layer Index&#39; },
+                camera: {
+                    eye: { x: 1.5, y: 1.5, z: 1.5 }
+                }
+            },
+            margin: { l: 0, r: 0, b: 0, t: 40 },
+            legend: {
+                x: 0,
+                y: 1
+            }
+        };
+
+        Plotly.newPlot(&#39;plot&#39;, traces, layout, {
+            responsive: true,
+            displayModeBar: true
         });
     }
-    
-    const layout = {
-        title: {
-            text: `3D Layer-wise Embedding Evolution: ${dataset.description}`,
-            font: { size: 16, color: '#2c3e50' }
-        },
-        scene: {
-            xaxis: { 
-                title: 'PC1',
-                gridcolor: 'rgba(128,128,128,0.3)',
-                backgroundcolor: 'rgba(240,240,240,0.1)'
-            },
-            yaxis: { 
-                title: 'PC2',
-                gridcolor: 'rgba(128,128,128,0.3)',
-                backgroundcolor: 'rgba(240,240,240,0.1)'
-            },
-            zaxis: { 
-                title: 'Layer Index',
-                gridcolor: 'rgba(128,128,128,0.3)',
-                backgroundcolor: 'rgba(240,240,240,0.1)'
-            },
-            camera: {
-                eye: { x: 1.8, y: 1.8, z: 1.2 },
-                center: { x: 0, y: 0, z: 0.3 }
-            },
-            aspectmode: 'manual',
-            aspectratio: { x: 1, y: 1, z: 0.8 },
-            bgcolor: 'rgba(248,249,250,0.8)'
-        },
-        showlegend: true,
-        legend: {
-            x: 0.02,
-            y: 0.98,
-            bgcolor: 'rgba(255,255,255,0.95)',
-            bordercolor: 'rgba(0,0,0,0.1)',
-            borderwidth: 1
-        },
-        margin: { l: 0, r: 0, t: 40, b: 0 },
-        paper_bgcolor: 'rgba(0,0,0,0)'
-    };
-    
-    const config = {
-        responsive: true,
-        displayModeBar: true,
-        modeBarButtonsToRemove: ['pan2d', 'select2d', 'lasso2d'],
-        displaylogo: false
-    };
-    
-    Plotly.newPlot('plot-3d', plotTraces, layout, config);
-}
 
-// Initialize visualization when page loads
-document.addEventListener('DOMContentLoaded', loadVisualizationData);
-</script>
-
-<h2>Research Implications</h2>
-<p>This 3D visualization demonstrates several key principles of transformer architectures:</p>
-<ol>
-<li><strong>Hierarchical Representation Learning</strong>: Early layers capture surface-level patterns while deeper layers develop semantic understanding</li>
-<li><strong>Emergent Clustering</strong>: Categories naturally separate without explicit supervision</li>
-<li><strong>Representation Stability</strong>: Final layers show consistent, structured embeddings suitable for downstream tasks</li>
-</ol>
-<p>The ability to visualize this transformation provides insights into why transformer models are so effective at natural language understanding tasks - they automatically develop meaningful semantic representations through their layered architecture.</p>
+    // Instructions for user
+    if (!currentData) {
+        document.getElementById(&#39;plot&#39;).innerHTML = `
+            &lt;div style=&quot;display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;&quot;&gt;
+                &lt;div style=&quot;text-align: center;&quot;&gt;
+                    &lt;p&gt;Loading data from: ${JSON_FILE_PATH}&lt;/p&gt;
+                    &lt;p style=&quot;font-size: 14px; color: #999;&quot;&gt;
+                        Click &quot;Load Data&quot; if the data doesn&#39;t load automatically
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        `;
+    }
+&lt;/script&gt;
+</code></pre>
+</body>
 
     </div>
 
