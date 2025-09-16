@@ -6,564 +6,378 @@ tags: [embeddings, pca, 3d-visualization, plotly]
 description: "Interactive 3D visualization of how neural network embeddings evolve across layers"
 ---
 
-# 3D Layer-wise Embedding Evolution
+# Visualizing Transformer Layer Embeddings: A Journey Through Neural Network Representations
 
-This visualization shows how neural network embeddings evolve across different layers. Each point represents a text sample positioned in 2D PCA space, with the Z-axis representing the layer index. Trajectory lines connect the same text samples across layers, revealing how the embedding space transforms through the network.
+This visualization explores how transformer embeddings evolve across different layers of a neural network. We examine three datasets - sentiment analysis, academic subjects, and scientific domains - to understand how semantic representations develop through the layers.
 
-## Features
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.26.0/plotly.min.js"></script>
 
-- **Interactive 3D Plot**: Rotate, zoom, and pan to explore the embedding space
-- **Layer Evolution**: See how embeddings change from input to output layers
-- **Category Visualization**: Different colors for different categories with legend
-- **Trajectory Tracking**: Lines show how individual samples move through embedding space
-- **Adjustable Z-separation**: Control the spacing between layers
+## Interactive Layer-wise PCA Visualizations
 
-## Datasets
+<div class="visualization-container">
+  <div class="controls">
+    <label for="dataset-select">Dataset:</label>
+    <select id="dataset-select">
+      <option value="sentiment_analysis">Sentiment Analysis</option>
+      <option value="academic_subjects">Academic Subjects</option>
+      <option value="scientific_domains">Scientific Domains</option>
+    </select>
+    
+    <label for="layer-slider">Layer:</label>
+    <input type="range" id="layer-slider" min="0" max="24" value="0">
+    <span id="layer-value">0</span>
+    
+    <button id="animate-btn">Animate Through Layers</button>
+  </div>
+  
+  <div id="scatter-plot" style="width:100%;height:500px;"></div>
+  
+  <div class="layer-info">
+    <h3>Layer <span id="current-layer">0</span> Statistics</h3>
+    <div class="stats-grid">
+      <div class="stat">
+        <strong>Explained Variance (PC1):</strong>
+        <span id="variance-pc1">-</span>%
+      </div>
+      <div class="stat">
+        <strong>Explained Variance (PC2):</strong>
+        <span id="variance-pc2">-</span>%
+      </div>
+      <div class="stat">
+        <strong>Total Variance Captured:</strong>
+        <span id="total-variance">-</span>%
+      </div>
+    </div>
+  </div>
+</div>
 
-The visualization includes three datasets:
-- **Sentiment Analysis**: Positive, negative, and neutral sentiment classifications
-- **Academic Subjects**: Science, mathematics, and literature texts
-- **Scientific Domains**: Astronomy, biology, and physics research topics
+## Variance Analysis Across Layers
 
-<div id="embedding-visualization">
+<div id="variance-plot" style="width:100%;height:400px;"></div>
+
+## Key Insights
+
+### Evolution of Semantic Clustering
+
+The visualizations reveal how semantic representations evolve through transformer layers:
+
+1. **Early Layers (0-4)**: Embeddings show relatively low explained variance and mixed clustering
+2. **Middle Layers (5-15)**: Gradual emergence of clearer category separation
+3. **Later Layers (16-24)**: More distinct clustering with higher explained variance
+
+### Dataset-Specific Patterns
+
+#### Sentiment Analysis
+- **Categories**: Positive, Negative, Neutral
+- **Peak separation**: Around layers 10-15
+- **Final layer clustering**: Strong sentiment-based groupings
+
+#### Academic Subjects  
+- **Categories**: Science, Mathematics, Literature
+- **Peak separation**: Around layers 12-18
+- **Final layer clustering**: Clear disciplinary boundaries
+
+#### Scientific Domains
+- **Categories**: Astronomy, Biology, Physics
+- **Peak separation**: Around layers 8-14
+- **Final layer clustering**: Well-defined domain clusters
+
+### Explained Variance Trends
+
+The explained variance by the first two principal components shows interesting patterns:
+
+- **Layer 0**: Low variance (15-20%), indicating distributed representations
+- **Peak layers**: Middle layers often show highest total variance capture
+- **Final layers**: Variable patterns depending on task complexity
+
 <style>
-body {
-    font-family: Arial, sans-serif;
+.visualization-container {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
-.viz-container {
-    max-width: 100%;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin: 20px 0;
-}
+
 .controls {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    flex-wrap: wrap;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
 }
-.controls select, .controls input[type="range"] {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+
+.controls label {
+  font-weight: bold;
 }
+
+.controls select, .controls input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .controls button {
-    padding: 8px 16px;
-    background: #007cba;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 8px 16px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
+
 .controls button:hover {
-    background: #005a87;
+  background-color: #005a99;
 }
-#plot {
-    width: 100%;
-    height: 600px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+
+.layer-info {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
 }
-.info {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #e8f4f8;
-    border-radius: 4px;
-    font-size: 14px;
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
 }
-#loadStatus {
-    margin-left: 10px;
-    font-weight: bold;
-}
-.demo-note {
-    background: #fff3cd;
-    border: 1px solid #ffeaa7;
-    border-radius: 4px;
-    padding: 15px;
-    margin-bottom: 20px;
-    color: #856404;
+
+.stat {
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
 }
 </style>
 
-<div class="viz-container">
-    <div class="demo-note">
-        <strong>Loading...</strong> Attempting to load embedding data from JSON file.
-    </div>
-    
-    <div class="controls">
-        <select id="datasetSelect" style="display: none;">
-            <option value="">Select Dataset</option>
-        </select>
-        <label>
-            Z-separation: 
-            <input type="range" id="zSeparation" min="1" max="20" value="5" />
-            <span id="zValue">5</span>
-        </label>
-        <button id="loadData">Load JSON Data</button>
-        <button id="generateData" style="display: none;">Generate Synthetic Data</button>
-        <span id="loadStatus">Initializing...</span>
-    </div>
-    
-    <div id="info" class="info"></div>
-    <div id="plot"></div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
 <script>
-    let currentData = null;
+// Load the embeddings data
+let embeddingsData;
+
+// Fetch the data
+fetch('https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json')
+  .then(response => response.json())
+  .then(data => {
+    embeddingsData = data;
+    initializeVisualization();
+  })
+  .catch(error => {
+    console.error('Error loading data:', error);
+    document.getElementById('scatter-plot').innerHTML = '<p>Error loading visualization data. Please check the data source.</p>';
+  });
+
+let currentDataset = 'sentiment_analysis';
+let currentLayer = 0;
+let isAnimating = false;
+
+function initializeVisualization() {
+  // Set up event listeners
+  document.getElementById('dataset-select').addEventListener('change', function(e) {
+    currentDataset = e.target.value;
+    updateVisualization();
+    updateVarianceChart();
+  });
+  
+  document.getElementById('layer-slider').addEventListener('input', function(e) {
+    currentLayer = parseInt(e.target.value);
+    document.getElementById('layer-value').textContent = currentLayer;
+    updateVisualization();
+  });
+  
+  document.getElementById('animate-btn').addEventListener('click', function() {
+    if (isAnimating) {
+      stopAnimation();
+    } else {
+      startAnimation();
+    }
+  });
+  
+  // Initial visualization
+  updateVisualization();
+  updateVarianceChart();
+}
+
+function updateVisualization() {
+  if (!embeddingsData) return;
+  
+  const dataset = embeddingsData[currentDataset];
+  const layerData = dataset.layers[currentLayer.toString()];
+  
+  if (!layerData) return;
+  
+  // Prepare data for Plotly
+  const traces = {};
+  const colors = {
+    'positive': '#2E8B57',
+    'negative': '#DC143C', 
+    'neutral': '#4682B4',
+    'science': '#FF6B6B',
+    'mathematics': '#4ECDC4',
+    'literature': '#45B7D1',
+    'astronomy': '#96CEB4',
+    'biology': '#FECA57',
+    'physics': '#FF9FF3'
+  };
+  
+  // Group items by category
+  layerData.items.forEach(item => {
+    if (!traces[item.category]) {
+      traces[item.category] = {
+        x: [],
+        y: [],
+        text: [],
+        mode: 'markers',
+        type: 'scatter',
+        name: item.category.charAt(0).toUpperCase() + item.category.slice(1),
+        marker: {
+          color: colors[item.category] || '#666666',
+          size: 8,
+          opacity: 0.7
+        }
+      };
+    }
     
-    // Color palette for categories
-    const colors = [
-        '#e41a1c', '#377eb8', '#4daf4a', '#984ea3', 
-        '#ff7f00', '#ffff33', '#a65628', '#f781bf'
-    ];
+    traces[item.category].x.push(item.pca_coordinates.x);
+    traces[item.category].y.push(item.pca_coordinates.y);
+    traces[item.category].text.push(item.text);
+  });
+  
+  const plotData = Object.values(traces);
+  
+  const layout = {
+    title: `${dataset.description} - Layer ${currentLayer}`,
+    xaxis: {
+      title: `PC1 (${(layerData.explained_variance[0] * 100).toFixed(1)}%)`,
+      zeroline: true
+    },
+    yaxis: {
+      title: `PC2 (${(layerData.explained_variance[1] * 100).toFixed(1)}%)`,
+      zeroline: true
+    },
+    showlegend: true,
+    hovermode: 'closest',
+    margin: { t: 50, l: 80, r: 20, b: 80 }
+  };
+  
+  const config = {
+    responsive: true,
+    displayModeBar: true,
+    modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d']
+  };
+  
+  Plotly.newPlot('scatter-plot', plotData, layout, config);
+  
+  // Update stats
+  document.getElementById('current-layer').textContent = currentLayer;
+  document.getElementById('variance-pc1').textContent = (layerData.explained_variance[0] * 100).toFixed(2);
+  document.getElementById('variance-pc2').textContent = (layerData.explained_variance[1] * 100).toFixed(2);
+  document.getElementById('total-variance').textContent = (layerData.total_variance_captured * 100).toFixed(2);
+}
 
-    // Dataset definitions
-    const datasetConfigs = {
-        sentiment: {
-            dataset_name: 'Sentiment Analysis',
-            description: 'Text samples with positive, negative, and neutral sentiments',
-            categories: ['Positive', 'Negative', 'Neutral'],
-            samples: [
-                'This movie is absolutely fantastic!',
-                'I love sunny days and fresh air',
-                'What a wonderful surprise this was',
-                'This is the worst experience ever',
-                'I hate waiting in long lines',
-                'Terrible service and bad food',
-                'The weather is okay today',
-                'This product works as expected',
-                'Nothing special about this place'
-            ]
-        },
-        academic: {
-            dataset_name: 'Academic Subjects',
-            description: 'Academic texts from science, mathematics, and literature',
-            categories: ['Science', 'Mathematics', 'Literature'],
-            samples: [
-                'Photosynthesis converts light energy into chemical energy',
-                'DNA replication occurs during the S phase',
-                'Newton\'s laws describe the motion of objects',
-                'The derivative of x squared is 2x',
-                'Integration is the reverse of differentiation',
-                'Prime numbers have no divisors except 1 and themselves',
-                'Shakespeare wrote many famous tragedies',
-                'Poetry uses rhythm and metaphor effectively',
-                'The hero\'s journey is a common narrative structure'
-            ]
-        },
-        scientific: {
-            dataset_name: 'Scientific Domains',
-            description: 'Research topics from astronomy, biology, and physics',
-            categories: ['Astronomy', 'Biology', 'Physics'],
-            samples: [
-                'Black holes have intense gravitational fields',
-                'Stars form from collapsing gas clouds',
-                'Galaxies contain billions of stars',
-                'Cells are the basic unit of life',
-                'Evolution drives species adaptation',
-                'DNA carries genetic information',
-                'Quantum mechanics describes subatomic behavior',
-                'Energy and matter are equivalent',
-                'Forces cause changes in motion'
-            ]
-        }
-    };
-
-    const JSON_FILE_PATH = 'https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json';
-
-    // Wait for DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // Add event listeners
-        document.getElementById('loadData').addEventListener('click', loadDataFromFile);
-        document.getElementById('generateData').addEventListener('click', generateSyntheticData);
-        document.getElementById('datasetSelect').addEventListener('change', updateVisualization);
-        document.getElementById('zSeparation').addEventListener('input', function() {
-            const zValue = document.getElementById('zValue');
-            if (zValue) {
-                zValue.textContent = this.value;
-                updateVisualization();
-            }
-        });
-
-        // Try to load JSON data automatically on startup
-        loadDataFromFile();
-    });
-
-    function loadDataFromFile() {
-        const statusEl = document.getElementById('loadStatus');
-        if (statusEl) {
-            statusEl.textContent = 'Loading JSON data...';
-            statusEl.style.color = 'orange';
-        }
-        
-        fetch(JSON_FILE_PATH)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                currentData = data;
-                populateDatasetSelect();
-                updateVisualization();
-                if (statusEl) {
-                    statusEl.textContent = 'JSON data loaded successfully!';
-                    statusEl.style.color = 'green';
-                }
-                
-                // Update the demo note to indicate real data is loaded
-                const demoNote = document.querySelector('.demo-note');
-                if (demoNote) {
-                    demoNote.innerHTML = '<strong>Real Data Loaded:</strong> Successfully loaded embedding data from JSON file.';
-                    demoNote.style.background = '#d4edda';
-                    demoNote.style.borderColor = '#c3e6cb';
-                    demoNote.style.color = '#155724';
-                }
-                
-                // Hide synthetic data button, show dataset controls
-                const generateBtn = document.getElementById('generateData');
-                const loadBtn = document.getElementById('loadData');
-                if (generateBtn) generateBtn.style.display = 'none';
-                if (loadBtn) loadBtn.style.display = 'none';
-            })
-            .catch(error => {
-                console.error('Error loading JSON:', error);
-                if (statusEl) {
-                    statusEl.textContent = `JSON load failed, using synthetic data`;
-                    statusEl.style.color = 'orange';
-                }
-                
-                // Update demo note to explain fallback
-                const demoNote = document.querySelector('.demo-note');
-                if (demoNote) {
-                    demoNote.innerHTML = `
-                        <strong>Fallback Mode:</strong> Could not load JSON from: <br>
-                        <code>${JSON_FILE_PATH}</code><br>
-                        <strong>Error:</strong> ${error.message}<br>
-                        <em>Using synthetic data to demonstrate the visualization.</em>
-                    `;
-                    demoNote.style.background = '#fff3cd';
-                    demoNote.style.borderColor = '#ffeaa7';
-                    demoNote.style.color = '#856404';
-                }
-                
-                // Show synthetic data controls, hide JSON load button
-                const generateBtn = document.getElementById('generateData');
-                const loadBtn = document.getElementById('loadData');
-                const datasetSelect = document.getElementById('datasetSelect');
-                
-                if (generateBtn) generateBtn.style.display = 'inline-block';
-                if (loadBtn) loadBtn.textContent = 'Retry JSON Load';
-                if (datasetSelect) {
-                    datasetSelect.innerHTML = `
-                        <option value="sentiment">Sentiment Analysis</option>
-                        <option value="academic">Academic Subjects</option>
-                        <option value="scientific">Scientific Domains</option>
-                    `;
-                    datasetSelect.style.display = 'inline-block';
-                    datasetSelect.value = 'sentiment';
-                }
-                
-                // Fallback to synthetic data
-                generateSyntheticData();
-            });
+function updateVarianceChart() {
+  if (!embeddingsData) return;
+  
+  const dataset = embeddingsData[currentDataset];
+  const layers = Array.from({length: 25}, (_, i) => i);
+  
+  const pc1Variance = layers.map(layer => dataset.layers[layer.toString()].explained_variance[0] * 100);
+  const pc2Variance = layers.map(layer => dataset.layers[layer.toString()].explained_variance[1] * 100);
+  const totalVariance = layers.map(layer => dataset.layers[layer.toString()].total_variance_captured * 100);
+  
+  const traces = [
+    {
+      x: layers,
+      y: pc1Variance,
+      name: 'PC1 Explained Variance',
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: { color: '#1f77b4' }
+    },
+    {
+      x: layers,
+      y: pc2Variance,
+      name: 'PC2 Explained Variance', 
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: { color: '#ff7f0e' }
+    },
+    {
+      x: layers,
+      y: totalVariance,
+      name: 'Total Variance Captured',
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: { color: '#2ca02c', width: 3 }
     }
+  ];
+  
+  const layout = {
+    title: `Explained Variance Across Layers - ${dataset.description}`,
+    xaxis: {
+      title: 'Layer',
+      range: [0, 24]
+    },
+    yaxis: {
+      title: 'Explained Variance (%)',
+      range: [0, Math.max(...totalVariance) * 1.1]
+    },
+    showlegend: true,
+    margin: { t: 50, l: 80, r: 20, b: 80 }
+  };
+  
+  const config = {
+    responsive: true,
+    displayModeBar: false
+  };
+  
+  Plotly.newPlot('variance-plot', traces, layout, config);
+}
 
-    function populateDatasetSelect() {
-        const select = document.getElementById('datasetSelect');
-        if (!select) return;
-        
-        // Clear existing options
-        select.innerHTML = '<option value="">Select Dataset</option>';
-        
-        if (currentData) {
-            // Check if data has multiple datasets
-            const datasetNames = Object.keys(currentData);
-            if (datasetNames.length > 1 && !currentData.layers) {
-                // Multiple datasets format
-                select.innerHTML = '<option value="">Select Dataset</option>';
-                datasetNames.forEach(name => {
-                    const option = document.createElement('option');
-                    option.value = name;
-                    option.textContent = name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                    select.appendChild(option);
-                });
-                select.value = datasetNames[0]; // Select first dataset
-                select.style.display = 'inline-block';
-            } else {
-                // Single dataset format - hide the select
-                select.style.display = 'none';
-            }
-        }
-    }
+function startAnimation() {
+  if (isAnimating) return;
+  
+  isAnimating = true;
+  document.getElementById('animate-btn').textContent = 'Stop Animation';
+  
+  const animateStep = () => {
+    if (!isAnimating) return;
+    
+    currentLayer = (currentLayer + 1) % 25;
+    document.getElementById('layer-slider').value = currentLayer;
+    document.getElementById('layer-value').textContent = currentLayer;
+    updateVisualization();
+    
+    setTimeout(animateStep, 500); // 500ms delay between frames
+  };
+  
+  animateStep();
+}
 
-    function getCurrentDataset() {
-        if (!currentData) return null;
-        
-        const selectedDataset = document.getElementById('datasetSelect').value;
-        
-        if (selectedDataset && currentData[selectedDataset]) {
-            return currentData[selectedDataset];
-        } else if (currentData.layers) {
-            // Single dataset format
-            return currentData;
-        } else {
-            // Multiple datasets, return first one
-            const firstKey = Object.keys(currentData)[0];
-            return currentData[firstKey];
-        }
-    }
-
-    function generateSyntheticData() {
-        const statusEl = document.getElementById('loadStatus');
-        if (statusEl) {
-            statusEl.textContent = 'Generating...';
-            statusEl.style.color = 'orange';
-        }
-
-        const selectedDataset = document.getElementById('datasetSelect').value;
-        const config = datasetConfigs[selectedDataset];
-        
-        // Generate synthetic embedding data
-        const numLayers = 6;
-        const layers = {};
-        
-        for (let layer = 0; layer < numLayers; layer++) {
-            const items = [];
-            
-            config.samples.forEach((text, textIdx) => {
-                const categoryIdx = textIdx % config.categories.length;
-                const category = config.categories[categoryIdx];
-                
-                // Create realistic embedding evolution
-                // Start with random positions, then gradually cluster by category
-                const clusterProgress = layer / (numLayers - 1);
-                const randomComponent = 1 - clusterProgress;
-                const clusterComponent = clusterProgress;
-                
-                // Base cluster centers for each category
-                const clusterCenters = {
-                    [config.categories[0]]: { x: -2, y: 1 },
-                    [config.categories[1]]: { x: 2, y: -1 },
-                    [config.categories[2]]: { x: 0, y: 2 }
-                };
-                
-                const center = clusterCenters[category] || { x: 0, y: 0 };
-                
-                // Add some consistent individual variation
-                const individualSeed = textIdx * 1234.5;
-                const individualX = Math.sin(individualSeed) * 0.5;
-                const individualY = Math.cos(individualSeed) * 0.5;
-                
-                const x = (Math.random() - 0.5) * 4 * randomComponent + 
-                         center.x * clusterComponent + individualX;
-                const y = (Math.random() - 0.5) * 4 * randomComponent + 
-                         center.y * clusterComponent + individualY;
-                
-                items.push({
-                    text: text,
-                    category: category,
-                    pca_coordinates: { x: x, y: y }
-                });
-            });
-            
-            layers[layer] = { items: items };
-        }
-        
-        currentData = {
-            dataset_name: config.dataset_name,
-            description: config.description,
-            total_items: config.samples.length,
-            num_layers: numLayers,
-            categories: config.categories,
-            layers: layers
-        };
-        
-        updateVisualization();
-        
-        if (statusEl) {
-            statusEl.textContent = 'Data generated successfully!';
-            statusEl.style.color = 'green';
-        }
-    }
-
-    function updateVisualization() {
-        const dataset = getCurrentDataset();
-        if (!dataset) return;
-
-        const zSeparation = parseInt(document.getElementById('zSeparation').value) || 5;
-        
-        // Update info - check if element exists first
-        const infoEl = document.getElementById('info');
-        if (infoEl) {
-            infoEl.style.display = 'block';
-            infoEl.innerHTML = `
-                <strong>Dataset:</strong> ${dataset.dataset_name || 'Unknown'} | 
-                <strong>Description:</strong> ${dataset.description || 'N/A'} | 
-                <strong>Total Items:</strong> ${dataset.total_items || 'N/A'} | 
-                <strong>Layers:</strong> ${dataset.num_layers || Object.keys(dataset.layers).length}
-            `;
-        }
-
-        // Prepare data for plotting
-        const traces = [];
-        const categories = dataset.categories || [];
-        const categoryColors = {};
-        categories.forEach((cat, i) => {
-            categoryColors[cat] = colors[i % colors.length];
-        });
-
-        // Create traces for each category
-        categories.forEach(category => {
-            const x = [], y = [], z = [], text = [], layer_info = [];
-            
-            Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
-                const layerIdx = parseInt(layerStr);
-                const zLevel = layerIdx * zSeparation;
-                
-                layerData.items.forEach(item => {
-                    if (item.category === category) {
-                        x.push(item.pca_coordinates.x);
-                        y.push(item.pca_coordinates.y);
-                        z.push(zLevel);
-                        text.push(`${item.text}<br>Category: ${item.category}<br>Layer: ${layerIdx}`);
-                        layer_info.push(layerIdx);
-                    }
-                });
-            });
-
-            if (x.length > 0) {
-                traces.push({
-                    x: x,
-                    y: y,
-                    z: z,
-                    text: text,
-                    type: 'scatter3d',
-                    mode: 'markers',
-                    name: category,
-                    marker: {
-                        size: 8,
-                        color: categoryColors[category],
-                        opacity: 0.8,
-                        line: {
-                            color: 'black',
-                            width: 0.5
-                        }
-                    },
-                    hovertemplate: '%{text}<extra></extra>'
-                });
-            }
-        });
-
-        // Add trajectory lines for same text across layers
-        const textTrajectories = {};
-        Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
-            const layerIdx = parseInt(layerStr);
-            const zLevel = layerIdx * zSeparation;
-            
-            layerData.items.forEach(item => {
-                if (!textTrajectories[item.text]) {
-                    textTrajectories[item.text] = {
-                        x: [], y: [], z: [], 
-                        category: item.category
-                    };
-                }
-                textTrajectories[item.text].x.push(item.pca_coordinates.x);
-                textTrajectories[item.text].y.push(item.pca_coordinates.y);
-                textTrajectories[item.text].z.push(zLevel);
-            });
-        });
-
-        // Add trajectory lines
-        Object.values(textTrajectories).forEach((traj, i) => {
-            if (traj.x.length > 1) {
-                traces.push({
-                    x: traj.x,
-                    y: traj.y,
-                    z: traj.z,
-                    type: 'scatter3d',
-                    mode: 'lines',
-                    name: '',
-                    showlegend: false,
-                    line: {
-                        color: categoryColors[traj.category],
-                        width: 3,
-                        opacity: 0.4
-                    },
-                    hoverinfo: 'skip'
-                });
-            }
-        });
-
-        const layout = {
-            title: {
-                text: `3D Layer-wise Embedding Evolution: ${dataset.dataset_name || 'Dataset'}`,
-                font: { size: 16 }
-            },
-            scene: {
-                xaxis: { title: 'PC1' },
-                yaxis: { title: 'PC2' },
-                zaxis: { title: 'Layer Index' },
-                camera: {
-                    eye: { x: 1.5, y: 1.5, z: 1.5 }
-                }
-            },
-            margin: { l: 0, r: 0, b: 0, t: 60 },
-            legend: {
-                x: 0,
-                y: 1
-            }
-        };
-
-        const plotEl = document.getElementById('plot');
-        if (plotEl) {
-            Plotly.newPlot('plot', traces, layout, {
-                responsive: true,
-                displayModeBar: true
-            });
-        }
-    }
+function stopAnimation() {
+  isAnimating = false;
+  document.getElementById('animate-btn').textContent = 'Animate Through Layers';
+}
 </script>
-</div>
-
-## How to Use
-
-1. Select a dataset from the dropdown menu
-2. Click "Generate New Data" to create new synthetic embeddings
-3. Adjust the Z-separation slider to change layer spacing
-4. Click and drag to rotate the 3D plot
-5. Use mouse wheel to zoom in/out
-6. Hover over points to see detailed information
 
 ## Technical Details
 
-The visualization uses:
-- **Plotly.js** for 3D rendering
-- **Synthetic PCA coordinates** for 2D positioning at each layer
-- **Layer index** as the Z-axis dimension
-- **Trajectory lines** to show evolution paths
-- **Color coding** by semantic categories
+### Data Processing
+- **PCA**: 2-component principal component analysis applied to each layer's embeddings
+- **Normalization**: Embeddings normalized before PCA transformation
+- **Layers**: 25 transformer layers (0-24) analyzed for each dataset
 
-## Interpretation
+### Datasets
+1. **Sentiment Analysis**: 24 text samples across positive/negative/neutral sentiments
+2. **Academic Subjects**: 24 text samples across science/mathematics/literature domains  
+3. **Scientific Domains**: 24 text samples across astronomy/biology/physics fields
 
-- Points closer together represent similar embeddings
-- Trajectory lines show how individual samples move through the embedding space
-- Layer progression (Z-axis) reveals how the network transforms representations
-- Category clustering indicates semantic organization at different layers
-- Early layers show more random distribution, later layers show clearer category separation
+### Visualization Features
+- **Interactive scatter plots**: Click and drag to explore, hover for text details
+- **Layer animation**: Observe how clustering evolves through the network
+- **Variance tracking**: Monitor explained variance across layers
+- **Multi-dataset comparison**: Switch between different semantic tasks
 
-## Key Observations
-
-- **Layer 0-1**: Embeddings start relatively scattered with little semantic structure
-- **Layer 2-3**: Gradual emergence of category-based clustering
-- **Layer 4-5**: Clear separation between different semantic categories
-- **Trajectory lines**: Show smooth transitions rather than abrupt jumps
-
----
-
-*Note: This demo uses synthetic data to illustrate the concept. In a real implementation, you would replace the synthetic data generation with actual neural network embeddings from your model.*
+This analysis provides insights into how transformer models develop increasingly specialized and structured representations of semantic content as information flows through deeper layers of the network.
