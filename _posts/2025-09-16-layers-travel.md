@@ -6,469 +6,318 @@ tags: [embeddings, pca, 3d-visualization, plotly]
 description: "Interactive 3D visualization of how neural network embeddings evolve across layers"
 ---
 
----
-layout: post
-title: "3D Layerwise Embedding Evolution: A Journey Through Transformer Representations"
-date: 2025-09-16
-categories: [machine-learning, visualization, transformers]
-tags: [embeddings, neural-networks, pca, 3d-visualization, transformers]
-description: "Interactive 3D visualization showing how transformer embeddings evolve through neural network layers"
----
+# Interactive 3D visualization of how neural network embeddings evolve across layers
 
-# 3D Layerwise Embedding Evolution
-
-This interactive 3D visualization reveals how transformer embeddings evolve through the 25 layers of a neural network. Watch as semantic representations transform from scattered, unstructured patterns in early layers to clearly defined clusters in deeper layers.
-
-<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.26.0/plotly.min.js"></script>
-
-<div class="visualization-wrapper">
-    <div class="controls-panel">
-        <div class="control-group">
-            <label for="dataset-select">Dataset:</label>
-            <select id="dataset-select">
-                <option value="sentiment_analysis">Sentiment Analysis</option>
-                <option value="academic_subjects">Academic Subjects</option>
-                <option value="scientific_domains">Scientific Domains</option>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Layer-wise Embedding Evolution</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        select, input[type="file"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #plot {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .info {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e8f4f8;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>3D Layer-wise Embedding Evolution Visualizer</h1>
+        
+        <div class="controls">
+            <select id="datasetSelect" style="display: none;">
+                <option value="">Select Dataset</option>
             </select>
-        </div>
-        
-        <div class="control-group">
             <label>
-                <input type="checkbox" id="show-trajectories" checked>
-                Show Trajectories
+                Z-separation: 
+                <input type="range" id="zSeparation" min="1" max="20" value="5" />
+                <span id="zValue">5</span>
             </label>
+            <button id="loadData">Load Data</button>
+            <span id="loadStatus"></span>
         </div>
         
-        <div class="control-group">
-            <label>
-                <input type="checkbox" id="layer-spacing" checked>
-                Enhanced Layer Spacing
-            </label>
-        </div>
+        <div id="info" class="info" style="display: none;"></div>
+        <div id="plot"></div>
     </div>
-    
-    <div id="loading-state" class="status-message">
-        Loading 3D visualization...
-    </div>
-    
-    <div id="error-state" class="status-message error" style="display: none;">
-        Unable to load visualization data. Please check your connection.
-    </div>
-    
-    <div id="plot-3d" style="width:100%; height:600px; display:none;"></div>
-    
-    <div id="dataset-info" class="info-section" style="display:none;">
-        <h3>Dataset Statistics</h3>
-        <div class="stats-container">
-            <div class="stat-item">
-                <span class="stat-label">Total Items:</span>
-                <span class="stat-value" id="total-items">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Categories:</span>
-                <span class="stat-value" id="categories-list">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Layers:</span>
-                <span class="stat-value">25 (L0-L24)</span>
-            </div>
-        </div>
-    </div>
-</div>
 
-## Understanding the Visualization
-
-### 3D Structure
-- **X-axis (PC1)**: First principal component of embeddings
-- **Y-axis (PC2)**: Second principal component of embeddings  
-- **Z-axis**: Layer depth (0-24) through the transformer network
-
-### Visual Elements
-- **Colored Points**: Each category has a distinct color (science/math/literature, positive/negative/neutral, etc.)
-- **Trajectory Lines**: Faint lines connecting how individual text samples move through embedding space
-- **Layer Separation**: Vertical spacing shows the progression through network layers
-
-### Key Observations
-
-#### Early Layers (0-5)
-- Embeddings appear relatively mixed and unstructured
-- Limited semantic separation between categories
-- Lower explained variance in PCA components
-
-#### Middle Layers (6-15)  
-- Gradual emergence of category-specific clustering
-- Increasing separation between semantic groups
-- Peak explained variance often occurs in this range
-
-#### Late Layers (16-24)
-- Clear, distinct clusters for each category
-- Strong semantic organization
-- Stable representational structure
-
-## Dataset Comparisons
-
-### Academic Subjects
-Categories: Science, Mathematics, Literature
-- Mathematics concepts cluster tightly in later layers
-- Science topics show broad but consistent grouping  
-- Literature maintains distinct semantic space
-
-### Sentiment Analysis
-Categories: Positive, Negative, Neutral
-- Clear emotional polarity emerges by layer 10-12
-- Neutral sentiments occupy intermediate space
-- Strong linear separability in final layers
-
-### Scientific Domains  
-Categories: Astronomy, Biology, Physics
-- Domain-specific terminologies create clear boundaries
-- Physics and astronomy show some overlap (mathematical concepts)
-- Biology maintains distinct biological/life science cluster
-
-## Technical Implementation
-
-The visualization processes 1,800 data points (24 items × 25 layers × 3 datasets) in real-time, applying PCA dimensionality reduction while preserving the temporal evolution through network layers.
-
-<style>
-.visualization-wrapper {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.controls-panel {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    padding: 15px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-
-.control-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.control-group label {
-    font-weight: 600;
-    color: #495057;
-    font-size: 14px;
-}
-
-.control-group select {
-    padding: 6px 12px;
-    border: 2px solid #dee2e6;
-    border-radius: 6px;
-    background: white;
-    font-size: 14px;
-    min-width: 160px;
-}
-
-.control-group select:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.control-group input[type="checkbox"] {
-    transform: scale(1.2);
-    margin-right: 5px;
-}
-
-.status-message {
-    text-align: center;
-    padding: 40px;
-    font-size: 1.1rem;
-    color: #6c757d;
-    background: rgba(255,255,255,0.8);
-    border-radius: 8px;
-}
-
-.status-message.error {
-    color: #dc3545;
-    background: rgba(248, 215, 218, 0.8);
-}
-
-.info-section {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-
-.info-section h3 {
-    margin-top: 0;
-    color: #495057;
-    font-size: 1.2rem;
-}
-
-.stats-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.stat-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background: white;
-    border-radius: 6px;
-    border-left: 4px solid #667eea;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.stat-label {
-    font-weight: 600;
-    color: #495057;
-    font-size: 0.9rem;
-}
-
-.stat-value {
-    font-weight: 700;
-    color: #667eea;
-    font-size: 1rem;
-}
-
-#plot-3d {
-    background: rgba(255,255,255,0.95);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-}
-</style>
-
-<script>
-let embeddingsData = null;
-let currentDataset = 'academic_subjects';
-
-// Color schemes for each dataset
-const colorSchemes = {
-    sentiment_analysis: {
-        'positive': '#27ae60',
-        'negative': '#e74c3c', 
-        'neutral': '#3498db'
-    },
-    academic_subjects: {
-        'science': '#e74c3c',
-        'mathematics': '#1abc9c',
-        'literature': '#3498db'
-    },
-    scientific_domains: {
-        'astronomy': '#9b59b6',
-        'biology': '#f39c12',
-        'physics': '#e91e63'
-    }
-};
-
-async function loadVisualizationData() {
-    try {
-        const response = await fetch('https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json');
+    <script>
+        let currentData = null;
+        const JSON_FILE_PATH = 'https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json';
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        embeddingsData = await response.json();
-        
-        document.getElementById('loading-state').style.display = 'none';
-        document.getElementById('plot-3d').style.display = 'block';
-        document.getElementById('dataset-info').style.display = 'block';
-        
-        setupEventListeners();
-        renderVisualization();
-        updateDatasetInfo();
-        
-    } catch (error) {
-        console.error('Failed to load visualization data:', error);
-        document.getElementById('loading-state').style.display = 'none';
-        document.getElementById('error-state').style.display = 'block';
-    }
-}
+        // Color palette for categories
+        const colors = [
+            '#e41a1c', '#377eb8', '#4daf4a', '#984ea3', 
+            '#ff7f00', '#ffff33', '#a65628', '#f781bf'
+        ];
 
-function setupEventListeners() {
-    document.getElementById('dataset-select').addEventListener('change', function(e) {
-        currentDataset = e.target.value;
-        renderVisualization();
-        updateDatasetInfo();
-    });
-    
-    document.getElementById('show-trajectories').addEventListener('change', renderVisualization);
-    document.getElementById('layer-spacing').addEventListener('change', renderVisualization);
-}
+        document.getElementById('loadData').addEventListener('click', loadDataFromFile);
+        document.getElementById('datasetSelect').addEventListener('change', updateVisualization);
+        document.getElementById('zSeparation').addEventListener('input', function() {
+            document.getElementById('zValue').textContent = this.value;
+            updateVisualization();
+        });
 
-function updateDatasetInfo() {
-    if (!embeddingsData || !embeddingsData[currentDataset]) return;
-    
-    const dataset = embeddingsData[currentDataset];
-    document.getElementById('total-items').textContent = dataset.total_items;
-    document.getElementById('categories-list').textContent = dataset.categories.join(', ');
-}
+        // Load data automatically on page load
+        window.addEventListener('load', loadDataFromFile);
 
-function renderVisualization() {
-    if (!embeddingsData || !embeddingsData[currentDataset]) return;
-    
-    const dataset = embeddingsData[currentDataset];
-    const showTrajectories = document.getElementById('show-trajectories').checked;
-    const enhancedSpacing = document.getElementById('layer-spacing').checked;
-    const colors = colorSchemes[currentDataset];
-    
-    // Build trajectory data for each text item
-    const trajectoryMap = {};
-    
-    Object.keys(dataset.layers).forEach(layerKey => {
-        const layerIndex = parseInt(layerKey);
-        const layerData = dataset.layers[layerKey];
-        
-        layerData.items.forEach((item, itemIndex) => {
-            const uniqueKey = `${item.category}_${itemIndex}`;
+        function loadDataFromFile() {
+            const statusEl = document.getElementById('loadStatus');
+            statusEl.textContent = 'Loading...';
+            statusEl.style.color = 'orange';
             
-            if (!trajectoryMap[uniqueKey]) {
-                trajectoryMap[uniqueKey] = {
-                    category: item.category,
-                    text: item.text,
-                    coordinates: []
-                };
+            fetch(JSON_FILE_PATH)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    currentData = data;
+                    populateDatasetSelect();
+                    updateVisualization();
+                    statusEl.textContent = 'Data loaded successfully!';
+                    statusEl.style.color = 'green';
+                })
+                .catch(error => {
+                    console.error('Error loading JSON:', error);
+                    statusEl.textContent = `Error loading data: ${error.message}`;
+                    statusEl.style.color = 'red';
+                    
+                    // Show fallback message
+                    document.getElementById('plot').innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;">
+                            <div style="text-align: center;">
+                                <p>❌ Could not load JSON file from: ${JSON_FILE_PATH}</p>
+                                <p style="font-size: 14px; color: #999;">
+                                    Make sure the file exists at the specified path and the browser has permission to access it.
+                                </p>
+                                <p style="font-size: 12px; color: #ccc;">
+                                    Note: For security reasons, browsers may block local file access. 
+                                    Consider running a local web server or hosting the file.
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                });
+        }
+
+        function populateDatasetSelect() {
+            const select = document.getElementById('datasetSelect');
+            select.innerHTML = '<option value="">Select Dataset</option>';
+            
+            if (currentData) {
+                // Check if data has multiple datasets
+                const datasetNames = Object.keys(currentData);
+                if (datasetNames.length > 1) {
+                    datasetNames.forEach(name => {
+                        const option = document.createElement('option');
+                        option.value = name;
+                        option.textContent = name;
+                        select.appendChild(option);
+                    });
+                    select.style.display = 'block';
+                    select.value = datasetNames[0]; // Select first dataset
+                } else {
+                    select.style.display = 'none';
+                }
             }
-            
-            trajectoryMap[uniqueKey].coordinates.push({
-                x: item.pca_coordinates.x,
-                y: item.pca_coordinates.y,
-                z: enhancedSpacing ? layerIndex * 120 : layerIndex * 50,
-                layer: layerIndex
-            });
-        });
-    });
-    
-    let plotTraces = [];
-    
-    // Create scatter traces for each category
-    const categoryGroups = {};
-    Object.values(trajectoryMap).forEach(trajectory => {
-        const category = trajectory.category;
-        
-        if (!categoryGroups[category]) {
-            categoryGroups[category] = {
-                x: [], y: [], z: [],
-                text: [], customdata: [],
-                mode: 'markers',
-                type: 'scatter3d',
-                name: category.charAt(0).toUpperCase() + category.slice(1),
-                marker: {
-                    color: colors[category] || '#95a5a6',
-                    size: 5,
-                    opacity: 0.8,
-                    line: { color: 'rgba(0,0,0,0.1)', width: 0.5 }
-                },
-                hovertemplate: '<b>%{text}</b><br>' +
-                             'PC1: %{x:.1f}<br>' +
-                             'PC2: %{y:.1f}<br>' +
-                             'Layer: %{customdata}<br>' +
-                             '<extra></extra>'
-            };
         }
-        
-        trajectory.coordinates.forEach(coord => {
-            categoryGroups[category].x.push(coord.x);
-            categoryGroups[category].y.push(coord.y);
-            categoryGroups[category].z.push(coord.z);
-            categoryGroups[category].text.push(trajectory.text);
-            categoryGroups[category].customdata.push(coord.layer);
-        });
-    });
-    
-    plotTraces = Object.values(categoryGroups);
-    
-    // Add trajectory lines if enabled
-    if (showTrajectories) {
-        Object.values(trajectoryMap).forEach((trajectory, index) => {
-            const coords = trajectory.coordinates;
-            plotTraces.push({
-                x: coords.map(c => c.x),
-                y: coords.map(c => c.y),
-                z: coords.map(c => c.z),
-                mode: 'lines',
-                type: 'scatter3d',
-                line: {
-                    color: colors[trajectory.category] || '#95a5a6',
-                    width: 2,
-                    opacity: 0.4
-                },
-                showlegend: false,
-                hoverinfo: 'none'
+
+        function getCurrentDataset() {
+            if (!currentData) return null;
+            
+            const selectedDataset = document.getElementById('datasetSelect').value;
+            
+            if (selectedDataset && currentData[selectedDataset]) {
+                return currentData[selectedDataset];
+            } else if (currentData.layers) {
+                // Single dataset format
+                return currentData;
+            } else {
+                // Multiple datasets, return first one
+                const firstKey = Object.keys(currentData)[0];
+                return currentData[firstKey];
+            }
+        }
+
+        function updateVisualization() {
+            const dataset = getCurrentDataset();
+            if (!dataset) return;
+
+            const zSeparation = parseInt(document.getElementById('zSeparation').value);
+            
+            // Update info
+            const info = document.getElementById('info');
+            info.style.display = 'block';
+            info.innerHTML = `
+                <strong>Dataset:</strong> ${dataset.dataset_name || 'Unknown'} | 
+                <strong>Description:</strong> ${dataset.description || 'N/A'} | 
+                <strong>Total Items:</strong> ${dataset.total_items || 'N/A'} | 
+                <strong>Layers:</strong> ${dataset.num_layers || Object.keys(dataset.layers).length}
+            `;
+
+            // Prepare data for plotting
+            const traces = [];
+            const categories = dataset.categories || [];
+            const categoryColors = {};
+            categories.forEach((cat, i) => {
+                categoryColors[cat] = colors[i % colors.length];
             });
-        });
-    }
-    
-    const layout = {
-        title: {
-            text: `3D Layer-wise Embedding Evolution: ${dataset.description}`,
-            font: { size: 16, color: '#2c3e50' }
-        },
-        scene: {
-            xaxis: { 
-                title: 'PC1',
-                gridcolor: 'rgba(128,128,128,0.3)',
-                backgroundcolor: 'rgba(240,240,240,0.1)'
-            },
-            yaxis: { 
-                title: 'PC2',
-                gridcolor: 'rgba(128,128,128,0.3)',
-                backgroundcolor: 'rgba(240,240,240,0.1)'
-            },
-            zaxis: { 
-                title: 'Layer Index',
-                gridcolor: 'rgba(128,128,128,0.3)',
-                backgroundcolor: 'rgba(240,240,240,0.1)'
-            },
-            camera: {
-                eye: { x: 1.8, y: 1.8, z: 1.2 },
-                center: { x: 0, y: 0, z: 0.3 }
-            },
-            aspectmode: 'manual',
-            aspectratio: { x: 1, y: 1, z: 0.8 },
-            bgcolor: 'rgba(248,249,250,0.8)'
-        },
-        showlegend: true,
-        legend: {
-            x: 0.02,
-            y: 0.98,
-            bgcolor: 'rgba(255,255,255,0.95)',
-            bordercolor: 'rgba(0,0,0,0.1)',
-            borderwidth: 1
-        },
-        margin: { l: 0, r: 0, t: 40, b: 0 },
-        paper_bgcolor: 'rgba(0,0,0,0)'
-    };
-    
-    const config = {
-        responsive: true,
-        displayModeBar: true,
-        modeBarButtonsToRemove: ['pan2d', 'select2d', 'lasso2d'],
-        displaylogo: false
-    };
-    
-    Plotly.newPlot('plot-3d', plotTraces, layout, config);
-}
 
-// Initialize visualization when page loads
-document.addEventListener('DOMContentLoaded', loadVisualizationData);
-</script>
+            // Create traces for each category
+            categories.forEach(category => {
+                const x = [], y = [], z = [], text = [], layer_info = [];
+                
+                Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
+                    const layerIdx = parseInt(layerStr);
+                    const zLevel = layerIdx * zSeparation;
+                    
+                    layerData.items.forEach(item => {
+                        if (item.category === category) {
+                            x.push(item.pca_coordinates.x);
+                            y.push(item.pca_coordinates.y);
+                            z.push(zLevel);
+                            text.push(`${item.text}<br>Category: ${item.category}<br>Layer: ${layerIdx}`);
+                            layer_info.push(layerIdx);
+                        }
+                    });
+                });
 
-## Research Implications
+                if (x.length > 0) {
+                    traces.push({
+                        x: x,
+                        y: y,
+                        z: z,
+                        text: text,
+                        type: 'scatter3d',
+                        mode: 'markers',
+                        name: category,
+                        marker: {
+                            size: 6,
+                            color: categoryColors[category],
+                            opacity: 0.8,
+                            line: {
+                                color: 'black',
+                                width: 0.5
+                            }
+                        },
+                        hovertemplate: '%{text}<extra></extra>'
+                    });
+                }
+            });
 
-This 3D visualization demonstrates several key principles of transformer architectures:
+            // Add trajectory lines for same text across layers
+            const textTrajectories = {};
+            Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
+                const layerIdx = parseInt(layerStr);
+                const zLevel = layerIdx * zSeparation;
+                
+                layerData.items.forEach(item => {
+                    if (!textTrajectories[item.text]) {
+                        textTrajectories[item.text] = {
+                            x: [], y: [], z: [], 
+                            category: item.category
+                        };
+                    }
+                    textTrajectories[item.text].x.push(item.pca_coordinates.x);
+                    textTrajectories[item.text].y.push(item.pca_coordinates.y);
+                    textTrajectories[item.text].z.push(zLevel);
+                });
+            });
 
-1. **Hierarchical Representation Learning**: Early layers capture surface-level patterns while deeper layers develop semantic understanding
-2. **Emergent Clustering**: Categories naturally separate without explicit supervision
-3. **Representation Stability**: Final layers show consistent, structured embeddings suitable for downstream tasks
+            // Add trajectory lines
+            Object.values(textTrajectories).forEach((traj, i) => {
+                if (traj.x.length > 1) {
+                    traces.push({
+                        x: traj.x,
+                        y: traj.y,
+                        z: traj.z,
+                        type: 'scatter3d',
+                        mode: 'lines',
+                        name: '',
+                        showlegend: false,
+                        line: {
+                            color: categoryColors[traj.category],
+                            width: 2,
+                            opacity: 0.3
+                        },
+                        hoverinfo: 'skip'
+                    });
+                }
+            });
 
-The ability to visualize this transformation provides insights into why transformer models are so effective at natural language understanding tasks - they automatically develop meaningful semantic representations through their layered architecture.
+            const layout = {
+                title: `3D Layer-wise Embedding Evolution: ${dataset.dataset_name || 'Dataset'}`,
+                scene: {
+                    xaxis: { title: 'PC1' },
+                    yaxis: { title: 'PC2' },
+                    zaxis: { title: 'Layer Index' },
+                    camera: {
+                        eye: { x: 1.5, y: 1.5, z: 1.5 }
+                    }
+                },
+                margin: { l: 0, r: 0, b: 0, t: 40 },
+                legend: {
+                    x: 0,
+                    y: 1
+                }
+            };
+
+            Plotly.newPlot('plot', traces, layout, {
+                responsive: true,
+                displayModeBar: true
+            });
+        }
+
+        // Instructions for user
+        if (!currentData) {
+            document.getElementById('plot').innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;">
+                    <div style="text-align: center;">
+                        <p>Loading data from: ${JSON_FILE_PATH}</p>
+                        <p style="font-size: 14px; color: #999;">
+                            Click "Load Data" if the data doesn't load automatically
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
