@@ -90,22 +90,21 @@ body {
 
 <div class="viz-container">
     <div class="demo-note">
-        <strong>Demo Mode:</strong> Since the external JSON file is not accessible, this visualization uses synthetic data to demonstrate how neural network embeddings evolve across layers.
+        <strong>Loading...</strong> Attempting to load embedding data from JSON file.
     </div>
     
     <div class="controls">
-        <select id="datasetSelect">
-            <option value="sentiment">Sentiment Analysis</option>
-            <option value="academic">Academic Subjects</option>
-            <option value="scientific">Scientific Domains</option>
+        <select id="datasetSelect" style="display: none;">
+            <option value="">Select Dataset</option>
         </select>
         <label>
             Z-separation: 
             <input type="range" id="zSeparation" min="1" max="20" value="5" />
             <span id="zValue">5</span>
         </label>
-        <button id="generateData">Generate New Data</button>
-        <span id="loadStatus">Ready</span>
+        <button id="loadData">Load JSON Data</button>
+        <button id="generateData" style="display: none;">Generate Synthetic Data</button>
+        <span id="loadStatus">Initializing...</span>
     </div>
     
     <div id="info" class="info"></div>
@@ -179,6 +178,7 @@ body {
     // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
         // Add event listeners
+        document.getElementById('loadData').addEventListener('click', loadDataFromFile);
         document.getElementById('generateData').addEventListener('click', generateSyntheticData);
         document.getElementById('datasetSelect').addEventListener('change', updateVisualization);
         document.getElementById('zSeparation').addEventListener('input', function() {
@@ -189,7 +189,7 @@ body {
             }
         });
 
-        // Try to load JSON data first, fallback to synthetic data
+        // Try to load JSON data automatically on startup
         loadDataFromFile();
     });
 
@@ -224,6 +224,12 @@ body {
                     demoNote.style.borderColor = '#c3e6cb';
                     demoNote.style.color = '#155724';
                 }
+                
+                // Hide synthetic data button, show dataset controls
+                const generateBtn = document.getElementById('generateData');
+                const loadBtn = document.getElementById('loadData');
+                if (generateBtn) generateBtn.style.display = 'none';
+                if (loadBtn) loadBtn.style.display = 'none';
             })
             .catch(error => {
                 console.error('Error loading JSON:', error);
@@ -236,10 +242,31 @@ body {
                 const demoNote = document.querySelector('.demo-note');
                 if (demoNote) {
                     demoNote.innerHTML = `
-                        <strong>Fallback Mode:</strong> Could not load JSON from: ${JSON_FILE_PATH}<br>
-                        Error: ${error.message}<br>
-                        Using synthetic data to demonstrate the visualization.
+                        <strong>Fallback Mode:</strong> Could not load JSON from: <br>
+                        <code>${JSON_FILE_PATH}</code><br>
+                        <strong>Error:</strong> ${error.message}<br>
+                        <em>Using synthetic data to demonstrate the visualization.</em>
                     `;
+                    demoNote.style.background = '#fff3cd';
+                    demoNote.style.borderColor = '#ffeaa7';
+                    demoNote.style.color = '#856404';
+                }
+                
+                // Show synthetic data controls, hide JSON load button
+                const generateBtn = document.getElementById('generateData');
+                const loadBtn = document.getElementById('loadData');
+                const datasetSelect = document.getElementById('datasetSelect');
+                
+                if (generateBtn) generateBtn.style.display = 'inline-block';
+                if (loadBtn) loadBtn.textContent = 'Retry JSON Load';
+                if (datasetSelect) {
+                    datasetSelect.innerHTML = `
+                        <option value="sentiment">Sentiment Analysis</option>
+                        <option value="academic">Academic Subjects</option>
+                        <option value="scientific">Scientific Domains</option>
+                    `;
+                    datasetSelect.style.display = 'inline-block';
+                    datasetSelect.value = 'sentiment';
                 }
                 
                 // Fallback to synthetic data
@@ -259,6 +286,7 @@ body {
             const datasetNames = Object.keys(currentData);
             if (datasetNames.length > 1 && !currentData.layers) {
                 // Multiple datasets format
+                select.innerHTML = '<option value="">Select Dataset</option>';
                 datasetNames.forEach(name => {
                     const option = document.createElement('option');
                     option.value = name;
@@ -266,6 +294,7 @@ body {
                     select.appendChild(option);
                 });
                 select.value = datasetNames[0]; // Select first dataset
+                select.style.display = 'inline-block';
             } else {
                 // Single dataset format - hide the select
                 select.style.display = 'none';
