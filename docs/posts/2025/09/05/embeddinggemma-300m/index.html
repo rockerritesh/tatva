@@ -733,6 +733,7 @@ setTimeout(createClusteringAnalysis, 2500);
             })
             .then(data => {
                 currentData = data;
+                console.log('Loaded data:', data); // Debug log
                 populateDatasetSelect();
                 updateVisualization();
                 if (statusEl) {
@@ -787,24 +788,38 @@ setTimeout(createClusteringAnalysis, 2500);
     }
 
     function getCurrentDataset() {
-        if (!currentData) return null;
+        if (!currentData) {
+            console.log('No currentData available');
+            return null;
+        }
+        
+        console.log('currentData keys:', Object.keys(currentData));
         
         const selectEl = document.getElementById('datasetSelect');
         const selectedDataset = selectEl ? selectEl.value : '';
         
+        console.log('Selected dataset:', selectedDataset);
+        
         if (selectedDataset && currentData[selectedDataset]) {
+            console.log('Using selected dataset:', selectedDataset);
             return currentData[selectedDataset];
         } else if (currentData.layers) {
+            console.log('Using single dataset format');
             return currentData;
         } else {
             const firstKey = Object.keys(currentData)[0];
+            console.log('Using first key:', firstKey);
             return currentData[firstKey];
         }
     }
 
     function updateVisualization() {
         const dataset = getCurrentDataset();
-        if (!dataset) return;
+        console.log('Dataset:', dataset); // Debug log
+        if (!dataset) {
+            console.log('No dataset available');
+            return;
+        }
 
         const zSeparationEl = document.getElementById('zSeparation');
         const zSeparation = zSeparationEl ? parseInt(zSeparationEl.value) : 5;
@@ -912,10 +927,25 @@ setTimeout(createClusteringAnalysis, 2500);
 
         const plotEl = document.getElementById('plot');
         if (plotEl && typeof Plotly !== 'undefined') {
-            Plotly.newPlot('plot', traces, layout, {
-                responsive: true,
-                displayModeBar: true
-            });
+            try {
+                console.log('Creating plot with', traces.length, 'traces');
+                Plotly.newPlot('plot', traces, layout, {
+                    responsive: true,
+                    displayModeBar: true
+                });
+                console.log('Plot created successfully');
+            } catch (error) {
+                console.error('Error creating plot:', error);
+                plotEl.innerHTML = `<div style="padding: 20px; color: red;">Error creating plot: ${error.message}</div>`;
+            }
+        } else if (!plotEl) {
+            console.error('Plot element not found');
+        } else if (typeof Plotly === 'undefined') {
+            console.error('Plotly not loaded');
+            const plotEl = document.getElementById('plot');
+            if (plotEl) {
+                plotEl.innerHTML = '<div style="padding: 20px; color: orange;">Plotly.js not loaded. Please refresh the page.</div>';
+            }
         }
     }
 
