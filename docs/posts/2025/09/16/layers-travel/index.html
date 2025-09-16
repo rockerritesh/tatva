@@ -118,106 +118,106 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>3D Layer-wise Embedding Evolution Visualizer</h1>
+<div class="container">
+<h1>3D Layer-wise Embedding Evolution Visualizer</h1>
         
-<pre><code>    &lt;div class=&quot;controls&quot;&gt;
-        &lt;select id=&quot;datasetSelect&quot; style=&quot;display: none;&quot;&gt;
-            &lt;option value=&quot;&quot;&gt;Select Dataset&lt;/option&gt;
-        &lt;/select&gt;
-        &lt;label&gt;
-            Z-separation: 
-            &lt;input type=&quot;range&quot; id=&quot;zSeparation&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;5&quot; /&gt;
-            &lt;span id=&quot;zValue&quot;&gt;5&lt;/span&gt;
-        &lt;/label&gt;
-        &lt;button id=&quot;loadData&quot;&gt;Load Data&lt;/button&gt;
-        &lt;span id=&quot;loadStatus&quot;&gt;&lt;/span&gt;
-    &lt;/div&gt;
-    
-    &lt;div id=&quot;info&quot; class=&quot;info&quot; style=&quot;display: none;&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;plot&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
+<div class="controls">
+    <select id="datasetSelect" style="display: none;">
+        <option value="">Select Dataset</option>
+    </select>
+    <label>
+        Z-separation: 
+        <input type="range" id="zSeparation" min="1" max="20" value="5" />
+        <span id="zValue">5</span>
+    </label>
+    <button id="loadData">Load Data</button>
+    <span id="loadStatus"></span>
+</div>
 
-&lt;script&gt;
+<div id="info" class="info" style="display: none;"></div>
+<div id="plot"></div>
+</div>
+
+<script>
     let currentData = null;
-    const JSON_FILE_PATH = &#39;https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json&#39;;
+    const JSON_FILE_PATH = 'https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json';
     
     // Color palette for categories
     const colors = [
-        &#39;#e41a1c&#39;, &#39;#377eb8&#39;, &#39;#4daf4a&#39;, &#39;#984ea3&#39;, 
-        &#39;#ff7f00&#39;, &#39;#ffff33&#39;, &#39;#a65628&#39;, &#39;#f781bf&#39;
+        '#e41a1c', '#377eb8', '#4daf4a', '#984ea3', 
+        '#ff7f00', '#ffff33', '#a65628', '#f781bf'
     ];
 
-    document.getElementById(&#39;loadData&#39;).addEventListener(&#39;click&#39;, loadDataFromFile);
-    document.getElementById(&#39;datasetSelect&#39;).addEventListener(&#39;change&#39;, updateVisualization);
-    document.getElementById(&#39;zSeparation&#39;).addEventListener(&#39;input&#39;, function() {
-        document.getElementById(&#39;zValue&#39;).textContent = this.value;
+    document.getElementById('loadData').addEventListener('click', loadDataFromFile);
+    document.getElementById('datasetSelect').addEventListener('change', updateVisualization);
+    document.getElementById('zSeparation').addEventListener('input', function() {
+        document.getElementById('zValue').textContent = this.value;
         updateVisualization();
     });
 
     // Load data automatically on page load
-    window.addEventListener(&#39;load&#39;, loadDataFromFile);
+    window.addEventListener('load', loadDataFromFile);
 
     function loadDataFromFile() {
-        const statusEl = document.getElementById(&#39;loadStatus&#39;);
-        statusEl.textContent = &#39;Loading...&#39;;
-        statusEl.style.color = &#39;orange&#39;;
+        const statusEl = document.getElementById('loadStatus');
+        statusEl.textContent = 'Loading...';
+        statusEl.style.color = 'orange';
         
         fetch(JSON_FILE_PATH)
-            .then(response =&gt; {
+            .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
-            .then(data =&gt; {
+            .then(data => {
                 currentData = data;
                 populateDatasetSelect();
                 updateVisualization();
-                statusEl.textContent = &#39;Data loaded successfully!&#39;;
-                statusEl.style.color = &#39;green&#39;;
+                statusEl.textContent = 'Data loaded successfully!';
+                statusEl.style.color = 'green';
             })
-            .catch(error =&gt; {
-                console.error(&#39;Error loading JSON:&#39;, error);
+            .catch(error => {
+                console.error('Error loading JSON:', error);
                 statusEl.textContent = `Error loading data: ${error.message}`;
-                statusEl.style.color = &#39;red&#39;;
+                statusEl.style.color = 'red';
                 
                 // Show fallback message
-                document.getElementById(&#39;plot&#39;).innerHTML = `
-                    &lt;div style=&quot;display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;&quot;&gt;
-                        &lt;div style=&quot;text-align: center;&quot;&gt;
-                            &lt;p&gt;❌ Could not load JSON file from: ${JSON_FILE_PATH}&lt;/p&gt;
-                            &lt;p style=&quot;font-size: 14px; color: #999;&quot;&gt;
+                document.getElementById('plot').innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;">
+                        <div style="text-align: center;">
+                            <p>❌ Could not load JSON file from: ${JSON_FILE_PATH}</p>
+                            <p style="font-size: 14px; color: #999;">
                                 Make sure the file exists at the specified path and the browser has permission to access it.
-                            &lt;/p&gt;
-                            &lt;p style=&quot;font-size: 12px; color: #ccc;&quot;&gt;
+                            </p>
+                            <p style="font-size: 12px; color: #ccc;">
                                 Note: For security reasons, browsers may block local file access. 
                                 Consider running a local web server or hosting the file.
-                            &lt;/p&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
+                            </p>
+                        </div>
+                    </div>
                 `;
             });
     }
 
     function populateDatasetSelect() {
-        const select = document.getElementById(&#39;datasetSelect&#39;);
-        select.innerHTML = &#39;&lt;option value=&quot;&quot;&gt;Select Dataset&lt;/option&gt;&#39;;
+        const select = document.getElementById('datasetSelect');
+        select.innerHTML = '<option value="">Select Dataset</option>';
         
         if (currentData) {
             // Check if data has multiple datasets
             const datasetNames = Object.keys(currentData);
-            if (datasetNames.length &gt; 1) {
-                datasetNames.forEach(name =&gt; {
-                    const option = document.createElement(&#39;option&#39;);
+            if (datasetNames.length > 1) {
+                datasetNames.forEach(name => {
+                    const option = document.createElement('option');
                     option.value = name;
                     option.textContent = name;
                     select.appendChild(option);
                 });
-                select.style.display = &#39;block&#39;;
+                select.style.display = 'block';
                 select.value = datasetNames[0]; // Select first dataset
             } else {
-                select.style.display = &#39;none&#39;;
+                select.style.display = 'none';
             }
         }
     }
@@ -225,9 +225,9 @@
     function getCurrentDataset() {
         if (!currentData) return null;
         
-        const selectedDataset = document.getElementById(&#39;datasetSelect&#39;).value;
+        const selectedDataset = document.getElementById('datasetSelect').value;
         
-        if (selectedDataset &amp;&amp; currentData[selectedDataset]) {
+        if (selectedDataset && currentData[selectedDataset]) {
             return currentData[selectedDataset];
         } else if (currentData.layers) {
             // Single dataset format
@@ -243,75 +243,75 @@
         const dataset = getCurrentDataset();
         if (!dataset) return;
 
-        const zSeparation = parseInt(document.getElementById(&#39;zSeparation&#39;).value);
+        const zSeparation = parseInt(document.getElementById('zSeparation').value);
         
         // Update info
-        const info = document.getElementById(&#39;info&#39;);
-        info.style.display = &#39;block&#39;;
+        const info = document.getElementById('info');
+        info.style.display = 'block';
         info.innerHTML = `
-            &lt;strong&gt;Dataset:&lt;/strong&gt; ${dataset.dataset_name || &#39;Unknown&#39;} | 
-            &lt;strong&gt;Description:&lt;/strong&gt; ${dataset.description || &#39;N/A&#39;} | 
-            &lt;strong&gt;Total Items:&lt;/strong&gt; ${dataset.total_items || &#39;N/A&#39;} | 
-            &lt;strong&gt;Layers:&lt;/strong&gt; ${dataset.num_layers || Object.keys(dataset.layers).length}
+            <strong>Dataset:</strong> ${dataset.dataset_name || 'Unknown'} | 
+            <strong>Description:</strong> ${dataset.description || 'N/A'} | 
+            <strong>Total Items:</strong> ${dataset.total_items || 'N/A'} | 
+            <strong>Layers:</strong> ${dataset.num_layers || Object.keys(dataset.layers).length}
         `;
 
         // Prepare data for plotting
         const traces = [];
         const categories = dataset.categories || [];
         const categoryColors = {};
-        categories.forEach((cat, i) =&gt; {
+        categories.forEach((cat, i) => {
             categoryColors[cat] = colors[i % colors.length];
         });
 
         // Create traces for each category
-        categories.forEach(category =&gt; {
+        categories.forEach(category => {
             const x = [], y = [], z = [], text = [], layer_info = [];
             
-            Object.entries(dataset.layers).forEach(([layerStr, layerData]) =&gt; {
+            Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
                 const layerIdx = parseInt(layerStr);
                 const zLevel = layerIdx * zSeparation;
                 
-                layerData.items.forEach(item =&gt; {
+                layerData.items.forEach(item => {
                     if (item.category === category) {
                         x.push(item.pca_coordinates.x);
                         y.push(item.pca_coordinates.y);
                         z.push(zLevel);
-                        text.push(`${item.text}&lt;br&gt;Category: ${item.category}&lt;br&gt;Layer: ${layerIdx}`);
+                        text.push(`${item.text}<br>Category: ${item.category}<br>Layer: ${layerIdx}`);
                         layer_info.push(layerIdx);
                     }
                 });
             });
 
-            if (x.length &gt; 0) {
+            if (x.length > 0) {
                 traces.push({
                     x: x,
                     y: y,
                     z: z,
                     text: text,
-                    type: &#39;scatter3d&#39;,
-                    mode: &#39;markers&#39;,
+                    type: 'scatter3d',
+                    mode: 'markers',
                     name: category,
                     marker: {
                         size: 6,
                         color: categoryColors[category],
                         opacity: 0.8,
                         line: {
-                            color: &#39;black&#39;,
+                            color: 'black',
                             width: 0.5
                         }
                     },
-                    hovertemplate: &#39;%{text}&lt;extra&gt;&lt;/extra&gt;&#39;
+                    hovertemplate: '%{text}<extra></extra>'
                 });
             }
         });
 
         // Add trajectory lines for same text across layers
         const textTrajectories = {};
-        Object.entries(dataset.layers).forEach(([layerStr, layerData]) =&gt; {
+        Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
             const layerIdx = parseInt(layerStr);
             const zLevel = layerIdx * zSeparation;
             
-            layerData.items.forEach(item =&gt; {
+            layerData.items.forEach(item => {
                 if (!textTrajectories[item.text]) {
                     textTrajectories[item.text] = {
                         x: [], y: [], z: [], 
@@ -325,32 +325,32 @@
         });
 
         // Add trajectory lines
-        Object.values(textTrajectories).forEach((traj, i) =&gt; {
-            if (traj.x.length &gt; 1) {
+        Object.values(textTrajectories).forEach((traj, i) => {
+            if (traj.x.length > 1) {
                 traces.push({
                     x: traj.x,
                     y: traj.y,
                     z: traj.z,
-                    type: &#39;scatter3d&#39;,
-                    mode: &#39;lines&#39;,
-                    name: &#39;&#39;,
+                    type: 'scatter3d',
+                    mode: 'lines',
+                    name: '',
                     showlegend: false,
                     line: {
                         color: categoryColors[traj.category],
                         width: 2,
                         opacity: 0.3
                     },
-                    hoverinfo: &#39;skip&#39;
+                    hoverinfo: 'skip'
                 });
             }
         });
 
         const layout = {
-            title: `3D Layer-wise Embedding Evolution: ${dataset.dataset_name || &#39;Dataset&#39;}`,
+            title: `3D Layer-wise Embedding Evolution: ${dataset.dataset_name || 'Dataset'}`,
             scene: {
-                xaxis: { title: &#39;PC1&#39; },
-                yaxis: { title: &#39;PC2&#39; },
-                zaxis: { title: &#39;Layer Index&#39; },
+                xaxis: { title: 'PC1' },
+                yaxis: { title: 'PC2' },
+                zaxis: { title: 'Layer Index' },
                 camera: {
                     eye: { x: 1.5, y: 1.5, z: 1.5 }
                 }
@@ -362,7 +362,7 @@
             }
         };
 
-        Plotly.newPlot(&#39;plot&#39;, traces, layout, {
+        Plotly.newPlot('plot', traces, layout, {
             responsive: true,
             displayModeBar: true
         });
@@ -370,19 +370,18 @@
 
     // Instructions for user
     if (!currentData) {
-        document.getElementById(&#39;plot&#39;).innerHTML = `
-            &lt;div style=&quot;display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;&quot;&gt;
-                &lt;div style=&quot;text-align: center;&quot;&gt;
-                    &lt;p&gt;Loading data from: ${JSON_FILE_PATH}&lt;/p&gt;
-                    &lt;p style=&quot;font-size: 14px; color: #999;&quot;&gt;
-                        Click &quot;Load Data&quot; if the data doesn&#39;t load automatically
-                    &lt;/p&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+        document.getElementById('plot').innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;">
+                <div style="text-align: center;">
+                    <p>Loading data from: ${JSON_FILE_PATH}</p>
+                    <p style="font-size: 14px; color: #999;">
+                        Click "Load Data" if the data doesn't load automatically
+                    </p>
+                </div>
+            </div>
         `;
     }
-&lt;/script&gt;
-</code></pre>
+</script>
 </body>
 
     </div>
