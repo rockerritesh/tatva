@@ -1,6 +1,6 @@
 ---
 title: layers-travel
-date: 2025-09-05
+date: 2025-09-16
 categories: [machine-learning, visualization, neural-networks]
 tags: [embeddings, pca, 3d-visualization, plotly]
 description: "Interactive 3D visualization of how neural network embeddings evolve across layers"
@@ -101,7 +101,7 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
 <script>
     let currentData = null;
-    const JSON_FILE_PATH = 'https://tatva.sumityadav.com.np/posts/2025/09/05/embeddinggemma-300m/all_layerwise_embeddings.json';
+    const JSON_FILE_PATH = './all_layerwise_embeddings.json';
     
     // Color palette for categories
     const colors = [
