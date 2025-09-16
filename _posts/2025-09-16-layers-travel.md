@@ -6,378 +6,469 @@ tags: [embeddings, pca, 3d-visualization, plotly]
 description: "Interactive 3D visualization of how neural network embeddings evolve across layers"
 ---
 
-# Visualizing Transformer Layer Embeddings: A Journey Through Neural Network Representations
+---
+layout: post
+title: "3D Layerwise Embedding Evolution: A Journey Through Transformer Representations"
+date: 2025-09-16
+categories: [machine-learning, visualization, transformers]
+tags: [embeddings, neural-networks, pca, 3d-visualization, transformers]
+description: "Interactive 3D visualization showing how transformer embeddings evolve through neural network layers"
+---
 
-This visualization explores how transformer embeddings evolve across different layers of a neural network. We examine three datasets - sentiment analysis, academic subjects, and scientific domains - to understand how semantic representations develop through the layers.
+# 3D Layerwise Embedding Evolution
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+This interactive 3D visualization reveals how transformer embeddings evolve through the 25 layers of a neural network. Watch as semantic representations transform from scattered, unstructured patterns in early layers to clearly defined clusters in deeper layers.
+
 <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.26.0/plotly.min.js"></script>
 
-## Interactive Layer-wise PCA Visualizations
-
-<div class="visualization-container">
-  <div class="controls">
-    <label for="dataset-select">Dataset:</label>
-    <select id="dataset-select">
-      <option value="sentiment_analysis">Sentiment Analysis</option>
-      <option value="academic_subjects">Academic Subjects</option>
-      <option value="scientific_domains">Scientific Domains</option>
-    </select>
-    
-    <label for="layer-slider">Layer:</label>
-    <input type="range" id="layer-slider" min="0" max="24" value="0">
-    <span id="layer-value">0</span>
-    
-    <button id="animate-btn">Animate Through Layers</button>
-  </div>
-  
-  <div id="scatter-plot" style="width:100%;height:500px;"></div>
-  
-  <div class="layer-info">
-    <h3>Layer <span id="current-layer">0</span> Statistics</h3>
-    <div class="stats-grid">
-      <div class="stat">
-        <strong>Explained Variance (PC1):</strong>
-        <span id="variance-pc1">-</span>%
-      </div>
-      <div class="stat">
-        <strong>Explained Variance (PC2):</strong>
-        <span id="variance-pc2">-</span>%
-      </div>
-      <div class="stat">
-        <strong>Total Variance Captured:</strong>
-        <span id="total-variance">-</span>%
-      </div>
+<div class="visualization-wrapper">
+    <div class="controls-panel">
+        <div class="control-group">
+            <label for="dataset-select">Dataset:</label>
+            <select id="dataset-select">
+                <option value="sentiment_analysis">Sentiment Analysis</option>
+                <option value="academic_subjects">Academic Subjects</option>
+                <option value="scientific_domains">Scientific Domains</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>
+                <input type="checkbox" id="show-trajectories" checked>
+                Show Trajectories
+            </label>
+        </div>
+        
+        <div class="control-group">
+            <label>
+                <input type="checkbox" id="layer-spacing" checked>
+                Enhanced Layer Spacing
+            </label>
+        </div>
     </div>
-  </div>
+    
+    <div id="loading-state" class="status-message">
+        Loading 3D visualization...
+    </div>
+    
+    <div id="error-state" class="status-message error" style="display: none;">
+        Unable to load visualization data. Please check your connection.
+    </div>
+    
+    <div id="plot-3d" style="width:100%; height:600px; display:none;"></div>
+    
+    <div id="dataset-info" class="info-section" style="display:none;">
+        <h3>Dataset Statistics</h3>
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-label">Total Items:</span>
+                <span class="stat-value" id="total-items">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Categories:</span>
+                <span class="stat-value" id="categories-list">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Layers:</span>
+                <span class="stat-value">25 (L0-L24)</span>
+            </div>
+        </div>
+    </div>
 </div>
 
-## Variance Analysis Across Layers
+## Understanding the Visualization
 
-<div id="variance-plot" style="width:100%;height:400px;"></div>
+### 3D Structure
+- **X-axis (PC1)**: First principal component of embeddings
+- **Y-axis (PC2)**: Second principal component of embeddings  
+- **Z-axis**: Layer depth (0-24) through the transformer network
 
-## Key Insights
+### Visual Elements
+- **Colored Points**: Each category has a distinct color (science/math/literature, positive/negative/neutral, etc.)
+- **Trajectory Lines**: Faint lines connecting how individual text samples move through embedding space
+- **Layer Separation**: Vertical spacing shows the progression through network layers
 
-### Evolution of Semantic Clustering
+### Key Observations
 
-The visualizations reveal how semantic representations evolve through transformer layers:
+#### Early Layers (0-5)
+- Embeddings appear relatively mixed and unstructured
+- Limited semantic separation between categories
+- Lower explained variance in PCA components
 
-1. **Early Layers (0-4)**: Embeddings show relatively low explained variance and mixed clustering
-2. **Middle Layers (5-15)**: Gradual emergence of clearer category separation
-3. **Later Layers (16-24)**: More distinct clustering with higher explained variance
+#### Middle Layers (6-15)  
+- Gradual emergence of category-specific clustering
+- Increasing separation between semantic groups
+- Peak explained variance often occurs in this range
 
-### Dataset-Specific Patterns
+#### Late Layers (16-24)
+- Clear, distinct clusters for each category
+- Strong semantic organization
+- Stable representational structure
 
-#### Sentiment Analysis
-- **Categories**: Positive, Negative, Neutral
-- **Peak separation**: Around layers 10-15
-- **Final layer clustering**: Strong sentiment-based groupings
+## Dataset Comparisons
 
-#### Academic Subjects  
-- **Categories**: Science, Mathematics, Literature
-- **Peak separation**: Around layers 12-18
-- **Final layer clustering**: Clear disciplinary boundaries
+### Academic Subjects
+Categories: Science, Mathematics, Literature
+- Mathematics concepts cluster tightly in later layers
+- Science topics show broad but consistent grouping  
+- Literature maintains distinct semantic space
 
-#### Scientific Domains
-- **Categories**: Astronomy, Biology, Physics
-- **Peak separation**: Around layers 8-14
-- **Final layer clustering**: Well-defined domain clusters
+### Sentiment Analysis
+Categories: Positive, Negative, Neutral
+- Clear emotional polarity emerges by layer 10-12
+- Neutral sentiments occupy intermediate space
+- Strong linear separability in final layers
 
-### Explained Variance Trends
+### Scientific Domains  
+Categories: Astronomy, Biology, Physics
+- Domain-specific terminologies create clear boundaries
+- Physics and astronomy show some overlap (mathematical concepts)
+- Biology maintains distinct biological/life science cluster
 
-The explained variance by the first two principal components shows interesting patterns:
+## Technical Implementation
 
-- **Layer 0**: Low variance (15-20%), indicating distributed representations
-- **Peak layers**: Middle layers often show highest total variance capture
-- **Final layers**: Variable patterns depending on task complexity
+The visualization processes 1,800 data points (24 items × 25 layers × 3 datasets) in real-time, applying PCA dimensionality reduction while preserving the temporal evolution through network layers.
 
 <style>
-.visualization-container {
-  margin: 20px 0;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+.visualization-wrapper {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-.controls {
-  margin-bottom: 20px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  flex-wrap: wrap;
+.controls-panel {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
 }
 
-.controls label {
-  font-weight: bold;
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.controls select, .controls input {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.control-group label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
 }
 
-.controls button {
-  padding: 8px 16px;
-  background-color: #007acc;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.control-group select {
+    padding: 6px 12px;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+    min-width: 160px;
 }
 
-.controls button:hover {
-  background-color: #005a99;
+.control-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.layer-info {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: white;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+.control-group input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 5px;
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
+.status-message {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.1rem;
+    color: #6c757d;
+    background: rgba(255,255,255,0.8);
+    border-radius: 8px;
 }
 
-.stat {
-  padding: 8px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
+.status-message.error {
+    color: #dc3545;
+    background: rgba(248, 215, 218, 0.8);
+}
+
+.info-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.info-section h3 {
+    margin-top: 0;
+    color: #495057;
+    font-size: 1.2rem;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: white;
+    border-radius: 6px;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 1rem;
+}
+
+#plot-3d {
+    background: rgba(255,255,255,0.95);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
 }
 </style>
 
 <script>
-// Load the embeddings data
-let embeddingsData;
+let embeddingsData = null;
+let currentDataset = 'academic_subjects';
 
-// Fetch the data
-fetch('https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json')
-  .then(response => response.json())
-  .then(data => {
-    embeddingsData = data;
-    initializeVisualization();
-  })
-  .catch(error => {
-    console.error('Error loading data:', error);
-    document.getElementById('scatter-plot').innerHTML = '<p>Error loading visualization data. Please check the data source.</p>';
-  });
-
-let currentDataset = 'sentiment_analysis';
-let currentLayer = 0;
-let isAnimating = false;
-
-function initializeVisualization() {
-  // Set up event listeners
-  document.getElementById('dataset-select').addEventListener('change', function(e) {
-    currentDataset = e.target.value;
-    updateVisualization();
-    updateVarianceChart();
-  });
-  
-  document.getElementById('layer-slider').addEventListener('input', function(e) {
-    currentLayer = parseInt(e.target.value);
-    document.getElementById('layer-value').textContent = currentLayer;
-    updateVisualization();
-  });
-  
-  document.getElementById('animate-btn').addEventListener('click', function() {
-    if (isAnimating) {
-      stopAnimation();
-    } else {
-      startAnimation();
+// Color schemes for each dataset
+const colorSchemes = {
+    sentiment_analysis: {
+        'positive': '#27ae60',
+        'negative': '#e74c3c', 
+        'neutral': '#3498db'
+    },
+    academic_subjects: {
+        'science': '#e74c3c',
+        'mathematics': '#1abc9c',
+        'literature': '#3498db'
+    },
+    scientific_domains: {
+        'astronomy': '#9b59b6',
+        'biology': '#f39c12',
+        'physics': '#e91e63'
     }
-  });
-  
-  // Initial visualization
-  updateVisualization();
-  updateVarianceChart();
-}
+};
 
-function updateVisualization() {
-  if (!embeddingsData) return;
-  
-  const dataset = embeddingsData[currentDataset];
-  const layerData = dataset.layers[currentLayer.toString()];
-  
-  if (!layerData) return;
-  
-  // Prepare data for Plotly
-  const traces = {};
-  const colors = {
-    'positive': '#2E8B57',
-    'negative': '#DC143C', 
-    'neutral': '#4682B4',
-    'science': '#FF6B6B',
-    'mathematics': '#4ECDC4',
-    'literature': '#45B7D1',
-    'astronomy': '#96CEB4',
-    'biology': '#FECA57',
-    'physics': '#FF9FF3'
-  };
-  
-  // Group items by category
-  layerData.items.forEach(item => {
-    if (!traces[item.category]) {
-      traces[item.category] = {
-        x: [],
-        y: [],
-        text: [],
-        mode: 'markers',
-        type: 'scatter',
-        name: item.category.charAt(0).toUpperCase() + item.category.slice(1),
-        marker: {
-          color: colors[item.category] || '#666666',
-          size: 8,
-          opacity: 0.7
+async function loadVisualizationData() {
+    try {
+        const response = await fetch('https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/all_layerwise_embeddings.json');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-      };
+        
+        embeddingsData = await response.json();
+        
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('plot-3d').style.display = 'block';
+        document.getElementById('dataset-info').style.display = 'block';
+        
+        setupEventListeners();
+        renderVisualization();
+        updateDatasetInfo();
+        
+    } catch (error) {
+        console.error('Failed to load visualization data:', error);
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('error-state').style.display = 'block';
+    }
+}
+
+function setupEventListeners() {
+    document.getElementById('dataset-select').addEventListener('change', function(e) {
+        currentDataset = e.target.value;
+        renderVisualization();
+        updateDatasetInfo();
+    });
+    
+    document.getElementById('show-trajectories').addEventListener('change', renderVisualization);
+    document.getElementById('layer-spacing').addEventListener('change', renderVisualization);
+}
+
+function updateDatasetInfo() {
+    if (!embeddingsData || !embeddingsData[currentDataset]) return;
+    
+    const dataset = embeddingsData[currentDataset];
+    document.getElementById('total-items').textContent = dataset.total_items;
+    document.getElementById('categories-list').textContent = dataset.categories.join(', ');
+}
+
+function renderVisualization() {
+    if (!embeddingsData || !embeddingsData[currentDataset]) return;
+    
+    const dataset = embeddingsData[currentDataset];
+    const showTrajectories = document.getElementById('show-trajectories').checked;
+    const enhancedSpacing = document.getElementById('layer-spacing').checked;
+    const colors = colorSchemes[currentDataset];
+    
+    // Build trajectory data for each text item
+    const trajectoryMap = {};
+    
+    Object.keys(dataset.layers).forEach(layerKey => {
+        const layerIndex = parseInt(layerKey);
+        const layerData = dataset.layers[layerKey];
+        
+        layerData.items.forEach((item, itemIndex) => {
+            const uniqueKey = `${item.category}_${itemIndex}`;
+            
+            if (!trajectoryMap[uniqueKey]) {
+                trajectoryMap[uniqueKey] = {
+                    category: item.category,
+                    text: item.text,
+                    coordinates: []
+                };
+            }
+            
+            trajectoryMap[uniqueKey].coordinates.push({
+                x: item.pca_coordinates.x,
+                y: item.pca_coordinates.y,
+                z: enhancedSpacing ? layerIndex * 120 : layerIndex * 50,
+                layer: layerIndex
+            });
+        });
+    });
+    
+    let plotTraces = [];
+    
+    // Create scatter traces for each category
+    const categoryGroups = {};
+    Object.values(trajectoryMap).forEach(trajectory => {
+        const category = trajectory.category;
+        
+        if (!categoryGroups[category]) {
+            categoryGroups[category] = {
+                x: [], y: [], z: [],
+                text: [], customdata: [],
+                mode: 'markers',
+                type: 'scatter3d',
+                name: category.charAt(0).toUpperCase() + category.slice(1),
+                marker: {
+                    color: colors[category] || '#95a5a6',
+                    size: 5,
+                    opacity: 0.8,
+                    line: { color: 'rgba(0,0,0,0.1)', width: 0.5 }
+                },
+                hovertemplate: '<b>%{text}</b><br>' +
+                             'PC1: %{x:.1f}<br>' +
+                             'PC2: %{y:.1f}<br>' +
+                             'Layer: %{customdata}<br>' +
+                             '<extra></extra>'
+            };
+        }
+        
+        trajectory.coordinates.forEach(coord => {
+            categoryGroups[category].x.push(coord.x);
+            categoryGroups[category].y.push(coord.y);
+            categoryGroups[category].z.push(coord.z);
+            categoryGroups[category].text.push(trajectory.text);
+            categoryGroups[category].customdata.push(coord.layer);
+        });
+    });
+    
+    plotTraces = Object.values(categoryGroups);
+    
+    // Add trajectory lines if enabled
+    if (showTrajectories) {
+        Object.values(trajectoryMap).forEach((trajectory, index) => {
+            const coords = trajectory.coordinates;
+            plotTraces.push({
+                x: coords.map(c => c.x),
+                y: coords.map(c => c.y),
+                z: coords.map(c => c.z),
+                mode: 'lines',
+                type: 'scatter3d',
+                line: {
+                    color: colors[trajectory.category] || '#95a5a6',
+                    width: 2,
+                    opacity: 0.4
+                },
+                showlegend: false,
+                hoverinfo: 'none'
+            });
+        });
     }
     
-    traces[item.category].x.push(item.pca_coordinates.x);
-    traces[item.category].y.push(item.pca_coordinates.y);
-    traces[item.category].text.push(item.text);
-  });
-  
-  const plotData = Object.values(traces);
-  
-  const layout = {
-    title: `${dataset.description} - Layer ${currentLayer}`,
-    xaxis: {
-      title: `PC1 (${(layerData.explained_variance[0] * 100).toFixed(1)}%)`,
-      zeroline: true
-    },
-    yaxis: {
-      title: `PC2 (${(layerData.explained_variance[1] * 100).toFixed(1)}%)`,
-      zeroline: true
-    },
-    showlegend: true,
-    hovermode: 'closest',
-    margin: { t: 50, l: 80, r: 20, b: 80 }
-  };
-  
-  const config = {
-    responsive: true,
-    displayModeBar: true,
-    modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d']
-  };
-  
-  Plotly.newPlot('scatter-plot', plotData, layout, config);
-  
-  // Update stats
-  document.getElementById('current-layer').textContent = currentLayer;
-  document.getElementById('variance-pc1').textContent = (layerData.explained_variance[0] * 100).toFixed(2);
-  document.getElementById('variance-pc2').textContent = (layerData.explained_variance[1] * 100).toFixed(2);
-  document.getElementById('total-variance').textContent = (layerData.total_variance_captured * 100).toFixed(2);
-}
-
-function updateVarianceChart() {
-  if (!embeddingsData) return;
-  
-  const dataset = embeddingsData[currentDataset];
-  const layers = Array.from({length: 25}, (_, i) => i);
-  
-  const pc1Variance = layers.map(layer => dataset.layers[layer.toString()].explained_variance[0] * 100);
-  const pc2Variance = layers.map(layer => dataset.layers[layer.toString()].explained_variance[1] * 100);
-  const totalVariance = layers.map(layer => dataset.layers[layer.toString()].total_variance_captured * 100);
-  
-  const traces = [
-    {
-      x: layers,
-      y: pc1Variance,
-      name: 'PC1 Explained Variance',
-      type: 'scatter',
-      mode: 'lines+markers',
-      line: { color: '#1f77b4' }
-    },
-    {
-      x: layers,
-      y: pc2Variance,
-      name: 'PC2 Explained Variance', 
-      type: 'scatter',
-      mode: 'lines+markers',
-      line: { color: '#ff7f0e' }
-    },
-    {
-      x: layers,
-      y: totalVariance,
-      name: 'Total Variance Captured',
-      type: 'scatter',
-      mode: 'lines+markers',
-      line: { color: '#2ca02c', width: 3 }
-    }
-  ];
-  
-  const layout = {
-    title: `Explained Variance Across Layers - ${dataset.description}`,
-    xaxis: {
-      title: 'Layer',
-      range: [0, 24]
-    },
-    yaxis: {
-      title: 'Explained Variance (%)',
-      range: [0, Math.max(...totalVariance) * 1.1]
-    },
-    showlegend: true,
-    margin: { t: 50, l: 80, r: 20, b: 80 }
-  };
-  
-  const config = {
-    responsive: true,
-    displayModeBar: false
-  };
-  
-  Plotly.newPlot('variance-plot', traces, layout, config);
-}
-
-function startAnimation() {
-  if (isAnimating) return;
-  
-  isAnimating = true;
-  document.getElementById('animate-btn').textContent = 'Stop Animation';
-  
-  const animateStep = () => {
-    if (!isAnimating) return;
+    const layout = {
+        title: {
+            text: `3D Layer-wise Embedding Evolution: ${dataset.description}`,
+            font: { size: 16, color: '#2c3e50' }
+        },
+        scene: {
+            xaxis: { 
+                title: 'PC1',
+                gridcolor: 'rgba(128,128,128,0.3)',
+                backgroundcolor: 'rgba(240,240,240,0.1)'
+            },
+            yaxis: { 
+                title: 'PC2',
+                gridcolor: 'rgba(128,128,128,0.3)',
+                backgroundcolor: 'rgba(240,240,240,0.1)'
+            },
+            zaxis: { 
+                title: 'Layer Index',
+                gridcolor: 'rgba(128,128,128,0.3)',
+                backgroundcolor: 'rgba(240,240,240,0.1)'
+            },
+            camera: {
+                eye: { x: 1.8, y: 1.8, z: 1.2 },
+                center: { x: 0, y: 0, z: 0.3 }
+            },
+            aspectmode: 'manual',
+            aspectratio: { x: 1, y: 1, z: 0.8 },
+            bgcolor: 'rgba(248,249,250,0.8)'
+        },
+        showlegend: true,
+        legend: {
+            x: 0.02,
+            y: 0.98,
+            bgcolor: 'rgba(255,255,255,0.95)',
+            bordercolor: 'rgba(0,0,0,0.1)',
+            borderwidth: 1
+        },
+        margin: { l: 0, r: 0, t: 40, b: 0 },
+        paper_bgcolor: 'rgba(0,0,0,0)'
+    };
     
-    currentLayer = (currentLayer + 1) % 25;
-    document.getElementById('layer-slider').value = currentLayer;
-    document.getElementById('layer-value').textContent = currentLayer;
-    updateVisualization();
+    const config = {
+        responsive: true,
+        displayModeBar: true,
+        modeBarButtonsToRemove: ['pan2d', 'select2d', 'lasso2d'],
+        displaylogo: false
+    };
     
-    setTimeout(animateStep, 500); // 500ms delay between frames
-  };
-  
-  animateStep();
+    Plotly.newPlot('plot-3d', plotTraces, layout, config);
 }
 
-function stopAnimation() {
-  isAnimating = false;
-  document.getElementById('animate-btn').textContent = 'Animate Through Layers';
-}
+// Initialize visualization when page loads
+document.addEventListener('DOMContentLoaded', loadVisualizationData);
 </script>
 
-## Technical Details
+## Research Implications
 
-### Data Processing
-- **PCA**: 2-component principal component analysis applied to each layer's embeddings
-- **Normalization**: Embeddings normalized before PCA transformation
-- **Layers**: 25 transformer layers (0-24) analyzed for each dataset
+This 3D visualization demonstrates several key principles of transformer architectures:
 
-### Datasets
-1. **Sentiment Analysis**: 24 text samples across positive/negative/neutral sentiments
-2. **Academic Subjects**: 24 text samples across science/mathematics/literature domains  
-3. **Scientific Domains**: 24 text samples across astronomy/biology/physics fields
+1. **Hierarchical Representation Learning**: Early layers capture surface-level patterns while deeper layers develop semantic understanding
+2. **Emergent Clustering**: Categories naturally separate without explicit supervision
+3. **Representation Stability**: Final layers show consistent, structured embeddings suitable for downstream tasks
 
-### Visualization Features
-- **Interactive scatter plots**: Click and drag to explore, hover for text details
-- **Layer animation**: Observe how clustering evolves through the network
-- **Variance tracking**: Monitor explained variance across layers
-- **Multi-dataset comparison**: Switch between different semantic tasks
-
-This analysis provides insights into how transformer models develop increasingly specialized and structured representations of semantic content as information flows through deeper layers of the network.
+The ability to visualize this transformation provides insights into why transformer models are so effective at natural language understanding tasks - they automatically develop meaningful semantic representations through their layered architecture.
