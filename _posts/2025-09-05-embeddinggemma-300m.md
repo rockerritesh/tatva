@@ -2,7 +2,9 @@
 title: embeddinggemma-300m
 date: 2025-09-05
 ---
+
 <img src="https://tatva.sumityadav.com.np/posts/2025/09/05/embeddinggemma-300m/embed.png" alt="embeddinggemma-300m" width="100%">
+
 # Understanding Text Embeddings: A Comprehensive Quality Analysis
 
 Text embeddings are one of the most fundamental components of modern NLP systems. But how do we know if our embeddings are actually good? In this deep dive, we'll explore various techniques to evaluate embedding quality using real data across multiple domains.
@@ -115,11 +117,17 @@ async function loadDataAndCreatePlots() {
     
   } catch (error) {
     console.error('Error loading embedding data:', error);
-    document.getElementById('animals-plot').innerHTML = '<p style="color: red;">Error loading data. Please ensure all_embedding_pca_results.json is in the same directory.</p>';
+    const plotEl = document.getElementById('animals-plot');
+    if (plotEl) {
+      plotEl.innerHTML = '<p style="color: red;">Error loading data. Please ensure all_embedding_pca_results.json is in the same directory.</p>';
+    }
   }
 }
 
 function createPlot(containerId, data, title) {
+  const containerEl = document.getElementById(containerId);
+  if (!containerEl) return;
+  
   const categories = [...new Set(data.items.map(item => item.category))];
   
   const traces = categories.map(category => {
@@ -180,11 +188,21 @@ function createPlot(containerId, data, title) {
     displayModeBar: true
   };
 
-  Plotly.newPlot(containerId, traces, layout, config);
+  if (typeof Plotly !== 'undefined') {
+    Plotly.newPlot(containerId, traces, layout, config);
+  }
 }
 
-// Load data when page loads
-document.addEventListener('DOMContentLoaded', loadDataAndCreatePlots);
+// Load data when DOM is ready
+function initializeMainPlots() {
+  loadDataAndCreatePlots();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeMainPlots);
+} else {
+  initializeMainPlots();
+}
 </script>
 
 ---
@@ -195,7 +213,13 @@ document.addEventListener('DOMContentLoaded', loadDataAndCreatePlots);
 
 <script>
 function createVarianceAnalysis() {
-  if (!embeddingData || Object.keys(embeddingData).length === 0) return;
+  const varianceEl = document.getElementById('variance-analysis');
+  if (!varianceEl || !embeddingData || Object.keys(embeddingData).length === 0) {
+    if (varianceEl) {
+      setTimeout(createVarianceAnalysis, 1000);
+    }
+    return;
+  }
   
   // Create variance table
   let tableHTML = `
@@ -245,8 +269,11 @@ function createVarianceAnalysis() {
     </div>
   `;
   
-  document.getElementById('variance-analysis').innerHTML = tableHTML;
+  varianceEl.innerHTML = tableHTML;
 }
+
+// Initialize variance analysis
+setTimeout(createVarianceAnalysis, 2000);
 </script>
 
 ---
@@ -260,7 +287,7 @@ function createVarianceAnalysis() {
 <div style="margin: 20px 0;">
   <input id="word1" placeholder="Enter first word" style="padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px;">
   <input id="word2" placeholder="Enter second word" style="padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px;">
-  <button onclick="computeSimilarity()" style="padding: 8px 16px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Calculate Similarity</button>
+  <button id="computeBtn" style="padding: 8px 16px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Calculate Similarity</button>
 </div>
 <div id="similarity-result" style="font-size: 16px; font-weight: bold; margin: 10px 0;"></div>
 
@@ -280,16 +307,24 @@ function cosineSimilarity(a, b) {
 }
 
 function computeSimilarity() {
+  const resultEl = document.getElementById("similarity-result");
+  if (!resultEl) return;
+  
   if (!embeddingData || Object.keys(embeddingData).length === 0) {
-    document.getElementById("similarity-result").innerHTML = '<span style="color: red;">Data not loaded yet. Please wait...</span>';
+    resultEl.innerHTML = '<span style="color: red;">Data not loaded yet. Please wait...</span>';
     return;
   }
 
-  const w1 = document.getElementById("word1").value.toLowerCase().trim();
-  const w2 = document.getElementById("word2").value.toLowerCase().trim();
+  const word1El = document.getElementById("word1");
+  const word2El = document.getElementById("word2");
+  
+  if (!word1El || !word2El) return;
+  
+  const w1 = word1El.value.toLowerCase().trim();
+  const w2 = word2El.value.toLowerCase().trim();
   
   if (!w1 || !w2) {
-    document.getElementById("similarity-result").innerHTML = '<span style="color: orange;">Please enter both words.</span>';
+    resultEl.innerHTML = '<span style="color: orange;">Please enter both words.</span>';
     return;
   }
 
@@ -299,7 +334,7 @@ function computeSimilarity() {
   const f2 = allItems.find(d => d.text.toLowerCase() === w2);
 
   if (!f1 || !f2) {
-    document.getElementById("similarity-result").innerHTML = `<span style="color: red;">One or both words not found in embeddings database.</span>`;
+    resultEl.innerHTML = `<span style="color: red;">One or both words not found in embeddings database.</span>`;
     updateWordSuggestions();
     return;
   }
@@ -312,12 +347,13 @@ function computeSimilarity() {
   if (sim < 0.3) color = 'red';
   else if (sim < 0.6) color = 'orange';
 
-  document.getElementById("similarity-result").innerHTML = 
+  resultEl.innerHTML = 
     `<span style="color: ${color};">Cosine Similarity between "${w1}" and "${w2}": ${sim}</span>`;
 }
 
 function updateWordSuggestions() {
-  if (!embeddingData || Object.keys(embeddingData).length === 0) return;
+  const suggestionsEl = document.getElementById("word-suggestions");
+  if (!suggestionsEl || !embeddingData || Object.keys(embeddingData).length === 0) return;
   
   const allItems = Object.values(embeddingData).flatMap(d => d.items);
   const allWords = [...new Set(allItems.map(item => item.text))].sort();
@@ -329,45 +365,65 @@ function updateWordSuggestions() {
     </div>
   `;
   
-  document.getElementById("word-suggestions").innerHTML = suggestionsHTML;
+  suggestionsEl.innerHTML = suggestionsHTML;
 }
 
-// Update suggestions when data is loaded
-setTimeout(updateWordSuggestions, 2000);
+// Initialize similarity calculator
+function initializeSimilarityCalculator() {
+  const computeBtn = document.getElementById("computeBtn");
+  if (computeBtn) {
+    computeBtn.addEventListener('click', computeSimilarity);
+  }
+  
+  // Update suggestions when data is loaded
+  setTimeout(updateWordSuggestions, 3000);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeSimilarityCalculator);
+} else {
+  initializeSimilarityCalculator();
+}
 </script>
 
 ---
 
-## 🌐 PCA Visualization of Embeddings (3D)
+## Combined PCA Visualization
 
-Sometimes 2D isn’t enough — let’s explore **3D projections** of embeddings.  
-Rotate the plot below to see how clusters form in higher dimensions.
+Sometimes it helps to see all datasets together to understand the overall embedding space structure.
 
-<div id="pca-plot-3d"></div>
+<div id="pca-plot-3d" style="width: 100%; height: 700px; margin: 20px 0;"></div>
 
 <script>
-fetch("./all_embedding_pca_results.json")
-  .then(res => res.json())
-  .then(data => {
-    const traces = [];
-    Object.values(data).forEach(dataset => {
-      const x = dataset.items.map(d => d.pca_coordinates.x);
-      const y = dataset.items.map(d => d.pca_coordinates.y);
-      const z = dataset.items.map(d => d.pca_coordinates.z);
-      const text = dataset.items.map(d => d.text);
+function createCombinedPCAPlot() {
+  const plotEl = document.getElementById('pca-plot-3d');
+  if (!plotEl) return;
+  
+  if (!embeddingData || Object.keys(embeddingData).length === 0) {
+    setTimeout(createCombinedPCAPlot, 1000);
+    return;
+  }
+  
+  const traces = [];
+  Object.values(embeddingData).forEach(dataset => {
+    const x = dataset.items.map(d => d.pca_coordinates.x);
+    const y = dataset.items.map(d => d.pca_coordinates.y);
+    const z = dataset.items.map(d => d.pca_coordinates.z);
+    const text = dataset.items.map(d => d.text);
 
-      traces.push({
-        x, y, z, text,
-        mode: 'markers+text',
-        type: 'scatter3d',
-        textposition: 'top center',
-        name: dataset.dataset_name,
-        marker: { size: 5 }
-      });
+    traces.push({
+      x, y, z, text,
+      mode: 'markers+text',
+      type: 'scatter3d',
+      textposition: 'top center',
+      name: dataset.dataset_name.replace('_', ' '),
+      marker: { size: 5 }
     });
+  });
 
+  if (typeof Plotly !== 'undefined') {
     Plotly.newPlot('pca-plot-3d', traces, {
-      title: "PCA Projection of Embeddings (3D)",
+      title: "Combined PCA Projection of All Embeddings (3D)",
       scene: {
         xaxis: { title: "PC1" },
         yaxis: { title: "PC2" },
@@ -375,7 +431,10 @@ fetch("./all_embedding_pca_results.json")
       },
       height: 700
     });
-  });
+  }
+}
+
+setTimeout(createCombinedPCAPlot, 2500);
 </script>
 
 ---
@@ -394,6 +453,9 @@ One of the strongest tests of embedding quality is whether analogical relationsh
 
 <script>
 function analyzeAnalogies() {
+  const analysisEl = document.getElementById('analogy-analysis');
+  if (!analysisEl) return;
+  
   if (!embeddingData || !embeddingData.analogical_relationships) {
     setTimeout(analyzeAnalogies, 1000);
     return;
@@ -431,14 +493,14 @@ function analyzeAnalogies() {
            'Poor. The analogical relationship is not well captured.'}</p>
     `;
     
-    document.getElementById('analogy-analysis').innerHTML = analysisHTML;
+    analysisEl.innerHTML = analysisHTML;
   } else {
-    document.getElementById('analogy-analysis').innerHTML = '<p>Analogy words not found in dataset.</p>';
+    analysisEl.innerHTML = '<p>Analogy words not found in dataset.</p>';
   }
 }
 
 // Run analogy analysis when data loads
-setTimeout(analyzeAnalogies, 2000);
+setTimeout(analyzeAnalogies, 3000);
 </script>
 
 ---
@@ -449,6 +511,9 @@ setTimeout(analyzeAnalogies, 2000);
 
 <script>
 function createClusteringAnalysis() {
+  const clusteringEl = document.getElementById('clustering-analysis');
+  if (!clusteringEl) return;
+  
   if (!embeddingData || Object.keys(embeddingData).length === 0) {
     setTimeout(createClusteringAnalysis, 1000);
     return;
@@ -477,67 +542,13 @@ function createClusteringAnalysis() {
     </div>
   `;
   
-  document.getElementById('clustering-analysis').innerHTML = analysisHTML;
+  clusteringEl.innerHTML = analysisHTML;
 }
 
-setTimeout(createClusteringAnalysis, 2000);
+setTimeout(createClusteringAnalysis, 2500);
 </script>
 
 ---
-
-## Key Findings & Recommendations
-
-<div id="findings-section">
-
-### What This Embedding Model Does Well:
-1. **Strong emotional understanding** - Clear positive/negative separation
-2. **Good ordinal relationships** - Size progression is well-preserved  
-3. **Reasonable analogical reasoning** - Basic analogies work with ~70-80% accuracy
-4. **Semantic similarity** - Similar words cluster appropriately
-
-### Areas for Improvement:
-1. **Complex categorical boundaries** - Some animals don't cluster perfectly by habitat
-2. **Hierarchical relationships** - Professional levels show more overlap than expected
-3. **Multi-word context** - Sentence-level embeddings show more variance
-
-### Recommendations:
-- For **sentiment analysis**: This embedding performs excellently
-- For **similarity search**: Good performance with simple terms  
-- For **analogical reasoning**: Reasonable but may need fine-tuning
-- For **complex categorization**: Consider domain-specific fine-tuning
-
-</div>
-
----
-
-## Interactive Exploration
-
-Try exploring the visualizations above by:
-- **Rotating** the 3D plots to see different perspectives
-- **Hovering** over points to see exact words and coordinates  
-- **Zooming** to examine clustering in detail
-- **Toggling** categories on/off using the legend
-- **Testing word similarities** using the interactive calculator
-
-The interactive nature of these plots helps reveal patterns that might not be obvious in static analysis.
-
----
-
-## Conclusion
-
-This comprehensive analysis reveals that embeddings are complex, multi-dimensional representations that excel in some areas while facing challenges in others. The key to good embedding evaluation is testing across multiple dimensions:
-
-1. **Geometric properties** (clustering, separation)
-2. **Semantic relationships** (similarity, analogies)  
-3. **Task-specific performance** (classification accuracy)
-4. **Interpretability** (visualization, explainability)
-
-By combining quantitative metrics with interactive visualization, we gain much deeper insights into how well our embeddings capture human language understanding.
-
----
-
-*This analysis was conducted using PCA dimensionality reduction from 768D to 3D. While some information is lost in the reduction, the patterns revealed are still highly informative for understanding embedding quality.*
-
 
 # 3D Layer-wise Embedding Evolution
 
@@ -560,9 +571,6 @@ The visualization includes three datasets:
 
 <div id="embedding-visualization">
 <style>
-body {
-    font-family: Arial, sans-serif;
-}
 .viz-container {
     max-width: 100%;
     background: white;
@@ -631,7 +639,6 @@ body {
     <div id="plot"></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
 <script>
     let currentData = null;
     const JSON_FILE_PATH = 'https://tatva.sumityadav.com.np/posts/2025/09/05/embeddinggemma-300m/all_layerwise_embeddings.json';
@@ -642,20 +649,36 @@ body {
         '#ff7f00', '#ffff33', '#a65628', '#f781bf'
     ];
 
-    document.getElementById('loadData').addEventListener('click', loadDataFromFile);
-    document.getElementById('datasetSelect').addEventListener('change', updateVisualization);
-    document.getElementById('zSeparation').addEventListener('input', function() {
-        document.getElementById('zValue').textContent = this.value;
-        updateVisualization();
-    });
-
-    // Load data automatically on page load
-    window.addEventListener('load', loadDataFromFile);
+    // Wait for DOM to be ready before adding event listeners
+    function initializeLayerwiseVisualization() {
+        const loadButton = document.getElementById('loadData');
+        const datasetSelect = document.getElementById('datasetSelect');
+        const zSeparation = document.getElementById('zSeparation');
+        const zValue = document.getElementById('zValue');
+        
+        if (loadButton) {
+            loadButton.addEventListener('click', loadDataFromFile);
+        }
+        if (datasetSelect) {
+            datasetSelect.addEventListener('change', updateVisualization);
+        }
+        if (zSeparation && zValue) {
+            zSeparation.addEventListener('input', function() {
+                zValue.textContent = this.value;
+                updateVisualization();
+            });
+        }
+        
+        // Load data automatically
+        loadDataFromFile();
+    }
 
     function loadDataFromFile() {
         const statusEl = document.getElementById('loadStatus');
-        statusEl.textContent = 'Loading...';
-        statusEl.style.color = 'orange';
+        if (statusEl) {
+            statusEl.textContent = 'Loading...';
+            statusEl.style.color = 'orange';
+        }
         
         fetch(JSON_FILE_PATH)
             .then(response => {
@@ -668,38 +691,41 @@ body {
                 currentData = data;
                 populateDatasetSelect();
                 updateVisualization();
-                statusEl.textContent = 'Data loaded successfully!';
-                statusEl.style.color = 'green';
+                if (statusEl) {
+                    statusEl.textContent = 'Data loaded successfully!';
+                    statusEl.style.color = 'green';
+                }
             })
             .catch(error => {
                 console.error('Error loading JSON:', error);
-                statusEl.textContent = `Error loading data: ${error.message}`;
-                statusEl.style.color = 'red';
+                if (statusEl) {
+                    statusEl.textContent = `Error loading data: ${error.message}`;
+                    statusEl.style.color = 'red';
+                }
                 
-                // Show fallback message
-                document.getElementById('plot').innerHTML = `
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;">
-                        <div style="text-align: center;">
-                            <p>Could not load JSON file from: ${JSON_FILE_PATH}</p>
-                            <p style="font-size: 14px; color: #999;">
-                                Make sure the file exists at the specified path and the browser has permission to access it.
-                            </p>
-                            <p style="font-size: 12px; color: #ccc;">
-                                Note: For security reasons, browsers may block local file access. 
-                                Consider running a local web server or hosting the file.
-                            </p>
+                const plotEl = document.getElementById('plot');
+                if (plotEl) {
+                    plotEl.innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;">
+                            <div style="text-align: center;">
+                                <p>Could not load JSON file from: ${JSON_FILE_PATH}</p>
+                                <p style="font-size: 14px; color: #999;">
+                                    Make sure the file exists at the specified path and the browser has permission to access it.
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
             });
     }
 
     function populateDatasetSelect() {
         const select = document.getElementById('datasetSelect');
+        if (!select) return;
+        
         select.innerHTML = '<option value="">Select Dataset</option>';
         
         if (currentData) {
-            // Check if data has multiple datasets
             const datasetNames = Object.keys(currentData);
             if (datasetNames.length > 1) {
                 datasetNames.forEach(name => {
@@ -709,7 +735,7 @@ body {
                     select.appendChild(option);
                 });
                 select.style.display = 'block';
-                select.value = datasetNames[0]; // Select first dataset
+                select.value = datasetNames[0];
             } else {
                 select.style.display = 'none';
             }
@@ -719,15 +745,14 @@ body {
     function getCurrentDataset() {
         if (!currentData) return null;
         
-        const selectedDataset = document.getElementById('datasetSelect').value;
+        const selectEl = document.getElementById('datasetSelect');
+        const selectedDataset = selectEl ? selectEl.value : '';
         
         if (selectedDataset && currentData[selectedDataset]) {
             return currentData[selectedDataset];
         } else if (currentData.layers) {
-            // Single dataset format
             return currentData;
         } else {
-            // Multiple datasets, return first one
             const firstKey = Object.keys(currentData)[0];
             return currentData[firstKey];
         }
@@ -737,19 +762,21 @@ body {
         const dataset = getCurrentDataset();
         if (!dataset) return;
 
-        const zSeparation = parseInt(document.getElementById('zSeparation').value);
+        const zSeparationEl = document.getElementById('zSeparation');
+        const zSeparation = zSeparationEl ? parseInt(zSeparationEl.value) : 5;
         
-        // Update info
+        // Update info safely
         const info = document.getElementById('info');
-        info.style.display = 'block';
-        info.innerHTML = `
-            <strong>Dataset:</strong> ${dataset.dataset_name || 'Unknown'} | 
-            <strong>Description:</strong> ${dataset.description || 'N/A'} | 
-            <strong>Total Items:</strong> ${dataset.total_items || 'N/A'} | 
-            <strong>Layers:</strong> ${dataset.num_layers || Object.keys(dataset.layers).length}
-        `;
+        if (info) {
+            info.style.display = 'block';
+            info.innerHTML = `
+                <strong>Dataset:</strong> ${dataset.dataset_name || 'Unknown'} | 
+                <strong>Description:</strong> ${dataset.description || 'N/A'} | 
+                <strong>Total Items:</strong> ${dataset.total_items || 'N/A'} | 
+                <strong>Layers:</strong> ${dataset.num_layers || Object.keys(dataset.layers).length}
+            `;
+        }
 
-        // Prepare data for plotting
         const traces = [];
         const categories = dataset.categories || [];
         const categoryColors = {};
@@ -757,9 +784,8 @@ body {
             categoryColors[cat] = colors[i % colors.length];
         });
 
-        // Create traces for each category
         categories.forEach(category => {
-            const x = [], y = [], z = [], text = [], layer_info = [];
+            const x = [], y = [], z = [], text = [];
             
             Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
                 const layerIdx = parseInt(layerStr);
@@ -771,17 +797,13 @@ body {
                         y.push(item.pca_coordinates.y);
                         z.push(zLevel);
                         text.push(`${item.text}<br>Category: ${item.category}<br>Layer: ${layerIdx}`);
-                        layer_info.push(layerIdx);
                     }
                 });
             });
 
             if (x.length > 0) {
                 traces.push({
-                    x: x,
-                    y: y,
-                    z: z,
-                    text: text,
+                    x: x, y: y, z: z, text: text,
                     type: 'scatter3d',
                     mode: 'markers',
                     name: category,
@@ -789,17 +811,14 @@ body {
                         size: 6,
                         color: categoryColors[category],
                         opacity: 0.8,
-                        line: {
-                            color: 'black',
-                            width: 0.5
-                        }
+                        line: { color: 'black', width: 0.5 }
                     },
                     hovertemplate: '%{text}<extra></extra>'
                 });
             }
         });
 
-        // Add trajectory lines for same text across layers
+        // Add trajectory lines
         const textTrajectories = {};
         Object.entries(dataset.layers).forEach(([layerStr, layerData]) => {
             const layerIdx = parseInt(layerStr);
@@ -808,8 +827,7 @@ body {
             layerData.items.forEach(item => {
                 if (!textTrajectories[item.text]) {
                     textTrajectories[item.text] = {
-                        x: [], y: [], z: [], 
-                        category: item.category
+                        x: [], y: [], z: [], category: item.category
                     };
                 }
                 textTrajectories[item.text].x.push(item.pca_coordinates.x);
@@ -818,13 +836,10 @@ body {
             });
         });
 
-        // Add trajectory lines
-        Object.values(textTrajectories).forEach((traj, i) => {
+        Object.values(textTrajectories).forEach((traj) => {
             if (traj.x.length > 1) {
                 traces.push({
-                    x: traj.x,
-                    y: traj.y,
-                    z: traj.z,
+                    x: traj.x, y: traj.y, z: traj.z,
                     type: 'scatter3d',
                     mode: 'lines',
                     name: '',
@@ -845,35 +860,26 @@ body {
                 xaxis: { title: 'PC1' },
                 yaxis: { title: 'PC2' },
                 zaxis: { title: 'Layer Index' },
-                camera: {
-                    eye: { x: 1.5, y: 1.5, z: 1.5 }
-                }
+                camera: { eye: { x: 1.5, y: 1.5, z: 1.5 } }
             },
             margin: { l: 0, r: 0, b: 0, t: 40 },
-            legend: {
-                x: 0,
-                y: 1
-            }
+            legend: { x: 0, y: 1 }
         };
 
-        Plotly.newPlot('plot', traces, layout, {
-            responsive: true,
-            displayModeBar: true
-        });
+        const plotEl = document.getElementById('plot');
+        if (plotEl && typeof Plotly !== 'undefined') {
+            Plotly.newPlot('plot', traces, layout, {
+                responsive: true,
+                displayModeBar: true
+            });
+        }
     }
 
-    // Instructions for user
-    if (!currentData) {
-        document.getElementById('plot').innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;">
-                <div style="text-align: center;">
-                    <p>Loading data from: ${JSON_FILE_PATH}</p>
-                    <p style="font-size: 14px; color: #999;">
-                        Click "Load Data" if the data doesn't load automatically
-                    </p>
-                </div>
-            </div>
-        `;
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeLayerwiseVisualization);
+    } else {
+        initializeLayerwiseVisualization();
     }
 </script>
 </div>
@@ -881,7 +887,7 @@ body {
 ## How to Use
 
 1. The visualization will attempt to load data automatically
-2. Use the dropdown to switch between different datasets
+2. Use the dropdown to switch between different datasets (if multiple are available)
 3. Adjust the Z-separation slider to change layer spacing
 4. Click and drag to rotate the 3D plot
 5. Use mouse wheel to zoom in/out
@@ -905,4 +911,51 @@ The visualization uses:
 
 ---
 
-*Note: This visualization requires the JSON data file to be accessible at the specified path. For local development, consider running a simple web server to avoid browser security restrictions.*
+## Key Findings & Recommendations
+
+### What This Embedding Model Does Well:
+1. **Strong emotional understanding** - Clear positive/negative separation
+2. **Good ordinal relationships** - Size progression is well-preserved  
+3. **Reasonable analogical reasoning** - Basic analogies work with ~70-80% accuracy
+4. **Semantic similarity** - Similar words cluster appropriately
+
+### Areas for Improvement:
+1. **Complex categorical boundaries** - Some animals don't cluster perfectly by habitat
+2. **Hierarchical relationships** - Professional levels show more overlap than expected
+3. **Multi-word context** - Sentence-level embeddings show more variance
+
+### Recommendations:
+- For **sentiment analysis**: This embedding performs excellently
+- For **similarity search**: Good performance with simple terms  
+- For **analogical reasoning**: Reasonable but may need fine-tuning
+- For **complex categorization**: Consider domain-specific fine-tuning
+
+---
+
+## Interactive Exploration
+
+Try exploring the visualizations above by:
+- **Rotating** the 3D plots to see different perspectives
+- **Hovering** over points to see exact words and coordinates  
+- **Zooming** to examine clustering in detail
+- **Toggling** categories on/off using the legend
+- **Testing word similarities** using the interactive calculator
+
+The interactive nature of these plots helps reveal patterns that might not be obvious in static analysis.
+
+---
+
+## Conclusion
+
+This comprehensive analysis reveals that embeddings are complex, multi-dimensional representations that excel in some areas while facing challenges in others. The key to good embedding evaluation is testing across multiple dimensions:
+
+1. **Geometric properties** (clustering, separation)
+2. **Semantic relationships** (similarity, analogies)  
+3. **Task-specific performance** (classification accuracy)
+4. **Interpretability** (visualization, explainability)
+
+By combining quantitative metrics with interactive visualization, we gain much deeper insights into how well our embeddings capture human language understanding.
+
+---
+
+*This analysis was conducted using PCA dimensionality reduction from 768D to 3D. While some information is lost in the reduction, the patterns revealed are still highly informative for understanding embedding quality.*
