@@ -582,4 +582,321 @@ body {
     .post-info {
         height: 50%;
     }
+}
+
+// Main container with sidebar layout
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    align-items: start;
+}
+
+.content-area {
+    min-width: 0; // Prevent overflow in grid
+}
+
+// Sidebar styles
+.sidebar {
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    background: var(--bg-color);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+// Dark mode sidebar adjustments
+@media (prefers-color-scheme: dark) {
+    :root:not(.light-theme) .sidebar {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border-color: var(--border-color);
+    }
+}
+
+:root.dark-theme .sidebar {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-color);
+}
+
+// Profile card
+.profile-card {
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--link-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--link-color), #ff6b6b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.profile-name {
+    font-family: "Dancing Script", "Brush Script MT", cursive;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-color);
+}
+
+.profile-title {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 500;
+}
+
+.profile-location {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+}
+
+.profile-bio {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0 0 1.5rem 0;
+    text-align: left;
+    font-style: italic;
+}
+
+.profile-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    justify-content: center;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.profile-link:hover {
+    background-color: var(--border-light);
+    color: var(--link-color);
+    transform: translateY(-2px);
+}
+
+// Research highlights section
+.research-highlights {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.research-highlights h3 {
+    font-family: "Dancing Script", "Brush Script MT", cursive;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+}
+
+.highlight-section {
+    margin-bottom: 1.5rem;
+}
+
+.highlight-section:last-child {
+    margin-bottom: 0;
+}
+
+.highlight-section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--link-color);
+}
+
+.highlight-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.highlight-section li {
+    padding: 0.25rem 0;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.highlight-section li:before {
+    content: "•";
+    color: var(--link-color);
+    position: absolute;
+    left: 0;
+}
+
+// Recent posts section
+.recent-posts {
+    padding: 1.5rem 2rem;
+}
+
+.recent-posts h3 {
+    font-family: "Dancing Script", "Brush Script MT", cursive;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+}
+
+.sidebar-post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-post-item {
+    margin-bottom: 1rem;
+}
+
+.sidebar-post-item:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-post-link {
+    display: block;
+    text-decoration: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.sidebar-post-link:hover {
+    background-color: var(--border-light);
+    border-color: var(--link-color);
+    transform: translateX(2px);
+}
+
+.sidebar-post-title {
+    display: block;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-post-date {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+// Responsive sidebar
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 1fr 280px;
+        gap: 2rem;
+    }
+    
+    .sidebar {
+        position: static;
+        max-height: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .sidebar {
+        order: -1; // Show sidebar above content on mobile
+        position: static;
+        max-height: none;
+    }
+    
+    .profile-card {
+        padding: 1.5rem;
+    }
+    
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .profile-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem;
+    }
+    
+    .profile-link {
+        flex: 0 0 auto;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    .research-highlights,
+    .recent-posts {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .profile-name {
+        font-size: 1.5rem;
+    }
+    
+    .profile-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+    
+    .profile-link {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.75rem;
+    }
 } 

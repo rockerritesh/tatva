@@ -41,7 +41,12 @@
     
     <main class="page-content">
         <div class="wrapper">
-            {{ content }}
+            <div class="main-container">
+                <div class="content-area">
+                    {{ content }}
+                </div>
+                {% include sidebar.html %}
+            </div>
         </div>
     </main>
     
