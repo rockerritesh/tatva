@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2025-10-05T05:45:25.111Z</lastmod>
+    <lastmod>2025-10-30T05:49:01.264Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/about/</loc>
-    <lastmod>2025-10-05T00:00:00Z</lastmod>
+    <lastmod>2025-10-30T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2025/10/30/Neural Modularity Principle/</loc>
+    <lastmod>2025-10-30T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2025/09/22/advance_scanner/</loc>
