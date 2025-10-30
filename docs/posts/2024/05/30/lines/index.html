@@ -95,6 +95,88 @@ Leads to its place.</p>
 
     </div>
 
+    <div class="citation-section">
+    <h3 class="citation-title">📚 How to Cite This Post</h3>
+    
+    <div class="citation-formats">
+        <!-- BibTeX Citation -->
+        <div class="citation-format">
+            <h4>BibTeX</h4>
+            <div class="citation-box">
+                <pre class="citation-text" id="bibtex-citation">@article&#123;yadav{{ page.date | date: "%Y" }}{{ page.title | slugify | replace: '-', '' }},
+    title = &#123;Line&#125;,
+    author = &#123;Sumit Yadav&#125;,
+    journal = &#123;Tatva&#125;,
+    year = &#123;{{ page.date | date: "%Y" }}&#125;,
+    month = &#123;{{ page.date | date: "%B" }}&#125;,
+    day = &#123;{{ page.date | date: "%d" }}&#125;,
+    url = &#123;https://tatva.sumityadav.com.np/posts/2024/05/30/lines/&#125;,
+    note = &#123;Accessed: {{ site.time | date: "%B %d, %Y" }}&#125;
+&#125;</pre>
+                <button class="copy-button" onclick="copyToClipboard('bibtex-citation')" title="Copy BibTeX">
+                    📋 Copy BibTeX
+                </button>
+            </div>
+        </div>
+        
+        <!-- APA Citation -->
+        <div class="citation-format">
+            <h4>APA Style</h4>
+            <div class="citation-box">
+                <pre class="citation-text" id="apa-citation">Yadav, S. ({{ page.date | date: "%Y, %B %d" }}). Line. <em>." <em>Tatva</em>, {{ page.date | date: "%d %b %Y" }}, https://tatva.sumityadav.com.np." Tatva. {{ page.date | date: "%B %d, %Y" }}. https://tatva.sumityadav.com.np/posts/2024/05/30/lines/.</pre>
+                <button class="copy-button" onclick="copyToClipboard('chicago-citation')" title="Copy Chicago">
+                    📋 Copy Chicago
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="citation-note">
+        <p><strong>Note:</strong> This citation format is automatically generated. Please verify and adjust according to your institution's specific requirements.</p>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    const text = element.textContent || element.innerText;
+    
+    // Create a temporary textarea element
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    
+    // Select and copy the text
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // For mobile devices
+    
+    try {
+        document.execCommand('copy');
+        
+        // Update button text to show success
+        const button = element.nextElementSibling;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        button.style.background = 'var(--link-color)';
+        button.style.color = 'white';
+        
+        // Reset button after 2 seconds
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '';
+            button.style.color = '';
+        }, 2000);
+        
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+        alert('Failed to copy citation. Please select and copy manually.');
+    }
+    
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+}
+</script>
+
     <footer class="post-footer">
         <p><a href="/">&larr; Back to all posts</a></p>
     </footer>
