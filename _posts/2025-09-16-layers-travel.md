@@ -321,3 +321,12 @@ description: "Interactive 3D visualization of how neural network embeddings evol
     }
 </script>
 </body>
+
+
+##🧩 **Conclusion**
+
+This 3D visualization reveals how a transformer model **energizes and organizes meaning** across its layers.
+Initially, all sentence embeddings cluster tightly — representing **low semantic differentiation**. As the layers deepen, the embeddings **spread outward and form distinct clusters**, showing how the model gradually transforms raw token information into **semantically charged representations** (positive, negative, neutral).
+
+The expanding, conical structure reflects a **flow of informational energy** — from a compressed input state to a more expressive, task-specific space.
+In essence, this plot captures the **evolution of understanding inside the model**, where representational energy becomes more structured and sentiment meaning emerges layer by layer.
