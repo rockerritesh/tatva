@@ -6,7 +6,7 @@ tags: [embeddings, pca, 3d-visualization, plotly]
 description: "Interactive 3D visualization of how neural network embeddings evolve across layers"
 ---
 
-# Interactive 3D visualization of how neural network embeddings evolve across layers
+# Interactive 3D visualization of how neural network embeddings evolve across layers [gemma-embedding]
 
 <head>
     <meta charset="UTF-8">
