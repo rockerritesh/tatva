@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2025-11-27T15:55:46.078Z</lastmod>
+    <lastmod>2025-11-27T15:58:43.428Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,6 +11,12 @@
     <lastmod>2025-11-27T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2025/11/27/npl/</loc>
+    <lastmod>2025-11-27T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2025/10/30/Neural Modularity Principle/</loc>
@@ -141,12 +147,6 @@
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2024/05/30/lines/</loc>
     <lastmod>2025-05-30T00:00:00.000Z</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tatva.sumityadav.com.np/posts/2025/11/27/npl/</loc>
-    <lastmod>2024-11-27T00:00:00.000Z</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
