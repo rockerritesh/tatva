@@ -7,7 +7,8 @@ description: "Interactive 3D visualization of how neural network embeddings evol
 ---
 
 # Interactive 3D visualization of how neural network embeddings evolve across layers [gemma-embedding]
-![newplot(4).png](newplot(4).png)
+![newplot(4).png](https://tatva.sumityadav.com.np/posts/2025/09/16/layers-travel/newplot(4).png)
+
 
 <head>
     <meta charset="UTF-8">
