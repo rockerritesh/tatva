@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mastering Hexagonal Architecture: A Complete Guide with Python Implementation"
-date: 2025-01-15
+date: 2025-12-03
 author: "Architecture Team"
 categories: [architecture, python, design-patterns, clean-code]
 tags: [hexagonal-architecture, ports-adapters, clean-architecture, python, fastapi, dependency-injection]
@@ -28,7 +28,7 @@ image: /assets/images/hexagonal-architecture.png
 11. [Conclusion](#conclusion)
 
 ---
-https://github.com/rockerritesh/example-hexagonal-service.git
+Here is example implmentation:- https://github.com/rockerritesh/example-hexagonal-service.git
 ## Introduction
 
 In modern software development, maintaining clean, testable, and maintainable code is paramount. As applications grow in complexity, the traditional layered architecture often leads to tight coupling, making systems difficult to test, modify, and scale. **Hexagonal Architecture**, also known as **Ports and Adapters**, provides a solution to these challenges by inverting the dependency flow and isolating business logic from external concerns.
