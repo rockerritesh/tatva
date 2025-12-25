@@ -601,17 +601,29 @@ class JekyllLikeBuilder {
       const firstImage = this.extractFirstImage(body);
       const defaultImage = this.generateDefaultImage(frontmatter.title || slug);
       
+      // Ensure tags and categories are arrays
+      const ensureArray = (value) => {
+        if (!value) return [];
+        if (Array.isArray(value)) return value;
+        if (typeof value === 'string') return [value];
+        return [];
+      };
+
       const post = {
         ...frontmatter,
         content: finalContent,
-        excerpt: body.substring(0, 300) + '...',
+        excerpt: frontmatter.excerpt || body.substring(0, 300) + '...',
         url,
         date: frontmatter.date || `${year}-${month}-${day}`,
         slug,
         file: filePath,
         featuredImage: firstImage,
         defaultImageBg: defaultImage.background,
-        defaultImageIcon: defaultImage.icon
+        defaultImageIcon: defaultImage.icon,
+        tags: ensureArray(frontmatter.tags),
+        categories: ensureArray(frontmatter.categories),
+        readingTime: this.calculateReadingTime(finalContent),
+        wordCount: finalContent.replace(/<[^>]*>/g, '').split(/\s+/).filter(w => w.length > 0).length
       };
 
       this.posts.push(post);
@@ -912,6 +924,215 @@ Allow: /
     }
   }
 
+  // Calculate reading time
+  calculateReadingTime(content) {
+    const text = content.replace(/<[^>]*>/g, '');
+    const wordCount = text.split(/\s+/).filter(word => word.length > 0).length;
+    const wordsPerMinute = 200;
+    const minutes = Math.ceil(wordCount / wordsPerMinute);
+    return minutes;
+  }
+
+  // Generate search index
+  generateSearchIndex() {
+    const destPath = 'docs/search-index.json';
+
+    const searchIndex = this.posts.map(post => ({
+      id: post.url,
+      title: post.title,
+      excerpt: (post.excerpt || '').substring(0, 300).replace(/<[^>]*>/g, ''),
+      content: (post.content || '').replace(/<[^>]*>/g, '').substring(0, 5000),
+      date: post.date,
+      tags: post.tags || [],
+      categories: post.categories || []
+    }));
+
+    try {
+      fs.writeFileSync(destPath, JSON.stringify(searchIndex, null, 2));
+      console.log(`✅ Generated search index with ${searchIndex.length} posts`);
+    } catch (error) {
+      console.error('❌ Error generating search index:', error.message);
+    }
+  }
+
+  // Find related posts based on tags, categories, and date
+  findRelatedPosts(post, limit = 3) {
+    const scoredPosts = this.posts
+      .filter(p => p.url !== post.url)
+      .map(p => {
+        let score = 0;
+
+        // Tag overlap (most important)
+        const commonTags = (post.tags || []).filter(tag =>
+          (p.tags || []).includes(tag)
+        );
+        score += commonTags.length * 10;
+
+        // Category overlap
+        const commonCategories = (post.categories || []).filter(cat =>
+          (p.categories || []).includes(cat)
+        );
+        score += commonCategories.length * 5;
+
+        // Date proximity (recent posts get slight boost)
+        const daysDiff = Math.abs(
+          (new Date(post.date) - new Date(p.date)) / (1000 * 60 * 60 * 24)
+        );
+        score += Math.max(0, 5 - daysDiff / 60); // Decay over 300 days
+
+        return { post: p, score };
+      })
+      .filter(item => item.score > 0) // Only include if some relevance
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit)
+      .map(item => item.post);
+
+    return scoredPosts;
+  }
+
+  // Generate tag and category pages
+  generateTagPages() {
+    const tagMap = new Map();
+    const categoryMap = new Map();
+
+    // Collect all tags and categories
+    this.posts.forEach(post => {
+      (post.tags || []).forEach(tag => {
+        if (!tagMap.has(tag)) tagMap.set(tag, []);
+        tagMap.get(tag).push(post);
+      });
+
+      (post.categories || []).forEach(category => {
+        if (!categoryMap.has(category)) categoryMap.set(category, []);
+        categoryMap.get(category).push(post);
+      });
+    });
+
+    // Generate tag pages
+    tagMap.forEach((posts, tag) => {
+      const tagSlug = tag.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+      const outputPath = path.join('docs', 'tags', tagSlug, 'index.html');
+
+      const content = this.renderTagPage(tag, posts);
+      const pageData = {
+        title: `Posts tagged "${tag}"`,
+        url: `/tags/${tagSlug}/`,
+        tag: tag,
+        posts: posts
+      };
+
+      const html = this.applyLayout(content, 'default', pageData);
+
+      fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+      fs.writeFileSync(outputPath, html);
+    });
+
+    // Generate category pages
+    categoryMap.forEach((posts, category) => {
+      const catSlug = category.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+      const outputPath = path.join('docs', 'categories', catSlug, 'index.html');
+
+      const content = this.renderCategoryPage(category, posts);
+      const pageData = {
+        title: `${category} Posts`,
+        url: `/categories/${catSlug}/`,
+        category: category,
+        posts: posts
+      };
+
+      const html = this.applyLayout(content, 'default', pageData);
+
+      fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+      fs.writeFileSync(outputPath, html);
+    });
+
+    if (tagMap.size > 0 || categoryMap.size > 0) {
+      console.log(`✅ Generated ${tagMap.size} tag pages and ${categoryMap.size} category pages`);
+    }
+  }
+
+  renderTagPage(tag, posts) {
+    let html = `<div class="taxonomy-page">
+      <header class="taxonomy-header">
+        <h1 class="taxonomy-title">Posts tagged "${tag}"</h1>
+        <p class="taxonomy-count">${posts.length} post${posts.length !== 1 ? 's' : ''}</p>
+      </header>
+      <div class="post-list-simple">`;
+
+    posts.forEach(post => {
+      const date = new Date(post.date).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+
+      html += `
+        <article class="post-list-item">
+          <h2 class="post-list-title"><a href="${post.url}">${post.title}</a></h2>
+          <div class="post-list-meta">
+            <time datetime="${post.date}">${date}</time>
+            ${post.readingTime ? `<span class="separator">•</span><span>${post.readingTime} min read</span>` : ''}
+          </div>
+          ${post.excerpt ? `<p class="post-list-excerpt">${post.excerpt.replace(/<[^>]*>/g, '').substring(0, 200)}</p>` : ''}
+        </article>`;
+    });
+
+    html += `</div></div>`;
+    return html;
+  }
+
+  renderCategoryPage(category, posts) {
+    let html = `<div class="taxonomy-page">
+      <header class="taxonomy-header">
+        <h1 class="taxonomy-title">${category}</h1>
+        <p class="taxonomy-count">${posts.length} post${posts.length !== 1 ? 's' : ''}</p>
+      </header>
+      <div class="post-list-simple">`;
+
+    posts.forEach(post => {
+      const date = new Date(post.date).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+
+      html += `
+        <article class="post-list-item">
+          <h2 class="post-list-title"><a href="${post.url}">${post.title}</a></h2>
+          <div class="post-list-meta">
+            <time datetime="${post.date}">${date}</time>
+            ${post.readingTime ? `<span class="separator">•</span><span>${post.readingTime} min read</span>` : ''}
+          </div>
+          ${post.excerpt ? `<p class="post-list-excerpt">${post.excerpt.replace(/<[^>]*>/g, '').substring(0, 200)}</p>` : ''}
+        </article>`;
+    });
+
+    html += `</div></div>`;
+    return html;
+  }
+
+  // Copy JavaScript assets
+  copyJavaScriptAssets() {
+    const jsAssets = [
+      { src: 'assets/js/search.js', dest: 'docs/assets/js/search.js' },
+      { src: 'assets/js/toc.js', dest: 'docs/assets/js/toc.js' }
+    ];
+
+    let copiedCount = 0;
+
+    for (const { src, dest } of jsAssets) {
+      if (fs.existsSync(src)) {
+        try {
+          fs.mkdirSync(path.dirname(dest), { recursive: true });
+          fs.copyFileSync(src, dest);
+          copiedCount++;
+        } catch (error) {
+          console.error(`❌ Error copying ${src}:`, error.message);
+        }
+      }
+    }
+
+    if (copiedCount > 0) {
+      console.log(`✅ Copied ${copiedCount} JavaScript asset(s)`);
+    }
+  }
+
   // Build the site
   async build() {
     console.log('🔨 Building Jekyll-like site...');
@@ -935,7 +1156,16 @@ Allow: /
     
     // Compile SCSS
     this.compileScss();
-    
+
+    // Copy JavaScript assets
+    this.copyJavaScriptAssets();
+
+    // Generate search index
+    this.generateSearchIndex();
+
+    // Generate tag and category pages
+    this.generateTagPages();
+
     // Copy CNAME file
     this.copyCNAME();
     
@@ -956,13 +1186,20 @@ Allow: /
     for (const post of this.posts) {
       const layoutName = post.layout || 'post';
       const layout = this.layouts[layoutName];
-      
+
       if (!layout) {
         console.log(`⚠️  Layout '${layoutName}' not found for post: ${post.title}`);
         continue;
       }
 
-      const html = this.applyLayout(post.content, layoutName, post);
+      // Add related posts to page data
+      const relatedPosts = this.findRelatedPosts(post);
+      const pageData = {
+        ...post,
+        relatedPosts
+      };
+
+      const html = this.applyLayout(post.content, layoutName, pageData);
       
       // Create directory structure for the post
       const postDir = path.join('docs', post.url.replace(/\/$/, ''));

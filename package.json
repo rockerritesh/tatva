@@ -8,8 +8,9 @@
     "dev": "node build.js && cd docs && python3 -m http.server 8000"
   },
   "dependencies": {
-    "marked": "^9.1.6",
     "js-yaml": "^4.1.0",
+    "lunr": "^2.3.9",
+    "marked": "^9.1.6",
     "sass": "^1.69.5"
   },
   "author": "Sumit Yadav",
