@@ -1,5 +1,5 @@
 ---
-title: SAFE-MCP: A Comprehensive Security Framework for Model Context Protocol
+title: "SAFE-MCP: A Comprehensive Security Framework for Model Context Protocol"
 date: 2025-12-26
 ---
 
