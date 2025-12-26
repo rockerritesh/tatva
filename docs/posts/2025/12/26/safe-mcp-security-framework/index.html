@@ -104,40 +104,40 @@
 <h4>Attack Techniques Documented</h4>
 <p><strong>Discovery &amp; Reconnaissance:</strong></p>
 <ul>
-<li><p><strong><a href="https://github.com/openssf/safe-mcp/tree/main/techniques/SAFE-T1603">SAFE-T1603: System Prompt Disclosure</a></strong> - Documented sophisticated multi-turn conversational attacks that exploit LLM sycophancy to extract internal security policies, with research showing 86% success rates against undefended systems. Includes detection strategies using guard models, attention tracking, and behavioral monitoring.</p>
+<li><p><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/techniques/SAFE-T1603">SAFE-T1603: System Prompt Disclosure</a></strong> - Documented sophisticated multi-turn conversational attacks that exploit LLM sycophancy to extract internal security policies, with research showing 86% success rates against undefended systems. Includes detection strategies using guard models, attention tracking, and behavioral monitoring.</p>
 </li>
-<li><p><strong><a href="https://github.com/openssf/safe-mcp/tree/main/techniques/SAFE-T1601">SAFE-T1601: MCP Server Enumeration</a></strong> - Detailed unauthorized discovery and mapping of available MCP servers and tools.</p>
+<li><p><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/techniques/SAFE-T1601">SAFE-T1601: MCP Server Enumeration</a></strong> - Detailed unauthorized discovery and mapping of available MCP servers and tools.</p>
 </li>
 </ul>
 <p><strong>Execution &amp; Advanced Attacks:</strong></p>
 <ul>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/techniques/SAFE-T1110">SAFE-T1110: Multimodal Prompt Injection via Images/Audio</a></strong> - Comprehensive documentation of advanced execution techniques exploiting multimodal AI systems through steganographic embedding, OCR exploitation, and adversarial perturbations in images and audio content.</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/techniques/SAFE-T1110">SAFE-T1110: Multimodal Prompt Injection via Images/Audio</a></strong> - Comprehensive documentation of advanced execution techniques exploiting multimodal AI systems through steganographic embedding, OCR exploitation, and adversarial perturbations in images and audio content.</li>
 </ul>
 <p><strong>Privilege Escalation:</strong></p>
 <ul>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/techniques/SAFE-T1008">SAFE-T1008: Tool Shadowing Attack</a></strong> - Documented how malicious MCP servers can impersonate or interfere with legitimate tools through cross-server tool interference.</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/techniques/SAFE-T1008">SAFE-T1008: Tool Shadowing Attack</a></strong> - Documented how malicious MCP servers can impersonate or interfere with legitimate tools through cross-server tool interference.</li>
 </ul>
 <p><strong>Credential Access:</strong></p>
 <ul>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/techniques/SAFE-T1505">SAFE-T1505: In-Memory Secret Extraction</a></strong> - Detailed techniques for querying vector stores to extract API keys and secrets from AI agent memory, including practical detection examples using clustering and embedding analysis.</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/techniques/SAFE-T1505">SAFE-T1505: In-Memory Secret Extraction</a></strong> - Detailed techniques for querying vector stores to extract API keys and secrets from AI agent memory, including practical detection examples using clustering and embedding analysis.</li>
 </ul>
 <p><strong>Lateral Movement:</strong></p>
 <ul>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/techniques/SAFE-T1703">SAFE-T1703: Tool-Chaining Pivot</a></strong> - Documented how attackers compromise low-privilege tools to leverage privileged tools indirectly through chain attacks.</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/techniques/SAFE-T1703">SAFE-T1703: Tool-Chaining Pivot</a></strong> - Documented how attackers compromise low-privilege tools to leverage privileged tools indirectly through chain attacks.</li>
 </ul>
 <h4>Mitigation Strategies Developed</h4>
 <p><strong>Multimodal Security Controls (6 mitigations):</strong></p>
 <ul>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/mitigations/SAFE-M-49">SAFE-M-49: Multimedia Content Sanitization</a></strong> - Content Disarm and Reconstruction (CDR) for all multimedia inputs</li>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/mitigations/SAFE-M-50">SAFE-M-50: OCR Security Scanning</a></strong> - OCR-based malicious instruction detection</li>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/mitigations/SAFE-M-51">SAFE-M-51: Embedding Anomaly Detection</a></strong> - AI-based adversarial pattern detection in multimodal embeddings</li>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/mitigations/SAFE-M-52">SAFE-M-52: Input Validation Pipeline</a></strong> - Comprehensive multimedia validation including steganography detection</li>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/mitigations/SAFE-M-53">SAFE-M-53: Multimodal Behavioral Monitoring</a></strong> - AI response anomaly monitoring</li>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/mitigations/SAFE-M-54">SAFE-M-54: Cross-Modal Correlation Analysis</a></strong> - Correlation analysis between inputs and behavioral changes</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/mitigations/SAFE-M-49">SAFE-M-49: Multimedia Content Sanitization</a></strong> - Content Disarm and Reconstruction (CDR) for all multimedia inputs</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/mitigations/SAFE-M-50">SAFE-M-50: OCR Security Scanning</a></strong> - OCR-based malicious instruction detection</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/mitigations/SAFE-M-51">SAFE-M-51: Embedding Anomaly Detection</a></strong> - AI-based adversarial pattern detection in multimodal embeddings</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/mitigations/SAFE-M-52">SAFE-M-52: Input Validation Pipeline</a></strong> - Comprehensive multimedia validation including steganography detection</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/mitigations/SAFE-M-53">SAFE-M-53: Multimodal Behavioral Monitoring</a></strong> - AI response anomaly monitoring</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/mitigations/SAFE-M-54">SAFE-M-54: Cross-Modal Correlation Analysis</a></strong> - Correlation analysis between inputs and behavioral changes</li>
 </ul>
 <p><strong>Memory Security:</strong></p>
 <ul>
-<li><strong><a href="https://github.com/openssf/safe-mcp/tree/main/mitigations/SAFE-M-63">SAFE-M-63: Embedding Sanitization</a></strong> - Protection against in-memory secret extraction through embedding analysis and sanitization</li>
+<li><strong><a href="https://github.com/SAFE-MCP/safe-mcp/tree/main/mitigations/SAFE-M-63">SAFE-M-63: Embedding Sanitization</a></strong> - Protection against in-memory secret extraction through embedding analysis and sanitization</li>
 </ul>
 <h3>Research-Backed Approach</h3>
 <p>All my contributions are grounded in cutting-edge academic research and real-world security findings:</p>
@@ -580,7 +580,7 @@ vector_store.add(poisoned_embedding)
 <h3>For Security Teams</h3>
 <p><strong>1. Threat Assessment</strong></p>
 <pre><code class="language-bash"># Clone the SAFE-MCP repository
-git clone https://github.com/openssf/safe-mcp.git
+git clone https://github.com/SAFE-MCP/safe-mcp.git
 
 # Review techniques relevant to your MCP deployment
 cd safe-mcp/techniques/
@@ -668,14 +668,14 @@ def test_prompt_injection_isolation():
 <li>Testing evidence: Security test results mapped to techniques</li>
 </ul>
 <h2>📚 Community and Contribution</h2>
-<p>SAFE-MCP is an <strong>open-source, community-driven</strong> project under OpenSSF governance.</p>
+<p>SAFE-MCP is an <strong>open-source, community-driven</strong> project under SAFE-MCP governance.</p>
 <h3>Get Involved</h3>
 <p><strong>Join the Community:</strong></p>
 <ul>
 <li><strong>Mailing List:</strong> <a href="https://lists.openssf.org/g/openssf-sig-safe-mcp">openssf-sig-safe-mcp@lists.openssf.org</a></li>
 <li><strong>Slack:</strong> OpenSSF #sig-safe-mcp</li>
 <li><strong>Meetings:</strong> Bi-weekly at 1:00 PM PT (PST/PDT)</li>
-<li><strong>GitHub:</strong> <a href="https://github.com/openssf/safe-mcp">openssf/safe-mcp</a></li>
+<li><strong>GitHub:</strong> <a href="https://github.com/SAFE-MCP/safe-mcp">SAFE-MCP/safe-mcp</a></li>
 </ul>
 <p><strong>Contribute:</strong></p>
 <ul>
@@ -763,10 +763,10 @@ def test_prompt_injection_isolation():
 <h2>📖 Additional Resources</h2>
 <h3>Essential Reading</h3>
 <ul>
-<li><strong>SAFE-MCP Repository:</strong> <a href="https://github.com/openssf/safe-mcp">GitHub - openssf/safe-mcp</a></li>
+<li><strong>SAFE-MCP Repository:</strong> <a href="https://github.com/SAFE-MCP/safe-mcp">GitHub - openssf/safe-mcp</a></li>
 <li><strong>MITRE ATT&amp;CK:</strong> <a href="https://attack.mitre.org">attack.mitre.org</a></li>
 <li><strong>Model Context Protocol Spec:</strong> <a href="https://modelcontextprotocol.io">MCP Documentation</a></li>
-<li><strong>OpenSSF:</strong> <a href="https://openssf.org">openssf.org</a></li>
+<li><strong>SAFE-MCP:</strong> <a href="https://SAFE-MCP.org">SAFE-MCP.org</a></li>
 </ul>
 <h3>Quick Reference</h3>
 <p><strong>Top 5 Critical Techniques to Address First:</strong></p>
