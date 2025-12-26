@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2025-12-25T08:32:12.459Z</lastmod>
+    <lastmod>2025-12-26T04:18:31.940Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/about/</loc>
-    <lastmod>2025-12-25T00:00:00Z</lastmod>
+    <lastmod>2025-12-26T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2025/12/26/safe-mcp-security-framework/</loc>
+    <lastmod>2025-12-26T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2025/12/03/Mastering Hexagonal Architecture: A Complete Guide with Python Implementation/</loc>
