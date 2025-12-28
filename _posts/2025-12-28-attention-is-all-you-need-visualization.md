@@ -22,10 +22,10 @@ In this post, I present an interactive visualization that transforms the paper's
 Explore the full interactive 3D animation where you can rotate, zoom, and follow each sentence as it plots its course through semantic space:
 
 <div style="width: 100%; height: 800px; border: 2px solid #e94560; border-radius: 8px; margin: 20px 0;">
-  <iframe src="/posts/twitter_animation.html" width="100%" height="100%" frameborder="0" style="border-radius: 8px;"></iframe>
+  <iframe src="/posts/2025/12/28/attention-is-all-you-need-visualization/twitter_animation.html" width="100%" height="100%" frameborder="0" style="border-radius: 8px;"></iframe>
 </div>
 
-[Open Full Interactive Visualization](/posts/twitter_animation.html)
+[Open Full Interactive Visualization](/posts/2025/12/28/attention-is-all-you-need-visualization/twitter_animation.html)
 
 ### Video Animation
 
@@ -33,7 +33,7 @@ Watch the cinematic journey through the embedding space:
 
 <div style="max-width: 100%; margin: 20px 0;">
   <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <source src="/posts/twitter_hq.mp4" type="video/mp4">
+    <source src="/posts/2025/12/28/attention-is-all-you-need-visualization/twitter_hq.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -44,7 +44,7 @@ For faster loading and social media sharing:
 
 <div style="max-width: 100%; margin: 20px 0;">
   <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <source src="/posts/twitter_animation.mp4" type="video/mp4">
+    <source src="/posts/2025/12/28/attention-is-all-you-need-visualization/twitter_animation.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -335,9 +335,9 @@ The techniques demonstrated here are broadly applicable to any text corpus, offe
 
 ### Project Files
 
-- **Interactive HTML**: [twitter_animation.html](/posts/twitter_animation.html)
-- **High-Quality Video**: [twitter_hq.mp4](/posts/twitter_hq.mp4)
-- **Standard Video**: [twitter_animation.mp4](/posts/twitter_animation.mp4)
+- **Interactive HTML**: [twitter_animation.html](/posts/2025/12/28/attention-is-all-you-need-visualization/twitter_animation.html)
+- **High-Quality Video**: [twitter_hq.mp4](/posts/2025/12/28/attention-is-all-you-need-visualization/twitter_hq.mp4)
+- **Standard Video**: [twitter_animation.mp4](/posts/2025/12/28/attention-is-all-you-need-visualization/twitter_animation.mp4)
 
 ### Code & Documentation
 
