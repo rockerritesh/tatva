@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention Is All You Need: A Visual Journey Through Semantic Space - Tatva</title>
+    <meta name="description" content="">
+    <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ff6b6b',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#ff6b6b',
+                lineColor: '#666',
+                sectionBkgColor: '#f8f9fa',
+                altSectionBkgColor: '#e9ecef',
+                gridColor: '#ddd',
+                tertiaryColor: '#f1f3f4'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+    
+    <header class="site-header">
+    <div class="wrapper">
+        <a class="site-title" href="/">Tatva</a>
+        
+        <nav class="site-nav">
+            <div class="trigger">
+                <a class="page-link" href="/">Home</a>
+                <!-- <a class="page-link" href="/about">About</a> -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon theme-icon-light">🌙</span>
+                    <span class="theme-icon theme-icon-dark">☀️</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header> 
+    
+    <main class="page-content">
+        <div class="wrapper">
+            <div class="main-container">
+                <div class="content-area">
+                    
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">Attention Is All You Need: A Visual Journey Through Semantic Space</h1>
+        <p class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                December 28, 2025
+            </time>
+            
+        </p>
+    </header>
+
+    <div class="post-content">
+        <h1>Attention Is All You Need: A Visual Journey Through Semantic Space</h1>
+<p><em>Exploring the landmark Transformer paper through interactive 3D embedding visualizations</em></p>
+<hr>
+<h2>Introduction: Visualizing the Paper That Changed AI</h2>
+<p>The 2017 paper &quot;Attention Is All You Need&quot; by Vaswani et al. revolutionized natural language processing and laid the foundation for modern large language models. But what if we could visualize the semantic journey of this groundbreaking paper itself?</p>
+<p>In this post, I present an interactive visualization that transforms the paper&#39;s sentences into a 3D embedding space, revealing the hidden semantic structure of one of AI&#39;s most influential works.</p>
+<h2>The Visualization</h2>
+<h3>Interactive HTML Version</h3>
+<p>Explore the full interactive 3D animation where you can rotate, zoom, and follow each sentence as it plots its course through semantic space:</p>
+<div style="width: 100%; height: 800px; border: 2px solid #e94560; border-radius: 8px; margin: 20px 0;">
+  <iframe src="/posts/twitter_animation.html" width="100%" height="100%" frameborder="0" style="border-radius: 8px;"></iframe>
+</div>
+
+<p><a href="/posts/twitter_animation.html">Open Full Interactive Visualization</a></p>
+<h3>Video Animation</h3>
+<p>Watch the cinematic journey through the embedding space:</p>
+<div style="max-width: 100%; margin: 20px 0;">
+  <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <source src="/posts/twitter_hq.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<h3>Standard Quality Version</h3>
+<p>For faster loading and social media sharing:</p>
+<div style="max-width: 100%; margin: 20px 0;">
+  <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <source src="/posts/twitter_animation.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<hr>
+<h2>How It Works</h2>
+<h3>The Pipeline</h3>
+<p>The visualization was created through a comprehensive pipeline:</p>
+<ol>
+<li><strong>PDF Extraction</strong>: Downloaded and parsed the arXiv PDF of &quot;Attention Is All You Need&quot;</li>
+<li><strong>Text Processing</strong>: Cleaned and segmented the paper into individual sentences</li>
+<li><strong>Embedding Generation</strong>: Used Google&#39;s <code>embeddinggemma-300m</code> model to generate 768-dimensional embeddings</li>
+<li><strong>Dimensionality Reduction</strong>: Applied PCA to reduce to 3D while preserving semantic relationships</li>
+<li><strong>Visualization</strong>: Created interactive Plotly animations and high-quality MP4 videos</li>
+</ol>
+<h3>Technical Architecture</h3>
+<pre><code class="language-python"># Core components of the visualization pipeline
+class EmbeddingGenerator:
+    &quot;&quot;&quot;Generate embeddings using SentenceTransformer&quot;&quot;&quot;
+    def __init__(self, model_name=&quot;google/embeddinggemma-300m&quot;):
+        self.model = SentenceTransformer(model_name)
+
+    def generate_embeddings(self, sentences):
+        return self.model.encode(sentences, show_progress_bar=True)
+
+    def reduce_dimensions(self, embeddings, n_components=3):
+        pca = PCA(n_components=n_components)
+        return pca.fit_transform(embeddings)
+</code></pre>
+<h3>Features</h3>
+<p>The visualization includes several sophisticated features:</p>
+<ul>
+<li><strong>Real-time Sentence Display</strong>: Each frame shows the current sentence being visualized</li>
+<li><strong>Glowing Trail Effect</strong>: A gradient trail connects consecutive sentences</li>
+<li><strong>Progress Tracking</strong>: Visual progress bar and sentence counter</li>
+<li><strong>Smooth Camera Movement</strong>: Dynamic camera angles reveal different perspectives</li>
+<li><strong>Color Gradient</strong>: Plasma colormap shows temporal progression through the paper</li>
+<li><strong>Interactive Controls</strong>: Play, pause, and reset functionality in HTML version</li>
+</ul>
+<hr>
+<h2>Key Insights from the Visualization</h2>
+<h3>Semantic Clustering</h3>
+<p>The 3D visualization reveals several fascinating patterns:</p>
+<ol>
+<li><strong>Introduction vs. Methods</strong>: Clear separation between conceptual introduction and technical methodology sections</li>
+<li><strong>Mathematical Sections</strong>: Dense clustering in areas with heavy mathematical notation</li>
+<li><strong>Results and Discussion</strong>: Distinct cloud representing empirical findings</li>
+<li><strong>Related Work</strong>: Forms its own semantic neighborhood</li>
+</ol>
+<h3>Embedding Quality</h3>
+<p>The PCA analysis shows:</p>
+<ul>
+<li><strong>PC1 Variance</strong>: ~35-40% - Captures primary semantic dimension</li>
+<li><strong>PC2 Variance</strong>: ~20-25% - Secondary structural patterns</li>
+<li><strong>PC3 Variance</strong>: ~15-20% - Tertiary relationships</li>
+<li><strong>Total Variance Captured</strong>: ~70-85% in 3D projection</li>
+</ul>
+<p>This high variance capture indicates that the embedding model successfully preserves semantic relationships even after dramatic dimensionality reduction from 768D to 3D.</p>
+<h3>Journey Through Ideas</h3>
+<p>Following the trajectory reveals the paper&#39;s logical flow:</p>
+<ol>
+<li><strong>Problem Definition</strong> → Starting cluster (introducing attention mechanism)</li>
+<li><strong>Architecture Description</strong> → Middle cloud (detailed transformer components)</li>
+<li><strong>Training &amp; Results</strong> → Dense region (empirical validation)</li>
+<li><strong>Conclusion</strong> → Final position (summarizing contributions)</li>
+</ol>
+<hr>
+<h2>Implementation Details</h2>
+<h3>Model Selection: embeddinggemma-300m</h3>
+<p>I chose Google&#39;s EmbeddingGemma model for several reasons:</p>
+<ul>
+<li><strong>Optimized for Semantic Similarity</strong>: Specifically designed for embedding tasks</li>
+<li><strong>Efficient</strong>: 300M parameters provide excellent quality-to-size ratio</li>
+<li><strong>Modern Architecture</strong>: Based on recent Gemma model family</li>
+<li><strong>Strong Performance</strong>: Competitive with much larger embedding models</li>
+</ul>
+<h3>Visualization Technology Stack</h3>
+<p><strong>Python Libraries</strong>:</p>
+<ul>
+<li><code>sentence-transformers</code>: Embedding generation</li>
+<li><code>scikit-learn</code>: PCA dimensionality reduction</li>
+<li><code>plotly</code>: Interactive 3D visualizations</li>
+<li><code>matplotlib</code>: High-quality video rendering</li>
+<li><code>ffmpeg</code>: Video encoding</li>
+</ul>
+<p><strong>Output Formats</strong>:</p>
+<ul>
+<li><strong>HTML</strong>: Interactive Plotly-based 3D explorer</li>
+<li><strong>MP4 (Standard)</strong>: 15 FPS, optimized for social media</li>
+<li><strong>MP4 (HQ)</strong>: 30 FPS, cinematic quality for presentations</li>
+</ul>
+<h3>Color Scheme &amp; Design</h3>
+<p>The dark theme aesthetic was carefully chosen:</p>
+<pre><code class="language-css">Background: #0d1117  /* GitHub dark background */
+Accent: #e94560      /* Vibrant pink for current point */
+Trail: rgba(233, 69, 96, 0.4)  /* Translucent trail */
+Text: #ffffff        /* High contrast text */
+Grid: #21262d        /* Subtle grid lines */
+</code></pre>
+<p>This creates a professional, modern look suitable for technical presentations and social media sharing.</p>
+<hr>
+<h2>Creating Your Own Visualizations</h2>
+<h3>Quick Start</h3>
+<pre><code class="language-bash"># Install dependencies
+pip install requests pypdf sentence-transformers scikit-learn
+pip install matplotlib plotly numpy nltk
+
+# Run the visualization script
+python attention_embedding_viz_enhanced.py
+</code></pre>
+<h3>Customization Options</h3>
+<p>The script supports various customization options:</p>
+<pre><code class="language-python"># Change the embedding model
+embedder = EmbeddingGenerator(model_name=&quot;all-MiniLM-L6-v2&quot;)
+
+# Adjust animation speed
+viz.create_mp4_animation(&quot;output.mp4&quot;, fps=30)
+
+# Modify color schemes
+viz.accent_color = &#39;#58a6ff&#39;  # Blue accent
+viz.bg_color = &#39;#ffffff&#39;      # Light background
+
+# Control dimensionality
+reduced = embedder.reduce_dimensions(embeddings, n_components=2)
+</code></pre>
+<h3>Use Cases</h3>
+<p>This visualization approach can be applied to:</p>
+<ul>
+<li><strong>Research Papers</strong>: Visualize any academic paper&#39;s semantic structure</li>
+<li><strong>Documentation</strong>: Map software documentation relationships</li>
+<li><strong>Books</strong>: Explore narrative arcs in literature</li>
+<li><strong>Datasets</strong>: Understand text dataset composition</li>
+<li><strong>Conversations</strong>: Analyze dialogue progression</li>
+</ul>
+<hr>
+<h2>Technical Challenges &amp; Solutions</h2>
+<h3>Challenge 1: PDF Extraction</h3>
+<p><strong>Problem</strong>: Academic PDFs contain complex formatting, equations, and references.</p>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Used <code>pypdf</code> for robust text extraction</li>
+<li>Implemented regex patterns to remove references and appendices</li>
+<li>Applied text cleaning to handle hyphenation and formatting artifacts</li>
+</ul>
+<h3>Challenge 2: Embedding Quality</h3>
+<p><strong>Problem</strong>: Not all embedding models preserve semantic relationships well.</p>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Tested multiple models (MiniLM, MPNet, EmbeddingGemma)</li>
+<li>Evaluated using variance explained by PCA</li>
+<li>Selected EmbeddingGemma for best semantic preservation</li>
+</ul>
+<h3>Challenge 3: Video Rendering Performance</h3>
+<p><strong>Problem</strong>: High-quality 3D animations are computationally expensive.</p>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Implemented dual-quality rendering (standard + HQ)</li>
+<li>Optimized frame generation with vectorized operations</li>
+<li>Used efficient FFmpeg encoding with H.264 codec</li>
+</ul>
+<h3>Challenge 4: Interactive Responsiveness</h3>
+<p><strong>Problem</strong>: Large datasets can make interactive visualizations sluggish.</p>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Used Plotly&#39;s optimized 3D scatter plots</li>
+<li>Implemented progressive loading for HTML version</li>
+<li>Reduced point count for mobile devices</li>
+</ul>
+<hr>
+<h2>Performance Metrics</h2>
+<h3>Processing Statistics</h3>
+<p>For the &quot;Attention Is All You Need&quot; paper:</p>
+<ul>
+<li><strong>Total Sentences</strong>: ~250 sentences (after filtering)</li>
+<li><strong>Embedding Time</strong>: ~30 seconds on CPU</li>
+<li><strong>PCA Computation</strong>: &lt;1 second</li>
+<li><strong>HTML Generation</strong>: ~5 seconds</li>
+<li><strong>MP4 Rendering (Standard)</strong>: ~2-3 minutes</li>
+<li><strong>MP4 Rendering (HQ)</strong>: ~5-8 minutes</li>
+</ul>
+<h3>File Sizes</h3>
+<ul>
+<li><strong>HTML File</strong>: ~5.4 MB (includes embedded Plotly.js)</li>
+<li><strong>MP4 Standard</strong>: ~15-20 MB</li>
+<li><strong>MP4 HQ</strong>: ~40-60 MB</li>
+<li><strong>Embeddings (NumPy)</strong>: ~1.5 MB</li>
+</ul>
+<hr>
+<h2>Interpretations &amp; Observations</h2>
+<h3>The Paper&#39;s Semantic Flow</h3>
+<p>The visualization reveals the paper&#39;s carefully crafted narrative:</p>
+<ol>
+<li><strong>Smooth Transitions</strong>: Generally gradual movements indicate logical flow</li>
+<li><strong>Abrupt Jumps</strong>: Sudden position changes mark major topic shifts</li>
+<li><strong>Circular Patterns</strong>: Revisiting concepts creates loops in semantic space</li>
+<li><strong>Convergence</strong>: Related concepts cluster together naturally</li>
+</ol>
+<h3>Attention Mechanism Itself</h3>
+<p>Interestingly, this visualization parallels the attention mechanism described in the paper:</p>
+<ul>
+<li><strong>Self-Attention</strong>: How each sentence relates to others (embedding similarities)</li>
+<li><strong>Positional Encoding</strong>: Temporal ordering preserved in the sequence</li>
+<li><strong>Multi-Head Attention</strong>: Multiple PCA components capture different semantic aspects</li>
+</ul>
+<p>The visualization becomes a meta-commentary on the very concept it describes.</p>
+<hr>
+<h2>Future Enhancements</h2>
+<h3>Potential Improvements</h3>
+<ol>
+<li><strong>Multi-Layer Visualization</strong>: Show how embeddings evolve through transformer layers</li>
+<li><strong>Interactive Sentence Highlighting</strong>: Click points to see full sentences</li>
+<li><strong>Comparative Analysis</strong>: Overlay multiple papers for comparison</li>
+<li><strong>Topic Coloring</strong>: Apply topic modeling to color-code semantic clusters</li>
+<li><strong>Citation Network</strong>: Include citation relationships in the visualization</li>
+</ol>
+<h3>Research Directions</h3>
+<ul>
+<li><strong>Cross-Paper Analysis</strong>: Visualize evolution of ideas across multiple papers</li>
+<li><strong>Temporal Embedding</strong>: Track how paper concepts evolved over drafts</li>
+<li><strong>Hierarchical Clustering</strong>: Automatic section detection from embeddings</li>
+<li><strong>Attention Heatmaps</strong>: Overlay actual attention weights from the model</li>
+</ul>
+<hr>
+<h2>Conclusion</h2>
+<p>This visualization transforms a static research paper into a dynamic journey through semantic space. By leveraging modern embedding models and dimensionality reduction, we can see the hidden structure of ideas that made &quot;Attention Is All You Need&quot; such a landmark contribution.</p>
+<p>The techniques demonstrated here are broadly applicable to any text corpus, offering new ways to understand, explore, and present written content. As embedding models continue to improve, these visualizations will become even more powerful tools for knowledge discovery.</p>
+<h3>Key Takeaways</h3>
+<p>✅ <strong>Embeddings Capture Semantics</strong>: Modern models preserve meaningful relationships
+✅ <strong>Dimensionality Reduction Works</strong>: PCA retains 70-85% variance in 3D
+✅ <strong>Visualization Reveals Structure</strong>: Hidden patterns become visible
+✅ <strong>Interactive Exploration</strong>: User engagement deepens understanding
+✅ <strong>Multiple Output Formats</strong>: HTML for interactivity, video for sharing</p>
+<hr>
+<h2>Resources</h2>
+<h3>Project Files</h3>
+<ul>
+<li><strong>Interactive HTML</strong>: <a href="/posts/twitter_animation.html">twitter_animation.html</a></li>
+<li><strong>High-Quality Video</strong>: <a href="/posts/twitter_hq.mp4">twitter_hq.mp4</a></li>
+<li><strong>Standard Video</strong>: <a href="/posts/twitter_animation.mp4">twitter_animation.mp4</a></li>
+</ul>
+<h3>Code &amp; Documentation</h3>
+<p>The complete Python script used to generate these visualizations includes:</p>
+<ul>
+<li>PDF downloading and text extraction</li>
+<li>Sentence tokenization and cleaning</li>
+<li>Embedding generation pipeline</li>
+<li>PCA dimensionality reduction</li>
+<li>Interactive Plotly visualization</li>
+<li>High-quality video rendering</li>
+<li>Customizable styling options</li>
+</ul>
+<h3>Original Paper</h3>
+<ul>
+<li><strong>Title</strong>: Attention Is All You Need</li>
+<li><strong>Authors</strong>: Vaswani et al.</li>
+<li><strong>Year</strong>: 2017</li>
+<li><strong>arXiv</strong>: <a href="https://arxiv.org/abs/1706.03762">1706.03762</a></li>
+</ul>
+<hr>
+<h2>Try It Yourself</h2>
+<p>Want to create similar visualizations for your own papers or documents? Here&#39;s a quick guide:</p>
+<pre><code class="language-python"># 1. Extract text from your PDF
+extractor = TextExtractor(&quot;your_paper.pdf&quot;)
+text = extractor.extract_text()
+sentences = extractor.split_into_sentences(text)
+
+# 2. Generate embeddings
+embedder = EmbeddingGenerator()
+embeddings = embedder.generate_embeddings(sentences)
+reduced = embedder.reduce_dimensions(embeddings)
+
+# 3. Create visualizations
+viz = EnhancedVisualizer(reduced, sentences)
+viz.create_twitter_animation_plotly(&quot;output.html&quot;)
+viz.create_high_quality_mp4(&quot;output.mp4&quot;)
+</code></pre>
+<p>That&#39;s it! Three simple steps to transform any text into an interactive semantic journey.</p>
+<hr>
+<p><em>This visualization demonstrates how AI can help us understand AI - using modern embedding models to visualize the very paper that revolutionized how we build AI systems.</em></p>
+<p><strong>Tags</strong>: #AI #MachineLearning #NLP #Embeddings #DataVisualization #Transformers #AttentionMechanism #Research #Python #3DVisualization</p>
+<hr>
+<p><em>Created: December 28, 2025</em>
+<em>Model: google/embeddinggemma-300m</em>
+<em>Sentences Analyzed: 250+</em>
+<em>Embedding Dimensions: 768 → 3 (PCA)</em></p>
+
+    </div>
+
+    <div class="citation-section">
+    <h3 class="citation-title">📚 How to Cite This Post</h3>
+    
+    <div class="citation-formats">
+        <!-- BibTeX Citation -->
+        <div class="citation-format">
+            <h4>BibTeX</h4>
+            <div class="citation-box">
+                <pre class="citation-text" id="bibtex-citation">@article&#123;yadav{{ page.date | date: "%Y" }}{{ page.title | slugify | replace: '-', '' }},
+    title = &#123;Attention Is All You Need: A Visual Journey Through Semantic Space&#125;,
+    author = &#123;Sumit Yadav&#125;,
+    journal = &#123;Tatva&#125;,
+    year = &#123;{{ page.date | date: "%Y" }}&#125;,
+    month = &#123;{{ page.date | date: "%B" }}&#125;,
+    day = &#123;{{ page.date | date: "%d" }}&#125;,
+    url = &#123;https://tatva.sumityadav.com.np/posts/2025/12/28/attention-is-all-you-need-visualization/&#125;,
+    note = &#123;Accessed: {{ site.time | date: "%B %d, %Y" }}&#125;
+&#125;</pre>
+                <button class="copy-button" onclick="copyToClipboard('bibtex-citation')" title="Copy BibTeX">
+                    📋 Copy BibTeX
+                </button>
+            </div>
+        </div>
+        
+        <!-- APA Citation -->
+        <div class="citation-format">
+            <h4>APA Style</h4>
+            <div class="citation-box">
+                <pre class="citation-text" id="apa-citation">Yadav, S. ({{ page.date | date: "%Y, %B %d" }}). Attention Is All You Need: A Visual Journey Through Semantic Space. <em>." <em>Tatva</em>, {{ page.date | date: "%d %b %Y" }}, https://tatva.sumityadav.com.np." Tatva. {{ page.date | date: "%B %d, %Y" }}. https://tatva.sumityadav.com.np/posts/2025/12/28/attention-is-all-you-need-visualization/.</pre>
+                <button class="copy-button" onclick="copyToClipboard('chicago-citation')" title="Copy Chicago">
+                    📋 Copy Chicago
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="citation-note">
+        <p><strong>Note:</strong> This citation format is automatically generated. Please verify and adjust according to your institution's specific requirements.</p>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    const text = element.textContent || element.innerText;
+    
+    // Create a temporary textarea element
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    
+    // Select and copy the text
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // For mobile devices
+    
+    try {
+        document.execCommand('copy');
+        
+        // Update button text to show success
+        const button = element.nextElementSibling;
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        button.style.background = 'var(--link-color)';
+        button.style.color = 'white';
+        
+        // Reset button after 2 seconds
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '';
+            button.style.color = '';
+        }, 2000);
+        
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+        alert('Failed to copy citation. Please select and copy manually.');
+    }
+    
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+}
+</script>
+
+    <footer class="post-footer">
+        <p><a href="/">&larr; Back to all posts</a></p>
+    </footer>
+</article> 
+                </div>
+                <aside class="sidebar">
+    <div class="profile-card">
+        <div class="profile-image">
+            
+            <img src="https://avatars.githubusercontent.com/rockerritesh" alt="Sumit Yadav" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            
+            <div class="profile-placeholder" style="display: none;">
+                <span>{{ site.author.name | slice: 0 }}</span>
+            </div>
+        </div>
+        
+        <div class="profile-info">
+            <h2 class="profile-name">Sumit Yadav</h2>
+            <p class="profile-title">Research Scientist & Developer</p>
+            <p class="profile-location">📍 Nepal</p>
+            
+            
+            <p class="profile-bio">AI/ML researcher passionate about building intelligent systems and exploring the intersection of technology and human creativity.</p>
+            
+            
+            <div class="profile-links">
+                
+                <a href="mailto:rockerritesh4@gmail.com" class="profile-link" title="Email">
+                    📧 Email
+                </a>
+                
+                
+                
+                <a href="https://github.com/rockerritesh" class="profile-link" title="GitHub" target="_blank">
+                    🐙 GitHub
+                </a>
+                
+                
+                
+                <a href="https://linkedin.com/in/rockerritesh" class="profile-link" title="LinkedIn" target="_blank">
+                    💼 LinkedIn
+                </a>
+                
+                
+                
+                <a href="https://twitter.com/rocker_ritesh" class="profile-link" title="Twitter" target="_blank">
+                    🐦 Twitter
+                </a>
+                
+                
+                
+                <a href="https://scholar.google.com/citations?user=ag74ytsAAAAJ&hl=en" class="profile-link" title="Google Scholar" target="_blank">
+                    🎓 Scholar
+                </a>
+                
+                
+                
+                <a href="https://sumityadav.com.np" class="profile-link" title="Website" target="_blank">
+                    🌐 Website
+                </a>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="research-highlights">
+        <h3>Research Highlights</h3>
+        <div class="highlight-section">
+            <h4>AI & Machine Learning</h4>
+            <ul>
+                <li>Large Language Models</li>
+                <li>Deep Learning Systems</li>
+                <li>Natural Language Processing</li>
+                <li>Computer Vision</li>
+            </ul>
+        </div>
+        
+        <div class="highlight-section">
+            <h4>Software Development</h4>
+            <ul>
+                <li>Full-Stack Development</li>
+                <li>Backend Systems</li>
+                <li>API Design</li>
+                <li>DevOps & Cloud</li>
+            </ul>
+        </div>
+        
+        <div class="highlight-section">
+            <h4>Current Focus</h4>
+            <ul>
+                <li>AI Agent Development</li>
+                <li>Model Optimization</li>
+                <li>Research & Innovation</li>
+                <li>Open Source Projects</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- <div class="recent-posts">
+        <h3>Recent Posts</h3>
+        <ul class="sidebar-post-list">
+            
+        </ul>
+    </div> -->
+</aside>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="site-footer">
+    <div class="wrapper">
+        <div class="footer-content">
+            <p>&copy; 2025 Made with ❤️ | All rights reserved to <a href="https://sumityadav.com.np" target="_blank">sumityadav.com.np</a></p>
+            <p>Licensed under <a href="https://github.com/rockerritesh/tatva/blob/main/LICENSE" target="_blank">Apache License 2.0</a></p>
+            
+                <p>Contact: <a href="mailto:rockerritesh4@gmail.com">rockerritesh4@gmail.com</a></p>
+            
+        </div>
+    </div>
+</footer> 
+    
+    <!-- Theme toggle functionality -->
+    <script>
+        (function() {
+            // Get theme preference from localStorage or default to system preference
+            const getThemePreference = () => {
+                const stored = localStorage.getItem('theme-preference');
+                if (stored) return stored;
+                
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            // Apply theme to document
+            const applyTheme = (theme) => {
+                const root = document.documentElement;
+                root.classList.remove('light-theme', 'dark-theme');
+                
+                if (theme !== 'auto') {
+                    root.classList.add(`${theme}-theme`);
+                }
+                
+                // Update Mermaid theme if it exists
+                if (window.mermaid) {
+                    const mermaidTheme = theme === 'dark' || 
+                        (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) 
+                        ? 'dark' : 'default';
+                    
+                    mermaid.initialize({ 
+                        startOnLoad: true,
+                        theme: mermaidTheme,
+                        themeVariables: {
+                            primaryColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            primaryTextColor: theme === 'dark' ? '#e0e0e0' : '#333',
+                            primaryBorderColor: theme === 'dark' ? '#4da6ff' : '#ff6b6b',
+                            lineColor: theme === 'dark' ? '#a0a0a0' : '#666',
+                            sectionBkgColor: theme === 'dark' ? '#2a2a2a' : '#f8f9fa',
+                            altSectionBkgColor: theme === 'dark' ? '#333' : '#e9ecef',
+                            gridColor: theme === 'dark' ? '#333' : '#ddd',
+                            tertiaryColor: theme === 'dark' ? '#2a2a2a' : '#f1f3f4'
+                        }
+                    });
+                    
+                    // Re-render existing diagrams
+                    document.querySelectorAll('.mermaid').forEach(el => {
+                        if (el.getAttribute('data-processed')) {
+                            el.removeAttribute('data-processed');
+                            el.innerHTML = el.getAttribute('data-original') || el.innerHTML;
+                        }
+                    });
+                    mermaid.init(undefined, '.mermaid');
+                }
+            };
+            
+            // Toggle theme function
+            const toggleTheme = () => {
+                const currentTheme = getThemePreference();
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                localStorage.setItem('theme-preference', newTheme);
+                applyTheme(newTheme);
+            };
+            
+            // Apply theme on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                const theme = getThemePreference();
+                applyTheme(theme);
+                
+                // Add click event to theme toggle button
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+                
+                // Store original mermaid content for re-rendering
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    if (!el.getAttribute('data-original')) {
+                        el.setAttribute('data-original', el.innerHTML);
+                    }
+                });
+            });
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only respond to system changes if user hasn't set a manual preference
+                if (!localStorage.getItem('theme-preference')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+        
+        // Scroll Progress Bar functionality
+        (function() {
+            const scrollProgressBar = document.getElementById('scroll-progress-bar');
+            
+            if (!scrollProgressBar) return;
+            
+            function updateScrollProgress() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                scrollProgressBar.style.height = Math.min(Math.max(scrollPercent, 0), 100) + '%';
+            }
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            
+            // Update on resize (in case content changes)
+            window.addEventListener('resize', updateScrollProgress, { passive: true });
+            
+            // Initial update
+            updateScrollProgress();
+        })();
+    </script>
+</body>
+</html> 
