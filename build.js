@@ -903,6 +903,33 @@ class JekyllLikeBuilder {
     }
   }
 
+  // Copy study materials to docs
+  copyStudyMaterials() {
+    const srcDir = 'study';
+    const destDir = 'docs/study';
+    if (!fs.existsSync(srcDir)) return;
+
+    const copyRecursive = (src, dest) => {
+      fs.mkdirSync(dest, { recursive: true });
+      for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+        const srcPath = path.join(src, entry.name);
+        const destPath = path.join(dest, entry.name);
+        if (entry.isDirectory()) {
+          copyRecursive(srcPath, destPath);
+        } else {
+          fs.copyFileSync(srcPath, destPath);
+        }
+      }
+    };
+
+    try {
+      copyRecursive(srcDir, destDir);
+      console.log('✅ Copied study materials to docs/study/');
+    } catch (error) {
+      console.error('❌ Error copying study materials:', error.message);
+    }
+  }
+
   // Generate robots.txt file
   generateRobotsTxt() {
     const destPath = 'docs/robots.txt';
@@ -1239,6 +1266,9 @@ Allow: /
     // Generate robots.txt and llms.txt files
     this.generateRobotsTxt();
     this.generateLlmsTxt();
+
+    // Copy study materials
+    this.copyStudyMaterials();
     
     // Generate individual post pages
     for (const post of this.posts) {

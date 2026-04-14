@@ -149,6 +149,11 @@ body {
   background-color: var(--header-bg);
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+.site-header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .site-title {
   font-family: var(--font-sans);
@@ -162,14 +167,16 @@ body {
 }
 
 .site-nav {
-  float: right;
-  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .site-nav .page-link {
   color: var(--text-color);
   text-decoration: none;
-  margin-left: 1.5rem;
+  margin-left: 1rem;
+  font-size: 0.9rem;
   transition: color 0.2s ease;
 }
 
@@ -409,11 +416,32 @@ body {
 .post-content {
   line-height: 1.75;
   font-size: 1.05rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .post-content img {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
+}
+.post-content table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.post-content table th, .post-content table td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+.post-content table th {
+  background: var(--blockquote-bg);
+  font-weight: 600;
+}
+.post-content iframe, .post-content video, .post-content embed, .post-content object {
+  max-width: 100%;
 }
 
 .post-content h1, .post-content h2, .post-content h3 {
@@ -539,23 +567,18 @@ body {
   .wrapper {
     padding: 0 1rem;
   }
-  .site-nav {
-    float: none;
-    margin-top: 1rem;
-  }
-  .site-nav .trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .site-nav .page-link {
+    margin-left: 0.6rem;
+    font-size: 0.85rem;
   }
   .theme-toggle {
-    width: 36px;
-    height: 36px;
-    font-size: 1.1rem;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
     margin-left: 0;
   }
   .post-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .post-list {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -842,14 +865,10 @@ body {
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
-    gap: 2rem;
+    gap: 0;
   }
   .sidebar {
-    flex: none;
-    width: 100%;
-    order: -1;
-    position: static;
-    max-height: none;
+    display: none;
   }
   .profile-card {
     padding: 1.5rem;
@@ -872,6 +891,9 @@ body {
   .research-highlights,
   .recent-posts {
     padding: 1.5rem;
+  }
+  .content-area {
+    max-width: 100%;
   }
 }
 @media (max-width: 480px) {
