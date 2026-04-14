@@ -13,8 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <!-- highlight.js for code blocks -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/core.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/highlight.min.js"></script>
 
     <style>
         :root {
@@ -759,9 +758,11 @@ async function loadChapter(chapterId) {
         });
 
         // Highlight code
-        content.querySelectorAll('pre code').forEach(block => {
-            hljs.highlightElement(block);
-        });
+        if (typeof hljs !== 'undefined') {
+            content.querySelectorAll('pre code').forEach(block => {
+                hljs.highlightElement(block);
+            });
+        }
 
         // Build floating TOC
         buildTOC();
@@ -808,6 +809,11 @@ function renderMarkdown(md) {
         inlineMathBlocks.push(match);
         return `%%INLINEMATH${idx}%%`;
     });
+
+    // Fix relative paths: chapters reference ../plots/ and ../videos/ relative to chapters/ dir
+    // but we render from index.html at /study/ect/, so rewrite to plots/ and videos/
+    processed = processed.replace(/\]\(\.\.\//g, '](');
+    processed = processed.replace(/src="\.\.\//g, 'src="');
 
     // Configure marked
     marked.setOptions({
