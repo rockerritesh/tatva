@@ -63,7 +63,7 @@
     <header class="post-header">
         <h1 class="post-title">SAFE-MCP: A Comprehensive Security Framework for Model Context Protocol</h1>
         <p class="post-meta">
-            <time datetime="{{ page.date | date_to_xmlschema }}">
+            <time datetime="2025-12-26T00:00:00.000Z">
                 December 26, 2025
             </time>
             
@@ -796,87 +796,113 @@ def test_prompt_injection_isolation():
 
     </div>
 
-    <div class="citation-section">
-    <h3 class="citation-title">📚 How to Cite This Post</h3>
-    
-    <div class="citation-formats">
-        <!-- BibTeX Citation -->
-        <div class="citation-format">
-            <h4>BibTeX</h4>
+    <div class="citation-section" id="citation-section">
+    <h3 class="citation-title">Cite This Post</h3>
+
+    <div class="citation-tabs" role="tablist">
+        <button class="citation-tab active" data-target="bibtex" role="tab" aria-selected="true">BibTeX</button>
+        <button class="citation-tab" data-target="apa" role="tab" aria-selected="false">APA</button>
+        <button class="citation-tab" data-target="mla" role="tab" aria-selected="false">MLA</button>
+        <button class="citation-tab" data-target="chicago" role="tab" aria-selected="false">Chicago</button>
+    </div>
+
+    <div class="citation-panels">
+        <div class="citation-panel active" id="panel-bibtex" role="tabpanel">
             <div class="citation-box">
-                <pre class="citation-text" id="bibtex-citation">@article&#123;yadav{{ page.date | date: "%Y" }}{{ page.title | slugify | replace: '-', '' }},
-    title = &#123;SAFE-MCP: A Comprehensive Security Framework for Model Context Protocol&#125;,
-    author = &#123;Sumit Yadav&#125;,
-    journal = &#123;Tatva&#125;,
-    year = &#123;{{ page.date | date: "%Y" }}&#125;,
-    month = &#123;{{ page.date | date: "%B" }}&#125;,
-    day = &#123;{{ page.date | date: "%d" }}&#125;,
-    url = &#123;https://tatva.sumityadav.com.np/posts/2025/12/26/safe-mcp-security-framework/&#125;,
-    note = &#123;Accessed: {{ site.time | date: "%B %d, %Y" }}&#125;
-&#125;</pre>
-                <button class="copy-button" onclick="copyToClipboard('bibtex-citation')" title="Copy BibTeX">
-                    📋 Copy BibTeX
-                </button>
+                <pre class="citation-text" id="cite-bibtex"></pre>
+                <button class="copy-btn" data-cite="cite-bibtex">Copy</button>
             </div>
         </div>
-        
-        <!-- APA Citation -->
-        <div class="citation-format">
-            <h4>APA Style</h4>
+        <div class="citation-panel" id="panel-apa" role="tabpanel">
             <div class="citation-box">
-                <pre class="citation-text" id="apa-citation">Yadav, S. ({{ page.date | date: "%Y, %B %d" }}). SAFE-MCP: A Comprehensive Security Framework for Model Context Protocol. <em>." <em>Tatva</em>, {{ page.date | date: "%d %b %Y" }}, https://tatva.sumityadav.com.np." Tatva. {{ page.date | date: "%B %d, %Y" }}. https://tatva.sumityadav.com.np/posts/2025/12/26/safe-mcp-security-framework/.</pre>
-                <button class="copy-button" onclick="copyToClipboard('chicago-citation')" title="Copy Chicago">
-                    📋 Copy Chicago
-                </button>
+                <pre class="citation-text" id="cite-apa"></pre>
+                <button class="copy-btn" data-cite="cite-apa">Copy</button>
+            </div>
+        </div>
+        <div class="citation-panel" id="panel-mla" role="tabpanel">
+            <div class="citation-box">
+                <pre class="citation-text" id="cite-mla"></pre>
+                <button class="copy-btn" data-cite="cite-mla">Copy</button>
+            </div>
+        </div>
+        <div class="citation-panel" id="panel-chicago" role="tabpanel">
+            <div class="citation-box">
+                <pre class="citation-text" id="cite-chicago"></pre>
+                <button class="copy-btn" data-cite="cite-chicago">Copy</button>
             </div>
         </div>
     </div>
-    
-    <div class="citation-note">
-        <p><strong>Note:</strong> This citation format is automatically generated. Please verify and adjust according to your institution's specific requirements.</p>
-    </div>
+
+    <p class="citation-note">Auto-generated. Verify for your institution's requirements.</p>
 </div>
 
+<template id="cite-meta">SAFE-MCP: A Comprehensive Security Framework for Model Context Protocol</template>
+
 <script>
-function copyToClipboard(elementId) {
-    const element = document.getElementById(elementId);
-    const text = element.textContent || element.innerText;
-    
-    // Create a temporary textarea element
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    
-    // Select and copy the text
-    textarea.select();
-    textarea.setSelectionRange(0, 99999); // For mobile devices
-    
-    try {
-        document.execCommand('copy');
-        
-        // Update button text to show success
-        const button = element.nextElementSibling;
-        const originalText = button.textContent;
-        button.textContent = '✅ Copied!';
-        button.style.background = 'var(--link-color)';
-        button.style.color = 'white';
-        
-        // Reset button after 2 seconds
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = '';
-            button.style.color = '';
-        }, 2000);
-        
-    } catch (err) {
-        console.error('Failed to copy text: ', err);
-        alert('Failed to copy citation. Please select and copy manually.');
-    }
-    
-    // Remove the temporary textarea
-    document.body.removeChild(textarea);
-}
+(function() {
+    var t = document.getElementById('cite-meta').content.textContent || document.getElementById('cite-meta').innerHTML;
+    var a = 'Sumit Yadav';
+    var j = 'Tatva';
+    var u = 'https://tatva.sumityadav.com.np/posts/2025/12/26/safe-mcp-security-framework/';
+    var y = '2025';
+    var mo = 'December';
+    var ms = 'Dec';
+    var dy = '26';
+    var k = a.split(' ')[0].toLowerCase() + y + t.toLowerCase().replace(/[^a-z0-9]+/g, '');
+
+    document.getElementById('cite-bibtex').textContent =
+        '@article{' + k + ',\n  title     = {' + t + '},\n  author    = {' + a +
+        '},\n  journal   = {' + j + '},\n  year      = {' + y + '},\n  month     = {' + mo +
+        '},\n  day       = {' + dy + '},\n  url       = {' + u + '}\n}';
+
+    document.getElementById('cite-apa').textContent =
+        a + '. (' + y + ', ' + mo + ' ' + dy + '). ' + t + '. ' + j + '. ' + u;
+
+    document.getElementById('cite-mla').textContent =
+        a + '. \u201C' + t + '.\u201D ' + j + ', ' + dy + ' ' + ms + ' ' + y + ', ' + u + '.';
+
+    document.getElementById('cite-chicago').textContent =
+        a + '. \u201C' + t + '.\u201D ' + j + '. ' + mo + ' ' + dy + ', ' + y + '. ' + u + '.';
+
+    var sec = document.getElementById('citation-section');
+    sec.querySelectorAll('.citation-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            sec.querySelectorAll('.citation-tab').forEach(function(x) {
+                x.classList.remove('active');
+                x.setAttribute('aria-selected', 'false');
+            });
+            sec.querySelectorAll('.citation-panel').forEach(function(p) { p.classList.remove('active'); });
+            this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
+            sec.querySelector('#panel-' + this.dataset.target).classList.add('active');
+        });
+    });
+
+    sec.querySelectorAll('.copy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var text = document.getElementById(this.dataset.cite).textContent;
+            var b = this;
+            navigator.clipboard.writeText(text).then(function() {
+                b.textContent = 'Copied!';
+                b.classList.add('copied');
+                setTimeout(function() { b.textContent = 'Copy'; b.classList.remove('copied'); }, 2000);
+            }).catch(function() {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.cssText = 'position:fixed;opacity:0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                b.textContent = 'Copied!';
+                b.classList.add('copied');
+                setTimeout(function() { b.textContent = 'Copy'; b.classList.remove('copied'); }, 2000);
+            });
+        });
+    });
+})();
 </script>
+
 
     <footer class="post-footer">
         <p><a href="/">&larr; Back to all posts</a></p>

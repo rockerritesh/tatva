@@ -34,18 +34,45 @@ class JekyllLikeBuilder {
       const configPath = '_config.yml';
       if (fs.existsSync(configPath)) {
         const configContent = fs.readFileSync(configPath, 'utf-8');
-        return yaml.load(configContent);
+        const config = yaml.load(configContent);
+        config.time = new Date().toISOString();
+        return config;
       }
     } catch (error) {
       console.log('Could not load _config.yml, using defaults');
     }
-    
+
     return {
       title: 'Tatva',
       description: 'A blog',
       baseurl: '',
-      author: { name: 'Sumit Yadav' }
+      author: { name: 'Sumit Yadav' },
+      time: new Date().toISOString()
     };
+  }
+
+  // Format a date using strftime-style format strings
+  formatDate(date, format) {
+    const dateObj = new Date(date);
+    if (isNaN(dateObj.getTime())) return '';
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const pad = (n) => n.toString().padStart(2, '0');
+
+    return format
+      .replace(/%B/g, months[dateObj.getMonth()])
+      .replace(/%b/g, monthsShort[dateObj.getMonth()])
+      .replace(/%Y/g, dateObj.getFullYear().toString())
+      .replace(/%m/g, pad(dateObj.getMonth() + 1))
+      .replace(/%d/g, pad(dateObj.getDate()))
+      .replace(/%e/g, dateObj.getDate().toString())
+      .replace(/%H/g, pad(dateObj.getHours()))
+      .replace(/%M/g, pad(dateObj.getMinutes()))
+      .replace(/%S/g, pad(dateObj.getSeconds()));
   }
 
   // Parse frontmatter from markdown content
@@ -108,7 +135,7 @@ class JekyllLikeBuilder {
     }
     
     let processed = template;
-    
+
     // First, process includes: {% include header.html %}
     processed = processed.replace(/\{\%\s*include\s+(\w+\.html)\s*\%\}/g, (match, includeName) => {
       const includeKey = includeName.replace('.html', '');
@@ -119,7 +146,7 @@ class JekyllLikeBuilder {
     processed = processed.replace(/\{\{\s*'([^']+)'\s*\|\s*relative_url\s*\}\}/g, (match, url) => {
       return this.config.baseurl + url;
     });
-    
+
     // Process special 'now' date: {{ 'now' | date: '%Y' }}
     processed = processed.replace(/\{\{\s*'now'\s*\|\s*date:\s*['"]([^'"]+)['"]\s*\}\}/g, (match, format) => {
       const now = new Date();
@@ -128,7 +155,6 @@ class JekyllLikeBuilder {
       }
       return now.toLocaleDateString();
     });
-    
     // Then handle loops BEFORE processing variables inside them
     // Process loops with else: {% for post in site.posts %}...{% else %}...{% endfor %}
     processed = processed.replace(/\{\%\s*for\s+(\w+)\s+in\s+([^%]+)\s*\%\}(.*?)\{\%\s*else\s*\%\}(.*?)\{\%\s*endfor\s*\%\}/gs, (match, itemVar, arrayVar, loopContent, elseContent) => {
@@ -244,11 +270,42 @@ class JekyllLikeBuilder {
     });
     
     // Now process variables with complex filters
-    // Process complex variables with filters: {{ page.description | default: site.description }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*default:\s*([^}]+?)\s*\}\}/g, (match, variable, defaultVar) => {
+    // Process slugify with replace chain: {{ page.title | slugify | replace: '-', '' }}
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*slugify\s*\|\s*replace:\s*'([^']*)'\s*,\s*'([^']*)'\s*\}\}/g, (match, variable, find, replacement) => {
       const parts = variable.trim().split('.');
       let value = data;
-      
+      for (const part of parts) {
+        if (value && value[part] !== undefined) {
+          value = value[part];
+        } else {
+          return '';
+        }
+      }
+      if (!value) return '';
+      const slugified = value.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      return slugified.split(find).join(replacement);
+    });
+
+    // Process slugify filter: {{ page.title | slugify }}
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*slugify\s*\}\}/g, (match, variable) => {
+      const parts = variable.trim().split('.');
+      let value = data;
+      for (const part of parts) {
+        if (value && value[part] !== undefined) {
+          value = value[part];
+        } else {
+          return '';
+        }
+      }
+      if (!value) return '';
+      return value.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    });
+
+    // Process complex variables with filters: {{ page.description | default: site.description }}
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*default:\s*([^}]+?)\s*\}\}/g, (match, variable, defaultVar) => {
+      const parts = variable.trim().split('.');
+      let value = data;
+
       for (const part of parts) {
         if (value && value[part] !== undefined) {
           value = value[part];
@@ -257,12 +314,18 @@ class JekyllLikeBuilder {
           break;
         }
       }
-      
+
       if (value) {
         return value;
       }
-      
-      // Try to get default value
+
+      // Check if default is a string literal (quoted)
+      const stringMatch = defaultVar.trim().match(/^["'](.*)["']$/);
+      if (stringMatch) {
+        return stringMatch[1];
+      }
+
+      // Try to resolve as a data path
       const defaultParts = defaultVar.trim().split('.');
       let defaultValue = data;
       for (const part of defaultParts) {
@@ -272,12 +335,12 @@ class JekyllLikeBuilder {
           return '';
         }
       }
-      
+
       return defaultValue || '';
     });
     
     // Process filters: {{ post.url | relative_url }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*relative_url\s*\}\}/g, (match, variable) => {
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*relative_url\s*\}\}/g, (match, variable) => {
       const parts = variable.trim().split('.');
       let value = data;
       
@@ -293,10 +356,10 @@ class JekyllLikeBuilder {
     });
     
     // Process escape filter: {{ post.title | escape }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*escape\s*\}\}/g, (match, variable) => {
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*escape\s*\}\}/g, (match, variable) => {
       const parts = variable.trim().split('.');
       let value = data;
-      
+
       for (const part of parts) {
         if (value && value[part] !== undefined) {
           value = value[part];
@@ -304,12 +367,12 @@ class JekyllLikeBuilder {
           return '';
         }
       }
-      
+
       return value ? value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') : '';
     });
 
     // Process escape and slice filter: {{ post.title | escape | slice: 0 }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*escape\s*\|\s*slice:\s*(\d+)\s*\}\}/g, (match, variable, index) => {
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*escape\s*\|\s*slice:\s*(\d+)\s*\}\}/g, (match, variable, index) => {
       const parts = variable.trim().split('.');
       let value = data;
       
@@ -326,7 +389,7 @@ class JekyllLikeBuilder {
     });
     
     // Process strip_html and truncatewords: {{ post.excerpt | strip_html | truncatewords: 30 }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*strip_html\s*\|\s*truncatewords:\s*(\d+)\s*\}\}/g, (match, variable, wordCount) => {
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*strip_html\s*\|\s*truncatewords:\s*(\d+)\s*\}\}/g, (match, variable, wordCount) => {
       const parts = variable.trim().split('.');
       let value = data;
       
@@ -348,7 +411,7 @@ class JekyllLikeBuilder {
     });
     
     // Process date filters: {{ page.date | date_to_xmlschema }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*date_to_xmlschema\s*\}\}/g, (match, dateVar) => {
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*date_to_xmlschema\s*\}\}/g, (match, dateVar) => {
       const parts = dateVar.trim().split('.');
       let date = data;
       
@@ -369,10 +432,10 @@ class JekyllLikeBuilder {
     });
     
     // Process date filters: {{ page.date | date: "%B %d, %Y" }}
-    processed = processed.replace(/\{\{\s*([^|]+)\|\s*date:\s*"([^"]+)"\s*\}\}/g, (match, dateVar, format) => {
+    processed = processed.replace(/\{\{\s*([^|}]+)\|\s*date:\s*"([^"]+)"\s*\}\}/g, (match, dateVar, format) => {
       const parts = dateVar.trim().split('.');
       let date = data;
-      
+
       for (const part of parts) {
         if (date && date[part] !== undefined) {
           date = date[part];
@@ -380,32 +443,23 @@ class JekyllLikeBuilder {
           return match;
         }
       }
-      
+
       if (date) {
-        const dateObj = new Date(date);
-        // Simple date formatting
-        if (format === '%B %d, %Y') {
-          return dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        } else if (format === '%Y') {
-          return dateObj.getFullYear().toString();
-        }
+        return this.formatDate(date, format);
       }
-      
+
       return match;
     });
-    
     // Finally, process simple variables: {{ site.title }}, {{ page.title }}
     processed = processed.replace(/\{\{\s*([^}]+)\s*\}\}/g, (match, variable) => {
       // Skip if this looks like a complex template that wasn't processed
       if (variable.includes('|') || variable.includes('%')) {
         return match;
       }
-      
 
-      
       const parts = variable.trim().split('.');
       let value = data;
-      
+
       for (const part of parts) {
         if (value && value[part] !== undefined) {
           value = value[part];
@@ -413,8 +467,12 @@ class JekyllLikeBuilder {
           return ''; // Return empty instead of keeping the template
         }
       }
-      
-      return value || '';
+
+      if (typeof value === 'object' && value !== null) {
+        return JSON.stringify(value);
+      }
+
+      return value !== undefined && value !== null ? String(value) : '';
     });
     
     return processed;
