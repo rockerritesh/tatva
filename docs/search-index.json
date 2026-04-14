@@ -22,6 +22,23 @@
     ]
   },
   {
+    "id": "/posts/2026/04/14/ect-study-material/",
+    "title": "Electric Circuit Theory (EE 501) — Complete Study Material",
+    "excerpt": "\n# Electric Circuit Theory (EE 501) — Complete Study Material\n\nA comprehensive, interactive study guide for **Electric Circuit Theory (EE 501)** — Tribhuvan University, Institute of Engineering syllabus.\n\n**[Open the Study Material](/study/ect/)**\n\n---\n\n## What's Inside\n\nSeven full chapters covering",
+    "content": "Electric Circuit Theory (EE 501) — Complete Study Material\nA comprehensive, interactive study guide for Electric Circuit Theory (EE 501) — Tribhuvan University, Institute of Engineering syllabus.\nOpen the Study Material\n\nWhat&#39;s Inside\nSeven full chapters covering the entire EE 501 syllabus, with worked examples, derivations, formula boxes, and exam-pattern questions.\n\n\n\nChapter\nTopic\nKey Concepts\n\n\n\n1\nNetwork Analysis &amp; Resonance\nMesh/Nodal analysis in AC, Series &amp; Parallel RLC resonance, Q-factor, Bandwidth\n\n\n2\nInitial Conditions\nInductor/Capacitor behavior at t=0+, switching circuits, energy storage\n\n\n3\nTransient Analysis (Direct)\nFirst-order RL/RC, Second-order RLC, overdamped/underdamped/critical\n\n\n4\nLaplace Transform Method\ns-domain circuit models, transfer functions, partial fractions, pole-zero\n\n\n5\nFrequency Response &amp; Bode Plots\nBode magnitude/phase, corner frequencies, asymptotic approximation\n\n\n6\nFourier Series\nTrigonometric &amp; exponential forms, symmetry shortcuts, Parseval&#39;s theorem\n\n\n7\nTwo-Port Networks\nZ, Y, h, ABCD parameters, interconnections, T and Pi networks\n\n\nPlus an Exam Questions Bank with past TU/IOE questions organized by chapter.\nFeatures\n\nLaTeX math rendering (KaTeX) for all equations and derivations\nInteractive plots and diagrams for resonance curves, Bode plots, transient responses\nAnimated videos (Manim) for Series Resonance, Transient Response, Laplace Transform, Bode Plot Construction, Fourier Series Buildup\nCode-highlighted Python examples\nSidebar navigation with chapter search\nMobile-friendly dark theme\n\nWho Is This For\n\nBCE/BEL/BEX students at IOE preparing for EE 501 exams\nAnyone learning circuit theory fundamentals\nQuick reference for practicing engineers\n\nStart studying\n",
+    "date": "2026-04-14T00:00:00.000Z",
+    "tags": [
+      "ect",
+      "circuit-theory",
+      "study-material",
+      "TU-IOE",
+      "electrical-engineering"
+    ],
+    "categories": [
+      "engineering"
+    ]
+  },
+  {
     "id": "/posts/2026/03/08/Internet-Penetration-and-RSPs-Success/",
     "title": "Internet Penetration and RSP's Success in Nepal's 2082 Election — A Quick Correlation Look",
     "excerpt": "\n# Internet Penetration vs RSP Winning Districts — Are They Really Correlated?\n\n![Scatter plot of internet penetration vs RSP wins](https://pbs.twimg.com/media/HC2w1nOboAEw6cK.jpg)  \n*(One of the visuals from the original tweet — districts with higher access/usage rates tended to lean RSP)*\n\n![Map v",

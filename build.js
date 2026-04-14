@@ -857,10 +857,25 @@ class JekyllLikeBuilder {
   </url>`;
     }
     
+    // Add study material pages
+    if (fs.existsSync('study')) {
+      const studyDirs = fs.readdirSync('study', { withFileTypes: true })
+        .filter(d => d.isDirectory());
+      for (const dir of studyDirs) {
+        sitemapContent += `
+  <url>
+    <loc>${fullBaseUrl}/study/${dir.name}/</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+      }
+    }
+
     sitemapContent += `
 </urlset>
 `;
-    
+
     try {
       fs.writeFileSync(destPath, sitemapContent);
       console.log(`✅ Generated sitemap.xml with ${this.posts.length} posts and ${this.pages.length} pages`);

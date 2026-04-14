@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2026-04-14T10:02:08.913Z</lastmod>
+    <lastmod>2026-04-14T10:11:17.282Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,6 +14,12 @@
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2026/04/14/King Salhesh, the Blooming Love and Jur Shital/</loc>
+    <lastmod>2026-04-14T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2026/04/14/ect-study-material/</loc>
     <lastmod>2026-04-14T00:00:00.000Z</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -209,5 +215,11 @@
     <lastmod>2020-01-17T00:00:00.000Z</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/study/ect/</loc>
+    <lastmod>2026-04-14T10:11:17.282Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
