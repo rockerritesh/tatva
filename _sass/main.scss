@@ -438,6 +438,12 @@ body {
 .post-content {
     line-height: 1.75;
     font-size: 1.05rem;
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+    }
 }
 
 .post-content h1, .post-content h2, .post-content h3 {
