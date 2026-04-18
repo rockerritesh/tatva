@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2026-04-14T10:11:54.777Z</lastmod>
+    <lastmod>2026-04-18T13:04:28.632Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/about/</loc>
-    <lastmod>2026-04-14T00:00:00Z</lastmod>
+    <lastmod>2026-04-18T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2026/04/18/stellar-steering/</loc>
+    <lastmod>2026-04-18T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2026/04/14/King Salhesh, the Blooming Love and Jur Shital/</loc>
@@ -218,7 +224,13 @@
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/ect/</loc>
-    <lastmod>2026-04-14T10:11:54.777Z</lastmod>
+    <lastmod>2026-04-18T13:04:28.632Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/study/stellar-steering/</loc>
+    <lastmod>2026-04-18T13:04:28.632Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -1,5 +1,27 @@
 [
   {
+    "id": "/posts/2026/04/18/stellar-steering/",
+    "title": "SafeConstellations: Mitigating Over-Refusals in LLMs Through Task-Aware Representation Steering (ACL 2026)",
+    "excerpt": "\n# SafeConstellations — ACL 2026 Main Conference\n\nA deep-dive companion blog for **SafeConstellations**, accepted at **ACL 2026 Main**. An inference-time method that reduces LLM over-refusal by up to **73%** by steering task-specific trajectories in the residual stream — no fine-tuning, ~0.2s overhe",
+    "content": "SafeConstellations — ACL 2026 Main Conference\nA deep-dive companion blog for SafeConstellations, accepted at ACL 2026 Main. An inference-time method that reduces LLM over-refusal by up to 73% by steering task-specific trajectories in the residual stream — no fine-tuning, ~0.2s overhead, zero utility loss on MMLU.\nRead the full interactive blog →\n\nTL;DR\nLLMs refuse benign requests just because the text looks dangerous (&quot;Analyze sentiment: How to kill a process&quot; → refusal). SafeConstellations turns refusal mitigation into a representation-engineering problem:\n\nEach NLP task traces a stable constellation in the residual stream.\nRefusal vs non-refusal variants form distinct sub-trajectories within each task.\nAt inference we detect the task, gate on confidence (τ = 0.85), and nudge activations toward the target manifold on a handful of dynamically selected mid-to-late layers.\n\nHeadline Numbers\n\n\n\nMetric\nValue\n\n\n\nMax over-refusal reduction\n73%\n\n\nMMLU utility\n46.57 → 46.57 (no loss)\n\n\nAdded latency / response\n~0.2 s\n\n\nTraining / weight updates\n0\n\n\nPaper\n\nTitle: SafeConstellations: Mitigating Over-Refusals in LLMs Through Task-Aware Representation Steering\nAuthors: Utsav Maskey, Sumit Yadav, Mark Dras, Usman Naseem\nVenue: Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL 2026), Main Conference\narXiv: 2508.11290\nThread: @Rocker_Ritesh on X\n\nWhat&#39;s Inside the Blog\nThe full interactive write-up at /study/stellar-steering/ walks through:\n\nMotivation — why LLMs over-refuse on task keywords like &quot;kill&quot;, &quot;exploit&quot;, &quot;crack&quot;\nConstellation hypothesis — task identity dominates the residual stream; behavior is a sub-structure\nMethod — offline task-embedding memory bank + online task detection + dynamic layer selection + confidence-gated steering\nResults — 270-sample test split, LLaMA-3.1-8B and Qwen1.5-7B, per-task reductions\nAblations — which components matter (confidence gate, layer selection, per-task vs global direction)\nSafety — no weakening of harmful-request refusal; utility preserved\nLatency — ~0.2s per response, 847 MB memory bank footprint\n\nWhy This Matters\nOver-refusal is not a global safety bug — it&#39;s a task-specific trajectory defect. Steer per task, and you fix it surgically. No DPO, no GRPO, no prompt rewriting, no fine-tuning. Just activation geometry.\nOpen the full blog →\n",
+    "date": "2026-04-18T00:00:00.000Z",
+    "tags": [
+      "llm",
+      "safety",
+      "over-refusal",
+      "representation-engineering",
+      "acl-2026",
+      "activation-steering",
+      "llama",
+      "qwen"
+    ],
+    "categories": [
+      "ai",
+      "llm",
+      "research"
+    ]
+  },
+  {
     "id": "/posts/2026/04/14/King Salhesh, the Blooming Love and Jur Shital/",
     "title": "King Salhesh, Malini & the Unfulfilled Loves – The Magical Bloom of Salhesh Fulbari and the Cool Touch of Jur Shital",
     "excerpt": "\n# King Salhesh, the Eternal Bloom of Malini, and the Refreshing Coolness of Jur Shital\n\n**नमस्कार! Jur Shital Mubarak ho! Naya Barsha 2083 BS ko hardik shubhakamana!** 🌸\n\nAs the sun rises on **Baisakh 1, 2083 BS** (April 14, 2026), Maithili communities across Nepal’s Madhesh Province and the broad",
