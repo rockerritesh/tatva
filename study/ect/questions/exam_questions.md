@@ -51,6 +51,8 @@
 
 **[2081 Bhadra Q1a]** Discuss the importance of bandwidth in resonance circuit. For the circuit shown in figure, find the frequency at which the whole circuit will be at resonance. If the capacitor and inductor are interchanged, what will be the value of resonance frequency? **[1+7]**
 
+> _Figure not included — topology not determined from text. See IOE 2081 Bhadra paper for the canonical figure._
+
 **[2081 Baishakh Q1a]** Define resonance in parallel R-L-C circuit with the help of phasor diagram. A 220 V, 100 Hz AC source supplies a series circuit with a capacitor and coil. If the coil has 50 $m\Omega$ resistance and 5 mH inductance, find the value of capacitor to create resonance. Also calculate: (i) voltage across R, L and C, (ii) Quality factor. **[8]**
 
 **[2080 Bhadra Q1a]** What do you mean by resonance in RLC series circuit? Define half power frequencies and bandwidth in RLC series circuit and also obtain an expression for them. **[8]**
@@ -61,9 +63,13 @@
 
 **[2079 Baishakh Q1a]** In the circuit shown in figure, find the value of "v", using node voltage method. **[8]**
 
+> _Figure not included — topology not determined from text. See IOE 2079 Baishakh paper for the canonical figure._
+
 ### Mesh/Nodal Analysis Questions
 
 **[2079 Baishakh Q1a]** In the circuit shown, find the value of "v" using node voltage method. 16 V source, 5 A current source, 8$\Omega$, 4$\Omega$, 2$\Omega$ resistors, $v_x$ Amp dependent source. **[8]**
+
+> _Figure not included — topology not determined from text. See IOE 2079 Baishakh paper for the canonical figure._
 
 ---
 
@@ -71,17 +77,31 @@
 
 **[2082 Baishakh Q1b]** In the given circuit, the switch is closed at $t = 0$. Obtain the value of $i_1$, $di_1/dt$, $di_2/dt$, and $d^2i_2/dt^2$ at $t = 0^+$. Assume $V_C(0^-) = 2$ V and inductor is de-energized. Circuit: 10 V, 1 H inductor, 10 $\Omega$ resistors, 1/10 $\Omega$, 1 F capacitor. **[8]**
 
+![2082 Baishakh Q1b — two-mesh switching circuit](../plots/q_2082_baishakh_q1b.png)
+
 **[2081 Bhadra Q1b]** Switch is closed at $t = 0$. Determine initial and final values of $i_1$ and $i_2$. Find rate of change of current in inductor and rate of change of voltage in capacitor at $t = 0^+$. **[8]**
+
+![2081 Bhadra Q1b — two-mesh switching circuit (topology inferred)](../plots/q_2081_bhadra_q1b.png)
 
 **[2081 Baishakh Q1b]** Obtain $i_1, i_2, di_1/dt, di_2/dt, d^2i_1/dt^2, d^2i_2/dt^2$ at $t = 0^+$, if switch closed at $t = 0$. Circuit: 10 V, 1 $\Omega$ resistors, 1 F capacitor, 3 H inductor. **[8]**
 
+![2081 Baishakh Q1b — two-mesh switching circuit](../plots/q_2081_baishakh_q1b.png)
+
 **[2080 Bhadra Q1b]** Determine $i_1, i_2, i_1', i_2', i_1''$ at $t = 0^+$. Circuit: 100 V, 10 $\Omega$, 2 H inductors, 20 $\Omega$, 2 F capacitor. **[8]**
+
+![2080 Bhadra Q1b — two-mesh switching circuit](../plots/q_2080_bhadra_q1b.png)
 
 **[2080 Baishakh Q1b]** Obtain $i_1, i_2, di_1/dt, di_2/dt, d^2i_1/dt^2, d^2i_2/dt^2$ at $t = 0^+$. Circuit: $10e^{vt}$ V, 3 H inductor, 5 $\Omega$, 1 F capacitor. **[8]**
 
+![2080 Baishakh Q1b — two-mesh switching circuit](../plots/q_2080_baishakh_q1b.png)
+
 **[2079 Bhadra Q1b]** Find $i_1, i_2, di_1/dt, di_2/dt, d^2i_2/dt^2$ at $t = 0^+$. Circuit: 50 V, 2 $\mu$F, 10 $\Omega$, 2 mH inductor. **[8]**
 
+![2079 Bhadra Q1b — two-mesh switching circuit](../plots/q_2079_bhadra_q1b.png)
+
 **[2079 Baishakh Q1b]** Two inductors $L_1 = 2$ mH, $L_2 = 6$ mH, $R_1 = 10$ k$\Omega$, $R_2 = 5$ k$\Omega$, $i(L_1)(0) = 2$ A. Solve for $i_1, i_2, di_1/dt, di_2/dt, d^2i_1/dt^2, d^2i_2/dt^2$ at $t = 0^+$. **[8]**
+
+![2079 Baishakh Q1b — two-coil switching circuit (topology inferred)](../plots/q_2079_baishakh_q1b.png)
 
 ---
 
@@ -89,31 +109,57 @@
 
 **[2082 Baishakh Q2a]** Switch is opened at $t = 0$. Find general solution for inductor current and voltage using classical method. Find both at $t = 50$ ms. Circuit: 12 V, 4 $\Omega$, 0.1 H, parallel 20 $\Omega$. **[8]**
 
+![2082 Baishakh Q2a — RL transient with switch opening](../plots/q_2082_baishakh_q2a.png)
+
 **[2082 Baishakh Q2b]** Find expression of current through inductor using direct solution method, switch closed at $t = 0$. Source: $10\sin(10^4t+60°)$ V, 2 $\Omega$, 0.01 H. **[8]**
+
+![2082 Baishakh Q2b — RL series with sinusoidal source](../plots/q_2082_baishakh_q2b.png)
 
 **[2081 Bhadra Q2b]** Exponential voltage $v(t) = V_0 e^{-at}$ applied to RC series circuit. Derive expression of current and charge for $t > 0$ using classical approach. **[8]**
 
 **[2081 Bhadra Q3a]** Find $i_1(t)$ and $i_2(t)$ using classical approach when switch closed at $t = 0$. 10 V, 2 $\Omega$, 1 $\Omega$, 0.5 F capacitor. **[8]**
 
+![2081 Bhadra Q3a — two-mesh RC transient](../plots/q_2081_bhadra_q3a.png)
+
 **[2081 Baishakh Q2a]** Switch closed at $t = 0$. Find current through and voltage across capacitor using classical method. Source: $25\sin(10t)$ V, 1 $\Omega$, 1 F. **[8]**
+
+![2081 Baishakh Q2a — RC series with sinusoidal source](../plots/q_2081_baishakh_q2a.png)
 
 **[2081 Baishakh Q2b]** Find $V_c(t)$ using classical method. Source: $v = 6e^{-t}$ V, 5 $\Omega$, 1 H, 0.25 F. **[8]**
 
+![2081 Baishakh Q2b — RLC series with exponential source](../plots/q_2081_baishakh_q2b.png)
+
 **[2080 Bhadra Q2a]** Two mesh network, switch closed at $t = 0$. Find mesh currents $i_1(t), i_2(t)$ using classical method. Also calculate capacitor voltage. 50 V, 10 $\Omega$, 2 $\mu$F. **[8]**
+
+![2080 Bhadra Q2a — two-mesh RC switching circuit](../plots/q_2080_bhadra_q2a.png)
 
 **[2080 Bhadra Q2b]** Switch closed for long time, opens at $t = 0$. Obtain current through inductor and voltage across capacitor for $t > 0$. 12 V, 1 H, 5 $\Omega$, 2 F. **[8]**
 
+![2080 Bhadra Q2b — RLC switching circuit](../plots/q_2080_bhadra_q2b.png)
+
 **[2080 Baishakh Q2a]** Find voltage across inductor $L_2$ using classical method. 100 V, 10 $\Omega$, $L_1 = 3$ H, 15 $\Omega$, $L_2 = 2$ H. **[8]**
+
+![2080 Baishakh Q2a — two-coil two-mesh circuit](../plots/q_2080_baishakh_q2a.png)
 
 **[2080 Baishakh Q2b]** Calculate total current by source for $t > 0$ using classical method. 100 V, 20 $\Omega$, 10 $\Omega$, 10 mH, 100 F. **[8]**
 
+![2080 Baishakh Q2b — RLC switching circuit](../plots/q_2080_baishakh_q2b.png)
+
 **[2079 Bhadra Q2a]** Find current and voltage across capacitor for $t > 0$ using classical method. 100 V, 20 $\Omega$ resistors, 10 $\Omega$, 20 $\mu$F. **[8]**
+
+![2079 Bhadra Q2a — two-mesh RC transient](../plots/q_2079_bhadra_q2a.png)
 
 **[2079 Bhadra Q2b]** Find expression of current through inductor for $t > 0$, voltage across inductor at 10 ms. 20 V, 10 V sources, 30 $\Omega$, 70 $\Omega$, 0.5 H, 1 F. **[8]**
 
+![2079 Bhadra Q2b — two-source RLC switching circuit](../plots/q_2079_bhadra_q2b.png)
+
 **[2079 Baishakh Q2a]** 3 F capacitor initially charged to 20 V, 6 F capacitor to 10 V. Switch closed at $t = 0$. Solve for $i(t)$ using classical method. **[8]**
 
+> _Figure not included — topology not determined from text. See IOE 2079 Baishakh paper for the canonical figure._
+
 **[2079 Baishakh Q2b]** Exponential current $i(t) = 20e^{5t}$ A applied to parallel RLC ($R = 1/10$ $\Omega$, $L = 10$ mH, $C = 2.5$ $\mu$F). Obtain complete particular solution for $v(t)$ by classical method. **[8]**
+
+![2079 Baishakh Q2b — parallel RLC with current source (topology inferred)](../plots/q_2079_baishakh_q2b.png)
 
 ---
 
@@ -121,31 +167,59 @@
 
 **[2082 Baishakh Q3a]** Exponential voltage $20e^{-t}$ applied to RLC series (4 $\Omega$, 1 H, 1/3 F) at $t = 0$. Obtain $i(t)$ using Laplace transform. **[8]**
 
+![2082 Baishakh Q3a — RLC series with exponential source](../plots/q_2082_baishakh_q3a.png)
+
 **[2082 Baishakh Q3b]** Steady state with switch closed. 6 V, 6 $\Omega$, 3 $\Omega$, inductor, 1 F cap. Switch opens at $t = 0$. Find $i_L(t)$ and $V_L(t)$ using Laplace. **[8]**
+
+![2082 Baishakh Q3b — switching circuit with parallel L||C](../plots/q_2082_baishakh_q3b.png)
 
 **[2081 Bhadra Q2a]** Switch opened at $t = 0$. Find expression for current and voltage across inductor for $t > 0$ using Laplace. Steady state before. 11 V, 1 H, 1 $\Omega$, 1/9 F. **[8]**
 
+![2081 Bhadra Q2a — RLC switching circuit (Laplace)](../plots/q_2081_bhadra_q2a.png)
+
 **[2081 Bhadra Q3b]** Determine $i_1(t)$ and $i_2(t)$ for $t > 0$ using Laplace. 60 V, resistors, 20 $\mu$F, 0.8 H. **[8]**
+
+![2081 Bhadra Q3b — two-mesh RLC (topology inferred)](../plots/q_2081_bhadra_q3b.png)
 
 **[2081 Baishakh Q3a]** Switch moved from 1 to 2 at $t = 0$. Find capacitor voltage and current by Laplace. 24 V, 10 $\Omega$ (k=20), 12 $\Omega$, 6 $\Omega$, 1/36 F. **[8]**
 
+![2081 Baishakh Q3a — SPDT switch RC circuit (topology inferred)](../plots/q_2081_baishakh_q3a.png)
+
 **[2081 Baishakh Q3b]** Switch opened at $t = 0$. Find $V_c(t)$ for $t > 0$ using Laplace. 12 V, 1 $\Omega$, 0.5 H, 5 $\Omega$, 2 F. **[8]**
+
+![2081 Baishakh Q3b — RLC switching circuit](../plots/q_2081_baishakh_q3b.png)
 
 **[2080 Bhadra Q3a]** $s_1$ closed at $t = 0$, $s_2$ opened at $t = 4$ ms. Determine $i(t)$ using Laplace. 100 V, 50 $\Omega$, 100 $\Omega$, inductor. **[8]**
 
+![2080 Bhadra Q3a — two-switch RL circuit](../plots/q_2080_bhadra_q3a.png)
+
 **[2080 Bhadra Q3b]** Parallel circuit, capacitor initial voltage 10 V. Switch closed at $t = 0$. Find $V(t)$ using Laplace. 1 F, 0.25 $\Omega$, 1/10 H. **[8]**
+
+![2080 Bhadra Q3b — parallel RLC with charged capacitor](../plots/q_2080_bhadra_q3b.png)
 
 **[2080 Baishakh Q3a]** Find current and $V_C$ for $t > 0$ using Laplace. $v = 10e^{-t}$, 4 $\Omega$, 1 H, 1/3 F. **[8]**
 
+![2080 Baishakh Q3a — RLC series with exponential source](../plots/q_2080_baishakh_q3a.png)
+
 **[2080 Baishakh Q3b]** Find $v(t)$ for $t > 0$ using Laplace. 1 F (initial 10 V), 4 $\Omega$, 3 H. **[8]**
+
+![2080 Baishakh Q3b — source-free RLC with charged capacitor](../plots/q_2080_baishakh_q3b.png)
 
 **[2079 Bhadra Q3a]** Find current and voltage across inductor using Laplace. $10e^{-7t}$ V, 10 $\Omega$, 1 H, 1/100 F. **[8]**
 
+![2079 Bhadra Q3a — RLC series with exponential source](../plots/q_2079_bhadra_q3a.png)
+
 **[2079 Bhadra Q3b]** Find loop currents $i_1, i_2$ for $t > 0$ using Laplace. 10 V, 1 F, 1/6 H, 1/5 $\Omega$. **[8]**
+
+![2079 Bhadra Q3b — two-loop RLC switching circuit](../plots/q_2079_bhadra_q3b.png)
 
 **[2079 Baishakh Q3a]** Steady state with switch closed. Switch opens at $t = 0$. Find current through capacitor using Laplace. 100 V, 20 $\Omega$, 10 $\Omega$, 3 F. **[8]**
 
+![2079 Baishakh Q3a — RC switching circuit](../plots/q_2079_baishakh_q3a.png)
+
 **[2079 Baishakh Q3b]** Steady state with switch open. Switch closed at $t = 0$. Write integrodifferential equations. Evaluate $i_1, i_2$ using Laplace. 100 V, $R_1=10$, $R_2=20$, $R_3=20$, $L=1$ H, $C=1$ $\mu$F. **[8]**
+
+![2079 Baishakh Q3b — two-mesh RLC (topology inferred)](../plots/q_2079_baishakh_q3b.png)
 
 ---
 
@@ -197,9 +271,13 @@
 
 **[2080 Baishakh Q5a]** Find Y and Z parameters for network with $3I_1$ dependent current source. **[8]**
 
+![2080 Baishakh Q5a — two-port with $3I_1$ CCCS (inferred)](../plots/q_2080_baishakh_q5a.png)
+
 **[2079 Bhadra Q5b]** Calculate [Y] and [Z] parameters. Check reciprocity and symmetry. Network with $2V_1$ dependent source, $2I_2$ dependent source. **[8]**
 
 **[2079 Baishakh Q5a]** Find y and g parameters. Check symmetricity and reciprocity. Network with $3V_1$ dependent voltage source. **[6]**
+
+![2079 Baishakh Q5a — two-port with $3V_1$ VCVS (inferred)](../plots/q_2079_baishakh_q5a.png)
 
 **[2079 Baishakh Q5b]** Show: Overall ABCD parameter matrix for cascaded network = matrix product of individual ABCD matrices. **[4]**
 
@@ -209,13 +287,19 @@
 
 **[2082 Baishakh Q4a]** Find transfer impedance $Z_{21}(s)$ and current ratio transfer function $\alpha_{21}(s)$. Two-port with 1 $\Omega$, 2 H, 2 $\Omega$ shunt. **[8]**
 
+![2082 Baishakh Q4a — two-port: 1 Ω + 2 H series, 2 Ω shunt (inferred)](../plots/q_2082_baishakh_q4a.png)
+
 **[2081 Bhadra Q4a]** Find voltage ratio transfer function and transfer impedance when port 2 terminated with 5 $\Omega$. **[6]**
 
 **[2081 Baishakh Q4a]** Find voltage ratio $G_{12}(s)$ and current ratio $\alpha_{21}(s)$. Two-port with 1 H inductors, 1 F cap, 1 $\Omega$ resistors. **[8]**
 
+![2081 Baishakh Q4a — two-port ladder (inferred)](../plots/q_2081_baishakh_q4a.png)
+
 **[2080 Bhadra Q4a]** Determine driving point impedance. With port 2 terminated by 1/2 H inductor, find $Z_{21}(s)$, $Y_{21}(s)$, $\alpha_{21}(s)$. **[8]**
 
 **[2080 Baishakh Q4a]** Find driving point impedance and voltage ratio transfer function. Ladder network: 1 H, 2 H, 1 $\Omega$, 2 $\Omega$. **[8]**
+
+![2080 Baishakh Q4a — two-port LR ladder (inferred)](../plots/q_2080_baishakh_q4a.png)
 
 **[2079 Bhadra Q4a]** Find voltage ratio transfer function. Two-port with 3 $\Omega$, 1 $\Omega$, 2 F caps. **[8]**
 

@@ -2,6 +2,7 @@
 .specs/
 _posts/research-notes.md
 Conversation.md
+.superpowers/
 
 # Dependencies
 node_modules/

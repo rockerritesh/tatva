@@ -379,6 +379,8 @@ When $L$ and $C$ are in parallel, the same voltage appears across both. The init
 
 **Problem:** In the circuit shown, the switch closes at $t = 0$. The DC source is $V_s = 10\,\text{V}$, the inductor is $L = 1\,\text{H}$, the capacitor is $C = 1\,\text{F}$ with initial voltage $v_C(0^-) = 2\,\text{V}$, and there are two $10\,\Omega$ resistors $R_1$ and $R_2$.
 
+![Chapter 2 worked example — two-mesh switching circuit (10 V, $R_1{=}R_2{=}10$ Ω, $L{=}1$ H, $C{=}1$ F)](../plots/ch2_q1_switching.png)
+
 Circuit description: $V_s = 10\,\text{V}$ in series with $R_1 = 10\,\Omega$ and the switch. After the switch, the circuit splits into two branches in parallel: Branch 1 has $L = 1\,\text{H}$ carrying current $i_1$, and Branch 2 has $R_2 = 10\,\Omega$ in series with $C = 1\,\text{F}$ carrying current $i_2$. The total current from the source is $i = i_1 + i_2$.
 
 Find at $t = 0^+$:

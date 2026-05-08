@@ -749,6 +749,8 @@ Compare with series: $R_{\text{critical,series}} = 2\sqrt{L/C}$.
 
 **Problem:** In the circuit shown, a $12\,\text{V}$ DC source is connected through a $4\,\Omega$ resistor and a switch to an inductor $L = 0.1\,\text{H}$. A $20\,\Omega$ resistor is connected in parallel with the inductor. The switch has been closed for a long time and opens at $t = 0$.
 
+![Chapter 3 worked example — RL transient (12 V, 4 Ω, $L{=}0.1$ H, 20 Ω parallel)](../plots/ch3_q1_rl_transient.png)
+
 Find $i_L(t)$ and $v_L(t)$ using the classical method. Evaluate both at $t = 50\,\text{ms}$.
 
 **Solution:**

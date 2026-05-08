@@ -658,6 +658,8 @@ The current eventually dies out because the capacitor blocks DC in steady state.
 
 > **Problem (2082 Baishakh, Q3b):** In the circuit shown, steady state is reached with the switch closed. The circuit has: $V_s = 6\,\text{V}$, $R_1 = 6\,\Omega$ (in series with source), $R_2 = 3\,\Omega$ (in parallel with $L$ and $C$), $L$ (inductor), $C = 1\,\text{F}$ (capacitor). The switch opens at $t = 0$. Find $i_L(t)$ and $V_L(t)$ for $t > 0$ using the Laplace transform method.
 
+![Chapter 4 worked example — Laplace switching circuit ($V_s{=}6$ V, $R_1{=}6$ Ω, $R_2{=}3$ Ω parallel L||C, $C{=}1$ F)](../plots/ch4_q1_laplace_switch.png)
+
 *Note: The exact circuit topology requires assuming standard exam configurations. We'll work with a common configuration where, before switching, the inductor is in steady state carrying current through the parallel combination.*
 
 #### Step 1: Initial Conditions (Before Switch Opens, $t < 0$)
