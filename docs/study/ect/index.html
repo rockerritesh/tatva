@@ -627,6 +627,31 @@
             <span class="ch-num">Q</span> Exam Questions Bank
         </div>
     </div>
+
+    <div class="nav-section">
+        <div class="nav-section-title">Past Question Solutions</div>
+        <a class="nav-item" href="solutions/Q1_RLC_PowerFactor/solution.html" target="_blank" rel="noopener" title="Series R-L-C — Power Factor Correction">
+            <span class="ch-num">1</span> Series RLC · PF Correction
+        </a>
+        <a class="nav-item" href="solutions/Q2_Resonance_Bandwidth/solution.html" target="_blank" rel="noopener" title="Resonance, Half-Power Frequencies & Bandwidth (Series RLC)">
+            <span class="ch-num">2</span> Resonance &amp; Bandwidth
+        </a>
+        <a class="nav-item" href="solutions/Q3_Parallel_Resonance_SeriesNumerical/solution.html" target="_blank" rel="noopener" title="Parallel Resonance (Theory) + Series Resonance (Numerical)">
+            <span class="ch-num">3</span> Parallel/Series Resonance
+        </a>
+        <a class="nav-item" href="solutions/Q4_Series_RLC_Find_RLC/solution.html" target="_blank" rel="noopener" title="Series R-L-C: Determine R, L, C from Resonance Data">
+            <span class="ch-num">4</span> Find R, L, C from Data
+        </a>
+        <a class="nav-item" href="solutions/Q5_NodeVoltage_DependentSources/solution.html" target="_blank" rel="noopener" title="Node Voltage Analysis with Dependent Sources">
+            <span class="ch-num">5</span> Node Voltage · Dep. Sources
+        </a>
+        <a class="nav-item" href="solutions/Q6_Nodal_4Ohm_AB/solution.html" target="_blank" rel="noopener" title="Nodal Analysis — Current through 4Ω between A and B">
+            <span class="ch-num">6</span> Nodal · 4Ω A–B Current
+        </a>
+        <a class="nav-item" href="solutions/Bode_Plots/bode_plots.html" target="_blank" rel="noopener" title="Bode Plot Numericals — Textbook-Style Solutions">
+            <span class="ch-num">B</span> Bode Plot Numericals
+        </a>
+    </div>
 </nav>
 
 <!-- Search Overlay -->
@@ -965,8 +990,8 @@ window.addEventListener('scroll', () => {
 });
 
 // ===== EVENT LISTENERS =====
-// Nav items
-document.querySelectorAll('.nav-item').forEach(item => {
+// Nav items (only chapter-backed ones; external anchor nav-items navigate natively)
+document.querySelectorAll('.nav-item[data-chapter]').forEach(item => {
     item.addEventListener('click', () => loadChapter(item.dataset.chapter));
 });
 
