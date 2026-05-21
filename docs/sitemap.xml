@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2026-05-19T23:25:39.225Z</lastmod>
+    <lastmod>2026-05-21T16:12:04.235Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/about/</loc>
-    <lastmod>2026-05-19T00:00:00Z</lastmod>
+    <lastmod>2026-05-21T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -230,25 +230,31 @@
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/ect/</loc>
-    <lastmod>2026-05-19T23:25:39.226Z</lastmod>
+    <lastmod>2026-05-21T16:12:04.235Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/study/nec-bct-licensure/</loc>
+    <lastmod>2026-05-21T16:12:04.235Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/python-codesignal-prep/</loc>
-    <lastmod>2026-05-19T23:25:39.226Z</lastmod>
+    <lastmod>2026-05-21T16:12:04.235Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/stellar-steering/</loc>
-    <lastmod>2026-05-19T23:25:39.226Z</lastmod>
+    <lastmod>2026-05-21T16:12:04.235Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/tithi-wheel/</loc>
-    <lastmod>2026-05-19T23:25:39.226Z</lastmod>
+    <lastmod>2026-05-21T16:12:04.235Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
