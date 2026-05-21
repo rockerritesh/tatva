@@ -1,16 +1,16 @@
-# NEC BCT Licensure Exam — Past Questions, Solutions & Key Concepts
+# NEC BCT Licensure Exam — Question Bank, Solutions & Key Concepts
 
-Multiple-choice past questions from the **Nepal Engineering Council (NEC) Licensure Examination** for **Bachelor of Computer Engineering (BCT)** — covering three exam sittings:
+Multiple-choice questions from the **Nepal Engineering Council (NEC) Licensure Examination** for **Bachelor of Computer Engineering (BCT)** — organised into three sets:
 
-- **Set I** — Mangshir 2080 (Section A 60 + Section B 20)
-- **Set II** — Mangshir 2080 (Section A 60 + Section B 20)
-- **Set III** — Baishakh 2081 (Section A 60 + Section B 20)
+- **Set I** — Section A (60) + Section B (20)
+- **Set II** — Section A (60) + Section B (20)
+- **Set III** — Section A (60) + Section B (20)
 
-Each question lists the original options, the correct answer, and a short **key-concept** note so you can recover the answer from first principles rather than memorisation.
+Each question lists the options, the correct answer, and a short **key-concept** note so you can recover the answer from first principles rather than memorisation.
 
 ---
 
-## Set I — Mangshir 2080
+## Set I
 
 ### Set I · Section A (60 × 1 = 60)
 
@@ -407,7 +407,7 @@ Each question lists the original options, the correct answer, and a short **key-
 
 ---
 
-## Set II — Mangshir 2080
+## Set II
 
 ### Set II · Section A (60 × 1)
 
@@ -745,7 +745,7 @@ Each question lists the original options, the correct answer, and a short **key-
 
 ---
 
-## Set III — Baishakh 2081
+## Set III
 
 ### Set III · Section A (60 × 1)
 
