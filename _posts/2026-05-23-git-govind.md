@@ -1,6 +1,10 @@
---
-title: Git Govind
+---
+title: "Git Govind — Jayadeva's Gita Govinda"
 date: 2026-05-23
+author: Sumit Yadav (@Rocker_Ritesh)
+categories: [culture]
+tags: [gita-govinda, jayadeva, radha-krishna, sanskrit, literature, devotional]
+description: "A chapter-by-chapter retelling of Jayadeva's Gita Govinda — the divine love of Radha and Govinda across all twelve cantos."
 ---
 
 **In the sacred groves of Vrindavan, where the Yamuna River flows like a silver ribbon under the moonlit sky, the eternal love story of Radha and Govinda unfolds like the blooming lotuses in spring. This is the tale from Jayadeva's *Gita Govinda*, a divine symphony of longing, separation, jealousy, repentance, and ultimate blissful union. It is not merely a song of earthly passion but a profound allegory of the soul's yearning for the Divine.**
