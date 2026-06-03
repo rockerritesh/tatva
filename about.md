@@ -123,7 +123,7 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 ## Competitions
 
 Active Kaggle competitor — recent: **ARC-AGI / NeuroGolf 2026** (minimal-cost ONNX networks),
-**BirdCLEF 2026**, **Scientific Image Forgery Detection** (SAM-based, leaderboard #7).
+**BirdCLEF 2026**, and **Scientific Image Forgery Detection** (SAM-based).
 
 ## Honors & Awards
 
