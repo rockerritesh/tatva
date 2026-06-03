@@ -66,8 +66,8 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
    [[paper]](https://arxiv.org/abs/2602.00130)
 
 3. **Geometric Phases of Mechanism Formation in Neural Networks.**
-   *ICML 2026 Mechanistic Interpretability Workshop (under review).* Traces how internal mechanisms form
-   across training using linear probes, CKA, and targeted ablations (CIFAR-10/100).
+   *Working paper, 2026.* Traces how internal mechanisms form across training using linear probes,
+   CKA, and targeted ablations (CIFAR-10/100).
 
 3. **Can maiBERT Speak for Maithili?**
    *LoResLM @ ACL 2026.* The first monolingual BERT for Maithili (~50M speakers); **87% accuracy**
@@ -89,7 +89,7 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 
 - **Cross-lingual inference-time steering** ([devanagari-steering](https://github.com/rockerritesh/devanagari-steering)) —
   transferring a model's Hindi competence onto sister Devanagari languages (Maithili, Nepali, Bhojpuri) with
-  *no fine-tuning*, directly extending **SafeConstellations** and **maiBERT**. *(targeting a NeurIPS 2026 workshop)*
+  *no fine-tuning*, directly extending **SafeConstellations** and **maiBERT**.
 - **Federated memory for AI agents** ([paper](https://github.com/rockerritesh/federated-memory-paper) ·
   [server](https://github.com/rockerritesh/sumit-mcp-server)) — long-term agent memory with transaction trails,
   versioning, and audit; evaluated on LOCOMO and LongMemEval.
