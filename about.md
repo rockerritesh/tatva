@@ -65,6 +65,10 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
    predicts generalization across vision and language models (partial *r* = 0.75 over 52 classifiers).
    [[paper]](https://arxiv.org/abs/2602.00130)
 
+3. **Geometric Phases of Mechanism Formation in Neural Networks.**
+   *ICML 2026 Mechanistic Interpretability Workshop (under review).* Traces how internal mechanisms form
+   across training using linear probes, CKA, and targeted ablations (CIFAR-10/100).
+
 3. **Can maiBERT Speak for Maithili?**
    *LoResLM @ ACL 2026.* The first monolingual BERT for Maithili (~50M speakers); **87% accuracy**
    on news classification, outperforming MuRIL and NepBERTa.
@@ -80,6 +84,15 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 6. **Support Vectors Are a Better Way of Text Classification for Imbalanced Data.**
    *2023.* A robust SVC method for 100+ class text classification under severe imbalance.
    [[paper]](https://www.researchgate.net/publication/371514138_SUPPORT_VECTORS_ARE_A_BETTER_WAY_OF_TEXT_CLASSIFICATION_FOR_IMBALANCED_DATA)
+
+## Preprints & Work in Progress
+
+- **Cross-lingual inference-time steering** ([devanagari-steering](https://github.com/rockerritesh/devanagari-steering)) —
+  transferring a model's Hindi competence onto sister Devanagari languages (Maithili, Nepali, Bhojpuri) with
+  *no fine-tuning*, directly extending **SafeConstellations** and **maiBERT**. *(targeting a NeurIPS 2026 workshop)*
+- **Federated memory for AI agents** ([paper](https://github.com/rockerritesh/federated-memory-paper) ·
+  [server](https://github.com/rockerritesh/sumit-mcp-server)) — long-term agent memory with transaction trails,
+  versioning, and audit; evaluated on LOCOMO and LongMemEval.
 
 ## News
 
@@ -101,8 +114,16 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 
 - **[maiBERT](https://huggingface.co/rockerritesh/maiBERT_TF)** — first BERT for Maithili ([demo](https://maithili.streamlit.app/)).
 - **[SAFE-MCP](https://github.com/rockerritesh)** — adversarial evaluation framework for MCP agent infrastructure.
+- **[AgentGuard](https://github.com/rockerritesh/agentguard)** — Zero-Trust protocol for AI agents: identity, policy, mTLS, audit (Python SDK + Go server).
+- **[spiffe-core](https://github.com/rockerritesh/spiffe-core)** · **[TraT](https://github.com/rockerritesh/trat-multi-agent)** — SPIFFE-based agent identity / attestation and Transaction Tokens for multi-agent workflows.
+- **[sumit-mcp-server](https://github.com/rockerritesh/sumit-mcp-server)** — federated memory MCP server ([live on HF Spaces](https://huggingface.co/spaces/rockerritesh/sumit-server)).
 - **[Vibe-Coder](https://github.com/rockerritesh/vibe_coder)** — an agent that builds Streamlit/FastAPI apps.
 - **[IRB Robotics Arm](https://github.com/jarp0l/IRB-Robo-Arm)** — open-source image-recognition robotic arm (UN SDG3).
+
+## Competitions
+
+Active Kaggle competitor — recent: **ARC-AGI / NeuroGolf 2026** (minimal-cost ONNX networks),
+**BirdCLEF 2026**, **Scientific Image Forgery Detection** (SAM-based, leaderboard #7).
 
 ## Honors & Awards
 
