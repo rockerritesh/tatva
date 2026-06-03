@@ -41,7 +41,8 @@ equally invested in extending these tools to **low-resource and multilingual set
 built the first language model for Maithili (~50M speakers).
 
 I currently lead AI-safety and agentic-systems research at **[Astha.ai](https://astha.ai)**, and I am
-**applying to PhD programs (Fall 2027)** in mechanistic interpretability and AI alignment.
+**ready to begin a PhD (Fall 2027)** in mechanistic interpretability and AI alignment — actively
+looking for the right group to join.
 
 ## Research Interests
 
@@ -103,11 +104,12 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 
 ## Experience
 
-- **AI Architect — Safety & Agentic Systems**, [Astha.ai](https://astha.ai) *(2024–present)* — Zero-Trust
+- **AI Researcher — Safety & Agentic Systems**, [Astha.ai](https://astha.ai) *(2025–present)* — Zero-Trust
   agent oversight, MCP-Scanner vulnerability platform, SAFE-MCP framework.
-- **AI Engineer — RAG & Infrastructure**, Amnil Technology *(2023–2024)* — guardrails, LLM-as-a-Judge
+- **AI Engineer — RAG & Infrastructure**, AMNIL Technologies *(2024–2025)* — guardrails, LLM-as-a-Judge
   evaluation, self-hosted LLM serving with vLLM.
-- **Chief Data Officer**, Ed-Acadia *(2022–2023)* — OCR & semantic search for low-resource Nepali/Maithili.
+- **Data Team Lead**, GradeUp Educations *(2022–2024)* — learning agents/chatbots for students, an automated
+  grade-evaluation system, and semantic-similarity matching between questions and answers.
 - **GAN Specialization Mentor**, [DeepLearning.AI](https://www.deeplearning.ai/) *(2021–present)*.
 
 ## Selected Projects
@@ -127,9 +129,12 @@ Active Kaggle competitor — recent: **ARC-AGI / NeuroGolf 2026** (minimal-cost 
 
 ## Honors & Awards
 
-- Winner, **GritFeat AI Hackathon** 2023 · 2× Runner-Up, **Locus Dataverse** 2022 & 2023
-- Winner, **LogPoint Capture The Flag** 2021 · Winner, **IT-Meet Image Challenge** 2022
-- Best AI Project, **DELTA 3.0** (Nepali Harvest)
+- **Winner, GritFeat AI Hackathon** (2023) — *SWIFT*: wearable LSTM fall-detection for the elderly (79.86%).
+- **1st Runner-Up, Locus Dataverse** (2023) — NLP classification of imbalanced research-paper abstracts.
+- **1st Runner-Up, Docsumo DataRush** (2022) — abstract classification into 158 classes (SVC + TF-IDF).
+- **Best AI Project, DELTA 3.0** (2023) — *Nepali Harvest*: crop-disease prediction & harvest-time recommendations.
+- **Winner, IT-Meet Image Challenge** (2022) — computer-vision classification of Nepali ballot-paper images.
+- **Winner, LogPoint Capture The Flag** (2022) — binary exploitation & forensics.
 
 ## Contact
 
