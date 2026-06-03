@@ -110,6 +110,10 @@ over-refusals by up to <strong>73%</strong> with minimal utility loss — no ret
 predicts generalization across vision and language models (partial <em>r</em> = 0.75 over 52 classifiers).
 <a href="https://arxiv.org/abs/2602.00130">[paper]</a></p>
 </li>
+<li><p><strong>Geometric Phases of Mechanism Formation in Neural Networks.</strong>
+<em>ICML 2026 Mechanistic Interpretability Workshop (under review).</em> Traces how internal mechanisms form
+across training using linear probes, CKA, and targeted ablations (CIFAR-10/100).</p>
+</li>
 <li><p><strong>Can maiBERT Speak for Maithili?</strong>
 <em>LoResLM @ ACL 2026.</em> The first monolingual BERT for Maithili (~50M speakers); <strong>87% accuracy</strong>
 on news classification, outperforming MuRIL and NepBERTa.
@@ -127,6 +131,15 @@ on news classification, outperforming MuRIL and NepBERTa.
 <a href="https://www.researchgate.net/publication/371514138_SUPPORT_VECTORS_ARE_A_BETTER_WAY_OF_TEXT_CLASSIFICATION_FOR_IMBALANCED_DATA">[paper]</a></p>
 </li>
 </ol>
+<h2>Preprints &amp; Work in Progress</h2>
+<ul>
+<li><strong>Cross-lingual inference-time steering</strong> (<a href="https://github.com/rockerritesh/devanagari-steering">devanagari-steering</a>) —
+transferring a model&#39;s Hindi competence onto sister Devanagari languages (Maithili, Nepali, Bhojpuri) with
+<em>no fine-tuning</em>, directly extending <strong>SafeConstellations</strong> and <strong>maiBERT</strong>. <em>(targeting a NeurIPS 2026 workshop)</em></li>
+<li><strong>Federated memory for AI agents</strong> (<a href="https://github.com/rockerritesh/federated-memory-paper">paper</a> ·
+<a href="https://github.com/rockerritesh/sumit-mcp-server">server</a>) — long-term agent memory with transaction trails,
+versioning, and audit; evaluated on LOCOMO and LongMemEval.</li>
+</ul>
 <h2>News</h2>
 <ul>
 <li><strong>2026</strong> — <em>SafeConstellations</em> accepted to <strong>ACL 2026 (Main)</strong>.</li>
@@ -147,9 +160,15 @@ evaluation, self-hosted LLM serving with vLLM.</li>
 <ul>
 <li><strong><a href="https://huggingface.co/rockerritesh/maiBERT_TF">maiBERT</a></strong> — first BERT for Maithili (<a href="https://maithili.streamlit.app/">demo</a>).</li>
 <li><strong><a href="https://github.com/rockerritesh">SAFE-MCP</a></strong> — adversarial evaluation framework for MCP agent infrastructure.</li>
+<li><strong><a href="https://github.com/rockerritesh/agentguard">AgentGuard</a></strong> — Zero-Trust protocol for AI agents: identity, policy, mTLS, audit (Python SDK + Go server).</li>
+<li><strong><a href="https://github.com/rockerritesh/spiffe-core">spiffe-core</a></strong> · <strong><a href="https://github.com/rockerritesh/trat-multi-agent">TraT</a></strong> — SPIFFE-based agent identity / attestation and Transaction Tokens for multi-agent workflows.</li>
+<li><strong><a href="https://github.com/rockerritesh/sumit-mcp-server">sumit-mcp-server</a></strong> — federated memory MCP server (<a href="https://huggingface.co/spaces/rockerritesh/sumit-server">live on HF Spaces</a>).</li>
 <li><strong><a href="https://github.com/rockerritesh/vibe_coder">Vibe-Coder</a></strong> — an agent that builds Streamlit/FastAPI apps.</li>
 <li><strong><a href="https://github.com/jarp0l/IRB-Robo-Arm">IRB Robotics Arm</a></strong> — open-source image-recognition robotic arm (UN SDG3).</li>
 </ul>
+<h2>Competitions</h2>
+<p>Active Kaggle competitor — recent: <strong>ARC-AGI / NeuroGolf 2026</strong> (minimal-cost ONNX networks),
+<strong>BirdCLEF 2026</strong>, <strong>Scientific Image Forgery Detection</strong> (SAM-based, leaderboard #7).</p>
 <h2>Honors &amp; Awards</h2>
 <ul>
 <li>Winner, <strong>GritFeat AI Hackathon</strong> 2023 · 2× Runner-Up, <strong>Locus Dataverse</strong> 2022 &amp; 2023</li>
