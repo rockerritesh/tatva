@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tatva.sumityadav.com.np/</loc>
-    <lastmod>2026-06-05T03:07:07.756Z</lastmod>
+    <lastmod>2026-06-05T03:20:10.986Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,6 +14,12 @@
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/posts/2026/06/05/boltzmann-machine-energy-based-models/</loc>
+    <lastmod>2026-06-05T00:00:00.000Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tatva.sumityadav.com.np/posts/2026/06/05/mechanistic-interpretability-sparse-autoencoders/</loc>
     <lastmod>2026-06-05T00:00:00.000Z</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -350,37 +356,37 @@
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/ect/</loc>
-    <lastmod>2026-06-05T03:07:07.756Z</lastmod>
+    <lastmod>2026-06-05T03:20:10.986Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/nec-bct-licensure/</loc>
-    <lastmod>2026-06-05T03:07:07.756Z</lastmod>
+    <lastmod>2026-06-05T03:20:10.986Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/nepal-budget-2083-84/</loc>
-    <lastmod>2026-06-05T03:07:07.756Z</lastmod>
+    <lastmod>2026-06-05T03:20:10.986Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/python-codesignal-prep/</loc>
-    <lastmod>2026-06-05T03:07:07.756Z</lastmod>
+    <lastmod>2026-06-05T03:20:10.986Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/stellar-steering/</loc>
-    <lastmod>2026-06-05T03:07:07.756Z</lastmod>
+    <lastmod>2026-06-05T03:20:10.986Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://tatva.sumityadav.com.np/study/tithi-wheel/</loc>
-    <lastmod>2026-06-05T03:07:07.756Z</lastmod>
+    <lastmod>2026-06-05T03:20:10.986Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

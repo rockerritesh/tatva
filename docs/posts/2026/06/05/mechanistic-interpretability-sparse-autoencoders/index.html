@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boltzmann Machines & Energy-Based Models: The Nobel-Prize-Winning Physics Behind Neural Networks - Tatva</title>
+    <title>Mechanistic Interpretability & Sparse Autoencoders: Giving AI an X-Ray - Tatva</title>
     <meta name="description" content="">
     <meta name="google-site-verification" content="IVG1y4MVA_6MT0wsjk13ooZDQLWXxvYcPXQlmf83MLM" />
     <!-- Google Fonts -->
@@ -61,7 +61,7 @@
                     
 <article class="post">
     <header class="post-header">
-        <h1 class="post-title">Boltzmann Machines & Energy-Based Models: The Nobel-Prize-Winning Physics Behind Neural Networks</h1>
+        <h1 class="post-title">Mechanistic Interpretability & Sparse Autoencoders: Giving AI an X-Ray</h1>
         <p class="post-meta">
             <time datetime="2026-06-05T00:00:00.000Z">
                 June 05, 2026
@@ -79,78 +79,145 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 
-<p><img src="boltzmann-nobel.png" alt="Boltzmann machine — 2024 Nobel Prize in Physics"></p>
-<p>In 2024, the <strong>Nobel Prize in Physics</strong> went to <strong>John Hopfield</strong> and <strong>Geoffrey Hinton</strong> — <em>&quot;for foundational discoveries and inventions that enable machine learning with artificial neural networks.&quot;</em> A physics prize, for AI? It turns out the two are deeply connected: the ideas that power modern neural networks came straight from the physics of <strong>energy, heat, and how systems settle into their most stable states.</strong></p>
-<p>At the heart of it all sits one beautiful concept — the <strong>energy-based model</strong>.</p>
+<p><img src="sae-dense-vs-sparse.png" alt="Dense vs. sparse activations — the SAE forces the model to commit"></p>
+<p>Imagine you&#39;re a physician a hundred years ago. You can observe a patient&#39;s symptoms, listen to their heartbeat, and make educated guesses about what&#39;s happening inside. Then someone hands you an <strong>X-ray machine.</strong> Suddenly you don&#39;t guess — you <em>see</em>.</p>
+<p>That&#39;s exactly the leap <strong>mechanistic interpretability</strong> brings to AI. For years we judged language models purely by their outputs — the probability of the next word. Ask an AI a question and it might output <em>&quot;Paris&quot;</em> with 95% probability. But <em>why?</em> <strong>Sparse Autoencoders (SAEs)</strong> are giving us the X-ray to finally look inside.</p>
 <blockquote>
-<p>🎬 <strong>Watch the 3-minute explainer (YouTube Short):</strong></p>
+<p>🎬 <strong>Watch the full 12-minute explainer:</strong></p>
 </blockquote>
-<div style="display: flex; justify-content: center; margin: 24px 0;">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 24px 0; border-radius: 12px;">
   <iframe
-    width="360" height="640"
-    src="https://www.youtube.com/embed/456kN6RKNA8"
-    title="Boltzmann Machines & Energy-Based Models"
+    src="https://www.youtube.com/embed/FygQSz5_fq8"
+    title="Mechanistic Interpretability of Sparse Autoencoders"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen
-    style="border-radius: 12px; max-width: 100%;"></iframe>
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"></iframe>
 </div>
 
-<p>▶️ Direct link: <a href="https://youtube.com/shorts/456kN6RKNA8">youtube.com/shorts/456kN6RKNA8</a></p>
+<p>▶️ Direct link: <a href="https://youtu.be/FygQSz5_fq8">youtu.be/FygQSz5_fq8</a></p>
 <hr>
-<h2>The Core Idea: An Energy Landscape</h2>
-<p>An energy-based model assigns every possible state of the system a single number — its <strong>energy</strong>. Picture a hilly landscape:</p>
+<h2>The Polysemanticity Problem</h2>
+<p>The biggest obstacle to reading a model&#39;s mind is a phenomenon called <strong>polysemanticity</strong>. In a standard neural network, a single neuron doesn&#39;t represent just one concept. Because space is limited, the model constantly compresses many ideas into the same neuron.</p>
+<p><img src="sae-polysemanticity.png" alt="One neuron, six unrelated concepts — polysemanticity"></p>
+<p>The <em>same</em> neuron might fire for DNA sequences, legal contracts, JavaScript bugs, cat photos, poetry, and math proofs. You simply cannot tell what it &quot;means&quot; — the signal is hopelessly tangled.</p>
+<hr>
+<h2>The SAE Breakthrough</h2>
+<p>Enter the <strong>Sparse Autoencoder</strong>. Think of it as a high-resolution microscopic lens that deconstructs dense, messy neural activations.</p>
+<p>The SAE acts as a strict <strong>forcing function</strong>: it takes the model&#39;s tangled, compressed thoughts and re-expresses them through a much <em>wider</em> but strictly <em>limited</em> set of active features. We call these <strong>monosemantic</strong> features — each represents one, and only one, distinct concept. By expanding the mathematical space and forcing most activations to zero, the SAE unpacks the compressed data into crystal-clear, non-overlapping signals (the bright spikes on the right of the cover image above).</p>
+<h3>The Objective Function</h3>
+<p>How does it pull this off? With a beautifully simple objective that balances two terms:</p>
+<p>$$\mathcal{L} = \underbrace{\lVert x - \hat{x} \rVert_2^2}<em>{\text{reconstruction}} ;+; \lambda \underbrace{\lVert f \rVert_1}</em>{\text{sparsity}}$$</p>
 <ul>
-<li>The patterns we <em>want</em> (sensible, data-like states) sit <strong>low in the valleys</strong>.</li>
-<li>The states we <em>don&#39;t</em> want sit <strong>high on the hills</strong>.</li>
-<li>The system always wants to roll <strong>downhill</strong>, toward low energy.</li>
+<li>The <strong>reconstruction loss</strong> ($L_2$ norm squared) ensures no meaning is lost — the features must rebuild the original activation $x$.</li>
+<li>The <strong>sparsity penalty</strong> ($L_1$ norm, weighted by $\lambda$) mathematically forces the autoencoder to use as <em>few</em> active features as possible.</li>
 </ul>
-<p><img src="boltzmann-energy-landscape.png" alt="Energy landscape — the system rolls downhill toward low energy"></p>
-<p>Physics gives us the exact rule that links energy to probability — the famous <strong>Boltzmann distribution</strong>:</p>
-<p>$$P(x) \propto e^{-E(x)/T}$$</p>
-<p>The probability of a state falls off <em>exponentially</em> as its energy rises. <strong>Low energy means high probability.</strong> The temperature $T$ controls how much the system explores: hotter means more randomness.</p>
+<p><img src="sae-sparsity-histogram.png" alt="Activation sparsity histogram — most features forced to zero"></p>
+<p>This delicate balance — perfect reconstruction <em>plus</em> extreme sparsity — is what untangles the knot, isolating individual, human-understandable features from the noise.</p>
 <hr>
-<h2>Hopfield Networks: Memory as Valleys</h2>
-<p>Hopfield&#39;s insight, in <strong>1982</strong>, was to use this landscape as a <strong>memory</strong>. He wired neurons together with <em>symmetric</em> connections ($w_{ij} = w_{ji}$) and defined an energy that the network always decreases as it updates.</p>
-<p>The trick: shape the landscape so each <strong>stored memory becomes its own valley.</strong></p>
-<p><img src="boltzmann-hopfield.png" alt="Hopfield network — stored patterns are energy valleys"></p>
-<p>Show the network a noisy or partial pattern, and it simply rolls downhill into the nearest valley — <strong>recovering the clean memory.</strong> This is <em>associative memory</em>, built entirely out of energy.</p>
+<h2>The Golden Gate Feature</h2>
+<p>A now-famous example: using an SAE on <strong>Claude 3 Sonnet</strong>, Anthropic&#39;s researchers discovered a highly specific monosemantic feature in the model&#39;s middle layers. What did it represent? <strong>The Golden Gate Bridge.</strong></p>
+<p>This single feature fired whenever the model encountered text, images, or even abstract references to the landmark — but <em>not</em> for other bridges, and <em>not</em> for other cities. It was the model&#39;s pure, isolated concept of the Golden Gate Bridge, pinned to a specific coordinate in its vast brain.</p>
+<p>Individual concepts are just the nouns and verbs of thought. The real power comes from <strong>circuitry</strong> — watching features interact. The &quot;sarcasm&quot; feature might inhibit &quot;politeness&quot; while boosting &quot;humor.&quot; By mapping these circuits, we watch artificial thought form in real time.</p>
 <hr>
-<h2>The Boltzmann Machine</h2>
-<p>Hinton and colleagues took the next step. A <strong>Boltzmann machine</strong> is a Hopfield-style network made <strong>stochastic</strong>: instead of strictly rolling downhill, each neuron turns on or off with a <em>probability</em> set by that same Boltzmann rule.</p>
-<p>$$P(\text{neuron} = \text{ON}) = \sigma(\text{input}/T)$$</p>
-<p><img src="boltzmann-units.png" alt="Boltzmann machine — stochastic visible and hidden units"></p>
-<p>Two things make this powerful:</p>
+<h2>Feature Steering: Writing to the Model&#39;s Mind</h2>
+<p>Once you can <em>read</em> the model&#39;s mind, the next step is <em>writing</em> to it. SAE features (and persona vectors more broadly) give a direct dial for any concept the model represents.</p>
+<p><img src="sae-persona-steering.png" alt="Persona-vector steering reliably elicits a trait"></p>
+<p>Compare this to <strong>prompt engineering</strong> — a blunt instrument where you type words and <em>hope</em>. Steering is <strong>surgical</strong>. You compute a target centroid $c_{\text{target}}$ and a refusal centroid $c_{\text{refusal}}$ in the residual stream; the steering vector is simply their difference, applied at a few layers at inference time.</p>
+<p>The recent <strong>SafeConstellations</strong> result on LLaMA-3.1-8B makes it concrete:</p>
+<ul>
+<li>Over-refusal dropped from <strong>46.7% → 8.9%</strong> (an 81% reduction).</li>
+<li>MMLU utility stayed flat at <strong>46.57</strong>.</li>
+<li>Added latency: ~<strong>0.2s</strong> per response.</li>
+<li><strong>No retraining, no fine-tuning</strong> — just a few activation-space vectors at the right layers.</li>
+</ul>
+<hr>
+<h2>Safety: Three Pillars</h2>
+<p>The safety implications are staggering. Anthropic&#39;s persona-vector work showed three concrete applications:</p>
+<p><img src="sae-safety-pillars.png" alt="Three safety pillars from persona vectors"></p>
 <ol>
-<li><strong>Randomness lets it escape shallow traps</strong> and genuinely <em>explore</em> the landscape, rather than getting stuck in the first valley it finds.</li>
-<li>It adds <strong>hidden units</strong> — neurons representing features you never directly observe — so the network can capture deep, rich structure in the data instead of just memorizing patterns.</li>
+<li><strong>Monitor drift</strong> — measure how strongly persona vectors fire during deployment to detect personality changes the moment they happen.</li>
+<li><strong>Preventative steering</strong> — inject <em>bad</em> vectors at <strong>training</strong> time to &quot;vaccinate&quot; the model against them.</li>
+<li><strong>Flag training data</strong> — pre-screen documents that strongly activate evil/deception vectors.</li>
 </ol>
+<p>The motto: <strong>edit the circuit, not the prompt.</strong></p>
 <hr>
-<h2>Learning: Sculpting the Landscape</h2>
-<p>How does a Boltzmann machine learn? By <strong>reshaping the energy landscape itself</strong>, in two phases:</p>
-<ul>
-<li><strong>Positive phase</strong> — show it real data and <em>lower</em> the energy around it, digging valleys where the data lives.</li>
-<li><strong>Negative phase</strong> — let it &quot;dream,&quot; generating its own samples, and <em>raise</em> their energy, flattening the valleys it invented.</li>
-</ul>
-<p><img src="boltzmann-learning.png" alt="Learning — lower the energy of data, raise the energy of dreams"></p>
-<p>Repeat, and the landscape gradually comes to <strong>match the world.</strong> The <strong>Restricted Boltzmann Machine (RBM)</strong> — with no connections <em>inside</em> a layer — made this training fast and practical (via <em>contrastive divergence</em>).</p>
+<h2>From Stochastic Parrot to Auditable Intellect</h2>
+<p>For the longest time, critics dismissed LLMs as mere <strong>&quot;stochastic parrots&quot;</strong> — fancy autocorrect mimicking human text without real understanding. But the maps drawn by Sparse Autoencoders tell a wildly different story: a highly structured, deeply sophisticated representation of the world.</p>
+<p>We&#39;re shifting from treating AI as a statistical parrot to an <strong>auditable, transparent digital intellect</strong> — and mathematically proving these networks build real internal models of reality. As we build ever larger systems, understanding the <em>why</em> behind the <em>what</em> is no longer academic curiosity. It&#39;s the final frontier of the AI revolution.</p>
 <hr>
-<h2>Why It Mattered</h2>
-<p>This wasn&#39;t just elegant theory. In <strong>2006</strong>, stacking Restricted Boltzmann Machines let Hinton train <strong>deep networks</strong> for the first time — the spark that reignited deep learning after years in the cold.</p>
-<p><img src="boltzmann-timeline.png" alt="From Hopfield networks to modern generative models"></p>
-<p>And the energy-based view never went away. The idea of defining an <strong>energy you minimize</strong> still echoes through today&#39;s <strong>diffusion models</strong> and <strong>score-based generative methods</strong>. Physics gave AI a durable language for <em>probability</em> and <em>structure</em>.</p>
+<h3>⏱️ Chapters</h3>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0:00</td>
+<td>Cracking the Black Box</td>
+</tr>
+<tr>
+<td>0:54</td>
+<td>Probability vs Logic</td>
+</tr>
+<tr>
+<td>1:45</td>
+<td>Bridge to Knowing</td>
+</tr>
+<tr>
+<td>2:33</td>
+<td>The Polysemanticity Problem</td>
+</tr>
+<tr>
+<td>3:21</td>
+<td>The SAE Breakthrough</td>
+</tr>
+<tr>
+<td>4:08</td>
+<td>The Objective Function</td>
+</tr>
+<tr>
+<td>4:58</td>
+<td>Mapping the Blueprint</td>
+</tr>
+<tr>
+<td>5:44</td>
+<td>The Golden Gate Feature</td>
+</tr>
+<tr>
+<td>6:25</td>
+<td>Circuitry of a Thought</td>
+</tr>
+<tr>
+<td>7:09</td>
+<td>Feature Steering</td>
+</tr>
+<tr>
+<td>8:06</td>
+<td>Surgical Precision: SafeConstellations</td>
+</tr>
+<tr>
+<td>9:07</td>
+<td>Safety: Three Pillars</td>
+</tr>
+<tr>
+<td>10:01</td>
+<td>Granular Alignment</td>
+</tr>
+<tr>
+<td>10:45</td>
+<td>Auditable Intellect</td>
+</tr>
+<tr>
+<td>11:26</td>
+<td>The Final Frontier</td>
+</tr>
+</tbody></table>
 <hr>
-<h2>The Takeaway</h2>
-<p>The Boltzmann machine, in one breath:</p>
-<ul>
-<li>Define an <strong>energy</strong> over every possible state.</li>
-<li><strong>Prefer the low-energy ones</strong> — those are the patterns you want.</li>
-<li>Add <strong>randomness</strong> so the network can explore.</li>
-<li><strong>Learning = reshaping the landscape</strong> to match the data.</li>
-</ul>
-<p>It&#39;s a Nobel-Prize-winning bridge between <strong>physics</strong> and <strong>intelligence</strong> — and a reminder that some of AI&#39;s deepest ideas were borrowed from the way the physical world settles into stable states.</p>
-<hr>
-<p><em>This post accompanies our short explainer video. We&#39;re brand new to YouTube — if you found this useful, please <strong><a href="https://youtube.com/shorts/456kN6RKNA8">subscribe</a></strong> and like; it genuinely helps us keep making these. Thanks for reading!</em> 🙏</p>
+<p><em>Featured research: Anthropic&#39;s work on monosemantic features and persona vectors, and the SafeConstellations steering result on LLaMA-3.1-8B. Diagrams above are our own illustrations.</em></p>
+<p><em>If you enjoyed this, we&#39;re brand new to YouTube — please <strong><a href="https://youtu.be/FygQSz5_fq8">subscribe</a></strong> and like; it genuinely helps us keep making these. Thanks for reading!</em> 🙏</p>
 
     </div>
 
@@ -194,14 +261,14 @@
     <p class="citation-note">Auto-generated. Verify for your institution's requirements.</p>
 </div>
 
-<template id="cite-meta">Boltzmann Machines & Energy-Based Models: The Nobel-Prize-Winning Physics Behind Neural Networks</template>
+<template id="cite-meta">Mechanistic Interpretability & Sparse Autoencoders: Giving AI an X-Ray</template>
 
 <script>
 (function() {
     var t = document.getElementById('cite-meta').content.textContent || document.getElementById('cite-meta').innerHTML;
     var a = 'Sumit Yadav';
     var j = 'Tatva';
-    var u = 'https://tatva.sumityadav.com.np/posts/2026/06/05/boltzmann-machine-energy-based-models/';
+    var u = 'https://tatva.sumityadav.com.np/posts/2026/06/05/mechanistic-interpretability-sparse-autoencoders/';
     var y = '2026';
     var mo = 'June';
     var ms = 'Jun';

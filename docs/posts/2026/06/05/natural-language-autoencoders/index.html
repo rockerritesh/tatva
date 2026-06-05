@@ -107,7 +107,7 @@
 <p>Natural language sits in the middle as a <strong>bottleneck</strong>, so the description is forced to capture whatever the activation actually encodes.</p>
 <hr>
 <h2>Unsupervised &amp; Readable</h2>
-<p><img src="/posts/2026/06/05/natural-language-autoencoders/nla-unsupervised.png" alt="Unsupervised and readable — language as a faithful bottleneck"></p>
+<p><img src="nla-unsupervised.png" alt="Unsupervised and readable — language as a faithful bottleneck"></p>
 <p>Why is this exciting? Because it&#39;s <strong>unsupervised</strong>. The system learns purely from reconstruction — there are no human labels, no fixed list of features to look for, and no dictionary written in advance. If the English explanation is good enough to rebuild the activation, then it <em>must</em> have captured the real content.</p>
 <p>And the output isn&#39;t a number or a heatmap — it&#39;s a <strong>sentence a person can read, question, and act on.</strong></p>
 <hr>
@@ -121,7 +121,7 @@
 <p>NLAs also helped debug <strong>training itself</strong> — verbalizing activations during multilingual conversations exposed malformed training data where the language unexpectedly switched mid-conversation. A subtle data-quality bug, made visible in plain English.</p>
 <hr>
 <h2>Honest Limitations</h2>
-<p><img src="/posts/2026/06/05/natural-language-autoencoders/nla-limitations.png" alt="Honest limitations — confabulation, not mechanistically grounded, expensive"></p>
+<p><img src="nla-limitations.png" alt="Honest limitations — confabulation, not mechanistically grounded, expensive"></p>
 <p>None of this is magic, and the authors are careful to say so:</p>
 <ul>
 <li>Explanations can <strong>confabulate</strong> — confidently describing context that isn&#39;t there.</li>
@@ -132,7 +132,7 @@
 <p>Natural language autoencoders are a powerful new instrument — not a final answer.</p>
 <hr>
 <h2>Translating a Model&#39;s Inner Life</h2>
-<p><img src="/posts/2026/06/05/natural-language-autoencoders/nla-takeaway.png" alt="Takeaway — translating a model&#39;s inner life into readable English"></p>
+<p><img src="nla-takeaway.png" alt="Takeaway — translating a model&#39;s inner life into readable English"></p>
 <p>Still, the direction is exciting. Natural language autoencoders turn a model&#39;s private, numerical inner life into <strong>sentences we can actually read</strong> — unsupervised, faithful enough to reconstruct the original, and useful enough to catch hidden evaluation awareness, bad training data, and steerable beliefs.</p>
 <p>It&#39;s a real step toward <strong>auditing AI systems in our own language.</strong></p>
 <hr>
