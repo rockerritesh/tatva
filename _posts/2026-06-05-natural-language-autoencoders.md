@@ -49,7 +49,7 @@ Natural language sits in the middle as a **bottleneck**, so the description is f
 
 ## Unsupervised & Readable
 
-![Unsupervised and readable — language as a faithful bottleneck](/posts/2026/06/05/natural-language-autoencoders/nla-unsupervised.png)
+![Unsupervised and readable — language as a faithful bottleneck](nla-unsupervised.png)
 
 Why is this exciting? Because it's **unsupervised**. The system learns purely from reconstruction — there are no human labels, no fixed list of features to look for, and no dictionary written in advance. If the English explanation is good enough to rebuild the activation, then it *must* have captured the real content.
 
@@ -77,7 +77,7 @@ NLAs also helped debug **training itself** — verbalizing activations during mu
 
 ## Honest Limitations
 
-![Honest limitations — confabulation, not mechanistically grounded, expensive](/posts/2026/06/05/natural-language-autoencoders/nla-limitations.png)
+![Honest limitations — confabulation, not mechanistically grounded, expensive](nla-limitations.png)
 
 None of this is magic, and the authors are careful to say so:
 
@@ -92,7 +92,7 @@ Natural language autoencoders are a powerful new instrument — not a final answ
 
 ## Translating a Model's Inner Life
 
-![Takeaway — translating a model's inner life into readable English](/posts/2026/06/05/natural-language-autoencoders/nla-takeaway.png)
+![Takeaway — translating a model's inner life into readable English](nla-takeaway.png)
 
 Still, the direction is exciting. Natural language autoencoders turn a model's private, numerical inner life into **sentences we can actually read** — unsupervised, faithful enough to reconstruct the original, and useful enough to catch hidden evaluation awareness, bad training data, and steerable beliefs.
 

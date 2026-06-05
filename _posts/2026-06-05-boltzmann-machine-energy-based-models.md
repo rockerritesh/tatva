@@ -12,7 +12,7 @@ tags: [machine-learning, deep-learning, boltzmann-machine, energy-based-models, 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 
-![Boltzmann machine — 2024 Nobel Prize in Physics](/posts/2026/06/05/boltzmann-machine-energy-based-models/boltzmann-nobel.png)
+![Boltzmann machine — 2024 Nobel Prize in Physics](boltzmann-nobel.png)
 
 In 2024, the **Nobel Prize in Physics** went to **John Hopfield** and **Geoffrey Hinton** — *"for foundational discoveries and inventions that enable machine learning with artificial neural networks."* A physics prize, for AI? It turns out the two are deeply connected: the ideas that power modern neural networks came straight from the physics of **energy, heat, and how systems settle into their most stable states.**
 
@@ -43,7 +43,7 @@ An energy-based model assigns every possible state of the system a single number
 - The states we *don't* want sit **high on the hills**.
 - The system always wants to roll **downhill**, toward low energy.
 
-![Energy landscape — the system rolls downhill toward low energy](/posts/2026/06/05/boltzmann-machine-energy-based-models/boltzmann-energy-landscape.png)
+![Energy landscape — the system rolls downhill toward low energy](boltzmann-energy-landscape.png)
 
 Physics gives us the exact rule that links energy to probability — the famous **Boltzmann distribution**:
 
@@ -59,7 +59,7 @@ Hopfield's insight, in **1982**, was to use this landscape as a **memory**. He w
 
 The trick: shape the landscape so each **stored memory becomes its own valley.**
 
-![Hopfield network — stored patterns are energy valleys](/posts/2026/06/05/boltzmann-machine-energy-based-models/boltzmann-hopfield.png)
+![Hopfield network — stored patterns are energy valleys](boltzmann-hopfield.png)
 
 Show the network a noisy or partial pattern, and it simply rolls downhill into the nearest valley — **recovering the clean memory.** This is *associative memory*, built entirely out of energy.
 
@@ -71,7 +71,7 @@ Hinton and colleagues took the next step. A **Boltzmann machine** is a Hopfield-
 
 $$P(\text{neuron} = \text{ON}) = \sigma(\text{input}/T)$$
 
-![Boltzmann machine — stochastic visible and hidden units](/posts/2026/06/05/boltzmann-machine-energy-based-models/boltzmann-units.png)
+![Boltzmann machine — stochastic visible and hidden units](boltzmann-units.png)
 
 Two things make this powerful:
 
@@ -87,7 +87,7 @@ How does a Boltzmann machine learn? By **reshaping the energy landscape itself**
 - **Positive phase** — show it real data and *lower* the energy around it, digging valleys where the data lives.
 - **Negative phase** — let it "dream," generating its own samples, and *raise* their energy, flattening the valleys it invented.
 
-![Learning — lower the energy of data, raise the energy of dreams](/posts/2026/06/05/boltzmann-machine-energy-based-models/boltzmann-learning.png)
+![Learning — lower the energy of data, raise the energy of dreams](boltzmann-learning.png)
 
 Repeat, and the landscape gradually comes to **match the world.** The **Restricted Boltzmann Machine (RBM)** — with no connections *inside* a layer — made this training fast and practical (via *contrastive divergence*).
 
@@ -97,7 +97,7 @@ Repeat, and the landscape gradually comes to **match the world.** The **Restrict
 
 This wasn't just elegant theory. In **2006**, stacking Restricted Boltzmann Machines let Hinton train **deep networks** for the first time — the spark that reignited deep learning after years in the cold.
 
-![From Hopfield networks to modern generative models](/posts/2026/06/05/boltzmann-machine-energy-based-models/boltzmann-timeline.png)
+![From Hopfield networks to modern generative models](boltzmann-timeline.png)
 
 And the energy-based view never went away. The idea of defining an **energy you minimize** still echoes through today's **diffusion models** and **score-based generative methods**. Physics gave AI a durable language for *probability* and *structure*.
 
