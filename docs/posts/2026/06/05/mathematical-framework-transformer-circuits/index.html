@@ -137,12 +137,42 @@
 <blockquote>
 <p>💡 You can also detect <strong>copying</strong> behavior straight from the weights using <strong>eigenvalues</strong>: treat the OV circuit as a token-to-token map; a copying head maps tokens back to themselves, so its eigenvalues are positive.</p>
 </blockquote>
+<blockquote>
+<p>⚡ <strong>90-second version</strong> — <em>&quot;What is a skip-trigram?&quot;</em></p>
+</blockquote>
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <iframe
+    width="315" height="560"
+    src="https://www.youtube.com/embed/LxmtD5Ibpew"
+    title="What is a skip-trigram?"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="border-radius: 12px; max-width: 100%;"></iframe>
+</div>
+
+<p>▶️ Short: <a href="https://youtube.com/shorts/LxmtD5Ibpew">youtube.com/shorts/LxmtD5Ibpew</a></p>
 <hr>
 <h2>Two Layers: Composition &amp; Induction Heads</h2>
 <p>Add a second layer and something new appears: <strong>composition</strong>. A head in the second layer can read what a head in the first layer wrote — through <strong>Q-composition</strong> (shaping queries), <strong>K-composition</strong> (shaping keys), or <strong>V-composition</strong> (shaping values). Two simple heads chain into an algorithm neither could do alone.</p>
 <p>The most famous result is the <strong>induction head</strong>:</p>
 <p><img src="framework-induction.png" alt="The induction head — if A B appeared earlier, after A predict B"></p>
 <p>An induction head implements a powerful in-context rule: <em>if the pattern A B appeared earlier, and you now see A again, predict B.</em> It&#39;s a two-head circuit — a first-layer <strong>previous-token head</strong> tags each position with the token before it, and a second-layer head uses <strong>K-composition</strong> to find where the current token last appeared, then copies what came next. Having seen &quot;Mr Dursley,&quot; when the model later hits &quot;Mr D,&quot; it predicts &quot;ursley.&quot; This is <strong>in-context learning</strong>, pinned down as a concrete mechanism.</p>
+<blockquote>
+<p>⚡ <strong>90-second version</strong> — <em>&quot;What is an induction head?&quot;</em></p>
+</blockquote>
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <iframe
+    width="315" height="560"
+    src="https://www.youtube.com/embed/JSoHLBhCEnI"
+    title="What is an induction head?"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="border-radius: 12px; max-width: 100%;"></iframe>
+</div>
+
+<p>▶️ Short: <a href="https://youtube.com/shorts/JSoHLBhCEnI">youtube.com/shorts/JSoHLBhCEnI</a></p>
 <hr>
 <h2>Path Expansion: Virtual Attention Heads</h2>
 <p>Multiply out a two-layer model and you get terms of increasing order: <strong>order 0</strong> is the direct path (bigrams), <strong>order 1</strong> is each individual head, and <strong>order 2</strong> gives <strong>virtual attention heads</strong> — pairs of real heads composed together. That order-2 term is exactly where induction heads live: small on average, but disproportionately important. Expanding the paths makes the whole computation legible.</p>
