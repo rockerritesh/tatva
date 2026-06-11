@@ -34,6 +34,21 @@ The paper is **"An Image is Worth 16x16 Words"** (Dosovitskiy et al., ICLR 2021)
 
 ▶️ Direct link: [youtu.be/UwxeaIX0rZ4](https://youtu.be/UwxeaIX0rZ4)
 
+> ⚡ **Short on time? Here's the ~2-minute version** — *"Vision Transformers, explained fast."*
+
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <iframe
+    width="315" height="560"
+    src="https://www.youtube.com/embed/Whe0zU4WlFk"
+    title="Vision Transformers explained"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="border-radius: 12px; max-width: 100%;"></iframe>
+</div>
+
+▶️ Short: [youtube.com/shorts/Whe0zU4WlFk](https://youtube.com/shorts/Whe0zU4WlFk)
+
 ---
 
 ## Two Worlds of Deep Learning

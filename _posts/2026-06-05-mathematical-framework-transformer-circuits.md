@@ -87,6 +87,21 @@ The framework even **predicts the model's bugs**: because QK and OV are separate
 
 > 💡 You can also detect **copying** behavior straight from the weights using **eigenvalues**: treat the OV circuit as a token-to-token map; a copying head maps tokens back to themselves, so its eigenvalues are positive.
 
+> ⚡ **90-second version** — *"What is a skip-trigram?"*
+
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <iframe
+    width="315" height="560"
+    src="https://www.youtube.com/embed/LxmtD5Ibpew"
+    title="What is a skip-trigram?"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="border-radius: 12px; max-width: 100%;"></iframe>
+</div>
+
+▶️ Short: [youtube.com/shorts/LxmtD5Ibpew](https://youtube.com/shorts/LxmtD5Ibpew)
+
 ---
 
 ## Two Layers: Composition & Induction Heads
@@ -98,6 +113,21 @@ The most famous result is the **induction head**:
 ![The induction head — if A B appeared earlier, after A predict B](framework-induction.png)
 
 An induction head implements a powerful in-context rule: *if the pattern A B appeared earlier, and you now see A again, predict B.* It's a two-head circuit — a first-layer **previous-token head** tags each position with the token before it, and a second-layer head uses **K-composition** to find where the current token last appeared, then copies what came next. Having seen "Mr Dursley," when the model later hits "Mr D," it predicts "ursley." This is **in-context learning**, pinned down as a concrete mechanism.
+
+> ⚡ **90-second version** — *"What is an induction head?"*
+
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <iframe
+    width="315" height="560"
+    src="https://www.youtube.com/embed/JSoHLBhCEnI"
+    title="What is an induction head?"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="border-radius: 12px; max-width: 100%;"></iframe>
+</div>
+
+▶️ Short: [youtube.com/shorts/JSoHLBhCEnI](https://youtube.com/shorts/JSoHLBhCEnI)
 
 ---
 

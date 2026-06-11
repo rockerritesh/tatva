@@ -114,9 +114,39 @@ It would be too tidy if every neuron were as clean as a curve detector. Many are
 
 Some neurons are **polysemantic** — a single unit fires for several unrelated things (say, cat faces, fronts of cars, and cat legs). Why would a network do that?
 
+> ⚡ **60-second version** — *"What is a polysemantic neuron?"*
+
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <iframe
+    width="315" height="560"
+    src="https://www.youtube.com/embed/MJlIOMGj3Ec"
+    title="What is a polysemantic neuron?"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="border-radius: 12px; max-width: 100%;"></iframe>
+</div>
+
+▶️ Short: [youtube.com/shorts/MJlIOMGj3Ec](https://youtube.com/shorts/MJlIOMGj3Ec)
+
 ![Superposition — packing more features than neurons by tolerating interference](circuits-superposition.png)
 
 The leading hypothesis is **superposition**: there are far more useful features than neurons, so the network packs multiple features into shared directions, tolerating a little interference. Polysemanticity is the visible symptom of this packing — and one of the central obstacles to fully reverse-engineering a network.
+
+> ⚡ **60-second version** — *"What is superposition?"*
+
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <iframe
+    width="315" height="560"
+    src="https://www.youtube.com/embed/jht5lLU9CRk"
+    title="What is superposition?"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="border-radius: 12px; max-width: 100%;"></iframe>
+</div>
+
+▶️ Short: [youtube.com/shorts/jht5lLU9CRk](https://youtube.com/shorts/jht5lLU9CRk)
 
 ---
 
