@@ -980,6 +980,57 @@ Sitemap: ${fullSitemapUrl}
     }
   }
 
+  // Generate a custom 404 page that invites visitors to browse the blog
+  generate404() {
+    const destPath = 'docs/404.html';
+    const siteTitle = (this.config && this.config.title) || 'Tatva';
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · ${siteTitle}</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<style>
+  :root{--bg:#fff;--fg:#1a1a1a;--muted:#666;--accent:#0b5fa5;--rule:#e6e6e6;--card:#fafafa}
+  @media (prefers-color-scheme:dark){:root{--bg:#15171a;--fg:#e8e8e8;--muted:#9aa0a6;--accent:#6cb2ff;--rule:#2a2d31;--card:#1c1f23}}
+  body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;
+    align-items:center;justify-content:center;text-align:center;padding:24px;
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .box{max-width:460px}
+  h1{font-size:3.4rem;margin:0;letter-spacing:-.02em}
+  .lead{font-size:1.05rem;margin:.4rem 0 .2rem}
+  p{color:var(--muted)}
+  a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+  .cta{display:inline-block;margin-top:1rem;border:1px solid var(--rule);background:var(--card);
+    border-radius:8px;padding:.7rem 1.1rem;color:var(--fg)}
+  .cta:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+  .small{margin-top:1.1rem;font-size:.9rem}
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1>404</h1>
+    <p class="lead">This page wandered off.</p>
+    <p>You're on <b>${siteTitle}</b> — essays and notes on AI, math, and a few things in between.
+       Maybe what you were looking for is somewhere in the writing.</p>
+    <a class="cta" href="/">Browse the blog →</a>
+    <p class="small">
+      <a href="/about/">about</a> ·
+      <a href="https://sumityadav.com.np">portfolio</a>
+    </p>
+  </div>
+</body>
+</html>
+`;
+    try {
+      fs.writeFileSync(destPath, html);
+      console.log('✅ Generated 404.html');
+    } catch (error) {
+      console.error('❌ Error generating 404.html:', error.message);
+    }
+  }
+
   // Generate llms.txt file
   generateLlmsTxt() {
     const destPath = 'docs/llms.txt';
@@ -1281,6 +1332,9 @@ Allow: /
     // Generate robots.txt and llms.txt files
     this.generateRobotsTxt();
     this.generateLlmsTxt();
+
+    // Generate custom 404 page
+    this.generate404();
 
     // Copy study materials
     this.copyStudyMaterials();

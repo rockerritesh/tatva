@@ -17,7 +17,7 @@ permalink: /about/
 
 # Sumit Yadav
 
-**AI Safety & Interpretability Researcher**
+**Interpretability & AI-safety research**
 *Computer Engineering · Pulchowk Campus, Tribhuvan University, Nepal*
 
 [Email](mailto:076bct088.sumit@pcampus.edu.np) ·
@@ -29,20 +29,21 @@ permalink: /about/
 
 ---
 
-I am a Computer Engineering student at **Pulchowk Campus, Tribhuvan University**, working on the
-**interpretability and safety of language models**. My research looks at how safety-aligned LLMs
-fail silently — through over-refusals, geometric misrepresentation, and surface-level triggers —
-and how the internal structure of a model's representations can be understood and steered to make
-it safer and more reliable.
+I'm a Computer Engineering student at **Pulchowk Campus, Tribhuvan University**. Most of my time goes
+into trying to understand how language models work on the inside — why a safety-aligned model sometimes
+refuses perfectly harmless questions, and how the **geometry of a model's internal representations**
+relates to what it has actually learned. A lot of it is simply curiosity, following a question until it
+starts to make sense.
 
-A recurring theme in my work is **geometry**: representations trace structured trajectories inside a
-model, and that structure turns out to predict both *safety behavior* and *generalization*. I am
-equally invested in extending these tools to **low-resource and multilingual settings**, where I
-built the first language model for Maithili (~50M speakers).
+I care about making these tools useful for languages that are often left out. My family speaks
+**Maithili** — around 50 million speakers, yet very little language technology exists for it — so
+building a small model for it felt as personal as it was technical.
 
-I currently lead AI-safety and agentic-systems research at **[Astha.ai](https://astha.ai)**, and I am
-**ready to begin a PhD (Fall 2027)** in mechanistic interpretability and AI alignment — actively
-looking for the right group to join.
+Alongside research I work on AI safety and agentic systems at **[Astha.ai](https://astha.ai)**, and I
+hope to pursue a PhD in interpretability and alignment. I try to learn in the open: I write here on
+Tatva, share short explainers on [YouTube](https://www.youtube.com/@Audio-Obsession), and keep a camera
+and a fondness for Mithila's stories and festivals close by. If any of this overlaps with your own work,
+I'd be glad to hear from you.
 
 ## Research Interests
 
@@ -67,22 +68,23 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
    [[paper]](https://arxiv.org/abs/2602.00130)
 
 3. **Geometric Phases of Mechanism Formation in Neural Networks.**
-   *Working paper, 2026.* Traces how internal mechanisms form across training using linear probes,
-   CKA, and targeted ablations (CIFAR-10/100).
+   *GLOW 2026 — Workshop on Generalizing from Limited Resources in the Open World @ IJCAI 2026 (Poster).*
+   Traces how internal mechanisms form across training using linear probes, CKA, and targeted
+   ablations (CIFAR-10/100). *arXiv & code coming soon.*
 
-3. **Can maiBERT Speak for Maithili?**
+4. **Can maiBERT Speak for Maithili?**
    *LoResLM @ ACL 2026.* The first monolingual BERT for Maithili (~50M speakers); **87% accuracy**
    on news classification, outperforming MuRIL and NepBERTa.
    [[paper]](https://arxiv.org/abs/2509.15048) · [[model]](https://huggingface.co/rockerritesh/maiBERT_TF)
 
-4. **Revolutionizing Currency Security: A YOLOv8-Based Approach for Detecting Counterfeit Nepali Banknotes.**
+5. **Revolutionizing Currency Security: A YOLOv8-Based Approach for Detecting Counterfeit Nepali Banknotes.**
    *J. Bus. Econ. Stud., 2024.* [[paper]](https://doi.org/10.61440/JBES.2024.v1.47)
 
-5. **Machine Learning Analysis of Tirhuta Lipi.**
+6. **Machine Learning Analysis of Tirhuta Lipi.**
    *2023.* 0.97 accuracy in Tirhuta script recognition for OCR and translation of low-resource scripts.
    [[paper]](https://www.researchgate.net/publication/373370042_Machine_Learning_Analysis_of_Tirhuta_Lipi)
 
-6. **Support Vectors Are a Better Way of Text Classification for Imbalanced Data.**
+7. **Support Vectors Are a Better Way of Text Classification for Imbalanced Data.**
    *2023.* A robust SVC method for 100+ class text classification under severe imbalance.
    [[paper]](https://www.researchgate.net/publication/371514138_SUPPORT_VECTORS_ARE_A_BETTER_WAY_OF_TEXT_CLASSIFICATION_FOR_IMBALANCED_DATA)
 
@@ -97,10 +99,11 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 
 ## News
 
+- **2026** — *Geometric Phases of Mechanism Formation in Neural Networks* accepted as a **poster at GLOW 2026 @ IJCAI**.
 - **2026** — *SafeConstellations* accepted to **ACL 2026 (Main)**.
 - **2026** — *maiBERT* accepted to **LoResLM @ ACL 2026**.
 - **2026** — Preprint on **representation geometry and generalization** released.
-- **2024–** — Leading AI-safety & agentic-systems research at **Astha.ai** (MCP-Scanner, SAFE-MCP).
+- **2024–** — Working on AI-safety & agentic-systems research at **Astha.ai** (MCP-Scanner, SAFE-MCP).
 
 ## Experience
 
