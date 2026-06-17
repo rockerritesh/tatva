@@ -29,7 +29,7 @@ permalink: /about/
 
 ---
 
-I'm a Computer Engineering student at **Pulchowk Campus, Tribhuvan University**. Most of my time goes
+I'm a Computer Engineering graduate from **Pulchowk Campus, Tribhuvan University**. Most of my time goes
 into trying to understand how language models work on the inside — why a safety-aligned model sometimes
 refuses perfectly harmless questions, and how the **geometry of a model's internal representations**
 relates to what it has actually learned. A lot of it is simply curiosity, following a question until it
