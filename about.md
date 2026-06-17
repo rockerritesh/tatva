@@ -69,8 +69,13 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 
 3. **Geometric Phases of Mechanism Formation in Neural Networks.**
    *GLOW 2026 — Workshop on Generalizing from Limited Resources in the Open World @ IJCAI 2026 (Poster).*
-   Traces how internal mechanisms form across training using linear probes, CKA, and targeted
-   ablations (CIFAR-10/100). *arXiv & code coming soon.*
+   Using linear probes and centered kernel alignment (CKA) across dense training checkpoints, finds that
+   classification mechanisms form **output-layer-first** and within the **first ~5% of training**: output
+   layers reach >70% probe accuracy by epoch 5 while input layers stay below 50% (Cohen's *d* = 3.68). The
+   same deep-first pattern holds in the first ~200M tokens of from-scratch LLM pretraining (GPT-2 Small,
+   SmolLM2-135M) and reproduces on public Pythia / OLMo-2 checkpoints — and isn't explained by gradient
+   magnitude (input layers receive up to 6.9× more gradient yet learn less). A temporal map of *when* and
+   *where* mechanisms emerge (CIFAR-10/100, decoder-only LLMs). *arXiv & code coming soon.*
 
 4. **Can maiBERT Speak for Maithili?**
    *LoResLM @ ACL 2026.* The first monolingual BERT for Maithili (~50M speakers); **87% accuracy**

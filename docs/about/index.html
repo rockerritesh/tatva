@@ -114,8 +114,13 @@ predicts generalization across vision and language models (partial <em>r</em> = 
 </li>
 <li><p><strong>Geometric Phases of Mechanism Formation in Neural Networks.</strong>
 <em>GLOW 2026 — Workshop on Generalizing from Limited Resources in the Open World @ IJCAI 2026 (Poster).</em>
-Traces how internal mechanisms form across training using linear probes, CKA, and targeted
-ablations (CIFAR-10/100). <em>arXiv &amp; code coming soon.</em></p>
+Using linear probes and centered kernel alignment (CKA) across dense training checkpoints, finds that
+classification mechanisms form <strong>output-layer-first</strong> and within the <strong>first ~5% of training</strong>: output
+layers reach &gt;70% probe accuracy by epoch 5 while input layers stay below 50% (Cohen&#39;s <em>d</em> = 3.68). The
+same deep-first pattern holds in the first ~200M tokens of from-scratch LLM pretraining (GPT-2 Small,
+SmolLM2-135M) and reproduces on public Pythia / OLMo-2 checkpoints — and isn&#39;t explained by gradient
+magnitude (input layers receive up to 6.9× more gradient yet learn less). A temporal map of <em>when</em> and
+<em>where</em> mechanisms emerge (CIFAR-10/100, decoder-only LLMs). <em>arXiv &amp; code coming soon.</em></p>
 </li>
 <li><p><strong>Can maiBERT Speak for Maithili?</strong>
 <em>LoResLM @ ACL 2026.</em> The first monolingual BERT for Maithili (~50M speakers); <strong>87% accuracy</strong>
