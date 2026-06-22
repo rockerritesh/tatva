@@ -80,7 +80,7 @@ See my [Google Scholar](https://scholar.google.com/citations?user=ag74ytsAAAAJ&h
 4. **Can maiBERT Speak for Maithili?**
    *LoResLM @ ACL 2026.* The first monolingual BERT for Maithili (~50M speakers); **87% accuracy**
    on news classification, outperforming MuRIL and NepBERTa.
-   [[paper]](https://arxiv.org/abs/2509.15048) · [[model]](https://huggingface.co/rockerritesh/maiBERT_TF)
+   [[paper]](https://aclanthology.org/2026.loreslm-1.38/) · [[arXiv]](https://arxiv.org/abs/2509.15048) · [[model]](https://huggingface.co/rockerritesh/maiBERT_TF)
 
 5. **Revolutionizing Currency Security: A YOLOv8-Based Approach for Detecting Counterfeit Nepali Banknotes.**
    *J. Bus. Econ. Stud., 2024.* [[paper]](https://doi.org/10.61440/JBES.2024.v1.47)
